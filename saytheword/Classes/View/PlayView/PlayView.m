@@ -389,7 +389,7 @@
 
 - (void)winEventFromAnswerView
 {
-//    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     UIView *leftTitleView = [self viewWithTag:kTagOfLeftTitle];
     UIView *rightTitleView = [self viewWithTag:kTagOfRightTitle];
     [UIView animateWithDuration:0.8 animations:^{

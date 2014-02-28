@@ -18,7 +18,7 @@
 #define kRewardCoinsForSharingApp 99
 
 #define kNavBarImg @"nav-bar.png"
-#define kInitialCoin 0
+#define kInitialCoin 10000
 #define kProductIDOf200  @"com.lxmhoang.saytheword.iap.200coins"
 #define kProductIDOf420  @"com.lxmhoang.saytheword.iap.420coins"
 #define kProductIDOf1085  @"com.lxmhoang.saytheword.iap.1085coins"

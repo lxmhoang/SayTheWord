@@ -23,9 +23,9 @@
     //initialize the emitter
     _emitter = (CAEmitterLayer*)self.layer;
     _emitter.emitterPosition = CGPointMake(self.bounds.size.width /2, self.bounds.size.height/2 );
-    _emitter.emitterSize = self.bounds.size;
+      _emitter.emitterSize = CGSizeMake(2, 2);//self.bounds.size;
     _emitter.emitterMode = kCAEmitterLayerAdditive;
-    _emitter.emitterShape = kCAEmitterLayerRectangle;
+    _emitter.emitterShape = kCAEmitterLayerCircle;
   }
   return self;
 }
@@ -54,8 +54,8 @@
     
    
   
-  emitterCell.birthRate = 500;
-  emitterCell.lifetime = 2.75;
+  emitterCell.birthRate = 50;
+  emitterCell.lifetime = 2;
     
 //  emitterCell.greenRange = 0.99;
 //  emitterCell.greenRange = -8.8;
@@ -100,8 +100,8 @@
 //    emitterCell.alphaSpeed = -0.2;
     
   
-  emitterCell.velocity = 100;
-  emitterCell.velocityRange = 00;
+  emitterCell.velocity = 50;
+  emitterCell.velocityRange = 30;
   
   emitterCell.scaleRange = 0.0;
   emitterCell.scaleSpeed = 0.0;
