@@ -55,6 +55,19 @@
     [menuBackBtn setFrame:CGRectMake(kWidthOfScreen - 120, 0, 120, 44)];
     [menuBackBtn addTarget:delegate action:@selector(backBtnPressFromSettingController) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:menuBackBtn];
+    
+    UISlider *bgMusicVolumSilder = [[UISlider alloc] initWithFrame:CGRectMake(30, 150, kWidthOfScreen-30-30, 30)];
+    [bgMusicVolumSilder addTarget:self action:@selector(bgMusicSliderChanged:) forControlEvents:UIControlEventValueChanged];
+    [bgMusicVolumSilder setValue:[CommonFunction getBGSoundVolume]];
+    [self.view addSubview:bgMusicVolumSilder];
+}
+
+#pragma mark UISlider Value Changed
+
+- (void)bgMusicSliderChanged:(UISlider *)sender
+{
+    [CommonFunction setBGSoundVolume:sender.value];
+    
 }
 
 - (void)didReceiveMemoryWarning

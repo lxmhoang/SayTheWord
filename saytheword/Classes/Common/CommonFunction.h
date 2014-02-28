@@ -117,6 +117,9 @@
 + (int)getCoin;
 + (void)setCoin:(int)_val;
 
++ (float)getBGSoundVolume;
++ (void)setBGSoundVolume:(float)vol;
+
 + (void)playBGSound;
 + (void)stopBGSound;
 

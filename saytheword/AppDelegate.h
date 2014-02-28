@@ -24,6 +24,8 @@
 @property (nonatomic, retain) RootController *rootController;
 
 - (RootController *)getRootController;
+- (void)setBGSoundVolume:(float)vol;
+
 - (void)playBGSound;
 - (void)stopBGSound;
 

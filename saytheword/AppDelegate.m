@@ -18,9 +18,14 @@
     return rootController;
 }
 
+- (void)setBGSoundVolume:(float)vol
+{
+    player.volume = vol;
+}
+
 - (void)playBGSound
 {
-    player.volume = 0.1;
+    player.volume = [CommonFunction getBGSoundVolume];
     [player play];
 }
 

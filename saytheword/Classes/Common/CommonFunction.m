@@ -36,8 +36,20 @@
 }
 
 
-
 #pragma mark sound control
+
++ (float)getBGSoundVolume
+{
+   return [[NSUserDefaults standardUserDefaults] floatForKey:@"bgSoundVolume"];
+}
+
++ (void)setBGSoundVolume:(float)vol
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:vol] forKey:@"bgSoundVolume"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+     [(AppDelegate *)[[UIApplication sharedApplication] delegate] setBGSoundVolume:vol];
+    
+}
 
 + (void)playBGSound
 {
@@ -247,6 +259,10 @@
      
     NSNumber *coin = [NSNumber numberWithInt:kInitialCoin];
     
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"bgSoundVolume"] == nil){
+        [self setBGSoundVolume:0.4];
+    }
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"showLeftTitle"] == nil){
         [self setShowLeftTitle:NO];
     }
@@ -254,8 +270,7 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"showRightTitle"] == nil){
         [self setShowRightTitle:NO];
     }
-
-
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"likeFanPage"] == nil){
         [self setLikeFanPage:NO];
     }
