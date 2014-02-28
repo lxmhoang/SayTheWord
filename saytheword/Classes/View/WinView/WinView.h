@@ -19,6 +19,7 @@
 @interface WinView : UIView <ExplodeViewDelegate>
 {
     NSMutableArray *listCoins;
+    BOOL tapped;
 }
 
 @property (nonatomic, assign) id delegate;

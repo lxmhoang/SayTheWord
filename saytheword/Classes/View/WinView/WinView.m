@@ -27,6 +27,7 @@
     self = [super init];
     if (self)
     {
+        tapped = NO;
         playModel = [_playModel retain];
     }
     [self setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
@@ -36,7 +37,6 @@
 
 - (void)createSubViews
 {
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 //    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //    [btn setTag:111];
 //    [btn setFrame:CGRectMake(60, 80, 200, 80)];
@@ -206,23 +206,21 @@
 
 - (void)moveToNextLevel:(UITapGestureRecognizer *)_tap
 {
-
-    for (int i=0;i<[listCoins count];i++){
-        [UIView animateWithDuration:1.0 delay:(playModel.wordInfo.finalWord.length-i)*0.3 options:UIViewAnimationOptionCurveEaseIn animations:^{
-            UIView *coin = [listCoins objectAtIndex:i];
-            [coin setFrame:CGRectMake(350, -20, coin.frame.size.width, coin.frame.size.height)];
-        } completion:^(BOOL finished) {
-            if (i==0){
-                [delegate performSelector:@selector(animationFinished) withObject:nil afterDelay:1.0];
-                
-//                [delegate animationFinished];
-            }
-        }];
-
+    if (!tapped)
+    {
+        tapped = YES;
+        for (int i=0;i<[listCoins count];i++){
+            [UIView animateWithDuration:1.0 delay:(playModel.wordInfo.finalWord.length-i)*0.3 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                UIView *coin = [listCoins objectAtIndex:i];
+                [coin setFrame:CGRectMake(350, -40, coin.frame.size.width, coin.frame.size.height)];
+            } completion:^(BOOL finished) {
+                if (i==0){
+                    [delegate performSelector:@selector(animationFinished) withObject:nil afterDelay:1.0];
+                }
+            }];
+            
+        }
     }
-    
-    
-    
 }
 
 #pragma mark ExplodeView Delegate

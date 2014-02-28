@@ -14,13 +14,15 @@
 #import <AVFoundation/AVFoundation.h>
 #import "AppiraterDelegate.h"
 
-#import "SparklesViewController.h"
+#import "SettingViewController.h"
+
+#import "SparklesViewController.h"  
 
 
 
 
 
-@interface RootController : UIViewController<MenuControllerProtocol, PlayControllerProtocol, WinControllerProtocol, AppiraterDelegate, UIAlertViewDelegate>
+@interface RootController : UIViewController<MenuControllerProtocol, PlayControllerProtocol, WinControllerProtocol, AppiraterDelegate, SettingControllerProtocol,UIAlertViewDelegate>
 {
     BOOL getCoinsForRating;
 }

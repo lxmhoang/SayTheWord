@@ -76,8 +76,17 @@
     MenuController *menuController = [[MenuController alloc]initWithPosition:-1];
     menuController.delegate = self;
     [self presentNewVCFromTheLeft:menuController];
-    
 }
+
+#pragma mark setting controller delegate method
+
+- (void)backBtnPressFromSettingController 
+{
+    MenuController *menuController = [[MenuController alloc]initWithPosition:1];
+    menuController.delegate = self;
+    [self presentNewVCFromTheRight:menuController];
+}
+
 
 - (void)showWinScreen
 {
@@ -93,23 +102,20 @@
 
 #pragma mark menucontroller delegate method
 
-- (void)playActionFromMenuController
+- (void)settingActionFromMenuController
 {
     
-//    WinController *test = [[WinController alloc] initWithPosition:-1];
-//    [self presentNewVCFromTheRight:test];
-//    return;
-//    SparklesViewController *test = [[SparklesViewController alloc] init];
-//    [self presentNewVCFromTheLeft:test];
-//    
-//    return;
+    SettingViewController *settingController = [[SettingViewController alloc]initWithPosition:-1];
+    settingController.delegate = self;
+    [self presentNewVCFromTheLeft:settingController];
+}
+
+
+- (void)playActionFromMenuController
+{
     PlayController *playController = [[PlayController alloc]initWithPosition:1];
     playController.delegate = self;
-//    NSLog(@"position : %d",playController.playView.playModel.position); 
     [self presentNewVCFromTheRight:playController];
-//    NSLog(@"position : %d",playController.playView.playModel.position);
-//    playController.playModel.position=0;
-//    NSLog(@"position : %d",playController.playView.playModel.position);
 }
 
 #pragma mark WinController delegate method

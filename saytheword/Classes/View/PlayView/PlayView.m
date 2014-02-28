@@ -58,8 +58,8 @@
 - (void)createNavigationBar
 {
     UIView *navBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kWidthOfScreen, 44)];
-    [navBar setBackgroundColor:[UIColor blackColor]];
-    [navBar setAlpha:0.4];
+    [navBar setBackgroundColor:[UIColor clearColor]];
+//    [navBar setAlpha:0.4];
 //    [navBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:kNavBarImg]]];
 //    NSLog(@"AAAAAAAAAAAAA %@",playModel.leftSource);
 
@@ -106,8 +106,10 @@
     
     //Create MenuBtn
     UIButton *menuBackBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [menuBackBtn setBackgroundImage:[UIImage imageNamed:@"menuBtnImg.png"] forState:UIControlStateNormal];
-    [menuBackBtn setFrame:CGRectMake(10, 0, 90, 35)];
+    [menuBackBtn setTitle:@"Menu" forState:UIControlStateNormal];
+    [menuBackBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
+    [menuBackBtn setTintColor:[UIColor magentaColor]];
+    [menuBackBtn setFrame:CGRectMake(0, 0, 90, 44)];
     [menuBackBtn addTarget:delegate action:@selector(backBtnPressFromPlayView) forControlEvents:UIControlEventTouchUpInside];
     [navBar addSubview:menuBackBtn];
     
@@ -389,7 +391,6 @@
 
 - (void)winEventFromAnswerView
 {
-    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     UIView *leftTitleView = [self viewWithTag:kTagOfLeftTitle];
     UIView *rightTitleView = [self viewWithTag:kTagOfRightTitle];
     [UIView animateWithDuration:0.8 animations:^{
@@ -550,15 +551,7 @@
             }
         } completion:^(BOOL finished) {
             [answerView winEvent];
-   
-            
-            
         }];
-        
-
-        
-
-//        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(winEventFromAnswerView) userInfo:nil repeats:NO];
         
     }
     else

@@ -20,7 +20,7 @@
 
 - (void)playBGSound
 {
-    player.volume = 0.2;
+    player.volume = 0.1;
     [player play];
 }
 

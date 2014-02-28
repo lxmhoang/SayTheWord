@@ -131,6 +131,13 @@
     [playBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:23.0f]];
     [playBtn addTarget:delegate action:@selector(playBtnPressFromMenuView) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:playBtn];
+    
+    UIButton *settingBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [settingBtn setFrame:CGRectMake(40, 320+80, 240, 40)];
+    [settingBtn setBackgroundImage:[UIImage imageNamed:@"playbtn.png"] forState:UIControlStateNormal];
+    [settingBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:23.0f]];
+    [settingBtn addTarget:delegate action:@selector(settingBtnPressFromMenuView) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:settingBtn];
 //    [playBtn release];
     
 //    UIButton *playBtn2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];

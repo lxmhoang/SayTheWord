@@ -239,6 +239,7 @@
 		A4076084183DDD980062A553 /* NewRelicAgent.framework in Sources */ = {isa = PBXBuildFile; fileRef = A407607F183DDC230062A553 /* NewRelicAgent.framework */; };
 		A4076086183DDDE40062A553 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4076085183DDDE40062A553 /* CoreTelephony.framework */; };
 		A4076088183DDDF40062A553 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A4076087183DDDF40062A553 /* libz.dylib */; };
+		A461014618C095E400479EE3 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A461014518C095E400479EE3 /* SettingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -539,6 +540,8 @@
 		A4076080183DDC230062A553 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		A4076085183DDDE40062A553 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		A4076087183DDDF40062A553 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		A461014418C095E400479EE3 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		A461014518C095E400479EE3 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -744,6 +747,7 @@
 		379DC49417533A0B00CEDB69 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A461014318C095D100479EE3 /* SettingViewController */,
 				379F05631774507600C50DDB /* WinController */,
 				379F054117740FB400C50DDB /* StoreController */,
 				37A11C7F1754564800905B92 /* MenuController */,
@@ -1240,6 +1244,15 @@
 			path = NewRelic_iOS_Agent_1.376;
 			sourceTree = "<group>";
 		};
+		A461014318C095D100479EE3 /* SettingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A461014418C095E400479EE3 /* SettingViewController.h */,
+				A461014518C095E400479EE3 /* SettingViewController.m */,
+			);
+			path = SettingViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1531,6 +1544,7 @@
 				379F0562177438CE00C50DDB /* HintView.m in Sources */,
 				379F0567177450D900C50DDB /* WinController.m in Sources */,
 				379F056A1774512600C50DDB /* WinView.m in Sources */,
+				A461014618C095E400479EE3 /* SettingViewController.m in Sources */,
 				37AFAD771776920B00469882 /* CommonFunction.m in Sources */,
 				37A9711017792058008D4634 /* Appirater.m in Sources */,
 				379AA0C4178AD01C0039F0D1 /* HintsView.m in Sources */,

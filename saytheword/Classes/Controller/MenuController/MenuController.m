@@ -68,6 +68,11 @@
     [delegate playActionFromMenuController];
 }
 
+- (void)settingBtnPressFromMenuView
+{
+    [delegate settingActionFromMenuController];
+}
+
 - (void)coinViewTappedFromMenuView
 {
     StoreController *storeController = [[StoreController alloc]init];
