@@ -191,7 +191,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "155"
             endingLineNumber = "155"
-            landmarkName = "+getLastSendSMS"
+            landmarkName = "+getLastSendEmail"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -223,7 +223,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "166"
             endingLineNumber = "166"
-            landmarkName = "+getLastFBShare"
+            landmarkName = "+getLastSendSMS"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

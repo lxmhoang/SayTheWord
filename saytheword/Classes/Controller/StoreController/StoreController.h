@@ -20,7 +20,7 @@
 
 @end
 
-@interface StoreController : UIViewController<StoreViewDelegate, StoresViewDelegate, UITableViewDataSource, UITableViewDelegate, IAPHelperDelegate, MBProgressHUDDelegate, UIAlertViewDelegate>
+@interface StoreController : UIViewController<StoreViewDelegate, StoresViewDelegate, IAPHelperDelegate, MBProgressHUDDelegate, UIAlertViewDelegate>
 {
     MBProgressHUD *HUD;
     IAPHelper *iAPHelper;

@@ -13,6 +13,9 @@
 @end
 
 @interface SettingViewController : UIViewController
+{
+    UISlider *bgMusicVolumSilder;
+}
 
 @property (nonatomic, assign) id delegate;
 

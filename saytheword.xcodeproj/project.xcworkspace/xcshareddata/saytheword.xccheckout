@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>BF5B4A5D-AF8E-411E-B0A4-0B19F40BD5B8</string>
+	<key>IDESourceControlProjectName</key>
+	<string>saytheword</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>97155A71-F9A5-4DF5-A3AB-7784CD0C953D</key>
+		<string>https://github.com/lxmhoang/SayTheWord.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>saytheword.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>97155A71-F9A5-4DF5-A3AB-7784CD0C953D</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lxmhoang/SayTheWord.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>97155A71-F9A5-4DF5-A3AB-7784CD0C953D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>97155A71-F9A5-4DF5-A3AB-7784CD0C953D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SayTheWord</string>
+		</dict>
+	</array>
+</dict>
+</plist>

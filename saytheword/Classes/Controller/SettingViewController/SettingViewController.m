@@ -53,10 +53,16 @@
     [menuBackBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
     [menuBackBtn setTintColor:[UIColor magentaColor]];
     [menuBackBtn setFrame:CGRectMake(kWidthOfScreen - 120, 0, 120, 44)];
-    [menuBackBtn addTarget:delegate action:@selector(backBtnPressFromSettingController) forControlEvents:UIControlEventTouchUpInside];
+    [menuBackBtn addTarget:self action:@selector(backBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:menuBackBtn];
     
-    UISlider *bgMusicVolumSilder = [[UISlider alloc] initWithFrame:CGRectMake(30, 150, kWidthOfScreen-30-30, 30)];
+    UILabel *bgMusicVolumLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 100, kWidthOfScreen-30-30, 30)];
+    [bgMusicVolumLabel setTextColor:[UIColor whiteColor]];
+    [bgMusicVolumLabel setFont:[UIFont boldSystemFontOfSize:15.0f]];
+    bgMusicVolumLabel.text = @"BackGround Music Volume";
+    [self.view addSubview:bgMusicVolumLabel];
+    
+    bgMusicVolumSilder = [[UISlider alloc] initWithFrame:CGRectMake(30, 150, kWidthOfScreen-30-30, 30)];
     [bgMusicVolumSilder addTarget:self action:@selector(bgMusicSliderChanged:) forControlEvents:UIControlEventValueChanged];
     [bgMusicVolumSilder setValue:[CommonFunction getBGSoundVolume]];
     [self.view addSubview:bgMusicVolumSilder];
@@ -66,8 +72,19 @@
 
 - (void)bgMusicSliderChanged:(UISlider *)sender
 {
-    [CommonFunction setBGSoundVolume:sender.value];
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] setBGSoundVolume:bgMusicVolumSilder.value];
     
+}
+
+#pragma mark Menu Btn Pressed
+
+- (void)backBtnPressed:(id)sender
+{
+    [CommonFunction setBGSoundVolume:bgMusicVolumSilder.value];
+    if ([delegate respondsToSelector:@selector(backBtnPressFromSettingController)])
+    {
+        [delegate backBtnPressFromSettingController];
+    }
 }
 
 - (void)didReceiveMemoryWarning
