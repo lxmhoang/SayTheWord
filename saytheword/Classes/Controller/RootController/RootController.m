@@ -104,7 +104,6 @@
 
 - (void)settingActionFromMenuController
 {
-    
     SettingViewController *settingController = [[SettingViewController alloc]initWithPosition:-1];
     settingController.delegate = self;
     [self presentNewVCFromTheLeft:settingController];

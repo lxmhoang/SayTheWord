@@ -59,7 +59,7 @@
 
 - (void)resetLevel
 {
-    [CommonFunction setLevel:9];
+    [CommonFunction setLevel:1];
     [delegate playActionFromMenuController];
 }
 
