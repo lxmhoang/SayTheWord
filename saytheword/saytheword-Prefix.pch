@@ -3,6 +3,7 @@
 //
 
 #import <Availability.h>
+#import "Common.h"
 #import "CommonFunction.h"
 
 #ifndef __IPHONE_3_0

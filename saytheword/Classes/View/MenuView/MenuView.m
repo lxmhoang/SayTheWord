@@ -39,7 +39,13 @@
 {
     UIView *navBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kWidthOfScreen, 44)];
 //    [navBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:kNavBarImg]]];
-
+    
+    [navBar setBackgroundColor:[UIColor colorWithRed:203/255.0f green:122/255.0f blue:38/255.0f alpha:1.0f]];
+    navBar.layer.masksToBounds = NO;
+    navBar.layer.cornerRadius = 5; // if you like rounded corners
+    navBar.layer.shadowOffset = CGSizeMake(4, 5);
+    navBar.layer.shadowRadius = 5;
+    navBar.layer.shadowOpacity = 0.5;
     coinView = [[UIView alloc]init];
     [coinView setBackgroundColor:[UIColor clearColor]];
     

@@ -44,7 +44,7 @@
 		379E93271765C97000237F39 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 379E93171765C97000237F39 /* bg.jpg */; };
 		379E93281765C97000237F39 /* bg1136.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 379E93181765C97000237F39 /* bg1136.jpg */; };
 		379E93291765C97000237F39 /* bgip4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 379E93191765C97000237F39 /* bgip4.jpg */; };
-		379E932A1765C97000237F39 /* bgip5 copy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 379E931A1765C97000237F39 /* bgip5 copy.jpg */; };
+		379E932A1765C97000237F39 /* bgnau.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 379E931A1765C97000237F39 /* bgnau.jpg */; };
 		379E932B1765C97000237F39 /* bgip5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 379E931B1765C97000237F39 /* bgip5.jpg */; };
 		379E932C1765C97000237F39 /* coins.png in Resources */ = {isa = PBXBuildFile; fileRef = 379E931C1765C97000237F39 /* coins.png */; };
 		379E932D1765C97000237F39 /* menuBackBtnImg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 379E931D1765C97000237F39 /* menuBackBtnImg.jpg */; };
@@ -106,6 +106,7 @@
 		37A9711517792099008D4634 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A9711417792099008D4634 /* CFNetwork.framework */; };
 		37A97117177920A3008D4634 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A97116177920A3008D4634 /* SystemConfiguration.framework */; };
 		37AFAD771776920B00469882 /* CommonFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AFAD761776920B00469882 /* CommonFunction.m */; };
+		37B11BEE19929E4800047989 /* homeBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B11BED19929E4800047989 /* homeBtn.png */; };
 		37B91F381777E4AB00A37CA2 /* bg2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37B91F361777E4AB00A37CA2 /* bg2.jpg */; };
 		37B91F391777E4AB00A37CA2 /* bg3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37B91F371777E4AB00A37CA2 /* bg3.jpg */; };
 		37B91F3B1777E54000A37CA2 /* nav bar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37B91F3A1777E54000A37CA2 /* nav bar.jpg */; };
@@ -273,7 +274,7 @@
 		379D988C178E9F1A00CADFC2 /* ApActivityData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApActivityData.m; sourceTree = "<group>"; };
 		379D988F178EAFE000CADFC2 /* FacebookActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookActivity.h; sourceTree = "<group>"; };
 		379D9890178EAFE000CADFC2 /* FacebookActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookActivity.m; sourceTree = "<group>"; };
-		379DC472175334BE00CEDB69 /* Say The Word.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Say The Word.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		379DC472175334BE00CEDB69 /* Say it loud, the word come out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Say it loud, the word come out.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		379DC475175334BE00CEDB69 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		379DC477175334BE00CEDB69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		379DC479175334BE00CEDB69 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -290,7 +291,7 @@
 		379E93171765C97000237F39 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		379E93181765C97000237F39 /* bg1136.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg1136.jpg; sourceTree = "<group>"; };
 		379E93191765C97000237F39 /* bgip4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bgip4.jpg; sourceTree = "<group>"; };
-		379E931A1765C97000237F39 /* bgip5 copy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bgip5 copy.jpg"; sourceTree = "<group>"; };
+		379E931A1765C97000237F39 /* bgnau.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bgnau.jpg; sourceTree = "<group>"; };
 		379E931B1765C97000237F39 /* bgip5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bgip5.jpg; sourceTree = "<group>"; };
 		379E931C1765C97000237F39 /* coins.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coins.png; sourceTree = "<group>"; };
 		379E931D1765C97000237F39 /* menuBackBtnImg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = menuBackBtnImg.jpg; sourceTree = "<group>"; };
@@ -407,6 +408,7 @@
 		37A97116177920A3008D4634 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		37AFAD751776920B00469882 /* CommonFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonFunction.h; sourceTree = "<group>"; };
 		37AFAD761776920B00469882 /* CommonFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonFunction.m; sourceTree = "<group>"; };
+		37B11BED19929E4800047989 /* homeBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeBtn.png; sourceTree = "<group>"; };
 		37B91F361777E4AB00A37CA2 /* bg2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg2.jpg; sourceTree = "<group>"; };
 		37B91F371777E4AB00A37CA2 /* bg3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg3.jpg; sourceTree = "<group>"; };
 		37B91F3A1777E54000A37CA2 /* nav bar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "nav bar.jpg"; sourceTree = "<group>"; };
@@ -662,7 +664,7 @@
 		379DC473175334BE00CEDB69 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				379DC472175334BE00CEDB69 /* Say The Word.app */,
+				379DC472175334BE00CEDB69 /* Say it loud, the word come out.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -806,6 +808,7 @@
 		379E93151765C97000237F39 /* Accessory */ = {
 			isa = PBXGroup;
 			children = (
+				37B11BED19929E4800047989 /* homeBtn.png */,
 				37A4CB5717B8A82E00E024B9 /* coinngang.png */,
 				37A4CB5517B8A63100E024B9 /* 100coin.png */,
 				37A4CB5317B8A08800E024B9 /* onecoin.png */,
@@ -830,7 +833,7 @@
 				379E93171765C97000237F39 /* bg.jpg */,
 				379E93181765C97000237F39 /* bg1136.jpg */,
 				379E93191765C97000237F39 /* bgip4.jpg */,
-				379E931A1765C97000237F39 /* bgip5 copy.jpg */,
+				379E931A1765C97000237F39 /* bgnau.jpg */,
 				379E931B1765C97000237F39 /* bgip5.jpg */,
 				37435FE4176DDDB4007FA421 /* lbbg.png */,
 				379E931C1765C97000237F39 /* coins.png */,
@@ -1270,7 +1273,7 @@
 			);
 			name = saytheword;
 			productName = saytheword;
-			productReference = 379DC472175334BE00CEDB69 /* Say The Word.app */;
+			productReference = 379DC472175334BE00CEDB69 /* Say it loud, the word come out.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1337,7 +1340,7 @@
 				379E93271765C97000237F39 /* bg.jpg in Resources */,
 				379E93281765C97000237F39 /* bg1136.jpg in Resources */,
 				379E93291765C97000237F39 /* bgip4.jpg in Resources */,
-				379E932A1765C97000237F39 /* bgip5 copy.jpg in Resources */,
+				379E932A1765C97000237F39 /* bgnau.jpg in Resources */,
 				379E932B1765C97000237F39 /* bgip5.jpg in Resources */,
 				379E932C1765C97000237F39 /* coins.png in Resources */,
 				379E932D1765C97000237F39 /* menuBackBtnImg.jpg in Resources */,
@@ -1359,6 +1362,7 @@
 				37B91F3B1777E54000A37CA2 /* nav bar.jpg in Resources */,
 				37B91F3E17782CA600A37CA2 /* Kiss_The_Rain.mp3 in Resources */,
 				37B91F4417783D4800A37CA2 /* RiverFlowsInYou.mp3 in Resources */,
+				37B11BEE19929E4800047989 /* homeBtn.png in Resources */,
 				37A9710F17792058008D4634 /* .gitignore in Resources */,
 				37A9711117792058008D4634 /* Appirater.podspec in Resources */,
 				37A9711217792058008D4634 /* AppiraterLocalizable.strings in Resources */,
@@ -1673,7 +1677,7 @@
 				GCC_PREFIX_HEADER = "saytheword/saytheword-Prefix.pch";
 				INFOPLIST_FILE = "saytheword/saytheword-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				PRODUCT_NAME = "Say The Word";
+				PRODUCT_NAME = "Say it loud, the word come out";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
@@ -1694,7 +1698,7 @@
 				GCC_PREFIX_HEADER = "saytheword/saytheword-Prefix.pch";
 				INFOPLIST_FILE = "saytheword/saytheword-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				PRODUCT_NAME = "Say The Word";
+				PRODUCT_NAME = "Say it loud, the word come out";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};

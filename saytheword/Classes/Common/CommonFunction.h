@@ -9,16 +9,13 @@
 
 #define kTagOfCopyAnswerView 669
 
-#define kFileNameRootViewBackGround @"bgip5.jpg"
-
 #define kRewardCoinsForRatingApp 300
 
 #define kRewardCoinsForLikingFB 300
 
 #define kRewardCoinsForSharingApp 99
 
-#define kNavBarImg @"nav-bar.png"
-#define kInitialCoin 10000
+#define kNavBarImg @"nav_nau.png"
 #define kProductIDOf200  @"com.lxmhoang.saytheword.iap.200coins"
 #define kProductIDOf420  @"com.lxmhoang.saytheword.iap.420coins"
 #define kProductIDOf1085  @"com.lxmhoang.saytheword.iap.1085coins"
@@ -29,12 +26,13 @@
 #define kHeightOfScreen [ [ UIScreen mainScreen ] bounds ].size.height
 #define kWidthOfScreen 320
 #define kTimeToPresentVC 0.5
+#define kInitialCoin 100
 
 #define kRandomNumber 33
 
 // Animate betweenVC
 
-#define kShortDisTanceOf2View 30
+#define kShortDisTanceOf2View 50
 
 //PlayView
 //#define kTagOfCoinLabel 80

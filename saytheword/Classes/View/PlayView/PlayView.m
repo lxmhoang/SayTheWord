@@ -59,10 +59,16 @@
 {
     UIView *navBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kWidthOfScreen, 44)];
     [navBar setBackgroundColor:[UIColor clearColor]];
+    [navBar setBackgroundColor:[UIColor colorWithRed:203/255.0f green:122/255.0f blue:38/255.0f alpha:1.0f]];
+    navBar.layer.masksToBounds = NO;
+    navBar.layer.cornerRadius = 5; // if you like rounded corners
+    navBar.layer.shadowOffset = CGSizeMake(4, 5);
+    navBar.layer.shadowRadius = 5;
+    navBar.layer.shadowOpacity = 0.5;
 //    [navBar setAlpha:0.4];
 //    [navBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:kNavBarImg]]];
 //    NSLog(@"AAAAAAAAAAAAA %@",playModel.leftSource);
-
+    
     
     coinView = [[UIView alloc]init];
     [coinView setBackgroundColor:[UIColor clearColor]];
@@ -74,7 +80,7 @@
     
     [coinLabel setTextAlignment:NSTextAlignmentRight];
     [coinLabel sizeToFit];
-    [coinLabel setFrame:CGRectMake(0, 5, 75, 33)];
+    [coinLabel setFrame:CGRectMake(0, 5, 75, 34)];
     [coinLabel setBackgroundColor:[UIColor clearColor]];
     [coinLabel setTextColor:[UIColor yellowColor]];
     [coinLabel setTag:1111];
@@ -91,7 +97,7 @@
     [coinView addSubview:coinImageView];
     [coinImageView release];
     
-    [coinView setFrame:CGRectMake(kWidthOfScreen - 120, -5, 120, 44)];
+    [coinView setFrame:CGRectMake(kWidthOfScreen - 120, 0, 120, 44)];
     //    [coinView setBackgroundColor:[UIColor redColor]];
     
     coinView.userInteractionEnabled = YES;
@@ -106,10 +112,11 @@
     
     //Create MenuBtn
     UIButton *menuBackBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [menuBackBtn setTitle:@"Menu" forState:UIControlStateNormal];
+    [menuBackBtn setBackgroundImage:[UIImage imageNamed:@"homeBtn.png"] forState:UIControlStateNormal];
+//    [menuBackBtn setTitle:@"Menu" forState:UIControlStateNormal];
     [menuBackBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
-    [menuBackBtn setTintColor:[UIColor magentaColor]];
-    [menuBackBtn setFrame:CGRectMake(0, 0, 90, 44)];
+    [menuBackBtn setTintColor:[UIColor blueColor]];
+    [menuBackBtn setFrame:CGRectMake(10, 5, 70, 34)];
     [menuBackBtn addTarget:delegate action:@selector(backBtnPressFromPlayView) forControlEvents:UIControlEventTouchUpInside];
     [navBar addSubview:menuBackBtn];
     
@@ -124,7 +131,7 @@
     // Create Level label
     UILabel *levelLabel = [[UILabel alloc]init];
     levelLabel.text = [NSString stringWithFormat:@"Level %d",[[[NSUserDefaults standardUserDefaults] objectForKey:@"level"] intValue]];
-    [levelLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20]];
+    [levelLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:18]];
     [levelLabel sizeToFit];
     
     [levelLabel setFrame:CGRectMake((kWidthOfScreen - levelLabel.frame.size.width)/2, (44 - levelLabel.frame.size.height)/2, levelLabel.frame.size.width, levelLabel.frame.size.height)];
