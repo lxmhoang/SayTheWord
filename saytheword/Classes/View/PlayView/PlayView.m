@@ -58,13 +58,21 @@
 - (void)createNavigationBar
 {
     UIView *navBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kWidthOfScreen, 44)];
-    [navBar setBackgroundColor:[UIColor clearColor]];
+    [navBar setBackgroundColor:[UIColor clearColor]];//bg_nau_new.png
     [navBar setBackgroundColor:[UIColor colorWithRed:203/255.0f green:122/255.0f blue:38/255.0f alpha:1.0f]];
+//    [navBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_nau_new.png"]]];
     navBar.layer.masksToBounds = NO;
     navBar.layer.cornerRadius = 5; // if you like rounded corners
     navBar.layer.shadowOffset = CGSizeMake(4, 5);
     navBar.layer.shadowRadius = 5;
     navBar.layer.shadowOpacity = 0.5;
+    
+    
+    UIView *v1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [v1 setBackgroundColor:navBar.backgroundColor];
+    [self addSubview:v1];
+    [v1 release];
+    
 //    [navBar setAlpha:0.4];
 //    [navBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:kNavBarImg]]];
 //    NSLog(@"AAAAAAAAAAAAA %@",playModel.leftSource);

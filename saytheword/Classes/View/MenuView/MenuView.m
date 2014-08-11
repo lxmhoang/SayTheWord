@@ -38,7 +38,8 @@
 - (void)createNavigationBar
 {
     UIView *navBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kWidthOfScreen, 44)];
-//    [navBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:kNavBarImg]]];
+    //    [navBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:kNavBarImg]]];
+    [navBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_nau_new.png"]]];
     
     [navBar setBackgroundColor:[UIColor colorWithRed:203/255.0f green:122/255.0f blue:38/255.0f alpha:1.0f]];
     navBar.layer.masksToBounds = NO;
@@ -46,6 +47,12 @@
     navBar.layer.shadowOffset = CGSizeMake(4, 5);
     navBar.layer.shadowRadius = 5;
     navBar.layer.shadowOpacity = 0.5;
+    
+    
+    UIView *v1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [v1 setBackgroundColor:[UIColor colorWithRed:203/255.0f green:122/255.0f blue:38/255.0f alpha:1.0f]];
+    [self addSubview:v1];
+    
     coinView = [[UIView alloc]init];
     [coinView setBackgroundColor:[UIColor clearColor]];
     
@@ -153,8 +160,11 @@
 //    [self addSubview:playBtn2];
 //    [playBtn2 release];
     
-    UIImageView *chars = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"1word2pics.png"]];
-    [chars setFrame:CGRectMake(30, 40, 260, 260)];
+//    UIImageView *chars = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"1word2pics.png"]];
+  //  UIImageView *chars = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+  //  [chars setFrame:CGRectMake(-90, 140, 500, 52)];
+    UIImageView *chars = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"testlogo.png"]];
+    [chars setFrame:CGRectMake(0, 140, 320, 160)];
     [self addSubview:chars];
     [chars release];
 }

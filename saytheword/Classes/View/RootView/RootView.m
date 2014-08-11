@@ -24,10 +24,7 @@
         }
         // Initialization code
     }
-    UIView *v1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-    [v1 setBackgroundColor:[UIColor colorWithRed:203/255.0f green:122/255.0f blue:38/255.0f alpha:1.0f]];
-    [self addSubview:v1];
-    [v1 release];
+
     return self;
 }
 

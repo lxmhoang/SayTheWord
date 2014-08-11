@@ -240,6 +240,11 @@
 		A4076084183DDD980062A553 /* NewRelicAgent.framework in Sources */ = {isa = PBXBuildFile; fileRef = A407607F183DDC230062A553 /* NewRelicAgent.framework */; };
 		A4076086183DDDE40062A553 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4076085183DDDE40062A553 /* CoreTelephony.framework */; };
 		A4076088183DDDF40062A553 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A4076087183DDDF40062A553 /* libz.dylib */; };
+		A440E69E19950C49007567F8 /* bg_nau_new.png in Resources */ = {isa = PBXBuildFile; fileRef = A440E69D19950C49007567F8 /* bg_nau_new.png */; };
+		A440E6A2199892C1007567F8 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A440E6A1199892C1007567F8 /* logo.png */; };
+		A440E6A41998997B007567F8 /* logo2.png in Resources */ = {isa = PBXBuildFile; fileRef = A440E6A31998997B007567F8 /* logo2.png */; };
+		A440E6A61998B359007567F8 /* logostw3.png in Resources */ = {isa = PBXBuildFile; fileRef = A440E6A51998B359007567F8 /* logostw3.png */; };
+		A440E6A81998BF8C007567F8 /* testlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = A440E6A71998BF8C007567F8 /* testlogo.png */; };
 		A461014618C095E400479EE3 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A461014518C095E400479EE3 /* SettingViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -542,6 +547,11 @@
 		A4076080183DDC230062A553 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		A4076085183DDDE40062A553 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		A4076087183DDDF40062A553 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		A440E69D19950C49007567F8 /* bg_nau_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_nau_new.png; sourceTree = "<group>"; };
+		A440E6A1199892C1007567F8 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		A440E6A31998997B007567F8 /* logo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo2.png; sourceTree = "<group>"; };
+		A440E6A51998B359007567F8 /* logostw3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logostw3.png; sourceTree = "<group>"; };
+		A440E6A71998BF8C007567F8 /* testlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testlogo.png; sourceTree = "<group>"; };
 		A461014418C095E400479EE3 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		A461014518C095E400479EE3 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -808,6 +818,9 @@
 		379E93151765C97000237F39 /* Accessory */ = {
 			isa = PBXGroup;
 			children = (
+				A440E6A71998BF8C007567F8 /* testlogo.png */,
+				A440E6A51998B359007567F8 /* logostw3.png */,
+				A440E69D19950C49007567F8 /* bg_nau_new.png */,
 				37B11BED19929E4800047989 /* homeBtn.png */,
 				37A4CB5717B8A82E00E024B9 /* coinngang.png */,
 				37A4CB5517B8A63100E024B9 /* 100coin.png */,
@@ -1113,6 +1126,8 @@
 		37BD66FB177BD590004356AD /* GiangImgs */ = {
 			isa = PBXGroup;
 			children = (
+				A440E6A31998997B007567F8 /* logo2.png */,
+				A440E6A1199892C1007567F8 /* logo.png */,
 				37BD66FC177BD590004356AD /* amulet.jpg */,
 				37BD66FD177BD590004356AD /* angry.jpg */,
 				37BD66FE177BD590004356AD /* archer.jpg */,
@@ -1390,6 +1405,7 @@
 				37BD6786177BD590004356AD /* button.jpg in Resources */,
 				37BD6787177BD590004356AD /* cabbage.jpg in Resources */,
 				37BD6788177BD590004356AD /* cabob.JPG in Resources */,
+				A440E6A2199892C1007567F8 /* logo.png in Resources */,
 				37BD6789177BD590004356AD /* calendar.jpg in Resources */,
 				37BD678A177BD590004356AD /* candy.jpg in Resources */,
 				37BD678B177BD590004356AD /* Canteen.jpg in Resources */,
@@ -1438,6 +1454,7 @@
 				37BD67B6177BD590004356AD /* marvel.jpg in Resources */,
 				37BD67B7177BD590004356AD /* medal.jpg in Resources */,
 				37BD67B8177BD590004356AD /* medusa.jpg in Resources */,
+				A440E69E19950C49007567F8 /* bg_nau_new.png in Resources */,
 				37BD67B9177BD590004356AD /* menu.jpg in Resources */,
 				37BD67BA177BD590004356AD /* microsoft.jpg in Resources */,
 				37BD67BB177BD590004356AD /* mobile.jpg in Resources */,
@@ -1466,8 +1483,10 @@
 				37BD67D1177BD590004356AD /* raven.jpg in Resources */,
 				37BD67D2177BD590004356AD /* rubik.jpg in Resources */,
 				37BD67D3177BD590004356AD /* ruler.jpg in Resources */,
+				A440E6A81998BF8C007567F8 /* testlogo.png in Resources */,
 				37BD67D4177BD590004356AD /* rumba.jpg in Resources */,
 				37BD67D5177BD590004356AD /* sailor.jpg in Resources */,
+				A440E6A61998B359007567F8 /* logostw3.png in Resources */,
 				37BD67D6177BD590004356AD /* salad.jpg in Resources */,
 				37BD67D7177BD590004356AD /* sandwich.jpg in Resources */,
 				37BD67D8177BD590004356AD /* station.jpg in Resources */,
@@ -1476,6 +1495,7 @@
 				37BD67DB177BD590004356AD /* tailor.jpg in Resources */,
 				37BD67DC177BD590004356AD /* tidy.jpg in Resources */,
 				37BD67DD177BD590004356AD /* tiger.jpg in Resources */,
+				A440E6A41998997B007567F8 /* logo2.png in Resources */,
 				37BD67DE177BD590004356AD /* torrent.jpg in Resources */,
 				37BD67DF177BD590004356AD /* tunnel.jpg in Resources */,
 				37BD67E0177BD590004356AD /* turquoise.jpg in Resources */,

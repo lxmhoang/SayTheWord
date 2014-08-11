@@ -25,7 +25,7 @@
 
 #define kHeightOfScreen [ [ UIScreen mainScreen ] bounds ].size.height
 #define kWidthOfScreen 320
-#define kTimeToPresentVC 0.5
+#define kTimeToPresentVC 0.75
 #define kInitialCoin 100
 
 #define kRandomNumber 33
