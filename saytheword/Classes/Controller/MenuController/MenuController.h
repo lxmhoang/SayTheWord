@@ -16,7 +16,7 @@
 
 - (void)playActionFromMenuController;
 
-- (void)settingActionFromMenuController;
+- (void)howtoActionFromMenuController;
 
 @end
 

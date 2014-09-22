@@ -34,6 +34,11 @@
     [player stop];
 }
 
+- (void)playFireworkSoud
+{
+    AudioServicesPlaySystemSound(fireWorkSound);
+}
+
 - (void)dealloc
 {
     [_window release];
@@ -50,10 +55,17 @@
 //    }
     
     [FBLoginView class];
+    
+    
+    NSString *pathFW  = [[NSBundle mainBundle] pathForResource:@"firework_explode" ofType:@"mp3"];
+    CFURLRef pathURLFW = (CFURLRef)[NSURL fileURLWithPath : pathFW];
+    
+    AudioServicesCreateSystemSoundID(pathURLFW, &fireWorkSound);
 
    
     NSString *path  = [[NSBundle mainBundle] pathForResource:@"RiverFlowsInYou" ofType:@"mp3"];
     NSURL *pathURL = [NSURL fileURLWithPath : path];
+    
     
     
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:pathURL error:nil];

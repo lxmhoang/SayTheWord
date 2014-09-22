@@ -17,7 +17,7 @@
     self = [super init];
     if (self)
     {
-//        [self loadStore];
+        [self loadStore];
     }
     return self;
 }
@@ -25,7 +25,7 @@
 
 - (void)requestPurchaseItem
 {
-    productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObjects:kProductIDOf200, kProductIDOf420, kProductIDOf1085, kProductIDOf2350,  nil ]];
+    productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObjects:kProductIDOf200, kProductIDOf420, kProductIDOf1100, kProductIDOf2400, kProductIDOf7800, nil ]];
     productsRequest.delegate = self;
     [productsRequest start];
 }
@@ -251,17 +251,17 @@
     {
         addAmount = 420;
     }
-    if ([productId isEqualToString:kProductIDOf1085])
+    if ([productId isEqualToString:kProductIDOf1100])
     {
-        addAmount = 1085;
+        addAmount = 1100;
     }
-    if ([productId isEqualToString:kProductIDOf2350])
+    if ([productId isEqualToString:kProductIDOf2400])
     {
-        addAmount = 2350;
+        addAmount = 2400;
     }
-    if ([productId isEqualToString:kProductIDOf7150])
+    if ([productId isEqualToString:kProductIDOf7800])
     {
-        addAmount = 7150;
+        addAmount = 7800;
     }
 
     

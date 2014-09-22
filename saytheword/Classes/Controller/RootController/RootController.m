@@ -49,7 +49,13 @@
     [self.view addSubview:menuController.view];
     fVC = menuController;
     [menuController release];
-    [CommonFunction playBGSound];
+    if ([CommonFunction checkPlayMusic])
+    {
+        [CommonFunction playBGSound];
+    }else
+    {
+        
+    }
     
       
     
@@ -78,9 +84,10 @@
     [self presentNewVCFromTheLeft:menuController];
 }
 
-#pragma mark setting controller delegate method
 
-- (void)backBtnPressFromSettingController 
+#pragma mark how to  controller delegate method
+
+- (void)backBtnPressFromHowToController
 {
     MenuController *menuController = [[MenuController alloc]initWithPosition:1];
     menuController.delegate = self;
@@ -102,11 +109,11 @@
 
 #pragma mark menucontroller delegate method
 
-- (void)settingActionFromMenuController
+- (void)howtoActionFromMenuController
 {
-    SettingViewController *settingController = [[SettingViewController alloc]initWithPosition:-1];
-    settingController.delegate = self;
-    [self presentNewVCFromTheLeft:settingController];
+    HowToPlayViewController *howtoController = [[HowToPlayViewController alloc]initWithPosition:-1];
+    howtoController.delegate = self;
+    [self presentNewVCFromTheLeft:howtoController];
 }
 
 
@@ -140,9 +147,11 @@
         [newVC.view setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
     } completion:^(BOOL finished) {
         [fVC.view removeFromSuperview];
+        [fVC release];
         [fVC dismissViewControllerAnimated:NO completion:nil];
         fVC = newVC;
     }];
+    [newVC release];
     
 }
 
@@ -158,6 +167,7 @@
         [newVC.view setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
     } completion:^(BOOL finished) {
         [fVC.view removeFromSuperview];
+        [fVC release];
         [fVC dismissViewControllerAnimated:NO completion:nil];
         
         fVC = newVC;

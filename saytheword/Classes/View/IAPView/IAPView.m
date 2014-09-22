@@ -43,15 +43,15 @@
     {
         bgImgName = @"coin 2.png";
         [self setFrame:CGRectMake(60, 24, 27 , 30)];
-    }else if ([productIdentifier isEqualToString:kProductIDOf1085])
+    }else if ([productIdentifier isEqualToString:kProductIDOf1100])
     {
         bgImgName = @"coin3.png";
         [self setFrame:CGRectMake(3, 60, 27 , 30)];
-    }else if ([productIdentifier isEqualToString:kProductIDOf2350])
+    }else if ([productIdentifier isEqualToString:kProductIDOf2400])
     {
         bgImgName = @"coin 4.png";
         [self setFrame:CGRectMake(31, 60, 28 , 30)];
-    }else if ([productIdentifier isEqualToString:kProductIDOf7150])
+    }else if ([productIdentifier isEqualToString:kProductIDOf7800])
     {
 //        bgImgName = @"coin 4.png";
 //        [self setFrame:CGRectMake(31, 60, 28 , 30)];

@@ -18,11 +18,13 @@
 
 #import "SparklesViewController.h"  
 
+#import "HowToPlayViewController.h"
 
 
 
 
-@interface RootController : UIViewController<MenuControllerProtocol, PlayControllerProtocol, WinControllerProtocol, AppiraterDelegate, SettingControllerProtocol,UIAlertViewDelegate>
+
+@interface RootController : UIViewController<MenuControllerProtocol, PlayControllerProtocol, WinControllerProtocol, AppiraterDelegate, SettingControllerProtocol,UIAlertViewDelegate, HowToControllerProtocol>
 {
     BOOL getCoinsForRating;
 }

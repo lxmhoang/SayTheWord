@@ -104,22 +104,22 @@
             [cell showPrice:@"$1.99" saving:@"5%"];
             
         }
-        if ([productID isEqualToString:kProductIDOf1085])
+        if ([productID isEqualToString:kProductIDOf1100])
         {
-            cellText = @"1085 coins";
-            [cell showPrice:@"$4.99" saving:@"8%"];
+            cellText = @"1100 coins";
+            [cell showPrice:@"$4.99" saving:@"10%"];
             //            [cell showPrice:@"$4.99 28%"];
         }
-        if ([productID isEqualToString:kProductIDOf2350])
+        if ([productID isEqualToString:kProductIDOf2400])
         {
-            cellText = @"2350 coins";
-            [cell showPrice:@"$9.99" saving:@"15%"];
+            cellText = @"2400 coins";
+            [cell showPrice:@"$9.99" saving:@"20%"];
             //            [cell showPrice:@"$9.99 50%"];
         }
-        if ([productID isEqualToString:kProductIDOf7150])
+        if ([productID isEqualToString:kProductIDOf7800])
         {
-            cellText = @"7150 coins";
-            [cell showPrice:@"$24.99" saving:@"30%"];
+            cellText = @"7800 coins";
+            [cell showPrice:@"$29.99" saving:@"30%"];
             //            [cell showPrice:@"$19.99 60%"];
         }
         cell.textLabel.text = cellText;

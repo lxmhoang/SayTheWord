@@ -16,7 +16,6 @@
 
 - (id)initWithModel:(MenuModel *)_model
 {
-
     self = [super init];
     if (self)
     {
@@ -35,14 +34,18 @@
     return self;
 }
 
+
+
+
 - (void)createNavigationBar
 {
     UIView *navBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kWidthOfScreen, 44)];
 //    [navBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:kNavBarImg]]];
     
-    [navBar setBackgroundColor:[UIColor colorWithRed:203/255.0f green:122/255.0f blue:38/255.0f alpha:1.0f]];
+//    [navBar setBackgroundColor:[UIColor colorWithRed:203/255.0f green:122/255.0f blue:38/255.0f alpha:1.0f]];
+    [navBar setBackgroundColor:navColor];
     navBar.layer.masksToBounds = NO;
-    navBar.layer.cornerRadius = 5; // if you like rounded corners
+//    navBar.layer.cornerRadius = 5; // if you like rounded corners
     navBar.layer.shadowOffset = CGSizeMake(4, 5);
     navBar.layer.shadowRadius = 5;
     navBar.layer.shadowOpacity = 0.5;
@@ -117,6 +120,24 @@
     [[UIApplication sharedApplication] openURL:url];
 }
 
+- (void)tapOnMusicIcon:(id)_sender
+{
+    BOOL playMusic = [CommonFunction checkPlayMusic];
+    if (playMusic)
+    {
+        [musicIcon setImage:[UIImage imageNamed:@"musicoff.png.png"]];
+        [CommonFunction stopBGSound];
+        
+    }else
+    {
+        [musicIcon setImage:[UIImage imageNamed:@"musicon.png.png"]];
+        [CommonFunction playBGSound];
+        
+    }
+    
+    [CommonFunction setMusicFlag:!playMusic];
+}
+
 - (void)createSubViews
 {
     UIImageView *fbIcon = [[UIImageView alloc] initWithFrame:CGRectMake(280, 50, 32, 32)];
@@ -128,21 +149,45 @@
     [self addSubview:fbIcon];
     [fbIcon release];
     
+    musicIcon = [[UIImageView alloc] initWithFrame:CGRectMake(280, 90, 32, 32)];
+    if ([CommonFunction checkPlayMusic])
+    {
+        [musicIcon setImage:[UIImage imageNamed:@"musicon.png"]];
+    }else
+    {
+        [musicIcon setImage:[UIImage imageNamed:@"musicoff.png.png"]];
+    }
+    musicIcon.userInteractionEnabled = YES;
+    UITapGestureRecognizer *_taponmusicIcon = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnMusicIcon:)];
+    [musicIcon addGestureRecognizer:_taponmusicIcon];
+    [_taponmusicIcon release];
+    [self addSubview:musicIcon];
+    [musicIcon release];
+    
+    
+    
     [self createNavigationBar];
     [self setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
     
     UIButton *playBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [playBtn setFrame:CGRectMake(40, 320, 240, 40)];
+    [playBtn setFrame:CGRectMake(40, 320, 240, 50)];
     [playBtn setBackgroundImage:[UIImage imageNamed:@"playbtn.png"] forState:UIControlStateNormal];
+    
+    [playBtn setTitle:@"Guess          " forState:UIControlStateNormal];
+    [playBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//    [playBtn setBackgroundImage:[UIImage imageNamed:@"playButton.png"] forState:UIControlStateNormal];
+//    [playBtn setBackgroundImage:[UIImage imageNamed:@"playButtonyl.png"] forState:UIControlStateNormal];
     [playBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:23.0f]];
     [playBtn addTarget:delegate action:@selector(playBtnPressFromMenuView) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:playBtn];
     
     UIButton *settingBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [settingBtn setFrame:CGRectMake(40, 320+80, 240, 40)];
+    [settingBtn setFrame:CGRectMake(40, 320+80, 240, 50)];
     [settingBtn setBackgroundImage:[UIImage imageNamed:@"playbtn.png"] forState:UIControlStateNormal];
+    [settingBtn setTitle:@"How to play" forState:UIControlStateNormal];
+    [settingBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [settingBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:23.0f]];
-    [settingBtn addTarget:delegate action:@selector(settingBtnPressFromMenuView) forControlEvents:UIControlEventTouchUpInside];
+    [settingBtn addTarget:delegate action:@selector(howtoBtnPressFromMenuView) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:settingBtn];
 //    [playBtn release];
     
@@ -153,10 +198,10 @@
 //    [self addSubview:playBtn2];
 //    [playBtn2 release];
     
-    UIImageView *chars = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"1word2pics.png"]];
-    [chars setFrame:CGRectMake(30, 40, 260, 260)];
-    [self addSubview:chars];
-    [chars release];
+//    UIImageView *chars = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"1word2pics.png"]];
+//    [chars setFrame:CGRectMake(30, 40, 260, 260)];
+//    [self addSubview:chars];
+//    [chars release];
 }
 
 - (void)coinViewTapped:(UITapGestureRecognizer *)_sender

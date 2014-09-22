@@ -16,17 +16,17 @@
 #define kRewardCoinsForSharingApp 99
 
 #define kNavBarImg @"nav_nau.png"
-#define kProductIDOf200  @"com.lxmhoang.saytheword.iap.200coins"
-#define kProductIDOf420  @"com.lxmhoang.saytheword.iap.420coins"
-#define kProductIDOf1085  @"com.lxmhoang.saytheword.iap.1085coins"
-#define kProductIDOf2350  @"com.lxmhoang.saytheword.iap.2350coins"
-#define kProductIDOf7150  @"com.lxmhoang.saytheword.iap.7150coins"
+#define kProductIDOf200  @"com.lxmhoang.sayitloud.iap.200coins"
+#define kProductIDOf420  @"com.lxmhoang.sayitloud.iap.420coins"
+#define kProductIDOf1100  @"com.lxmhoang.sayitloud.iap.1100coins"
+#define kProductIDOf2400  @"com.lxmhoang.sayitloud.iap.2400coins"
+#define kProductIDOf7800  @"com.lxmhoang.sayitloud.iap.7800coins"
 //#define kProductIDOf50000  @"com.lxmhoang.saytheword.iap.50000coins"
 
 #define kHeightOfScreen [ [ UIScreen mainScreen ] bounds ].size.height
 #define kWidthOfScreen 320
 #define kTimeToPresentVC 0.5
-#define kInitialCoin 100
+#define kInitialCoin 10000
 
 #define kRandomNumber 33
 
@@ -98,6 +98,9 @@
 
 + (RootController *)getRootController;
 
++ (BOOL)checkPlayMusic;
++ (void)setMusicFlag:(BOOL)flag;
+
 + (BOOL)checkFBLogin;
 
 + (BOOL)getLikeFanPage;
@@ -120,6 +123,8 @@
 
 + (void)playBGSound;
 + (void)stopBGSound;
+
++ (void)playFireworkSound;
 
 
 + (void)setCanRemoveALetter:(BOOL)_val;

@@ -23,6 +23,7 @@
     UILabel *coinLabel;
     UIImageView *coinImageView;
     UIView *coinView;
+    UIImageView *musicIcon;
 }
 
 

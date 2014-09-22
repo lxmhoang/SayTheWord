@@ -89,18 +89,18 @@
     [bigView addSubview:showRightTitle];
     [showRightTitle release];
     
-    UIView *showAnswer = [[UIView alloc]initWithFrame:CGRectMake(31, 64, 27 , 30)];
-    [showAnswer setBackgroundColor:[UIColor redColor]];
-    if ([CommonFunction getShowAnswer]){
-        showAnswer.alpha = 0.5;
-    }else{
-        UITapGestureRecognizer *_tap5 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showAnswer:)];
-        [showAnswer addGestureRecognizer:_tap5];
-        [_tap5 release];
-    }
-    
-    [bigView addSubview:showAnswer];
-    [showAnswer release];
+//    UIView *showAnswer = [[UIView alloc]initWithFrame:CGRectMake(31, 64, 27 , 30)];
+//    [showAnswer setBackgroundColor:[UIColor redColor]];
+//    if ([CommonFunction getShowAnswer]){
+//        showAnswer.alpha = 0.5;
+//    }else{
+//        UITapGestureRecognizer *_tap5 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showAnswer:)];
+//        [showAnswer addGestureRecognizer:_tap5];
+//        [_tap5 release];
+//    }
+//    
+//    [bigView addSubview:showAnswer];
+//    [showAnswer release];
 
 
 

@@ -68,9 +68,9 @@
     [delegate playActionFromMenuController];
 }
 
-- (void)settingBtnPressFromMenuView
+- (void)howtoBtnPressFromMenuView
 {
-    [delegate settingActionFromMenuController];
+    [delegate howtoActionFromMenuController];
 }
 
 - (void)coinViewTappedFromMenuView

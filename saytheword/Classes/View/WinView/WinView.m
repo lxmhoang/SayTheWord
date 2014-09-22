@@ -227,6 +227,7 @@
 
 - (void)genNewEV:(int)i
 {
+    NSLog(@"get new ev %@", self);
     int startX =  i*80+ arc4random()%80;
     UIImageView *fireBall = [[UIImageView alloc] initWithFrame:CGRectMake(startX, kHeightOfScreen, 10, 10)];
     [fireBall setImage:[UIImage imageNamed:@"particle.png"]];
@@ -238,12 +239,26 @@
         fireBall.center = CGPointMake(startX, endY);
     } completion:^(BOOL finished) {
         [fireBall removeFromSuperview];
+        [CommonFunction playFireworkSound];
         ExplodeView *stars = [[ExplodeView alloc] initWithFrame:CGRectMake(fireBall.center.x, fireBall.center.y, 10, 10)];
         stars.range = i;
         stars.delegate = self;
         [self addSubview:stars];
         [stars release];
     }];
+}
+
+- (void)dealloc
+{
+    for (id tmp in self.subviews)
+    {
+        if ([tmp isKindOfClass:[ExplodeView class]])
+        {
+            ExplodeView *t = (ExplodeView *)tmp;
+            t.delegate = nil;
+        }
+    }
+    [super dealloc];
 }
 
 /*

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3734A7CA19C71994005008B8 /* playButtongr.png in Resources */ = {isa = PBXBuildFile; fileRef = 3734A7C919C71994005008B8 /* playButtongr.png */; };
+		3734A7CC19C71BF6005008B8 /* bluebg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3734A7CB19C71BF6005008B8 /* bluebg.png */; };
+		3734A7CE19C725E0005008B8 /* bluebg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3734A7CD19C725E0005008B8 /* bluebg.jpg */; };
+		3734A7D019C80577005008B8 /* dots-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3734A7CF19C80577005008B8 /* dots-blue.png */; };
 		37435FE1176DD8CB007FA421 /* InputButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37435FE0176DD8CB007FA421 /* InputButtonView.m */; };
 		37435FE3176DD9F5007FA421 /* hint.png in Resources */ = {isa = PBXBuildFile; fileRef = 37435FE2176DD9F5007FA421 /* hint.png */; };
 		37435FE5176DDDB4007FA421 /* lbbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 37435FE4176DDDB4007FA421 /* lbbg.png */; };
@@ -98,6 +102,8 @@
 		37A4F79A176DCA8B004A61A6 /* TypingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A4F799176DCA8B004A61A6 /* TypingView.m */; };
 		37A860B117A8EC35009C0F89 /* ExplodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A860AF17A8EC35009C0F89 /* ExplodeView.m */; };
 		37A860B217A8EC35009C0F89 /* particle.png in Resources */ = {isa = PBXBuildFile; fileRef = 37A860B017A8EC35009C0F89 /* particle.png */; };
+		37A8FC0719CD88A600E92850 /* HowToPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A8FC0519CD88A600E92850 /* HowToPlayViewController.m */; };
+		37A8FC0819CD88A600E92850 /* HowToPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A8FC0619CD88A600E92850 /* HowToPlayViewController.xib */; };
 		37A9710F17792058008D4634 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 37A970EE17792057008D4634 /* .gitignore */; };
 		37A9711017792058008D4634 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A970F017792057008D4634 /* Appirater.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		37A9711117792058008D4634 /* Appirater.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 37A970F117792057008D4634 /* Appirater.podspec */; };
@@ -234,7 +240,14 @@
 		37BD67E8177BD590004356AD /* weaver.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37BD6771177BD590004356AD /* weaver.jpg */; };
 		37BD67E9177BD590004356AD /* zeus.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37BD6772177BD590004356AD /* zeus.jpg */; };
 		37C2C2AD17B4FD11006C7080 /* fb_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C2C2AC17B4FD11006C7080 /* fb_icon.png */; };
+		37C5E6AF19C44D61005007FD /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C5E6AE19C44D61005007FD /* menu.png */; };
+		37C5E6B319C4607B005007FD /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C5E6B219C4607B005007FD /* playButton.png */; };
+		37C5E6B519C47B8F005007FD /* menu2.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C5E6B419C47B8F005007FD /* menu2.png */; };
+		37C785C219CEFDAC00010613 /* firework_explode.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37C785C119CEFDAC00010613 /* firework_explode.mp3 */; };
+		37C785C619CEFFF600010613 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C785C519CEFFF600010613 /* AudioToolbox.framework */; };
 		37CEFA161780719200B1D1C8 /* nav_nau.png in Resources */ = {isa = PBXBuildFile; fileRef = 37CEFA151780719100B1D1C8 /* nav_nau.png */; };
+		37E1395A19CB4B37008190F5 /* musicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E1395919CB4B37008190F5 /* musicon.png */; };
+		37E1395C19CB50B9008190F5 /* musicoff.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E1395B19CB50B9008190F5 /* musicoff.png */; };
 		A4076081183DDC230062A553 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A407607E183DDC230062A553 /* LICENSE */; };
 		A4076083183DDC230062A553 /* README in Resources */ = {isa = PBXBuildFile; fileRef = A4076080183DDC230062A553 /* README */; };
 		A4076084183DDD980062A553 /* NewRelicAgent.framework in Sources */ = {isa = PBXBuildFile; fileRef = A407607F183DDC230062A553 /* NewRelicAgent.framework */; };
@@ -244,6 +257,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3734A7C919C71994005008B8 /* playButtongr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButtongr.png; sourceTree = "<group>"; };
+		3734A7CB19C71BF6005008B8 /* bluebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluebg.png; sourceTree = "<group>"; };
+		3734A7CD19C725E0005008B8 /* bluebg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bluebg.jpg; sourceTree = "<group>"; };
+		3734A7CF19C80577005008B8 /* dots-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dots-blue.png"; sourceTree = "<group>"; };
 		37435FDF176DD8CB007FA421 /* InputButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputButtonView.h; sourceTree = "<group>"; };
 		37435FE0176DD8CB007FA421 /* InputButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputButtonView.m; sourceTree = "<group>"; };
 		37435FE2176DD9F5007FA421 /* hint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hint.png; sourceTree = "<group>"; };
@@ -372,6 +389,9 @@
 		37A860AE17A8EC35009C0F89 /* ExplodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplodeView.h; sourceTree = "<group>"; };
 		37A860AF17A8EC35009C0F89 /* ExplodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExplodeView.m; sourceTree = "<group>"; };
 		37A860B017A8EC35009C0F89 /* particle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = particle.png; sourceTree = "<group>"; };
+		37A8FC0419CD88A600E92850 /* HowToPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HowToPlayViewController.h; sourceTree = "<group>"; };
+		37A8FC0519CD88A600E92850 /* HowToPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HowToPlayViewController.m; sourceTree = "<group>"; };
+		37A8FC0619CD88A600E92850 /* HowToPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HowToPlayViewController.xib; sourceTree = "<group>"; };
 		37A970EE17792057008D4634 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		37A970EF17792057008D4634 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		37A970F017792057008D4634 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
@@ -536,7 +556,15 @@
 		37BD6771177BD590004356AD /* weaver.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = weaver.jpg; sourceTree = "<group>"; };
 		37BD6772177BD590004356AD /* zeus.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zeus.jpg; sourceTree = "<group>"; };
 		37C2C2AC17B4FD11006C7080 /* fb_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb_icon.png; sourceTree = "<group>"; };
+		37C5E6AE19C44D61005007FD /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		37C5E6B219C4607B005007FD /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
+		37C5E6B419C47B8F005007FD /* menu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu2.png; sourceTree = "<group>"; };
+		37C785C119CEFDAC00010613 /* firework_explode.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = firework_explode.mp3; sourceTree = "<group>"; };
+		37C785C319CEFFA000010613 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		37C785C519CEFFF600010613 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		37CEFA151780719100B1D1C8 /* nav_nau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_nau.png; sourceTree = "<group>"; };
+		37E1395919CB4B37008190F5 /* musicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musicon.png; sourceTree = "<group>"; };
+		37E1395B19CB50B9008190F5 /* musicoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musicoff.png; sourceTree = "<group>"; };
 		A407607E183DDC230062A553 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		A407607F183DDC230062A553 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		A4076080183DDC230062A553 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -551,6 +579,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37C785C619CEFFF600010613 /* AudioToolbox.framework in Frameworks */,
 				A4076088183DDDF40062A553 /* libz.dylib in Frameworks */,
 				37A97117177920A3008D4634 /* SystemConfiguration.framework in Frameworks */,
 				A4076086183DDDE40062A553 /* CoreTelephony.framework in Frameworks */,
@@ -609,6 +638,7 @@
 		3797BD651755C10700F42FE4 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				37C785C119CEFDAC00010613 /* firework_explode.mp3 */,
 				37B91F4317783D4800A37CA2 /* RiverFlowsInYou.mp3 */,
 				37B91F3D17782CA600A37CA2 /* Kiss_The_Rain.mp3 */,
 			);
@@ -672,6 +702,8 @@
 		379DC474175334BE00CEDB69 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37C785C519CEFFF600010613 /* AudioToolbox.framework */,
+				37C785C319CEFFA000010613 /* AudioUnit.framework */,
 				A4076087183DDDF40062A553 /* libz.dylib */,
 				A4076085183DDDE40062A553 /* CoreTelephony.framework */,
 				A407607D183DDC230062A553 /* NewRelic_iOS_Agent_1.376 */,
@@ -808,6 +840,15 @@
 		379E93151765C97000237F39 /* Accessory */ = {
 			isa = PBXGroup;
 			children = (
+				37E1395B19CB50B9008190F5 /* musicoff.png */,
+				37E1395919CB4B37008190F5 /* musicon.png */,
+				3734A7CF19C80577005008B8 /* dots-blue.png */,
+				3734A7CD19C725E0005008B8 /* bluebg.jpg */,
+				3734A7CB19C71BF6005008B8 /* bluebg.png */,
+				3734A7C919C71994005008B8 /* playButtongr.png */,
+				37C5E6B419C47B8F005007FD /* menu2.png */,
+				37C5E6B219C4607B005007FD /* playButton.png */,
+				37C5E6AE19C44D61005007FD /* menu.png */,
 				37B11BED19929E4800047989 /* homeBtn.png */,
 				37A4CB5717B8A82E00E024B9 /* coinngang.png */,
 				37A4CB5517B8A63100E024B9 /* 100coin.png */,
@@ -1252,6 +1293,9 @@
 			children = (
 				A461014418C095E400479EE3 /* SettingViewController.h */,
 				A461014518C095E400479EE3 /* SettingViewController.m */,
+				37A8FC0419CD88A600E92850 /* HowToPlayViewController.h */,
+				37A8FC0519CD88A600E92850 /* HowToPlayViewController.m */,
+				37A8FC0619CD88A600E92850 /* HowToPlayViewController.xib */,
 			);
 			path = SettingViewController;
 			sourceTree = "<group>";
@@ -1284,6 +1328,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Hoang Le";
+				TargetAttributes = {
+					379DC471175334BE00CEDB69 = {
+						DevelopmentTeam = TMD3Y97MSH;
+					};
+				};
 			};
 			buildConfigurationList = 379DC46D175334BE00CEDB69 /* Build configuration list for PBXProject "saytheword" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1349,7 +1398,9 @@
 				379E93301765C97000237F39 /* menubuttonbg.jpg in Resources */,
 				379E93311765C97000237F39 /* nav-bar.png in Resources */,
 				379E93321765C97000237F39 /* naviBar.jpg in Resources */,
+				37C5E6B519C47B8F005007FD /* menu2.png in Resources */,
 				379E93331765C97000237F39 /* naviBarMenu.jpg in Resources */,
+				3734A7CA19C71994005008B8 /* playButtongr.png in Resources */,
 				379E93341765C97000237F39 /* playbtn.png in Resources */,
 				379E93351765C97000237F39 /* playbtntest.jpg in Resources */,
 				37435FE3176DD9F5007FA421 /* hint.png in Resources */,
@@ -1363,6 +1414,7 @@
 				37B91F3E17782CA600A37CA2 /* Kiss_The_Rain.mp3 in Resources */,
 				37B91F4417783D4800A37CA2 /* RiverFlowsInYou.mp3 in Resources */,
 				37B11BEE19929E4800047989 /* homeBtn.png in Resources */,
+				37C785C219CEFDAC00010613 /* firework_explode.mp3 in Resources */,
 				37A9710F17792058008D4634 /* .gitignore in Resources */,
 				37A9711117792058008D4634 /* Appirater.podspec in Resources */,
 				37A9711217792058008D4634 /* AppiraterLocalizable.strings in Resources */,
@@ -1379,6 +1431,7 @@
 				37BD677B177BD590004356AD /* beer.jpg in Resources */,
 				37BD677C177BD590004356AD /* beret.jpg in Resources */,
 				37BD677D177BD590004356AD /* beverage.jpg in Resources */,
+				37A8FC0819CD88A600E92850 /* HowToPlayViewController.xib in Resources */,
 				37BD677E177BD590004356AD /* bicycle.jpg in Resources */,
 				37BD677F177BD590004356AD /* billionaire.jpg in Resources */,
 				37BD6780177BD590004356AD /* birthday.jpg in Resources */,
@@ -1388,10 +1441,12 @@
 				37BD6784177BD590004356AD /* bubble.jpg in Resources */,
 				37BD6785177BD590004356AD /* butter.jpg in Resources */,
 				37BD6786177BD590004356AD /* button.jpg in Resources */,
+				37C5E6AF19C44D61005007FD /* menu.png in Resources */,
 				37BD6787177BD590004356AD /* cabbage.jpg in Resources */,
 				37BD6788177BD590004356AD /* cabob.JPG in Resources */,
 				37BD6789177BD590004356AD /* calendar.jpg in Resources */,
 				37BD678A177BD590004356AD /* candy.jpg in Resources */,
+				37E1395A19CB4B37008190F5 /* musicon.png in Resources */,
 				37BD678B177BD590004356AD /* Canteen.jpg in Resources */,
 				37BD678C177BD590004356AD /* capricorn.jpg in Resources */,
 				37BD678D177BD590004356AD /* carpet.jpg in Resources */,
@@ -1424,6 +1479,7 @@
 				37BD67A8177BD590004356AD /* kettle.JPG in Resources */,
 				37BD67A9177BD590004356AD /* lemon.jpg in Resources */,
 				37BD67AA177BD590004356AD /* libra.jpg in Resources */,
+				3734A7D019C80577005008B8 /* dots-blue.png in Resources */,
 				37BD67AB177BD590004356AD /* library.jpg in Resources */,
 				37BD67AC177BD590004356AD /* lichee.JPG in Resources */,
 				37BD67AD177BD590004356AD /* lighter.jpg in Resources */,
@@ -1485,7 +1541,9 @@
 				37BD67E4177BD590004356AD /* volley.jpg in Resources */,
 				37BD67E5177BD590004356AD /* wagon.jpg in Resources */,
 				37BD67E6177BD590004356AD /* waiter.jpg in Resources */,
+				37C5E6B319C4607B005007FD /* playButton.png in Resources */,
 				37BD67E7177BD590004356AD /* wallet.jpg in Resources */,
+				3734A7CE19C725E0005008B8 /* bluebg.jpg in Resources */,
 				37BD67E8177BD590004356AD /* weaver.jpg in Resources */,
 				37BD67E9177BD590004356AD /* zeus.jpg in Resources */,
 				37CEFA161780719200B1D1C8 /* nav_nau.png in Resources */,
@@ -1494,7 +1552,9 @@
 				37A20D71178D0E0C0025B3A3 /* Close-icon.png in Resources */,
 				37A20D77178D61FE0025B3A3 /* coin1.png in Resources */,
 				37A20D81178D6B8A0025B3A3 /* coin 2.png in Resources */,
+				3734A7CC19C71BF6005008B8 /* bluebg.png in Resources */,
 				37A20D82178D6B8A0025B3A3 /* coin 4.png in Resources */,
+				37E1395C19CB50B9008190F5 /* musicoff.png in Resources */,
 				37A20D83178D6B8A0025B3A3 /* coin 5.png in Resources */,
 				37A20D84178D6B8A0025B3A3 /* coin 6.png in Resources */,
 				37A20D85178D6B8A0025B3A3 /* coin3.png in Resources */,
@@ -1545,6 +1605,7 @@
 				379F05531774186800C50DDB /* IAPHelper.m in Sources */,
 				379F05571774188E00C50DDB /* MBProgressHUD.m in Sources */,
 				379F0561177438CE00C50DDB /* HintCell.m in Sources */,
+				37A8FC0719CD88A600E92850 /* HowToPlayViewController.m in Sources */,
 				379F0562177438CE00C50DDB /* HintView.m in Sources */,
 				379F0567177450D900C50DDB /* WinController.m in Sources */,
 				379F056A1774512600C50DDB /* WinView.m in Sources */,
@@ -1666,8 +1727,12 @@
 		379DC490175334BE00CEDB69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hoang Le (44T52VC842)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hoang Le (44T52VC842)";
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -1677,6 +1742,7 @@
 				GCC_PREFIX_HEADER = "saytheword/saytheword-Prefix.pch";
 				INFOPLIST_FILE = "saytheword/saytheword-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Say it loud, the word come out";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1687,8 +1753,12 @@
 		379DC491175334BE00CEDB69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: LE HOANG (TMD3Y97MSH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LE HOANG (TMD3Y97MSH)";
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -1697,8 +1767,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "saytheword/saytheword-Prefix.pch";
 				INFOPLIST_FILE = "saytheword/saytheword-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Say it loud, the word come out";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};

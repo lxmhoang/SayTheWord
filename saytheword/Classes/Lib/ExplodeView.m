@@ -120,7 +120,11 @@
 
 - (void)rebirth
 {
-    [delegate genNewEV:range];
+    if (delegate && [delegate respondsToSelector:@selector(genNewEV:)])
+    {
+        [delegate genNewEV:range];
+        
+    }
 }
 
 -(void)disableEmitterCell

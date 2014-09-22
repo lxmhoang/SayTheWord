@@ -14,6 +14,17 @@
     return [(AppDelegate *)[[UIApplication sharedApplication] delegate] getRootController];
 }
 
++ (BOOL)checkPlayMusic
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"playMusicFlag"];
+}
+
++ (void)setMusicFlag:(BOOL)flag
+{
+    [[NSUserDefaults standardUserDefaults] setBool:flag forKey:@"playMusicFlag"];
+}
+
+
 + (BOOL)checkFBLogin
 {
     return FBSession.activeSession.isOpen;
@@ -57,6 +68,11 @@
 }
 + (void)stopBGSound{
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] stopBGSound];
+}
+
++ (void)playFireworkSound
+{
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] playFireworkSoud];
 }
 
 #pragma mark set get remove index
@@ -259,8 +275,12 @@
      
     NSNumber *coin = [NSNumber numberWithInt:kInitialCoin];
     
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"playMusicFlag"] == nil){
+        [self setMusicFlag:YES];
+    }
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"bgSoundVolume"] == nil){
-        [self setBGSoundVolume:0.4];
+        [self setBGSoundVolume:1];
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"showLeftTitle"] == nil){

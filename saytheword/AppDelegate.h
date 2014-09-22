@@ -14,9 +14,11 @@
 
 
 
+
 @interface AppDelegate : NSObject <UIApplicationDelegate, FBLoginViewDelegate >
 {
     AVAudioPlayer *player;
+    SystemSoundID fireWorkSound;
     
 }
 
@@ -28,6 +30,9 @@
 
 - (void)playBGSound;
 - (void)stopBGSound;
+
+- (void)playFireworkSoud;
+
 
 
 
