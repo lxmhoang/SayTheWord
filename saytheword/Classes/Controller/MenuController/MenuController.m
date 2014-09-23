@@ -105,7 +105,6 @@
     
     menuView = [[MenuView alloc]initWithModel:menuModel];
     menuView.delegate = self;
-    menuView.delegate = self;
     [self.view addSubview:menuView];
     [menuView release];
     // Do any additional setup after loading the view.

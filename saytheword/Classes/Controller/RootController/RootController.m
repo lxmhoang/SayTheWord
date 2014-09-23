@@ -47,8 +47,11 @@
     menuController.delegate = self;
     [self addChildViewController:menuController];
     [self.view addSubview:menuController.view];
+    
     fVC = menuController;
-    [menuController release];
+//    [menuController.view release];
+    
+//    [menuController release];
     if ([CommonFunction checkPlayMusic])
     {
         [CommonFunction playBGSound];
@@ -140,18 +143,21 @@
 {
 
     [self addChildViewController:newVC];
+    
+    [newVC release];
     [self.view addSubview:newVC.view];
+//    [newVC.view release];
     
     [UIView animateWithDuration:kTimeToPresentVC animations:^{
         [fVC.view  setFrame:CGRectMake(+kWidthOfScreen, 0, kWidthOfScreen, kHeightOfScreen)];
         [newVC.view setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
     } completion:^(BOOL finished) {
         [fVC.view removeFromSuperview];
-        [fVC release];
         [fVC dismissViewControllerAnimated:NO completion:nil];
+        
+        [fVC removeFromParentViewController];
         fVC = newVC;
     }];
-    [newVC release];
     
 }
 
@@ -160,20 +166,21 @@
 //    MenuController *playController = [[MenuController alloc]initWithPosition:1];
 //    vc.delegate = self;
     [self addChildViewController:newVC];
+    
+    [newVC release];
     [self.view addSubview:newVC.view];
+//    [newVC.view release];
 
     [UIView animateWithDuration:kTimeToPresentVC animations:^{
         [fVC.view  setFrame:CGRectMake(-kWidthOfScreen, 0, kWidthOfScreen, kHeightOfScreen)];
         [newVC.view setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
     } completion:^(BOOL finished) {
         [fVC.view removeFromSuperview];
-        [fVC release];
         [fVC dismissViewControllerAnimated:NO completion:nil];
-        
+        [fVC removeFromParentViewController];
         fVC = newVC;
     }];
 //    [newVC.view release];
-    [newVC release];
     
     
     
