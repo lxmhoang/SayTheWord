@@ -12,7 +12,6 @@
 #import "RootView.h"
 #import "WinController.h"
 #import <AVFoundation/AVFoundation.h>
-#import "AppiraterDelegate.h"
 
 #import "SettingViewController.h"
 
@@ -24,11 +23,10 @@
 
 
 
-@interface RootController : UIViewController<MenuControllerProtocol, PlayControllerProtocol, WinControllerProtocol, AppiraterDelegate, SettingControllerProtocol,UIAlertViewDelegate, HowToControllerProtocol>
+@interface RootController : UIViewController<MenuControllerProtocol, PlayControllerProtocol, WinControllerProtocol, SettingControllerProtocol,UIAlertViewDelegate, HowToControllerProtocol>
 {
-    BOOL getCoinsForRating;
 }
 
-@property (nonatomic, retain) UIViewController *fVC;
+@property (nonatomic, strong) UIViewController *fVC;
 
 @end

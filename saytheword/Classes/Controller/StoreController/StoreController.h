@@ -29,8 +29,8 @@
     StoreModel *storeModel;
 }
 
-@property (nonatomic, retain) NSArray *listItems;
-@property (nonatomic, assign)  id delegate;
+@property (nonatomic, strong) NSArray *listItems;
+@property (nonatomic, unsafe_unretained)  id delegate;
 //- (id)initWithArray:(NSArray *)_array;
 
 @end

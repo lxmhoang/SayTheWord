@@ -17,7 +17,7 @@
     UISlider *bgMusicVolumSilder;
 }
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 - (id)initWithPosition:(int)_pos;
 

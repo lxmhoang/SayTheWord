@@ -15,7 +15,7 @@
 //    IAPHelper *iAPHelper;
 }
 
-@property (nonatomic, retain) NSArray *listItems;
+@property (nonatomic, strong) NSArray *listItems;
 
 - (id)initWithArray:(NSArray *)_array;
 - (void)importData:(NSArray *)_array;

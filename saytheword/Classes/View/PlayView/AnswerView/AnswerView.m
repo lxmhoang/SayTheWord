@@ -25,8 +25,14 @@
     self = [super initWithFrame:_frame];
     if (self)
     {
+        
+        distanceBwChars = kCheckIfIphone ? 5 : 10;
+        widthOfChar = kCheckIfIphone ? 30 : 60;
+        yOfLine = kCheckIfIphone ? 45 : 90;
+        thickOfLine = kCheckIfIphone ? 3 : 6;
+        yOfChar = kCheckIfIphone ? 29 : 34;
         self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
-        playModel = [_model retain];
+        playModel = _model;
         [self createSubViews];
         index = 0;
     }
@@ -35,21 +41,22 @@
 
 - (void)createSubViews
 {
-    float length = (playModel.wordInfo.finalWord.length+0)*(kWidthOfCharInAnswerView+kDistanceBwCharsInAnswerView)-kDistanceBwCharsInAnswerView;
-    leftPoint = (320-length)/2;
+    float length = (playModel.wordInfo.finalWord.length+0)*(widthOfChar+distanceBwChars)-distanceBwChars;
+    leftPoint = (kWidthOfScreen-length)/2;
     float moc = leftPoint;
+    int fontSize = kCheckIfIphone ? 25 : 38;
+    int paddingOfChar = kCheckIfIphone ? 14 : 14;
     for (int i=0;i<playModel.wordInfo.finalWord.length;i++)
     {
-        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(moc, 45, kWidthOfCharInAnswerView, 3)];
+        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(moc, yOfLine, widthOfChar, thickOfLine)];
         [line setTag:i+kRandomNumber*2];
         [line setBackgroundColor:[UIColor whiteColor]];
         if (i==0)
             [line setBackgroundColor:[UIColor yellowColor]];
         [self addSubview:line];
-        [line release];
         
-        UILabel *lb = [[UILabel alloc]initWithFrame:CGRectMake(moc+14, 29, 2, 2)];
-        [lb setFont:[UIFont fontWithName:@"Arial-BoldMT" size:25]];
+        UILabel *lb = [[UILabel alloc]initWithFrame:CGRectMake(moc+paddingOfChar, yOfChar, yOfLine - yOfChar, yOfLine - yOfChar)];
+        [lb setFont:[UIFont fontWithName:@"Arial-BoldMT" size:fontSize]];
         [lb setTextAlignment:NSTextAlignmentCenter];
         [lb setText:@""];
         [lb setTag:i+kRandomNumber];
@@ -59,26 +66,22 @@
         
         UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapLabel:)];
         [lb addGestureRecognizer:_tap];
-        [_tap release];
         
         
         [self addSubview:lb];
-        [lb release];
         
-        moc+=kWidthOfCharInAnswerView+kDistanceBwCharsInAnswerView;
+        moc+=widthOfChar+distanceBwChars;
     }
     
-    UIImageView *eraseIcon = [[UIImageView alloc]initWithFrame:CGRectMake(moc, 15, kWidthOfCharInAnswerView, kWidthOfCharInAnswerView)];
+    UIImageView *eraseIcon = [[UIImageView alloc]initWithFrame:CGRectMake(moc, 15, widthOfChar, widthOfChar)];
     eraseIcon.userInteractionEnabled = YES;
     [eraseIcon setImage:[UIImage imageNamed:@"clear.png"]];
     [eraseIcon setTag:kTagOfEraseIcon];
     
     UITapGestureRecognizer *clearTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeAllText)];
     [eraseIcon addGestureRecognizer:clearTap];
-    [clearTap release];
     
     [self addSubview:eraseIcon];
-    [eraseIcon release];
     
 }
 
@@ -91,7 +94,7 @@
 //    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         
-        [indexLb setFrame:CGRectMake(leftPoint+index*(kWidthOfCharInAnswerView+kDistanceBwCharsInAnswerView),15, kWidthOfCharInAnswerView, kWidthOfCharInAnswerView)];
+        [indexLb setFrame:CGRectMake(leftPoint+index*(widthOfChar+distanceBwChars),yOfChar, widthOfChar, widthOfChar)];
         indexLb.alpha = 1;
         
     } completion:^(BOOL finished) {
@@ -239,14 +242,7 @@
 
 - (void)removeAllText
 {
-//    for (int i=0;i<playModel.wordInfo.finalWord.length;i++)
-//    {
-//        UILabel *indexLb = (UILabel *)[self viewWithTag:(i+kRandomNumber)];
-//        [indexLb setFrame:CGRectMake(leftPoint+i*(kWidthOfCharInAnswerView+kDistanceBwCharsInAnswerView)+14,15+14, 2, 2)];
-//        indexLb.text = @"";
-//        [indexLb setTextColor:[UIColor whiteColor]];
-//    }
-//    [self setNewIndex:0];
+
     for(int i=0;i<playModel.wordInfo.finalWord.length;i++)
     {
          UILabel *indexLb = (UILabel *)[self viewWithTag:(i+kRandomNumber)];

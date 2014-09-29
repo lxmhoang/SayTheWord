@@ -10,7 +10,7 @@
 
 @implementation PlayView
 
-@synthesize playModel, delegate, typingView, answerView, coinLabel;
+@synthesize playModel, delegate, typingView, answerView, coinLabel, leftView, rightView;
 
 - (id)initWithModel:(PlayModel *)_model
 {
@@ -18,23 +18,27 @@
     self = [super init];
     if (self)
     {
-//        ExplodeView *stars = [[ExplodeView alloc] initWithFrame:CGRectMake(0, 70, self.frame.size.width, self.frame.size.height)];
-//        [self addSubview:stars];
-//        [self sendSubviewToBack:stars];
-//        [UIView animateWithDuration:3 animations:^{
-//            stars.center = CGPointMake(320, 70);
-//        } completion:^(BOOL finished) {
-//            [stars removeFromSuperview];
-//        }];
-//        
-//        [stars release];
 
-        playModel = [_model retain];
+        yOfImages = kCheckIfIphone ? 70 : 160;
+        sizeOfImg = kCheckIfIphone ? 155 : 300;
+        distanceFromImgToTitle = kCheckIfIphone ? 5 : 20;
+        heightOftitle = kCheckIfIphone ? 30 : 45;
+        yOfAnswerView = kCheckIfIphone ? 260 : 540;
+        heightOfAnswerView = kCheckIfIphone ? 60 : 120;
+        distanceFromAnswerViewToAnswerLabel = kCheckIfIphone ? 5 : 10;
+        yOfTypingView = kCheckIfIphone ? (([ [ UIScreen mainScreen ] bounds ].size.height == 568) ? 360 : 310) : 700;
+        heightOfTypingView = kCheckIfIphone ? 120 : 240;
+        
+        
+
+        playModel = _model;
         [self setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
         [self createSubViews];
         if ([CommonFunction getRevealIndex]>-1){
             [self revealALetterFromController:[CommonFunction getRevealIndex]];
         }
+        
+        
         
     }
     
@@ -55,207 +59,185 @@
 
 #pragma mark create sub views
 
+
+
 - (void)createNavigationBar
 {
-    UIView *navBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kWidthOfScreen, 44)];
-    [navBar setBackgroundColor:[UIColor clearColor]];
+    UIView *navBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfNavigationBar)];
+    
+    [navBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_nau_new.png"]]];
+    
+    //    [navBar setBackgroundColor:[UIColor colorWithRed:203/255.0f green:122/255.0f blue:38/255.0f alpha:1.0f]];
     [navBar setBackgroundColor:navColor];
-//    [navBar setBackgroundColor:[UIColor colorWithRed:203/255.0f green:122/255.0f blue:38/255.0f alpha:1.0f]];
     navBar.layer.masksToBounds = NO;
-//    navBar.layer.cornerRadius = 5; // if you like rounded corners
+    //    navBar.layer.cornerRadius = 5; // if you like rounded corners
     navBar.layer.shadowOffset = CGSizeMake(4, 5);
     navBar.layer.shadowRadius = 5;
     navBar.layer.shadowOpacity = 0.5;
-//    [navBar setAlpha:0.4];
-//    [navBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:kNavBarImg]]];
-//    NSLog(@"AAAAAAAAAAAAA %@",playModel.leftSource);
     
+    
+    //    UIView *v1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    //    [v1 setBackgroundColor:[UIColor colorWithRed:203/255.0f green:122/255.0f blue:38/255.0f alpha:1.0f]];
+    //    [self addSubview:v1];
     
     coinView = [[UIView alloc]init];
+    [coinView setFrame:CGRectMake(kWidthOfScreen - (kCheckIfIphone ? 120 : 220), 0, (kCheckIfIphone ? 120 : 220), kHeightOfNavigationBar)];
     [coinView setBackgroundColor:[UIColor clearColor]];
     
+    int fontSize = kCheckIfIphone ? 16 : 28;
     
     coinLabel = [[UILabel alloc]init];
     coinLabel.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"coins"]];
-    [coinLabel setFont:[UIFont fontWithName:@"ArialRoundedMTBold" size:16]];
+    [coinLabel setFont:[UIFont fontWithName:@"ArialRoundedMTBold" size:fontSize]];
     
     [coinLabel setTextAlignment:NSTextAlignmentRight];
     [coinLabel sizeToFit];
-    [coinLabel setFrame:CGRectMake(0, 5, 75, 34)];
+    [coinLabel setFrame:CGRectMake(0, kCheckIfIphone ? 5 : 10, kCheckIfIphone ? 75 : 150, kCheckIfIphone ? 33 : 44 )];
     [coinLabel setBackgroundColor:[UIColor clearColor]];
     [coinLabel setTextColor:[UIColor yellowColor]];
-    [coinLabel setTag:1111];
     [coinView addSubview:coinLabel];
-    [coinLabel release];
     
     coinImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"coins.png"]];
     [coinImageView setBackgroundColor:[UIColor clearColor]];
-    [coinImageView setFrame:CGRectMake(120-43, 5, 33, 33)];
+    int size = kCheckIfIphone ? 33 : 44;
+    [coinImageView setFrame:CGRectMake(coinLabel.frame.size.width+10, (coinView.frame.size.height-size)/2, size, size)];
     coinImageView.userInteractionEnabled = YES;
     coinImageView.layer.zPosition = 9999;
     
     
     [coinView addSubview:coinImageView];
-    [coinImageView release];
     
-    [coinView setFrame:CGRectMake(kWidthOfScreen - 120, 0, 120, 44)];
-    //    [coinView setBackgroundColor:[UIColor redColor]];
+    
     
     coinView.userInteractionEnabled = YES;
     UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(coinViewTapped:)];
     [coinView addGestureRecognizer:_tap];
-    [_tap release];
     
     [navBar addSubview:coinView];
-    [coinView release];
     
-    
-    
+    CGRect tmpRect = kCheckIfIphone ? CGRectMake(10, 5, 70, 34) : CGRectMake(16, 7, 100, 50);
     //Create MenuBtn
     UIButton *menuBackBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [menuBackBtn setBackgroundImage:[UIImage imageNamed:@"homeBtn.png"] forState:UIControlStateNormal];
-//    [menuBackBtn setTitle:@"Menu" forState:UIControlStateNormal];
+    //    [menuBackBtn setTitle:@"Menu" forState:UIControlStateNormal];
     [menuBackBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
     [menuBackBtn setTintColor:[UIColor blueColor]];
-    [menuBackBtn setFrame:CGRectMake(10, 5, 70, 34)];
+    [menuBackBtn setFrame:tmpRect];
     [menuBackBtn addTarget:delegate action:@selector(backBtnPressFromPlayView) forControlEvents:UIControlEventTouchUpInside];
     [navBar addSubview:menuBackBtn];
+
     
-//    navBar.layer.shadowOffset = CGSizeMake(0, 8);
-//    navBar.layer.shadowRadius = 10;
-//    navBar.layer.shadowOpacity = 0.5;
     
-//    navBar.layer.cornerRadius = 10;
+    
+    
     [self addSubview:navBar];
-    [navBar release];
     
     // Create Level label
+    fontSize = kCheckIfIphone ? 20 : 40;
     UILabel *levelLabel = [[UILabel alloc]init];
-    levelLabel.text = [NSString stringWithFormat:@"Level %d",[[[NSUserDefaults standardUserDefaults] objectForKey:@"level"] intValue]];
-    [levelLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:18]];
+    levelLabel.text = [NSString stringWithFormat:@"%d",[[[NSUserDefaults standardUserDefaults] objectForKey:@"level"] intValue]];
+    [levelLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:fontSize]];
     [levelLabel sizeToFit];
     
-    [levelLabel setFrame:CGRectMake((kWidthOfScreen - levelLabel.frame.size.width)/2, (44 - levelLabel.frame.size.height)/2, levelLabel.frame.size.width, levelLabel.frame.size.height)];
+    [levelLabel setFrame:CGRectMake((kWidthOfScreen - levelLabel.frame.size.width)/2, (kHeightOfNavigationBar - levelLabel.frame.size.height)/2, levelLabel.frame.size.width, levelLabel.frame.size.height)];
     [levelLabel setBackgroundColor:[UIColor clearColor]];
     [levelLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:levelLabel];
-    [levelLabel release];
 }
 
 - (void)createImageViews
 {
-    UIView *leftView = [[UIView alloc]initWithFrame:CGRectMake(2, kYOfImages, 155, 155)];
+    leftView = [[UIView alloc]initWithFrame:CGRectMake((kWidthOfScreen - 2*sizeOfImg)/4, yOfImages, sizeOfImg, sizeOfImg)];
     [leftView setBackgroundColor:[UIColor whiteColor]];
     [leftView.layer setCornerRadius:10.0f];
     [leftView setTag:kTagOfLeftView];
     
-    UIImageView *leftImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 145, 145)
+    UIImageView *leftImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, sizeOfImg-10, sizeOfImg-10)
                                 ];
     [leftImgView setImage:[UIImage imageNamed:playModel.wordInfo.leftImg]];
     [leftView addSubview:leftImgView];
-    [leftImgView release];
     
     UITapGestureRecognizer *_tapLeft = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapLeft:)];
     [leftView addGestureRecognizer:_tapLeft];
-    [_tapLeft release];
     
     [self addSubview:leftView];
-    [leftView release];
     
     
-    UIView *rightView = [[UIView alloc]initWithFrame:CGRectMake(163, kYOfImages, 155, 155)];
+    rightView = [[UIView alloc]initWithFrame:CGRectMake(leftView.frame.origin.x + leftView.frame.size.width + (kWidthOfScreen - sizeOfImg*2)/2, yOfImages, sizeOfImg, sizeOfImg)];
     [rightView setBackgroundColor:[UIColor whiteColor]];
     [rightView.layer setCornerRadius:10.0f];
     [rightView setTag:kTagOfRightView];
     
     UITapGestureRecognizer *_tapRight = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRight:)];
     [rightView addGestureRecognizer:_tapRight];
-    [_tapRight release];
     
-    UIImageView *rightImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 145, 145)];
+    UIImageView *rightImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, sizeOfImg-10, sizeOfImg-10)];
     [rightImageView setImage:[UIImage imageNamed:playModel.wordInfo.rightImg]];
     [rightView addSubview:rightImageView];
-    [rightImageView release];
     
     [self addSubview:rightView];
-    [rightView release];
     
 }
 
 - (void)createTitles
 {
-    UILabel *leftlabel = [[UILabel alloc] initWithFrame:CGRectMake(2, kYOfImages+155+5, 155, 30)];
+    int fontsize = kCheckIfIphone ? 15 : 32;
+    UILabel *leftlabel = [[UILabel alloc] initWithFrame:CGRectMake((kWidthOfScreen - 2*sizeOfImg)/4, yOfImages+sizeOfImg + distanceFromImgToTitle, sizeOfImg, heightOftitle)];
     [leftlabel setText:[playModel.wordInfo.leftWord uppercaseString]];
     [leftlabel setTextAlignment:NSTextAlignmentCenter];
     [leftlabel setBackgroundColor:[UIColor clearColor]];
-    leftlabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:15];
+    leftlabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:fontsize];
     [leftlabel setTextColor:[UIColor whiteColor]];
 //    [leftlabel setHidden:![CommonFunction getShowLeftTitle]];
     leftlabel.alpha = [CommonFunction getShowLeftTitle] ? 1 : 0;
     [leftlabel setTag:kTagOfLeftTitle];
     [self addSubview:leftlabel];
-    [leftlabel release];
     
-    UILabel *rightlabel = [[UILabel alloc] initWithFrame:CGRectMake(163, kYOfImages+155+5, 155, 30)];
+    UILabel *rightlabel = [[UILabel alloc] initWithFrame:CGRectMake(leftlabel.frame.origin.x + leftlabel.frame.size.width + (kWidthOfScreen - sizeOfImg*2)/2, yOfImages+sizeOfImg+distanceFromImgToTitle, sizeOfImg, heightOftitle)];
     [rightlabel setText:[playModel.wordInfo.rightWord uppercaseString]];
     [rightlabel setTextAlignment:NSTextAlignmentCenter];
     [rightlabel setBackgroundColor:[UIColor clearColor]];
-    rightlabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:15];
+    rightlabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:fontsize];
     [rightlabel setTextColor:[UIColor whiteColor]];
     rightlabel.alpha = [CommonFunction getShowRightTitle] ? 1 : 0;
 //    [rightlabel setHidden:![CommonFunction getShowRightTitle]];
     [rightlabel setTag:kTagOfRightTitle];
     [self addSubview:rightlabel];
-    [rightlabel release];
 }
 
 - (void)createAnswerView
 {
-    answerView = [[AnswerView alloc]initWithFrame:CGRectMake(0, kYOfAnswerView, 320, 60) andModel:playModel];
+    answerView = [[AnswerView alloc]initWithFrame:CGRectMake(0, yOfAnswerView, kWidthOfScreen, heightOfAnswerView) andModel:playModel];
     answerView.delegate = self;
     [self addSubview:answerView];
-    [answerView release];
     
-    UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kYOfAnswerView+60+5, 320, 30)];
+    UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, yOfAnswerView+yOfAnswerView+distanceFromAnswerViewToAnswerLabel, kWidthOfScreen, heightOfAnswerView)];
+    int fontSize = kCheckIfIphone ? 15 : 32;
     [answerLabel setText:[playModel.wordInfo.finalWord uppercaseString]];
     [answerLabel setTextAlignment:NSTextAlignmentCenter];
     [answerLabel setBackgroundColor:[UIColor clearColor]];
-    answerLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:15];
+    answerLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:fontSize];
     [answerLabel setTextColor:[UIColor whiteColor]];
     [answerLabel setHidden:![CommonFunction getShowAnswer]];
     [answerLabel setTag:kTagOfAnswerTitle];
     [self addSubview:answerLabel];
-    [answerLabel release];
 }
 
 - (void)createTypingView
 {
-    typingView = [[TypingView alloc]initWithFrame:CGRectMake(0, kYOfTyppingView, 320, 120) andModel:playModel];
+    typingView = [[TypingView alloc]initWithFrame:CGRectMake(0, yOfTypingView, kWidthOfScreen, heightOfTypingView) andModel:playModel];
     typingView.delegate = self;
     [self addSubview:typingView];
-    [typingView release];
 }
 
 - (void)createSubViews
 {
 
-//    FBLoginView *loginview = [[FBLoginView alloc] init];
-//    
-//    loginview.frame = CGRectOffset(loginview.frame, 5, 25);
-//    loginview.delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//    
-//    [self addSubview:loginview];
-//    
-//    [loginview sizeToFit];
 
-    
-//    [loginview sizeToFit];
-//    [loginview release];
     
     
     [self setBackgroundColor:[UIColor clearColor]];
-//    [self setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg1136.jpg"]]];
-    [self setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
+
     
     [self createNavigationBar];
     [self createImageViews];
@@ -263,16 +245,30 @@
     [self createAnswerView];
     [self createTypingView];
     
+    int paddingInTypingView = kCheckIfIphone ? 12 : 76;
+    int sizeOfCharInTypingView = kCheckIfIphone ? 48 : 96;
+    int yOfCharInTypingView = kCheckIfIphone ? 15:30;
+    
     UIButton *hintBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [hintBtn setFrame:CGRectMake(12, kYOfTyppingView+15, 45, 45)];
+    int y = yOfTypingView;
+    [hintBtn setFrame:CGRectMake(paddingInTypingView, y+yOfCharInTypingView, sizeOfCharInTypingView, sizeOfCharInTypingView)];
     [hintBtn setBackgroundImage:[UIImage imageNamed:@"hint.png"] forState:UIControlStateNormal];
     [hintBtn addTarget:delegate action:@selector(hintBtnTapped) forControlEvents:UIControlEventTouchUpInside];
     [hintBtn setTag:kTagOfHintButton];
     
     [self addSubview:hintBtn];
+    
+    if (![CommonFunction checkNoAds] && [CommonFunction checkIfShowAds])
+    {
+        adbanner = [[ADBannerView alloc] initWithFrame:CGRectMake(0, self.frame.size.height, kWidthOfScreen, 50)];
+        adbanner.delegate = self;
+        
+        _bannerIsVisible = NO;
+        [self addSubview:adbanner];
+    }
 }
 
-#pragma mark Handle Gesture
+#pragma mark Handle Gestured
 
 - (void)willRemoveTextOfAnswerView:(UITapGestureRecognizer *)_sender
 {
@@ -301,25 +297,22 @@
     [darkView setTag:kTagOfDarkView];
     darkView.alpha = 0.7;
     [self addSubview:darkView];
-    [darkView release];
    
-    UIView *newView = [[UIView alloc]initWithFrame:CGRectMake(10, kYOfImages, 145, 145)];
+    UIView *newView = [[UIView alloc]initWithFrame:leftView.frame];
     [newView setBackgroundColor:[UIColor whiteColor]];
     [newView.layer setCornerRadius:10.0f];
     
-    UIImageView *newImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 135, 135)];
+    UIImageView *newImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, sizeOfImg-10, sizeOfImg-10)];
     [newImgView setImage:[UIImage imageNamed:playModel.wordInfo.leftImg]];
     [newView addSubview:newImgView];
-    [newImgView release];
     
     [newView setTag:kTagOfNewView];
     [self addSubview:newView];
-    [newView release];
     
     [UIView animateWithDuration:0.2 animations:^{
-        [newView setFrame:CGRectMake(0, kYOfImages+50, 320, 320)];
+        [newView setFrame:CGRectMake(kWidthOfScreen*0.15, yOfImages+50, kWidthOfScreen*0.7, kWidthOfScreen*0.7)];
         for (UIView *subView in newView.subviews){
-            [subView setFrame:CGRectMake(5, 5, 310, 310)];
+            [subView setFrame:CGRectMake(5, 5, kWidthOfScreen*0.7-10, kWidthOfScreen*0.7-10)];
         }
     } completion:^(BOOL finished) {
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
@@ -330,7 +323,6 @@
         
         UITapGestureRecognizer *_tapToNormalGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapToNormal:)];
         [clearView addGestureRecognizer:_tapToNormalGesture];
-        [_tapToNormalGesture release];
         
         [self addSubview:clearView];
         
@@ -348,25 +340,22 @@
     [darkView setTag:kTagOfDarkView];
     darkView.alpha = 0.7;
     [self addSubview:darkView];
-    [darkView release];
     
-    UIView *newView = [[UIView alloc]initWithFrame:CGRectMake(165, kYOfImages, 145, 145)];
+    UIView *newView = [[UIView alloc]initWithFrame:rightView.frame];
     [newView setBackgroundColor:[UIColor whiteColor]];
     [newView.layer setCornerRadius:10.0f];
     
-    UIImageView *newImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 135, 135)];
+    UIImageView *newImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, sizeOfImg-10, sizeOfImg-10)];
     [newImgView setImage:[UIImage imageNamed:playModel.wordInfo.rightImg]];
     [newView addSubview:newImgView];
-    [newImgView release];
     
     [newView setTag:kTagOfNewView];
     [self addSubview:newView];
-    [newView release];
     
     [UIView animateWithDuration:0.2 animations:^{
-        [newView setFrame:CGRectMake(0, kYOfImages+50, 320, 320)];
+        [newView setFrame:CGRectMake(kWidthOfScreen*0.15, yOfImages+50, kWidthOfScreen*0.7, kWidthOfScreen*0.7)];
         for (UIView *subView in newView.subviews){
-            [subView setFrame:CGRectMake(5, 5, 310, 310)];
+            [subView setFrame:CGRectMake(5, 5, kWidthOfScreen*0.7-10, kWidthOfScreen*0.7-10)];
         }
     } completion:^(BOOL finished) {
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
@@ -377,7 +366,6 @@
         
         UITapGestureRecognizer *_tapToNormalGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapToNormal:)];
         [clearView addGestureRecognizer:_tapToNormalGesture];
-        [_tapToNormalGesture release];
         
         [self addSubview:clearView];
         
@@ -407,7 +395,7 @@
         rightTitleView.alpha = 1;
     } completion:^(BOOL finished) {
         RootController *rootVC = [CommonFunction getRootController];
-        AnswerView *copyAnswerView = [answerView retain];
+        AnswerView *copyAnswerView = answerView;
         
         [rootVC.view addSubview:copyAnswerView];
         [rootVC.view addSubview:leftTitleView];
@@ -415,127 +403,11 @@
         [leftTitleView setTag:kTagOfLeftTitle];
         [rightTitleView setTag:kTagOfRightTitle];
         [copyAnswerView setTag:kTagOfCopyAnswerView];
-        [copyAnswerView release];
         [delegate showWinScreenFromPlayView];
     }];
     
     
 
-    
-    return;
-    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-    UIView *hintBtn = [self viewWithTag:kTagOfHintButton];
-    UIView *leftView = [self viewWithTag:kTagOfLeftView];
-    UIView *rightView = [self viewWithTag:kTagOfRightView];
-
-    
-    [leftTitleView setFrame:CGRectMake(2, kYOfImages+155+5 + 90, leftTitleView.frame.size.width, leftTitleView.frame.size.height)];
-    [rightTitleView setFrame:CGRectMake(163, kYOfImages+155+5 + 90, rightTitleView.frame.size.width, rightTitleView.frame.size.height)];
-    
-    if (![CommonFunction getShowLeftTitle])
-    {
-        [leftTitleView setFrame:CGRectMake(-155, kYOfImages+155+5+ 90, 155, 30)];
-        leftTitleView.alpha = 1;
-    }
-
-    if (![CommonFunction getShowRightTitle])
-    {
-        [rightTitleView setFrame:CGRectMake(320, kYOfImages+155+5+ 90, 155, 30)];
-        rightTitleView.alpha = 1;
-    }
-    
-    
-
-    [UIView animateWithDuration:1.0 animations:^{
-        
-        [typingView setFrame:CGRectMake(typingView.frame.origin.x, kHeightOfScreen, typingView.frame.size.width, typingView.frame.size.height)];
-        [hintBtn setFrame:CGRectMake(hintBtn.frame.origin.x, kHeightOfScreen, hintBtn.frame.size.width , hintBtn.frame.size.height)];
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.5 animations:^{
-
-            
-            if (![CommonFunction getShowLeftTitle])
-            {
-                [leftTitleView setFrame:CGRectMake(2, kYOfImages+155+5+ 90, 155, 30)];
-            }
-            if (![CommonFunction getShowRightTitle])
-            {
-                [rightTitleView setFrame:CGRectMake(163, kYOfImages+155+5+ 90, 155, 30)];
-            }
-            
-        } completion:^(BOOL finished) {
-            
-            [UIView animateWithDuration:1.0 animations:^{
-                leftView.alpha = 0;
-                
-                rightView.alpha = 0;
-
-            } completion:^(BOOL finished) {
-                
-            }];
-
-            
-        }];
-        
-    }];
-//    [UIView animateWithDuration:2.0 animations:^{
-//        [[self viewWithTag:kTagOfLeftTitle] setAlpha:1.0];
-//        [[self viewWithTag:kTagOfRightTitle] setAlpha:1.0];
-//        [typingView setAlpha:0.0];
-//        [[self viewWithTag:kTagOfHintButton] setAlpha:0.0];
-//        
-//    } completion:^(BOOL finished) {
-//        
-//        
-//    }];
-
-//    [UIView animateWithDuration:1.5 animations:^{
-//        typingView.alpha = 0;
-//    } completion:^(BOOL finished) {
-//        NSLog(@"Done");
-//    }];
-
-    return;
-    
-    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-    [delegate showWinScreenFromPlayView];
-
-    return;
-    
-    AnswerView *newAnserView = [answerView retain];
-    [[newAnserView viewWithTag:kTagOfEraseIcon] removeFromSuperview];
-    
-    newAnserView.userInteractionEnabled = NO;
-    [answerView removeFromSuperview];
-    
-    RootController *rootController = [CommonFunction getRootController];
-
-    UIView *whiteView = [[UIView alloc]initWithFrame:answerView.frame];
-    whiteView.backgroundColor = [UIColor whiteColor];
-    whiteView.alpha = 0.4;
-    [rootController.view addSubview:whiteView];
-    [whiteView release];
-    
-    newAnserView.backgroundColor = [UIColor clearColor];
-    [rootController.view addSubview:newAnserView];
-    [newAnserView release];
-    
-    [UIView animateWithDuration:1.5 animations:^{
-        [self setFrame:CGRectMake(-320, 0, 320, kHeightOfScreen)];
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:1.0 animations:^{
-            [whiteView setFrame:CGRectMake(0, 0, 320, kHeightOfScreen)] ;
-        } completion:^(BOOL finished) {
-            [delegate showWinScreenFromPlayView];
-        }];
-        
-        
-//        [newAnserView setFrame:CGRectMake(0, 0, 320, kHeightOfScreen)];
-    }];
-
-    
-//    [self setFrame:CGRectMake(-320, kYOfTyppingView, 320, 120)];
-//    [delegate showWinScreenFromPlayView];
 }
 
 - (void)answerViewFilled
@@ -565,12 +437,10 @@
     else
     {
         [answerView setTextToRed];
-        UIView *clearView = [[UIView alloc]initWithFrame:CGRectMake(0, 44, 320, 568)];
+        UIView *clearView = [[UIView alloc]initWithFrame:CGRectMake(0, 44, kWidthOfScreen, kHeightOfScreen-44)];
         UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(willRemoveTextOfAnswerView:)];
         [clearView addGestureRecognizer:_tap];
-        [_tap release];
         [self addSubview:clearView];
-        [clearView release];
     }
 }
 
@@ -698,6 +568,35 @@
     
     
 }
+
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+    if (!_bannerIsVisible)
+    {
+        // If banner isn't part of view hierarchy, add it
+        if (adbanner.superview == nil)
+        {
+            [self addSubview:adbanner];
+        }
+        
+        [UIView beginAnimations:@"animateAdBannerOn" context:NULL];
+        
+        // Assumes the banner view is just off the bottom of the screen.
+        banner.frame = CGRectOffset(banner.frame, 0, -banner.frame.size.height);
+        
+        [UIView commitAnimations];
+        
+        _bannerIsVisible = YES;
+    }
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    NSLog(@"Failed to retrieve ad");
+}
+
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

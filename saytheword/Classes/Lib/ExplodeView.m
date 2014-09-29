@@ -99,9 +99,10 @@
 //    emitterCell.greenSpeed = 0.5;
 //    emitterCell.alphaSpeed = -0.2;
     
-  
+//    emitterCell.velocity = 50;
+//    emitterCell.velocityRange = 30;
   emitterCell.velocity = 50;
-  emitterCell.velocityRange = 30;
+  emitterCell.velocityRange = 150;
   
   emitterCell.scaleRange = 0.0;
   emitterCell.scaleSpeed = 0.0;

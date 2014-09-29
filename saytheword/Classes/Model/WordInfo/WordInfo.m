@@ -16,13 +16,13 @@
 {
     if (self = [super init]){
         level = uniqueLevel;
-        leftWord = [__leftWord retain];
-        rightWord = [__rightWord retain];
-        leftImg = [__leftImg retain];
-        rightImg = [__rightImg retain];
+        leftWord = __leftWord;
+        rightWord = __rightWord;
+        leftImg = __leftImg;
+        rightImg = __rightImg;
         NSLog(@"right img : %@",rightImg);
-        finalWord = [__finalWord retain];
-        dummyString = [__initString retain];
+        finalWord = __finalWord;
+        dummyString = __initString;
     }
     return self;
 }

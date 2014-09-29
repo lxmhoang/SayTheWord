@@ -17,7 +17,7 @@
 
 @interface ExplodeView : UIView
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, unsafe_unretained) id delegate;
 @property (assign, nonatomic) int range;
 
 @end

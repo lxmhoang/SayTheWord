@@ -33,13 +33,11 @@
     [imgView setBackgroundColor:[UIColor clearColor]];
     [imgView setFrame:CGRectMake(240-45, 15, 40, 40)];
     [self addSubview:imgView];
-    [imgView release];
     
     UILabel *lb = [[UILabel alloc]initWithFrame:CGRectMake(240-50-60, 15, 60, 40)];
     lb.textAlignment = NSTextAlignmentRight;
     lb.text = _amount;
     [self addSubview:lb];
-    [lb release];
 }
 
 @end

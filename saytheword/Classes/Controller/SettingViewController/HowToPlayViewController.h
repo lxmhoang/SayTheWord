@@ -14,8 +14,8 @@
 @end
 
 @interface HowToPlayViewController : UIViewController
-@property (retain, nonatomic) IBOutlet UIView *navigationBar;
-@property (nonatomic, assign) id delegate;
+@property (strong, nonatomic) IBOutlet UIView *navigationBar;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 
 - (id)initWithPosition:(int)_pos;

@@ -46,7 +46,6 @@
     
     
     [self addSubview:bigView];
-    [bigView release];
     [self bloat];
 }
 
@@ -79,8 +78,6 @@
             }
         }
     
-//        loginview.frame = _sender.view.bounds;
-//        [loginview setFrame:CGRectMake(5, 5, 120, 30)];
         loginview.delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
         [_sender.view addSubview:loginview];
@@ -91,10 +88,6 @@
         NSURL *url = [NSURL URLWithString:@"fb://profile/172415879600587"];
         [[UIApplication sharedApplication] openURL:url];
     }
-    
-//    [loginview sizeToFit];
-//    NSURL *url = [NSURL URLWithString:@"fb://profile/172415879600587"];
-//    [[UIApplication sharedApplication] openURL:url];
 }
 
 - (void)shareApp:(UITapGestureRecognizer *)_sender
@@ -104,27 +97,26 @@
         APActivityProvider *ActivityProvider = [[APActivityProvider alloc] init];
         UIImage *ImageAtt = [UIImage imageNamed:@"bg1136.jpg"];
         NSArray *Items = @[ActivityProvider, ImageAtt];
-        [ActivityProvider release];
         
         
         UIActivityViewController *aVC = [[UIActivityViewController alloc] initWithActivityItems:Items applicationActivities:nil];
-        NSMutableArray *listDisableItems = [[NSMutableArray alloc] initWithObjects:UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll, UIActivityTypePostToWeibo, nil];
+        NSMutableArray *listDisableItems = [[NSMutableArray alloc] initWithObjects:UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll, UIActivityTypePostToWeibo,UIActivityTypeAirDrop, nil];
         
         
         
-        if ([[NSDate date] compare:[[CommonFunction getLastFBShare] dateByAddingTimeInterval:kTimeToNextShare]]==NSOrderedAscending)
+        if ([[NSDate date] compare:[[CommonFunction getLastFBShare] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
         {
             [listDisableItems addObject:UIActivityTypePostToFacebook];
         }
-        if ([[NSDate date] compare:[[CommonFunction getLastSendEmail] dateByAddingTimeInterval:kTimeToNextShare]]==NSOrderedAscending)
+        if ([[NSDate date] compare:[[CommonFunction getLastSendEmail] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
         {
             [listDisableItems addObject:UIActivityTypeMail];
         }
-        if ([[NSDate date] compare:[[CommonFunction getLastTwitterShare] dateByAddingTimeInterval:kTimeToNextShare]]==NSOrderedAscending)
+        if ([[NSDate date] compare:[[CommonFunction getLastTwitterShare] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
         {
             [listDisableItems addObject:UIActivityTypePostToTwitter];
         }
-        if ([[NSDate date] compare:[[CommonFunction getLastSendSMS] dateByAddingTimeInterval:kTimeToNextShare]]==NSOrderedAscending)
+        if ([[NSDate date] compare:[[CommonFunction getLastSendSMS] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
         {
             [listDisableItems addObject:UIActivityTypeMessage];
         }
@@ -137,7 +129,6 @@
             {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Great" message:[NSString stringWithFormat:@"You got %d coins, thank you very much :> ",kRewardCoinsForSharingApp] delegate:delegate cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alertView show];
-                [alertView release];
                 [CommonFunction setCoin:[CommonFunction getCoin]+kRewardCoinsForSharingApp];
                 
                 SWITCH (activityType) {
@@ -168,7 +159,6 @@
     }else{
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"We are sorry. This feature can only available in IOS 6, please upgrade IOS to get free coins" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
-        [alertView release];
     }
 }
 
@@ -178,9 +168,7 @@
     [shareAppView setBackgroundColor:[UIColor whiteColor]];
     UITapGestureRecognizer *_tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareApp:)];
     [shareAppView addGestureRecognizer:_tap2];
-    [_tap2 release];
     [bigView addSubview:shareAppView];
-    [shareAppView release];
 
 }
 
@@ -191,17 +179,13 @@
     [likeFBView setBackgroundColor:[UIColor whiteColor]];
     UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(likeBtnPress:)];
     [likeFBView addGestureRecognizer:_tap];
-    [_tap release];
     [bigView addSubview:likeFBView];
-    [likeFBView release];
     
     UIView *shareAppView = [[UIView alloc] initWithFrame:CGRectMake(15, 60, 60, 18)];
     [shareAppView setBackgroundColor:[UIColor whiteColor]];
     UITapGestureRecognizer *_tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareApp:)];
     [shareAppView addGestureRecognizer:_tap2];
-    [_tap2 release];
     [bigView addSubview:shareAppView];
-    [shareAppView release];
 }
 
 - (void)createSmallViews
@@ -265,9 +249,7 @@
             
             UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeBigView:)];
             [closeIcon addGestureRecognizer:_tap];
-            [_tap release];
             [self addSubview:closeIcon];
-            [closeIcon release];
         }];
         
         

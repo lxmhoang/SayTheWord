@@ -59,6 +59,7 @@
     navBar.layer.shadowRadius = 5;
     navBar.layer.shadowOpacity = 0.5;
     
+    [self createNavigationBar];
     //Create MenuBtn
     UIButton *menuBackBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [menuBackBtn setBackgroundImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
@@ -70,7 +71,6 @@
     [navBar addSubview:menuBackBtn];
     
     [self.view addSubview:navBar];
-    [navBar release];
     
     
     
@@ -89,16 +89,7 @@
 //    [menuBackBtn addTarget:self action:@selector(backBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view addSubview:menuBackBtn];
     
-//    UILabel *bgMusicVolumLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 100, kWidthOfScreen-30-30, 30)];
-//    [bgMusicVolumLabel setTextColor:[UIColor whiteColor]];
-//    [bgMusicVolumLabel setFont:[UIFont boldSystemFontOfSize:15.0f]];
-//    bgMusicVolumLabel.text = @"BackGround Music Volume";
-//    [self.view addSubview:bgMusicVolumLabel];
-//    
-//    bgMusicVolumSilder = [[UISlider alloc] initWithFrame:CGRectMake(30, 150, kWidthOfScreen-30-30, 30)];
-//    [bgMusicVolumSilder addTarget:self action:@selector(bgMusicSliderChanged:) forControlEvents:UIControlEventValueChanged];
-//    [bgMusicVolumSilder setValue:[CommonFunction getBGSoundVolume]];
-//    [self.view addSubview:bgMusicVolumSilder];
+
 }
 
 

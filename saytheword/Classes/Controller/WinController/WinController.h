@@ -20,9 +20,9 @@
 
 @interface WinController : UIViewController <WinViewProtocol>
 
-@property (nonatomic, retain) PlayModel *playModel;
-@property (nonatomic, assign) WinView *winView;
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, strong) PlayModel *playModel;
+@property (nonatomic, strong) WinView *winView;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 - (id)initWithPosition:(int)_pos;
 

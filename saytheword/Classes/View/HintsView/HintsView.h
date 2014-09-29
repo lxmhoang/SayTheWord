@@ -28,7 +28,7 @@
 }
 
 
-@property (nonatomic, assign)  id<HintsViewDelegate> delegate;
+@property (nonatomic, unsafe_unretained)  id<HintsViewDelegate> delegate;
 
 
 - (void)bloat;

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PlayModel.h"
 #import "ExplodeView.h"
+#import <iAd/iAd.h>
 
 @protocol WinViewProtocol <NSObject>
 
@@ -16,17 +17,22 @@
 
 @end
 
-@interface WinView : UIView <ExplodeViewDelegate>
+@interface WinView : UIView <ExplodeViewDelegate, ADBannerViewDelegate>
 {
     NSMutableArray *listCoins;
     BOOL tapped;
+    ADBannerView *adbanner;
+    BOOL _bannerIsVisible;
+    int endYLimit;
+    int widthOfFireWork;
+    int numOfFW, sizeOfFW;
 }
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 
 
-@property (nonatomic, retain) PlayModel *playModel;
+@property (nonatomic, strong) PlayModel *playModel;
 
 - (id)initWithModel:(PlayModel *)_playModel;
 

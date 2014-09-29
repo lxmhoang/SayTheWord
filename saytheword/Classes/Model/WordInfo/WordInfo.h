@@ -20,12 +20,12 @@
 }
 
 @property (nonatomic, assign) int level;
-@property (nonatomic, retain) NSString *leftWord;
-@property (nonatomic, retain) NSString *rightWord;
-@property (nonatomic, retain) NSString *leftImg;
-@property (nonatomic, retain) NSString *rightImg;
-@property (nonatomic, retain) NSString *finalWord;
-@property (nonatomic, retain) NSString *dummyString;
+@property (nonatomic, strong) NSString *leftWord;
+@property (nonatomic, strong) NSString *rightWord;
+@property (nonatomic, strong) NSString *leftImg;
+@property (nonatomic, strong) NSString *rightImg;
+@property (nonatomic, strong) NSString *finalWord;
+@property (nonatomic, strong) NSString *dummyString;
 
 - (id)initWithUniqueLevel:(int)uniqueLevel leftWord:(NSString *)leftWord leftImg:(NSString *)leftImg rightWord:(NSString *)rightWord rightImg:(NSString *)rightImg finalWord:(NSString *)finalWord initString:(NSString *)initString;
 

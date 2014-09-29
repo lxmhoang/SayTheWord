@@ -13,6 +13,9 @@
 //#import "HintView.h"
 #import "HintsView.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "IAPViewController.h"
+
+@class IAPViewController;
 
 @protocol PlayControllerProtocol <NSObject>
 
@@ -23,11 +26,12 @@
 
 @end
 
-@interface PlayController : UIViewController <PlayViewProtocol, StoreControllerDelegate, HintsViewDelegate, UIAlertViewDelegate, FBLoginViewDelegate>
+@interface PlayController : UIViewController <PlayViewProtocol, StoreControllerDelegate, HintsViewDelegate, UIAlertViewDelegate, FBLoginViewDelegate, IAPControllerDelegate>
 
-@property (nonatomic, retain) PlayModel *playModel;
-@property (nonatomic, retain) PlayView *playView;
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, strong) IAPViewController *iapVC;
+@property (nonatomic, strong) PlayModel *playModel;
+@property (nonatomic, strong) PlayView *playView;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 -(id)initWithPosition:(int)_pos;
 

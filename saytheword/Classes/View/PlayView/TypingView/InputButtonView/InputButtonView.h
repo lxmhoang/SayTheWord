@@ -13,8 +13,8 @@
   
 }
 
-@property (nonatomic, retain) NSString *text;
-@property (nonatomic, retain) UILabel *lb;
+@property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) UILabel *lb;
 @property (nonatomic) int tagg;
 
 

@@ -27,13 +27,19 @@
     self = [super init];
     if (self)
     {
+        numOfFW = kCheckIfIphone ? 5 : 8;
         tapped = NO;
-        playModel = [_playModel retain];
+        playModel = _playModel;
+        endYLimit = kCheckIfIphone ? 200 : 500;
+        sizeOfFW = kCheckIfIphone ? 10 : 20;
+        widthOfFireWork = round(kWidthOfScreen/numOfFW);
     }
     [self setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
     [self createSubViews];
     return self;
 }
+
+
 
 - (void)createSubViews
 {
@@ -57,16 +63,14 @@
     
     UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moveToNextLevel:)];
     [transView addGestureRecognizer:_tap];
-    [_tap release];
     
     [self addSubview:transView];
-    [transView release];
     
     RootController *rootController = (RootController *)[CommonFunction getRootController];
     
-    AnswerView *aV = (AnswerView *)[[rootController.view viewWithTag:kTagOfCopyAnswerView] retain];    
-    UIView *leftViewTitle = [[rootController.view viewWithTag:kTagOfLeftTitle] retain];
-    UIView *rightViewTitle = [[rootController.view viewWithTag:kTagOfRightTitle] retain];
+    AnswerView *aV = (AnswerView *)[rootController.view viewWithTag:kTagOfCopyAnswerView];    
+    UIView *leftViewTitle = [rootController.view viewWithTag:kTagOfLeftTitle];
+    UIView *rightViewTitle = [rootController.view viewWithTag:kTagOfRightTitle];
     
     [self addSubview:leftViewTitle];
     [self sendSubviewToBack:leftViewTitle];
@@ -79,8 +83,6 @@
 
 
     
-    [leftViewTitle release];
-    [rightViewTitle release];
 
     
 //    CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.y"];
@@ -98,26 +100,28 @@
         [c1 setFrame:CGRectMake(-50, 450, 32, 32)];
         [listCoins addObject:c1];
         [self addSubview:c1];
-        [c1 release];
     }
     
     
-//    UIImageView *c1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"onecoin.png"]];
-//    [c1 setFrame:CGRectMake(160, 300, 32, 32)];
+    int yOfCongrat = kCheckIfIphone ? 310 : 600;
+    int fontSize = kCheckIfIphone ? 22 : 35;
     
-    UILabel *congratLB = [[UILabel alloc] initWithFrame:CGRectMake(0, 310, 320, 60)];
-    congratLB.text = [[NSString stringWithFormat:@"You got %d coins",playModel.wordInfo.finalWord.length] uppercaseString];
-    [congratLB setFont:[UIFont fontWithName:@"Arial-BoldMT" size:22]];
+    UILabel *congratLB = [[UILabel alloc] initWithFrame:CGRectMake(0, yOfCongrat, kWidthOfScreen, 60)];
+    congratLB.text = [[NSString stringWithFormat:@"You got %d coins",playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter] uppercaseString];
+    [congratLB setFont:[UIFont fontWithName:@"Arial-BoldMT" size:fontSize]];
     congratLB.alpha = 0;
     [congratLB setTextAlignment:NSTextAlignmentCenter];
     [congratLB setBackgroundColor:[UIColor clearColor]];
     [congratLB setTextColor:[UIColor whiteColor]];
     [self addSubview:congratLB];
-    [congratLB release];
     
+    int dstMoveUp = kCheckIfIphone ? 100 : 200;
+    
+    int yOfCoins = kCheckIfIphone ? 270 : 660;
+    int sizeOfCoins = kCheckIfIphone ? 32 : 64;
 
     [UIView animateWithDuration:1.5 animations:^{
-        [aV setFrame:CGRectMake(0, aV.frame.origin.y-100, 320, aV.frame.size.height)];
+        [aV setFrame:CGRectMake(0, aV.frame.origin.y-dstMoveUp, kWidthOfScreen, aV.frame.size.height)];
         
     } completion:^(BOOL finished) {
         for (int i=0;i<playModel.wordInfo.finalWord.length;i++)
@@ -125,7 +129,7 @@
             UIImageView *t = [listCoins objectAtIndex:i];
             [UIView animateWithDuration:1 delay:0.15*(playModel.wordInfo.finalWord.length-i) options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 int x = [aV viewWithTag:(i+kRandomNumber)].frame.origin.x;
-                [t setFrame:CGRectMake(x, 270, 32, 32)];
+                [t setFrame:CGRectMake(x, yOfCoins, sizeOfCoins, sizeOfCoins)];
             } completion:^(BOOL finished) {
                 NSLog(@"i=%d",i);
                 if (i==0){
@@ -145,45 +149,28 @@
 
     }];
     
-    
-//    [UIView animateWithDuration:0.3 delay:initTag*0.06 options:UIViewAnimationOptionCurveEaseIn animations:^{
-//        
-//        [self viewWithTag:tagView].layer.transform = CATransform3DMakeRotation(M_PI_2, 0.0, 1.0, 0.0);
-//        
-//    } completion:^(BOOL finished) {
-//        UILabel *lb = (UILabel *)[self viewWithTag:tagView];
-//        [lb setTextColor:[UIColor yellowColor]];
-//        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-//            [self viewWithTag:tagView].layer.transform = CATransform3DMakeRotation(M_PI_2*4,0.0,1.0,0.0); //flip halfway
-//        } completion:^(BOOL finished) {
-//            if (tagView == kRandomNumber + playModel.wordInfo.finalWord.length-1)
-//            {
-//                NSLog(@"tag View : %d", tagView);
-//                [delegate winEventFromAnswerView];
-//            }
-//            
-//        }];
-//        
-//        
-//    }];
+
 
     
-    [aV release];
- 
-
-//    [[rootController.view viewWithTag:kTagOfCopyAnswerView] removeFromSuperview];
-    
+    if (![CommonFunction checkNoAds] && [CommonFunction checkIfShowAds])
+    {
+        adbanner = [[ADBannerView alloc] initWithFrame:CGRectMake(0, self.frame.size.height, kWidthOfScreen, 50)];
+        adbanner.delegate = self;
+        
+        _bannerIsVisible = NO;
+        [self addSubview:adbanner];
+    }
     }
 
 #pragma mark Button press handle method
 
 - (void)move
 {
+    for (int i = 0;i<numOfFW; i++)
+    {
+        [self genNewEV:i];
+    }
 
-    [self genNewEV:0];
-    [self genNewEV:1];
-    [self genNewEV:2];
-    [self genNewEV:3];
 
     
 //    ExplodeView *stars = [[ExplodeView alloc] initWithFrame:CGRectMake(160, 70, 10, 10)];
@@ -206,13 +193,15 @@
 
 - (void)moveToNextLevel:(UITapGestureRecognizer *)_tap
 {
+    
     if (!tapped)
     {
+        [CommonFunction setCoin:[CommonFunction getCoin]+playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter];
         tapped = YES;
         for (int i=0;i<[listCoins count];i++){
             [UIView animateWithDuration:1.0 delay:(playModel.wordInfo.finalWord.length-i)*0.3 options:UIViewAnimationOptionCurveEaseIn animations:^{
                 UIView *coin = [listCoins objectAtIndex:i];
-                [coin setFrame:CGRectMake(350, -40, coin.frame.size.width, coin.frame.size.height)];
+                [coin setFrame:CGRectMake(kWidthOfScreen + coin.frame.size.width, -coin.frame.size.height, coin.frame.size.width, coin.frame.size.height)];
             } completion:^(BOOL finished) {
                 if (i==0){
                     [delegate performSelector:@selector(animationFinished) withObject:nil afterDelay:1.0];
@@ -221,30 +210,29 @@
             
         }
     }
+
 }
 
 #pragma mark ExplodeView Delegate
 
 - (void)genNewEV:(int)i
 {
-    NSLog(@"get new ev %@", self);
-    int startX =  i*80+ arc4random()%80;
-    UIImageView *fireBall = [[UIImageView alloc] initWithFrame:CGRectMake(startX, kHeightOfScreen, 10, 10)];
+//    NSLog(@"get new ev %@", self);
+    int startX =  i*widthOfFireWork+ arc4random()%widthOfFireWork;
+    UIImageView *fireBall = [[UIImageView alloc] initWithFrame:CGRectMake(startX, kHeightOfScreen, sizeOfFW, sizeOfFW)];
     [fireBall setImage:[UIImage imageNamed:@"particle.png"]];
     [self addSubview:fireBall];
-    [fireBall release];
-    int endY = 20+arc4random()%200;
+    int endY = 20+arc4random()%endYLimit;
     
     [UIView animateWithDuration:((kHeightOfScreen-endY)/350) delay:((arc4random()%30)/10) options:UIViewAnimationOptionAllowAnimatedContent animations:^{
         fireBall.center = CGPointMake(startX, endY);
     } completion:^(BOOL finished) {
         [fireBall removeFromSuperview];
         [CommonFunction playFireworkSound];
-        ExplodeView *stars = [[ExplodeView alloc] initWithFrame:CGRectMake(fireBall.center.x, fireBall.center.y, 10, 10)];
+        ExplodeView *stars = [[ExplodeView alloc] initWithFrame:CGRectMake(fireBall.center.x, fireBall.center.y, sizeOfFW, sizeOfFW)];
         stars.range = i;
         stars.delegate = self;
         [self addSubview:stars];
-        [stars release];
     }];
 }
 
@@ -258,7 +246,32 @@
             t.delegate = nil;
         }
     }
-    [super dealloc];
+}
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+    if (!_bannerIsVisible)
+    {
+        // If banner isn't part of view hierarchy, add it
+        if (adbanner.superview == nil)
+        {
+            [self addSubview:adbanner];
+        }
+        
+        [UIView beginAnimations:@"animateAdBannerOn" context:NULL];
+        
+        // Assumes the banner view is just off the bottom of the screen.
+        banner.frame = CGRectOffset(banner.frame, 0, -banner.frame.size.height);
+        
+        [UIView commitAnimations];
+        
+        _bannerIsVisible = YES;
+    }
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    NSLog(@"Failed to retrieve ad");
 }
 
 /*

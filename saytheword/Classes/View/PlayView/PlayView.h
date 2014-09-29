@@ -14,6 +14,8 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "ExplodeView.h"
 
+#import <iAd/iAd.h>
+
 
 @protocol PlayViewProtocol <NSObject>
 
@@ -24,18 +26,23 @@
 
 @end
 
-@interface PlayView : UIView <TypingViewDelegate, AnswerViewDelegate, FBLoginViewDelegate>
+@interface PlayView : UIView <TypingViewDelegate, AnswerViewDelegate, FBLoginViewDelegate, ADBannerViewDelegate>
 {
     UILabel *coinLabel;
     UIImageView *coinImageView;
     UIView *coinView;
+    
+    ADBannerView *adbanner;
+    BOOL _bannerIsVisible;
+    int yOfImages, paddingLeftImg, sizeOfImg, distanceFromImgToTitle, heightOftitle, yOfAnswerView, heightOfAnswerView, distanceFromAnswerViewToAnswerLabel, yOfTypingView,heightOfTypingView;
 }
 
-@property (nonatomic, retain) UILabel *coinLabel;
-@property (nonatomic, assign) id delegate;
-@property (nonatomic, retain) PlayModel *playModel;
-@property (nonatomic, retain) TypingView *typingView;
-@property (nonatomic, retain) AnswerView *answerView;
+@property (nonatomic, strong) UIView *leftView,*rightView;
+@property (nonatomic, strong) UILabel *coinLabel;
+@property (nonatomic, unsafe_unretained) id delegate;
+@property (nonatomic, strong) PlayModel *playModel;
+@property (nonatomic, strong) TypingView *typingView;
+@property (nonatomic, strong) AnswerView *answerView;
 
 - (id)initWithModel:(PlayModel *)_model;
 - (int)checkNumOfRemoveableChars;

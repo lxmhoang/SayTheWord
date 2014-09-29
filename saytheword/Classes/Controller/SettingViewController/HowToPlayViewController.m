@@ -27,7 +27,8 @@
 
 - (id)initWithPosition:(int)_pos
 {
-    self = [super init];
+    NSString *nibName = kCheckIfIphone ? @"HowToPlayViewController" : @"HowToPlayViewController_iPad";
+    self = [super initWithNibName:nibName bundle:nil];
     if (self)
     {
         [self.view setFrame:CGRectMake(_pos*kWidthOfScreen + _pos*kShortDisTanceOf2View, 0, kWidthOfScreen, kHeightOfScreen)];
@@ -60,10 +61,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
-    [navigationBar release];
-    [super dealloc];
-}
 - (void)viewDidUnload {
     [self setNavigationBar:nil];
     [super viewDidUnload];

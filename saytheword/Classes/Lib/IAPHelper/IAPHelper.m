@@ -77,14 +77,15 @@
     {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Invalid product ! There is an error in Itunes transactions. Please try again " delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
-        [alertView release];
         NSLog(@"Shit");
         NSLog(@"Invalid product id: %@" , invalidProductId);
     }
     
     // finally release the reqest we alloc/init’ed in requestProUpgradeProductData
-    
-    [delegate setListProducts:productList];
+    if (delegate && [delegate respondsToSelector:@selector(setListProducts:)])
+    {
+        [delegate setListProducts:productList];
+    }
 //    [productsRequest release];
 //    [self purchaseItem];
 //    [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerProductsFetchedNotification object:self userInfo:nil];
@@ -263,6 +264,11 @@
     {
         addAmount = 7800;
     }
+    
+    if (addAmount>= 1100)
+    {
+        [CommonFunction setNoAds:YES];
+    }
 
     
     [CommonFunction setCoin:([CommonFunction getCoin]+addAmount)];
@@ -282,7 +288,7 @@
 //
 - (void)finishTransaction:(SKPaymentTransaction *)transaction wasSuccessful:(BOOL)wasSuccessful
 {
-    NSLog(@"remove transaction : %@", transaction.transactionIdentifier);
+//    NSLog(@"remove transaction : %@", transaction.transactionIdentifier);
     // remove the transaction from the payment queue.
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     
@@ -298,6 +304,8 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerTransactionFailedNotification object:self userInfo:userInfo];
     }
     
+//    [CommonFunction alert:@"Transaction failed" delegate:nil];
+    
 //    [delegate finishTransaction];
 }
 
@@ -311,11 +319,11 @@
     
 }
 
-- (void)dealloc{
-    [productsRequest release];
-    [IAPProduct release];
-    [productList release];
-    [super dealloc];
+- (void)dealloc
+{
+    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
+    productsRequest.delegate = nil; // <----- Solution
 }
+
 
 @end

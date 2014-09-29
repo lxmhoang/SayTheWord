@@ -32,7 +32,6 @@
 
     UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(IAPselected:)];
     [self addGestureRecognizer:_tap];
-    [_tap release];
     if ([productIdentifier isEqualToString:kProductIDOf200])
     {
 
@@ -67,20 +66,20 @@
     {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:@"string not found" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
-        [alertView release];
     }
+    
+    bgImgName = @"button.png";
     
     [self setBackgroundColor:[UIColor clearColor]];
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.bounds];
     [imgView setImage:[UIImage imageNamed:bgImgName]];
     [self addSubview:imgView];
-    [imgView release];
-    UILabel *lb = [[UILabel alloc]initWithFrame:CGRectMake(4, 23, 19, 7)];
-    [lb setBackgroundColor:[UIColor clearColor]];
-    lb.text = bgImgName;
-    lb.font = [UIFont fontWithName:@"Arial" size:4];
-    [self addSubview:lb];
-    [lb release];
+//    UILabel *lb = [[UILabel alloc]initWithFrame:CGRectMake(4, 23, 19, 7)];
+//    [lb setBackgroundColor:[UIColor clearColor]];
+//    lb.text = bgImgName;
+//    lb.font = [UIFont fontWithName:@"Arial" size:4];
+//    [self addSubview:lb];
+//    [lb release];
     
 }
 

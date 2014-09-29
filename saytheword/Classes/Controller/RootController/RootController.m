@@ -27,20 +27,11 @@
 
 - (void)viewDidLoad
 {
-    getCoinsForRating = NO;
     
-    [Appirater setAppId:@"654642608"];
-    [Appirater setDaysUntilPrompt:-1];
-    [Appirater setUsesUntilPrompt:-1];
-    [Appirater setSignificantEventsUntilPrompt:1];
-    [Appirater setTimeBeforeReminding:-1];
-    [Appirater setDebug:NO];
-    [Appirater setDelegate:self];
     
     [super viewDidLoad];
     RootView *rootView = [[RootView alloc]initWithFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
     [self.view addSubview:rootView];
-    [rootView release];
     
    
     MenuController *menuController = [[MenuController alloc]initWithPosition:0];
@@ -68,14 +59,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     NSLog(@"root view appear !!!!");
-    if (getCoinsForRating)
-    {
-        return;
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Thank you for rating" message:[NSString stringWithFormat:@"You got %d for rating app",kRewardCoinsForRatingApp] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alertView show];
-        [alertView release];
-        getCoinsForRating = NO;
-    }
+
 }
 
 #pragma mark playcontroller delegate method
@@ -131,30 +115,38 @@
 
 - (void)nextLevelFromWinView
 {
+    [CommonFunction setLevel:([CommonFunction getLevel]+1)];
+    if ([CommonFunction getLevel]==100){
+        [CommonFunction setLevel:9];
+    }
+    
+    
+    
+    
+    
     PlayController *playController = [[PlayController alloc]initWithPosition:1];
     playController.delegate = self;
     [self presentNewVCFromTheRight:playController];
-    [Appirater userDidSignificantEvent:YES];
 }
 
 #pragma mark local method
 
 - (void)presentNewVCFromTheLeft:(UIViewController *)newVC
 {
-
-    [self addChildViewController:newVC];
     
-    [newVC release];
+    [self addChildViewController:newVC];
     [self.view addSubview:newVC.view];
+    [newVC didMoveToParentViewController:self];
+    
+//    [newVC.view release];
 //    [newVC.view release];
     
     [UIView animateWithDuration:kTimeToPresentVC animations:^{
         [fVC.view  setFrame:CGRectMake(+kWidthOfScreen, 0, kWidthOfScreen, kHeightOfScreen)];
         [newVC.view setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
     } completion:^(BOOL finished) {
+        [fVC willMoveToParentViewController:nil];
         [fVC.view removeFromSuperview];
-        [fVC dismissViewControllerAnimated:NO completion:nil];
-        
         [fVC removeFromParentViewController];
         fVC = newVC;
     }];
@@ -166,17 +158,18 @@
 //    MenuController *playController = [[MenuController alloc]initWithPosition:1];
 //    vc.delegate = self;
     [self addChildViewController:newVC];
-    
-    [newVC release];
     [self.view addSubview:newVC.view];
+    [newVC didMoveToParentViewController:self];
+    
 //    [newVC.view release];
+
 
     [UIView animateWithDuration:kTimeToPresentVC animations:^{
         [fVC.view  setFrame:CGRectMake(-kWidthOfScreen, 0, kWidthOfScreen, kHeightOfScreen)];
         [newVC.view setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
     } completion:^(BOOL finished) {
+        [fVC willMoveToParentViewController:nil];
         [fVC.view removeFromSuperview];
-        [fVC dismissViewControllerAnimated:NO completion:nil];
         [fVC removeFromParentViewController];
         fVC = newVC;
     }];
@@ -186,36 +179,52 @@
     
 }
 
-#pragma mark appirate delegate
-
-- (void)appiraterWillPresentModalView:(Appirater *)appirater animated:(BOOL)animated
-{
-    getCoinsForRating = YES;    
-}
-
 #pragma mark UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
      
-    if ([alertView.title isEqualToString:@"Thank you for rating"])
+    if ([alertView.title isEqualToString:[NSString stringWithFormat:kMsgThankForRating]])
     {
         [CommonFunction setCoin:([CommonFunction getCoin]+kRewardCoinsForRatingApp)];
         
-        PlayController *VC = (PlayController *)[self.childViewControllers lastObject];
-        if ([VC respondsToSelector:@selector(updateCoininVIew)])
+        for (id VC in self.childViewControllers)
         {
-            [VC updateCoininVIew];
+            if ([VC respondsToSelector:@selector(updateCoininVIew)])
+            {
+                [VC updateCoininVIew];
+                break;
+            }
         }
+        
+//        PlayController *VC = (PlayController *)[self.childViewControllers lastObject];
+//        if ([VC respondsToSelector:@selector(updateCoininVIew)])
+//        {
+//            [VC updateCoininVIew];
+//        }
     }else if ([alertView.title isEqualToString:@"Thank you for liking our page"])
     {
         [CommonFunction setCoin:([CommonFunction getCoin]+kRewardCoinsForLikingFB)];
         
-        PlayController *VC = (PlayController *)[self.childViewControllers lastObject];
-        if ([VC respondsToSelector:@selector(updateCoininVIew)])
+        id lastVC = [self.childViewControllers lastObject];
+        
+        if ([lastVC isKindOfClass:[PlayController class]])
         {
-            [VC updateCoininVIew];
+            PlayController *VC = (PlayController *)lastVC;
+            if ([VC respondsToSelector:@selector(updateCoininVIew)])
+            {
+                [VC updateCoininVIew];
+            }
+        }else if ([lastVC isKindOfClass:[MenuController class]])
+        {
+            MenuController *VC = (MenuController *)lastVC;
+            if ([VC respondsToSelector:@selector(updateCoininVIew)])
+            {
+                [VC updateCoininVIew];
+            }
         }
+        
+        
     }
     
 }

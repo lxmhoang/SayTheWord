@@ -42,7 +42,6 @@
     lb.textAlignment = NSTextAlignmentRight;
     lb.text = _amount;
     [self addSubview:lb];
-    [lb release];
     
     UILabel *lb2 = [[UILabel alloc]initWithFrame:CGRectMake(240-50-60, 5+35, 60, 20)];
     lb2.textAlignment = NSTextAlignmentRight;
@@ -52,7 +51,6 @@
     {
         [self addSubview:lb2];
     }
-    [lb2 release];
 }
 
 @end

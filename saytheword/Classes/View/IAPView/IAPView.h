@@ -21,8 +21,8 @@
     NSString *bgImgName;
 }
 
-@property (nonatomic, retain) NSString *productIdentifier;
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, strong) NSString *productIdentifier;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 - (id)initWithProductIdentifier:(NSString *)PI;
 

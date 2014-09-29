@@ -40,7 +40,6 @@
     tableView.delegate = self;
     tableView.dataSource = self;
     [bigView addSubview:tableView];
-    [tableView release];
     
     
 //    [bigView addSubview:row1];
@@ -60,7 +59,6 @@
 //    
 //    
 //    [fbLabel release];
-    [bigView release];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -102,7 +100,7 @@
 //    [test setBackgroundColor:[UIColor redColor]];
     
     if (cell == nil) {
-        cell = [[[HintCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[HintCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         switch (indexPath.row) {
             case 0:

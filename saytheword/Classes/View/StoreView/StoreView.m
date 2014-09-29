@@ -19,7 +19,7 @@
         //        self.alpha = 0;
         self.layer.cornerRadius = 10;
         self.layer.masksToBounds = YES;
-        storeModel = [_data retain];
+        storeModel = _data;
         [self createSubViews];
         HUD = [[MBProgressHUD alloc] initWithView:self];
         [self addSubview:HUD];
@@ -61,7 +61,6 @@
     
     [self addSubview:tableView];
     [tableView setHidden:YES];
-    [tableView release];
     //    [self setBackgroundColor:[UIColor redColor]];
 }
 
@@ -87,7 +86,7 @@
     StoreCell *cell = [_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[[StoreCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[StoreCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSString *productID =[[storeModel.listItems objectAtIndex:indexPath.row] productIdentifier];
         NSString *cellText;

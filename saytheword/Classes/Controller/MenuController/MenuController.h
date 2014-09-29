@@ -11,6 +11,7 @@
 #import "MenuView.h"
 #import "MenuModel.h"
 #import "StoreController.h"
+#import "IAPViewController.h"
 
 @protocol MenuControllerProtocol <NSObject>
 
@@ -21,11 +22,12 @@
 @end
 
 
-@interface MenuController : UIViewController<MenuViewProtocol, StoreControllerDelegate>
+@interface MenuController : UIViewController<MenuViewProtocol, IAPControllerDelegate>
 
-@property (nonatomic, retain) MenuView *menuView;
-@property (nonatomic, retain) MenuModel *menuModel;
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, strong) IAPViewController *iapVC;
+@property (nonatomic, strong) MenuView *menuView;
+@property (nonatomic, strong) MenuModel *menuModel;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 - (id)initWithPosition:(int)_pos;
 

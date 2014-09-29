@@ -46,10 +46,6 @@
 //    listItems = [[NSArray alloc] initWithArray:tmp];
 }
 
-- (void)dealloc{
-    [listItems release];
-    [super dealloc];
-}
 
 #pragma mark iaphelper delegate method
 

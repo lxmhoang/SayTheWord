@@ -36,8 +36,8 @@
     SKProductsRequest *productsRequest;
 }
 
-@property (nonatomic, assign) id delegate;
-@property (nonatomic, retain) NSArray *productList;
+@property (nonatomic, unsafe_unretained) id delegate;
+@property (nonatomic, strong) NSArray *productList;
 
 - (void)loadStore;
 - (BOOL)canMakePurchase;

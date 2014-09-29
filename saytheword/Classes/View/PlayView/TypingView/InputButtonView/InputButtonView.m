@@ -17,24 +17,19 @@
     self = [super initWithFrame:_frame];
     if (self)
     {
-
+        int fontSize = kCheckIfIphone ? 25 : 40;
         tagg=_i;
-        text = [_text retain];
+        text = _text;
         text = [text uppercaseString];
-//        UIImageView *imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.png",_text]]];
-//        [imgView setFrame:CGRectMake(0, 0, _frame.size.width, _frame.size.height)];
-//        [self addSubview:imgView];
         UIImageView *imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"button.png"]];
         [imgView setFrame:CGRectMake(0, 0, _frame.size.width, _frame.size.height)];
         [self addSubview:imgView];
-        [imgView release];
         lb = [[UILabel alloc]initWithFrame:self.bounds];
         lb.text = text;
-        [lb setFont:[UIFont fontWithName:@"Verdana-Bold" size:25]];
+        [lb setFont:[UIFont fontWithName:@"Verdana-Bold" size:fontSize]];
         [lb setTextAlignment:NSTextAlignmentCenter];
         [lb setBackgroundColor:[UIColor clearColor]];
         [self addSubview:lb];
-        [lb release];
     }
     return self;
 }

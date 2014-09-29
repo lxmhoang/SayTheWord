@@ -8,10 +8,50 @@
 
 #import "CommonFunction.h"
 
+#import <Parse/Parse.h>
+#import <sys/utsname.h>
+
 @implementation CommonFunction
+
++ (NSURL *)getAppURL
+{
+    
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        return [NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=901409937"];
+    }else
+    {
+        
+        return [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id901409937"];
+        
+    }
+}
 
 + (RootController *)getRootController{
     return [(AppDelegate *)[[UIApplication sharedApplication] delegate] getRootController];
+}
+
++ (NSNumber *)gettimeBetweenUpdate
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"timeToNextUpdate"];
+}
+
++ (void)setTimeBetweenUpdate:(NSNumber*)num
+{
+    [[NSUserDefaults standardUserDefaults] setObject:num forKey:@"timeBetweenUpdate"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL)checkNoAds
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"noAds"];
+}
+
+
++ (void)setNoAds:(BOOL)noAds
+{
+    [[NSUserDefaults standardUserDefaults] setBool:noAds forKey:@"noAds"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
 }
 
 + (BOOL)checkPlayMusic
@@ -157,6 +197,21 @@
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"canRevealALetter"];
 }
 
+#pragma mark set get time update to parse
+
++(void)setLastUpdateInfo:(NSDate *)_val
+{
+    
+    [[NSUserDefaults standardUserDefaults] setObject:_val forKey:@"lastUpdateInfo"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSDate *)getLastUpdateInfo
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"lastUpdateInfo"];
+}
+
+
 #pragma mark set get time share app
 
 + (void)setLastSendEmail:(NSDate *)_val
@@ -243,15 +298,15 @@
 
 #pragma mark get set rate us
 
-+ (void)setRateUs:(BOOL)_val
++ (void)setRateUs:(int)_val
 {
-    [[NSUserDefaults standardUserDefaults] setBool:_val forKey:@"rateUs"];
+    [[NSUserDefaults standardUserDefaults] setInteger:_val forKey:@"rateUs"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (BOOL)getRateUS
++ (int)getRateUS
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"rateUs"];
+    return [[NSUserDefaults standardUserDefaults] integerForKey:@"rateUs"];
 }
 
 #pragma mark get set rate us text
@@ -274,6 +329,37 @@
 {
      
     NSNumber *coin = [NSNumber numberWithInt:kInitialCoin];
+    
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rateForCoin"] == nil){
+        [self setRateForCoin:NO];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"msgShareNotAvail"] == nil){
+        [self setMsgSharingNotAvail:@"You already shared this app"];
+    }
+    
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"doubleCoinInWinView"] == nil){
+        [self setDoubleCoinInWinView:NO];
+    }
+    
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"showAds"] == nil){
+        [self setShowAds:NO];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"TimeToNextShare"] == nil){
+        [self setTimeToNextShare:3600*24*30];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"timeBetweenUpdate"] == nil){
+        [self setTimeBetweenUpdate:[NSNumber numberWithInt:60]];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"noAds"] == nil){
+        [self setNoAds:NO];
+    }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"playMusicFlag"] == nil){
         [self setMusicFlag:YES];
@@ -324,7 +410,7 @@
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"level"]==nil) {
-        [self setLevel:1];
+        [self setLevel:7];
     }
     
 
@@ -342,7 +428,7 @@
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rateUs"] == nil){
-        [self setRateUs:NO];
+        [self setRateUs:0];
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"textRateUs"] == nil){
@@ -364,6 +450,178 @@
     [self setCanRevealALetter:YES];
     [self setCanRemoveALetter:YES];
 
+}
+
+#pragma mark AlertView
+
++ (void)alert:(NSString *)str delegate:(id)_delegate
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"" message:str delegate:_delegate cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [al show];
+        
+    });
+}
+
+#pragma mark Device Name
+
++ (NSString*) machineName
+{
+    /*
+     @"i386"      on the simulator
+     @"iPod1,1"   on iPod Touch
+     @"iPod2,1"   on iPod Touch Second Generation
+     @"iPod3,1"   on iPod Touch Third Generation
+     @"iPod4,1"   on iPod Touch Fourth Generation
+     @"iPhone1,1" on iPhone
+     @"iPhone1,2" on iPhone 3G
+     @"iPhone2,1" on iPhone 3GS
+     @"iPad1,1"   on iPad
+     @"iPad2,1"   on iPad 2
+     @"iPad3,1"   on 3rd Generation iPad
+     @"iPhone3,1" on iPhone 4
+     @"iPhone4,1" on iPhone 4S
+     @"iPhone5,1" on iPhone 5 (model A1428, AT&T/Canada)
+     @"iPhone5,2" on iPhone 5 (model A1429, everything else)
+     @"iPad3,4" on 4th Generation iPad
+     @"iPad2,5" on iPad Mini
+     
+     */
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+}
+
+#pragma mark Parse.com
+
+
+
++ (void)updateInstallationInfoWithObject:(PFObject *)obj andDeviceToken:(NSString *)token
+{
+    
+    NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    
+    
+    NSTimeZone *timeZone = [NSTimeZone localTimeZone];
+    obj[@"timeZone"] = [timeZone name];
+    obj[@"deviceToken"] = token;
+    obj[@"app_version"] = version;
+    obj[@"ios_version"] = [[UIDevice currentDevice] systemVersion];
+    obj[@"coin"] = [NSNumber numberWithInt:[CommonFunction getCoin]];
+    
+    obj[@"level"] = [NSNumber numberWithInt:[CommonFunction getLevel]];
+    obj[@"device"] = [CommonFunction machineName];
+    
+    [CommonFunction setLastUpdateInfo:[NSDate date]];
+//    [CommonFunction alert:[NSString stringWithFormat:@"%@",[CommonFunction getLastUpdateInfo]] delegate:nil];
+    NSLog(@"last update : %@", [NSDate date]);
+    [obj saveEventually];
+    
+}
+
++ (void)updateConfigurationInfo
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"app_version = %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+    PFQuery *query = [PFQuery queryWithClassName:@"ConfigurationInfo" predicate:predicate];
+    
+    query.cachePolicy = kPFCachePolicyNetworkElseCache;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error)
+        {
+         // shit happen
+        }else
+        {
+            if (objects.count == 0)
+            {
+                // no coressponding app version
+            }else
+            {
+                PFObject *obj = [objects firstObject];
+                for (id key in [obj allKeys])
+                {
+                    NSString *strKey = key;
+                    [[NSUserDefaults standardUserDefaults] setObject:[obj objectForKey:strKey] forKey:strKey];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+            }
+        }
+    }];
+    
+}
+
+#pragma mark message sharing is not available
+
+// if time from last sharing to present is less than timetonextshare, then user is unable to share, and this message will appear
+
++ (NSString *)msgSharingNotAvail
+{
+   return [[NSUserDefaults standardUserDefaults] stringForKey:@"msgShareNotAvail"];
+}
+
++ (void)setMsgSharingNotAvail:(NSString *)str
+{
+    [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"msgShareNotAvail"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark Double Coin In win View
+
++ (BOOL)checkIfDoubleCoinInWinView
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"doubleCoinInWinView"];
+}
+
+
++ (void)setDoubleCoinInWinView:(BOOL)val
+{
+    [[NSUserDefaults standardUserDefaults] setBool:val forKey:@"doubleCoinInWinView"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark rateforcoin
+// 1. rate this app will appear in free coin options
+// 2. user will get coin for rating app
+
++ (BOOL)checkIfRateForCoin
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"rateForCoin"];
+}
+
+
++ (void)setRateForCoin:(BOOL)val
+{
+    [[NSUserDefaults standardUserDefaults] setBool:val forKey:@"rateForCoin"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark time to next share
+
+//1. time to next share, to disable repeat sharing, set it max 99999 on parse.com
+
++ (double)timeToNextShare
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"TimeToNextShare"] doubleValue];
+}
+
++ (void)setTimeToNextShare:(double)val
+{
+    [[NSUserDefaults standardUserDefaults] setDouble:val forKey:@"dirty_sharing"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark show ads
+
++ (BOOL)checkIfShowAds
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"showAds"];
+}
+
++ (void)setShowAds:(BOOL)val
+{
+    [[NSUserDefaults standardUserDefaults] setBool:val forKey:@"showAds"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

@@ -14,7 +14,7 @@
 
 @implementation MenuController
 
-@synthesize menuView,menuModel,delegate;
+@synthesize menuView,menuModel,delegate, iapVC;
 
 #pragma mark InitMethod
 
@@ -75,21 +75,40 @@
 
 - (void)coinViewTappedFromMenuView
 {
-    StoreController *storeController = [[StoreController alloc]init];
-    storeController.delegate = self;
-    //    [self presentViewController:storeController animated:YES completion:nil];
-    //    [storeController release];
-    [self addChildViewController:storeController];
+    if (iapVC)
+    {
+        return;
+    }
+    NSString *nibName = kCheckIfIphone ? @"IAPViewController" : @"IAPViewController_iPad";
+    iapVC = [[IAPViewController alloc] initWithNibName:nibName bundle:nil];
+    iapVC.delegate = self;
     
-    [self.view addSubview:storeController.view];
+    RootController *rootVC = [CommonFunction getRootController];
+    
+    [rootVC addChildViewController:iapVC];
+    [iapVC didMoveToParentViewController:rootVC];
+    [rootVC.view addSubview:iapVC.view];
+    
+//    StoreController *storeController = [[StoreController alloc]init];
+//    storeController.delegate = self;
+//    //    [self presentViewController:storeController animated:YES completion:nil];
+//    //    [storeController release];
+//    [self addChildViewController:storeController];
+//    
+//    [self.view addSubview:storeController.view];
 }
 
-#pragma mark StoreController delegate method
+#pragma mark IAPViewController delegate method
 
 - (void)updateCoininVIew
 {
     
     menuView.coinLabel.text = [NSString stringWithFormat:@"%d",[[[NSUserDefaults standardUserDefaults] objectForKey:@"coins"] intValue]];
+}
+
+- (void)dismissIAPVC
+{
+    iapVC = nil;
 }
 
 - (void)shareFB:(UIGestureRecognizer *)_tap
@@ -106,7 +125,6 @@
     menuView = [[MenuView alloc]initWithModel:menuModel];
     menuView.delegate = self;
     [self.view addSubview:menuView];
-    [menuView release];
     // Do any additional setup after loading the view.
 }
 

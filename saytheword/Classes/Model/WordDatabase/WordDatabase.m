@@ -113,7 +113,7 @@ static WordDatabase *_database;
 
 - (NSArray *)WordsInfo {
     
-    NSMutableArray *retval = [[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *retval = [[NSMutableArray alloc] init];
     NSString *query = @"SELECT level, leftWord, leftImg, rightWord, rightImg, finalWord, initString from words ORDER BY level ASC";
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(_database, [query UTF8String], -1, &statement, nil)
@@ -138,12 +138,6 @@ static WordDatabase *_database;
             WordInfo *info = [[WordInfo alloc] initWithUniqueLevel:newLevel leftWord:newLeftWord leftImg:newLeftImg rightWord:newRightWord rightImg:newRightImg finalWord:newFinalWord initString:newInitString];
             
             [retval addObject:info];
-            [newLeftWord release];
-            [newLeftImg release];
-            [newRightWord release];
-            [newRightImg release];
-            [newFinalWord release];
-            [newInitString release];
         }
         sqlite3_finalize(statement);
     }

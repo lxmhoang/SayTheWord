@@ -45,10 +45,8 @@
     }else{
         UITapGestureRecognizer *_tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeLetter:)];
         [removeLetterView addGestureRecognizer:_tap1];
-        [_tap1 release];
     }
     [bigView addSubview:removeLetterView];
-    [removeLetterView release];
     
     UIView *showLetterView = [[UIView alloc]initWithFrame:CGRectMake(31, 24, 28 , 30)];
     [showLetterView setBackgroundColor:[UIColor redColor]];
@@ -57,11 +55,9 @@
     }else{
         UITapGestureRecognizer *_tap2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(revealLetter:)];
         [showLetterView addGestureRecognizer:_tap2];
-        [_tap2 release];
     }
 
     [bigView addSubview:showLetterView];
-    [showLetterView release];
     
     UIView *showLeftTitle = [[UIView alloc]initWithFrame:CGRectMake(60, 24, 27 , 30)];
     [showLeftTitle setBackgroundColor:[UIColor redColor]];
@@ -70,11 +66,9 @@
     }else{
         UITapGestureRecognizer *_tap3 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showLeftTitle:)];
         [showLeftTitle addGestureRecognizer:_tap3];
-        [_tap3 release];
     }
 
     [bigView addSubview:showLeftTitle];
-    [showLeftTitle release];
     
     UIView *showRightTitle = [[UIView alloc]initWithFrame:CGRectMake(3, 64, 27 , 30)];
     [showRightTitle setBackgroundColor:[UIColor redColor]];
@@ -83,11 +77,9 @@
     }else{
         UITapGestureRecognizer *_tap4 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showRightTitle:)];
         [showRightTitle addGestureRecognizer:_tap4];
-        [_tap4 release];
     }
     
     [bigView addSubview:showRightTitle];
-    [showRightTitle release];
     
 //    UIView *showAnswer = [[UIView alloc]initWithFrame:CGRectMake(31, 64, 27 , 30)];
 //    [showAnswer setBackgroundColor:[UIColor redColor]];
@@ -120,13 +112,12 @@
         frameHintView =  CGRectMake(115, 200, 90, 100);
     }
     bigView = [[UIView alloc]initWithFrame:frameHintView];
-    [bigView setBackgroundColor:[UIColor yellowColor]];
+    [bigView setBackgroundColor:[UIColor whiteColor]];
     
     [self createSmallViews];
     
 
     [self addSubview:bigView];
-    [bigView release];
 }
 
 
@@ -168,9 +159,7 @@
             
             UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeBigView:)];
             [closeIcon addGestureRecognizer:_tap];
-            [_tap release];
             [self addSubview:closeIcon];
-            [closeIcon release];
         }];
         
 

@@ -24,6 +24,17 @@
 	<string>1.0</string>
 	<key>FacebookAppID</key>
 	<string>558267074215057</string>
+	<key>FacebookDisplayName</key>
+	<string>Say The Word</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb558267074215057</string>
+			</array>
+		</dict>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

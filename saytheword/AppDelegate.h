@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "RootController.h"
-#import "Appirater.h"
 #import <FacebookSDK/FacebookSDK.h>
 
 
@@ -23,7 +22,7 @@
 }
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, retain) RootController *rootController;
+@property (nonatomic, strong) RootController *rootController;
 
 - (RootController *)getRootController;
 - (void)setBGSoundVolume:(float)vol;

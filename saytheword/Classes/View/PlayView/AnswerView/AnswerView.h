@@ -20,12 +20,12 @@
 
 @interface AnswerView : UIView
 {
-    int index;
+    int index, distanceBwChars, widthOfChar, yOfLine, thickOfLine, yOfChar;
     float leftPoint;
 }
 
-@property (nonatomic, retain) PlayModel *playModel;
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, strong) PlayModel *playModel;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 - (id)initWithFrame:(CGRect)_frame andModel:(PlayModel *)_model;
 - (void)setNewChar:(NSString *)_newChar;

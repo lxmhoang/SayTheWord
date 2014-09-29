@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "WordDatabase.h"
 #import "WordInfo.h"
+#import <Parse/Parse.h>
 
 @implementation AppDelegate
 @synthesize rootController;
@@ -39,14 +40,11 @@
     AudioServicesPlaySystemSound(fireWorkSound);
 }
 
-- (void)dealloc
-{
-    [_window release];
-    [super dealloc];
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    [FBLoginView class];
 //    WordInfo *info = [[WordDatabase database] wordInfoWithLevel:6];
 //    NSLog(@"%d: %@, %@, %@",info.level, info.leftWord, info.rightWord, info.finalWord);
 //    NSArray *wordInfos = [WordDatabase database].WordsInfo;
@@ -54,11 +52,33 @@
 //        NSLog(@"%d: %@, %@, %@",info.level, info.leftWord, info.rightWord, info.finalWord);
 //    }
     
-    [FBLoginView class];
+    
+    
+    [Parse setApplicationId:@"7Rx018E0kJKkmON2WF5pSCWLxa5u0mR8boHcHCc5"
+                  clientKey:@"cQijJMLIqBiUCcNkaN1m4K7NbEyBhLCC0ZxM8BPA"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+
+    
+    //-- Set Notification
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+    else
+    {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+         (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
+    }
+    
+    
+//    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+//     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+//
     
     
     NSString *pathFW  = [[NSBundle mainBundle] pathForResource:@"firework_explode" ofType:@"mp3"];
-    CFURLRef pathURLFW = (CFURLRef)[NSURL fileURLWithPath : pathFW];
+    CFURLRef pathURLFW = (__bridge CFURLRef)[NSURL fileURLWithPath : pathFW];
     
     AudioServicesCreateSystemSoundID(pathURLFW, &fireWorkSound);
 
@@ -66,6 +86,7 @@
     NSString *path  = [[NSBundle mainBundle] pathForResource:@"RiverFlowsInYou" ofType:@"mp3"];
     NSURL *pathURL = [NSURL fileURLWithPath : path];
     
+    [CommonFunction class];
     
     
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:pathURL error:nil];
@@ -75,14 +96,17 @@
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     rootController = [[RootController alloc]init];
     [self.window setRootViewController:rootController];
-    [rootController release];
-    [Appirater appLaunched:YES];
+    
+
+    // check coin reward for rateus
+    
+    
     return YES;
 }
 
@@ -101,6 +125,14 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    if ([CommonFunction getRateUS] == 1)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:kMsgThankForRating] message:[NSString stringWithFormat:@" You have claimed %d coins", kRewardCoinsForRatingApp] delegate:rootController cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+        [CommonFunction setRateUs:2];
+    }
+    
     if (FBSession.activeSession.isOpen)
     {
         [FBRequestConnection startWithGraphPath:@"/me/likes/172415879600587" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -113,7 +145,7 @@
                     if (![CommonFunction getLikeFanPage]){
                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Thank you for liking our page" message:[NSString stringWithFormat:@"You get %d coins", kRewardCoinsForLikingFB] delegate:rootController cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                         [alertView show];
-                        [alertView release];
+                        
                     }
                     
                     [CommonFunction setLikeFanPage:YES];
@@ -125,7 +157,6 @@
     {
         
     }
-    [Appirater appEnteredForeground:YES];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -152,45 +183,73 @@
                     }];
 }
 
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSString *str =
+    [NSString stringWithFormat:@"%@",deviceToken];
+    str = [[str stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
+           stringByReplacingOccurrencesOfString:@" "
+           withString:@""];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"] == nil)
+    {
 
+//        [CommonFunction alert:@"first time" delegate:nil];
+        // first time
+        PFObject *obj = [[PFObject alloc] initWithClassName:@"Installation"];
+        
+        [CommonFunction updateInstallationInfoWithObject:obj andDeviceToken:str];
+        [CommonFunction updateConfigurationInfo];
+        
+    }else         if ([[NSDate date] compare:[[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]]]==NSOrderedDescending)
+    {
+        NSDate *dateToUpdate = [[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]];
+        NSString *str222 = [NSString stringWithFormat:@"WILL update \n, current time : %@ , \n last update : %@, \n time until next update : %d  ,\n  time to update : %@", [NSDate date], [CommonFunction getLastUpdateInfo], [[CommonFunction gettimeBetweenUpdate] intValue], dateToUpdate];
+//        [CommonFunction alert:str222 delegate:nil];
+//        [CommonFunction alert:@"long enough, let's update" delegate:nil];
+        PFQuery *query = [PFQuery queryWithClassName:@"Installation"];
+        
+        [query whereKey:@"deviceToken" equalTo:str];
+        NSLog(@"device token searching for : %@",str);
+        query.cachePolicy = kPFCachePolicyNetworkElseCache;
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                PFObject *obj = [objects firstObject];
+                if (obj)
+                {
+                    [CommonFunction updateInstallationInfoWithObject:obj andDeviceToken:str];
+                    
+                    [CommonFunction updateConfigurationInfo];
+                }else
+                {
+                    // no obj with this devicetoken on parse, may be first update has not completed yet, so we do nothing, wait for first update to be completed
+                }
+            } else {
+                // Log details of the failure
+//                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
+    }else
+    {
+        
+        NSDate *dateToUpdate = [[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]];
+        NSString *str = [NSString stringWithFormat:@"no update \n, current time : %@ , \n last update : %@, \n time until next update : %d  ,\n  time to update : %@", [NSDate date], [CommonFunction getLastUpdateInfo], [[CommonFunction gettimeBetweenUpdate] intValue], dateToUpdate];
+//        [CommonFunction alert:str delegate:nil];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"deviceToken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
 
-#pragma mark - FBLoginViewDelegate
-
-- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
-    // first get the buttons set for login mode
-    loginView.hidden = YES;
-    NSLog(@"loginView showwww");
+    
     
 }
 
-- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
-                            user:(id<FBGraphUser>)user {
-    // here we use helper properties of FBGraphUser to dot-through to first_name and
-    // id properties of the json response from the server; alternatively we could use
-    // NSDictionary methods such as objectForKey to get values from the my json object
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"didFailToRegisterForRemoteNotificationsWithError %@", error);
 }
-
-- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
-    NSLog(@"logged out");
-    // test to see if we can use the share dialog built into the Facebook application
-    FBShareDialogParams *p = [[FBShareDialogParams alloc] init];
-    p.link = [NSURL URLWithString:@"http://developers.facebook.com/ios"];
-#ifdef DEBUG
-    [FBSettings enableBetaFeatures:FBBetaFeaturesShareDialog];
-#endif
-    //    BOOL canShareFB = [FBDialogs canPresentShareDialogWithParams:p];
-    //    BOOL canShareiOS6 = [FBDialogs canPresentOSIntegratedShareDialogWithSession:nil];
-    //
-    
-    // "Post Status" available when logged on and potentially when logged off.  Differentiate in the label.
-}
-
-- (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error {
-    // see https://developers.facebook.com/docs/reference/api/errors/ for general guidance on error handling for Facebook API
-    // our policy here is to let the login view handle errors, but to log the results
-    NSLog(@"FBLoginView encountered an error=%@", error);
-}
-
 
 
 

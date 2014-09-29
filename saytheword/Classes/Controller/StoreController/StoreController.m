@@ -21,7 +21,7 @@
     if (self)
     {
         storeModel = [[StoreModel alloc]init];
-        self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.6];
+        self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.1];
     }
     return self;
 }
@@ -72,7 +72,6 @@
     [HUD hide:YES];
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:@"Cannot connect to Itunes, please check your Internet Connection" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alertView show];
-    [alertView release];
     [self dismissVC];
 }
 
@@ -98,7 +97,6 @@
     storesView.delegate = self;
     [self.view addSubview:storesView];
     [storesView showUp];
-    [storesView release];
     
     
     [HUD hide:YES];

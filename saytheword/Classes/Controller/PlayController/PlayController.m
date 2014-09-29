@@ -7,13 +7,14 @@
 //
 
 #import "PlayController.h"
+#import "IAPViewController.h"
 
 @interface PlayController ()
 
 @end
 
 @implementation PlayController
-@synthesize playView, playModel, delegate;
+@synthesize playView, playModel, delegate, iapVC;
 
 - (id)initWithPosition:(int)_pos
 {
@@ -42,15 +43,25 @@
 
 - (void)coinViewTappedFromPlayView
 {
-    StoreController *storeController = [[StoreController alloc]init];
-    storeController.delegate = self;
-    //    [self presentViewController:storeController animated:YES completion:nil];
-    //    [storeController release];
-    [self addChildViewController:storeController];
+    if (iapVC)
+    {
+        return;
+    }
+    NSString *nibName = kCheckIfIphone ? @"IAPViewController" : @"IAPViewController_iPad";
+    iapVC = [[IAPViewController alloc] initWithNibName:nibName bundle:nil];
+    iapVC.delegate = self;
     
-    [self.view addSubview:storeController.view];
-//    [storeController.view release];
-//    [storeController release];
+    RootController *rootVC = [CommonFunction getRootController];
+    
+    [rootVC addChildViewController:iapVC];
+    [iapVC didMoveToParentViewController:rootVC];
+    [rootVC.view addSubview:iapVC.view];
+    
+//    StoreController *storeController = [[StoreController alloc]init];
+//    storeController.delegate = self;
+//    [self addChildViewController:storeController];
+//    
+//    [self.view addSubview:storeController.view];
     
 }
 
@@ -61,7 +72,6 @@
     hintsView.delegate = self;
     [hintsView setTag:kTagOfHintView];
     [self.view addSubview:hintsView];
-    [hintsView release];
     [hintsView bloat];
     
 //    HintView *hintView = [[HintView alloc]initWithFrame:self.view.bounds];
@@ -97,11 +107,9 @@
     [self.view setBackgroundColor:[UIColor clearColor]];
     playView = [[PlayView alloc]initWithModel:playModel];
     [playView setDelegate:self];
-    [playModel release];
     
     [self.view setFrame:playView.bounds];
     [self.view addSubview:playView];
-    [playView release];
 
     // Do any additional setup after loading the view.
 }
@@ -121,7 +129,6 @@
     {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:@"There is no removeable char remain in Typing View" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
-        [alertView release];
         return;
     }
     
@@ -145,7 +152,6 @@
     if (numOfEmptyLB==0){
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:@"The answer view must have at least 1 empty label" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
-        [alertView release];
         return;
     }
     
@@ -229,12 +235,18 @@
     }
 }
 
-#pragma mark StoreController delegate method
+#pragma mark IAPViewController delegate method
 
 - (void)updateCoininVIew
 {
     
     playView.coinLabel.text = [NSString stringWithFormat:@"%d",[[[NSUserDefaults standardUserDefaults] objectForKey:@"coins"] intValue]];
+}
+
+
+- (void)dismissIAPVC
+{
+    iapVC = nil;
 }
 
 - (void)shareFB:(UIGestureRecognizer *)_tap

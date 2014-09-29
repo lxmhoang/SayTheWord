@@ -48,16 +48,11 @@
 
     
     winView.delegate = self;
-    [playModel release];
 
     [self.view setFrame:winView.bounds];
     [self.view addSubview:winView];
-    [winView release];
     
-    [CommonFunction setLevel:([CommonFunction getLevel]+1)];
-    if ([CommonFunction getLevel]==100){
-        [CommonFunction setLevel:9];
-    }
+
     
 
 

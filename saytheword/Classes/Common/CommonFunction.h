@@ -7,13 +7,35 @@
 //
 //iap
 
+@class PFObject;
+
+/*
+ *  System Versioning Preprocessor Macros
+ */
+
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+
+
+#define kTitleOfFacebookLike @"LIKE US"
+#define kTitleOfSharing @"SHARE THE APP"
+#define kTitleOfRating @"RATE IT"
+
 #define kTagOfCopyAnswerView 669
 
-#define kRewardCoinsForRatingApp 300
+#define kMsgThankForRating @"Thank you for rating"
 
-#define kRewardCoinsForLikingFB 300
+#define kRewardCoinsForRatingApp 70
 
-#define kRewardCoinsForSharingApp 99
+#define kRewardCoinsForLikingFB 70
+
+#define kRewardCoinsForSharingApp 15
+
+#define kRewardCoinsForEachLetter 3
 
 #define kNavBarImg @"nav_nau.png"
 #define kProductIDOf200  @"com.lxmhoang.sayitloud.iap.200coins"
@@ -24,7 +46,9 @@
 //#define kProductIDOf50000  @"com.lxmhoang.saytheword.iap.50000coins"
 
 #define kHeightOfScreen [ [ UIScreen mainScreen ] bounds ].size.height
-#define kWidthOfScreen 320
+#define kWidthOfScreen [ [ UIScreen mainScreen ] bounds ].size.width
+#define kHeightOfNavigationBar (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPhone) ? 44 : 64
+#define kCheckIfIphone (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPhone)
 #define kTimeToPresentVC 0.5
 #define kInitialCoin 10000
 
@@ -36,9 +60,9 @@
 
 //PlayView
 //#define kTagOfCoinLabel 80
-#define kYOfImages 70
-#define kYOfAnswerView 260
-#define kYOfTyppingView 360
+
+
+
 #define kTagOfHintView 454
 #define kTagOfHintButton 654
 
@@ -56,17 +80,12 @@
 
 // AnswerView
 
-#define kWidthOfCharInAnswerView 30
-#define kDistanceBwCharsInAnswerView 5
 #define kTagOfEraseIcon 9
 
 // store controller
 #define kHeightOfTopBarPopUpIAP 60
 #define kHeightOfRowStoreItem 56
 
-//time to share again
-
-#define kTimeToNextShare 150
 
 //prices of products
 
@@ -94,9 +113,17 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 
-@interface CommonFunction : NSObject 
+@interface CommonFunction : NSObject
+
++ (NSURL *)getAppURL;
 
 + (RootController *)getRootController;
+
++ (NSNumber *)gettimeBetweenUpdate;
++ (void)setTimeBetweenUpdate:(NSNumber*)num;
+
++ (BOOL)checkNoAds;
++ (void)setNoAds:(BOOL)noAds;
 
 + (BOOL)checkPlayMusic;
 + (void)setMusicFlag:(BOOL)flag;
@@ -137,6 +164,9 @@
 + (void)createGlobalVariable;
 + (void)reSetGlobalData;
 
++ (void)setLastUpdateInfo:(NSDate *)_val;
++ (NSDate *)getLastUpdateInfo;
+
 + (void)setLastSendEmail:(NSDate *)_val;
 + (NSDate *)getLastSendEmail;
 
@@ -158,10 +188,35 @@
 + (void)setShowAnswer:(BOOL)_val;
 + (BOOL)getShowAnswer;
 
-+ (void)setRateUs:(BOOL)_val;
-+ (BOOL)getRateUS;
++ (void)setRateUs:(int)_val;
++ (int)getRateUS;
 
 + (void)setTextRateUs:(NSString *)_val;
 + (NSString *)getTextRateUs;
+
++ (void)alert:(NSString *)str delegate:(id)delegate;
+
++ (NSString *)machineName;
+
++ (void)updateInstallationInfoWithObject:(PFObject *)obj andDeviceToken:(NSString *)token;
+
++ (void)updateConfigurationInfo;
+
++ (NSString *)msgSharingNotAvail;
+
++ (void)setMsgSharingNotAvail:(NSString *)str;
+
++ (BOOL)checkIfDoubleCoinInWinView;
+
++ (void)setDoubleCoinInWinView:(BOOL)val;
+
++ (BOOL)checkIfRateForCoin;
++ (void)setRateForCoin:(BOOL)val;
+
++ (double)timeToNextShare;
++ (void)setTimeToNextShare:(double)val;
+
++ (BOOL)checkIfShowAds;
++ (void)setShowAds:(BOOL)val;
 
 @end

@@ -8,6 +8,8 @@
 
 #import "TypingView.h"
 
+
+
 @implementation TypingView
 
 @synthesize playModel, delegate;
@@ -26,7 +28,11 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        playModel = [_playModel retain];
+        yOfChar = kCheckIfIphone ? 15:30;
+        padding = kCheckIfIphone ? 12 : 76;
+        sizeOfChar = kCheckIfIphone ? 48 : 96;
+        dstBetweenChars = kCheckIfIphone ? 2 : 8;
+        playModel = _playModel;
 //        [self setBackgroundColor:[UIColor blackColor]];
 //        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
 //        self.alpha = 0.3;
@@ -37,41 +43,37 @@
 
 - (void)createSubviews
 {
-    int bp=12;
+    int bp=padding;
     
 
 
-    bp+=48+2;
+    bp+=sizeOfChar+dstBetweenChars;
     
     for (int i=0;i<5;i++)
     {
-        InputButtonView *btn = [[InputButtonView alloc]initWithText:[playModel.wordInfo.dummyString substringWithRange:NSMakeRange(i, 1)] andFrame:CGRectMake(bp, 15, 48, 48) andTag:i+kRandomNumber];
+        InputButtonView *btn = [[InputButtonView alloc]initWithText:[playModel.wordInfo.dummyString substringWithRange:NSMakeRange(i, 1)] andFrame:CGRectMake(bp, yOfChar, sizeOfChar, sizeOfChar) andTag:i+kRandomNumber];
         [btn setTag:(i+kRandomNumber)];
         UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickCharPress:)];
         [btn addGestureRecognizer:_tap];
-        [_tap release];
         
         [self addSubview:btn];
-        [btn release];
-        bp+=48+2;
+        bp+=sizeOfChar+dstBetweenChars;
         if (i==[CommonFunction getRemoveIndex])
         {
             [btn removeFromSuperview];
         }
     }
-    bp=12;
+    bp=padding;
     for (int i=5;i<11;i++)
     {
-        InputButtonView *btn = [[InputButtonView alloc]initWithText:[playModel.wordInfo.dummyString substringWithRange:NSMakeRange(i, 1)] andFrame:CGRectMake(bp, 15+45+5, 48, 48) andTag:i+kRandomNumber];
+        InputButtonView *btn = [[InputButtonView alloc]initWithText:[playModel.wordInfo.dummyString substringWithRange:NSMakeRange(i, 1)] andFrame:CGRectMake(bp, yOfChar+sizeOfChar+dstBetweenChars, sizeOfChar, sizeOfChar) andTag:i+kRandomNumber];
         
         UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickCharPress:)];
         [btn addGestureRecognizer:_tap];
         [btn setTag:(i+kRandomNumber)];
-        [_tap release];
         
         [self addSubview:btn];
-        [btn release];
-        bp+=48+2;
+        bp+=sizeOfChar+dstBetweenChars;
         if (i==[CommonFunction getRemoveIndex])
         {
             [btn removeFromSuperview];

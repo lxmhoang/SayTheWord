@@ -62,7 +62,7 @@
             break;
     }
     
-    CGPoint pt=CGPointMake([self numberWithMin:0 :320],[self numberWithMin:0 :460]);
+    CGPoint pt=CGPointMake([self numberWithMin:0 :kWidthOfScreen],[self numberWithMin:0 :round(kHeightOfScreen/3*2)]);
     
     float multiplier=0.25f;
     

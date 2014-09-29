@@ -25,10 +25,10 @@
 - (void)createSubViews
 {
     bigView = [[UIView alloc] initWithFrame:CGRectMake(115, 200, 90, 100)];
-    [bigView setBackgroundColor:[UIColor blackColor]];
+    [bigView setBackgroundColor:[UIColor darkTextColor]];
+//    bigView.alpha = 0.4;
     [self addSubview:bigView];
     [bigView setHidden:YES];
-    [bigView release];
 }
 
 - (id)initWithFrame:(CGRect)frame andData:(StoreModel *)_data
@@ -39,7 +39,7 @@
         //        self.alpha = 0;
         self.layer.cornerRadius = 10;
         self.layer.masksToBounds = YES;
-        storeModel = [_data retain];
+        storeModel = _data;
         [self createSubViews];
         HUD = [[MBProgressHUD alloc] initWithView:self];
         [self addSubview:HUD];
@@ -61,18 +61,15 @@
         IAPView *iap = [[IAPView alloc] initWithProductIdentifier:[[storeModel.listItems objectAtIndex:i] productIdentifier]];
         iap.delegate = self;
         [bigView addSubview:iap];
-        [iap release];
         
     }
     IAPView *freeCoin = [[IAPView alloc] initWithProductIdentifier:@"FreeCoins"];
     [bigView addSubview:freeCoin];
     freeCoin.delegate = self;
-    [freeCoin release];
     
     IAPView *diamond = [[IAPView alloc] initWithProductIdentifier:@"diamond"];
     [bigView addSubview:diamond];
     diamond.delegate = self;
-    [diamond release];
     
 //    UILabel *freeCoinLabel = [[UILabel alloc]initWithFrame:CGRectMake(3, 24, 27, 30)];
 //    [freeCoinLabel setBackgroundColor:[UIColor redColor]];
@@ -118,31 +115,73 @@
     [delegate dismissStoreController];
 }
 
+- (void) attachPopUpAnimation
+{
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation
+                                      animationWithKeyPath:@"transform"];
+    
+//    CATransform3D scale1 = CATransform3DMakeScale(0.5, 0.5, 1);
+    CATransform3D scale2 = CATransform3DMakeScale(3.2, 3.2, 1);
+    CATransform3D scale3 = CATransform3DMakeScale(2.9, 2.9, 1);
+    CATransform3D scale4 = CATransform3DMakeScale(3.0, 3.0, 1);
+    
+    NSArray *frameValues = [NSArray arrayWithObjects:
+//                            [NSValue valueWithCATransform3D:scale1],
+                            [NSValue valueWithCATransform3D:scale2],
+                            [NSValue valueWithCATransform3D:scale3],
+                            [NSValue valueWithCATransform3D:scale4],
+                            nil];
+    [animation setValues:frameValues];
+    
+    NSArray *frameTimes = [NSArray arrayWithObjects:
+//                           [NSNumber numberWithFloat:0.0],
+                           [NSNumber numberWithFloat:0.5],
+                           [NSNumber numberWithFloat:0.9],
+                           [NSNumber numberWithFloat:1.0],
+                           nil];
+    [animation setKeyTimes:frameTimes];
+    
+    animation.fillMode = kCAFillModeForwards;
+    animation.removedOnCompletion = NO;
+    animation.duration = .2;
+    
+    [bigView.layer addAnimation:animation forKey:@"popup"];
+}
+
 - (void)showUp
 {
-    [bigView setHidden:NO];
     [self createSmallViews];
-    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+    
+    [bigView setHidden:NO];
+//    [self attachPopUpAnimation];
+    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
         [bigView setTransform:CGAffineTransformMakeScale(3.2, 3.2)];
-    } completion:^(BOOL finished) {
-        
-        [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-            [bigView setTransform:CGAffineTransformMakeScale(3.0, 3.0)];
-        } completion:^(BOOL finished) {
-            UIImageView *closeIcon = [[UIImageView alloc]initWithFrame:CGRectMake(bigView.frame.origin.x-12, bigView.frame.origin.y-12, 32, 32)];
-            [closeIcon setImage:[UIImage imageNamed:@"Close-icon.png"]];
-            closeIcon.userInteractionEnabled = YES;
-            
-            UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeBigView:)];
-            [closeIcon addGestureRecognizer:_tap];
-            [_tap release];
-            [self addSubview:closeIcon];
-            [closeIcon release];
-        }];
-        
-        
     }
+                     completion:^(BOOL finished) {
+                         if (finished)
+                         {
+                             
+                             [UIView animateWithDuration:0.05 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                 [bigView setTransform:CGAffineTransformMakeScale(3.0, 3.0)];
+                                 
+                             }
+                                              completion:^(BOOL finished) {
+                                                  if (finished)
+                                                  {
+                                                      UIImageView *closeIcon = [[UIImageView alloc]initWithFrame:CGRectMake(bigView.frame.origin.x+bigView.frame.size.width-30, bigView.frame.origin.y-12, 32, 32)];
+                                                      [closeIcon setImage:[UIImage imageNamed:@"Close-icon.png"]];
+                                                      closeIcon.userInteractionEnabled = YES;
+                                                      
+                                                      UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeBigView:)];
+                                                      [closeIcon addGestureRecognizer:_tap];
+                                                      [self addSubview:closeIcon];
+                                                  }
+                                              }];
+                         }
+                         
+                         
+                     }
      ];
 }
 
@@ -185,7 +224,6 @@
             FreeCoinView *freeCoinView = [[FreeCoinView alloc] initWithFrame:self.bounds];
             freeCoinView.delegate = delegate;
             [self addSubview:freeCoinView];
-            [freeCoinView release];
             
             return;
             

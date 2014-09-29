@@ -17,11 +17,16 @@
 @end
 
 @interface TypingView : UIView
+{
+    int sizeOfChar, dstBetweenChars, padding, yOfChar;
+}
 
-@property (nonatomic, retain) PlayModel *playModel;
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, strong) PlayModel *playModel;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 - (id)initWithFrame:(CGRect)frame andModel:(PlayModel *)_playModel;
 - (void)returnTextFromPlayView:(NSString *)_text;
 
 @end
+
+

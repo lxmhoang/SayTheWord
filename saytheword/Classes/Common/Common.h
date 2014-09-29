@@ -1,3 +1,5 @@
+//<<<<<<< HEAD
+
 #define bgImage @"bgnau.jpg"
 //#define bgImage @"bluebg.png"
 //#define bgImage @"bluebg.jpg"
@@ -18,4 +20,8 @@
 
 #define bgColor [UIColor colorWithRed:208/255.0f green:212/255.0f blue:219/255.0f alpha:1.0f]
 
-
+//
+//=======
+//#define bgImage @"bg_nau_new.png"
+//#define navColor [UIColor colorWithRed:79/255.0f green:193/255.0f blue:233/255.0f alpha:1.0f] 
+//>>>>>>> 51f19eabbd20b14101e469dddaf4a41579a0048c

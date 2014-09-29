@@ -26,7 +26,7 @@
     MBProgressHUD *HUD;
 }
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, unsafe_unretained) id delegate;
 
 - (id)initWithFrame:(CGRect)frame andData:(StoreModel *)_data;
 

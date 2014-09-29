@@ -11,6 +11,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "GradientButton.h"
 
+#import <iAd/iAd.h>
+
 @protocol MenuViewProtocol <NSObject>
 
 - (void)playBtnPressFromMenuView;
@@ -18,18 +20,21 @@
 
 @end
 
-@interface MenuView : UIView
+@interface MenuView : UIView <ADBannerViewDelegate>
 {
     UILabel *coinLabel;
     UIImageView *coinImageView;
     UIView *coinView;
     UIImageView *musicIcon;
+    
+    ADBannerView *adbanner;
+    BOOL _bannerIsVisible;
 }
 
 
-@property (nonatomic, assign) id delegate;
-@property (nonatomic, retain) MenuModel *menuModel;
-@property (nonatomic, retain) UILabel *coinLabel;
+@property (nonatomic, unsafe_unretained) id delegate;
+@property (nonatomic, strong) MenuModel *menuModel;
+@property (nonatomic, strong) UILabel *coinLabel;
 
 
 - (id)initWithModel:(MenuModel *)_model;
