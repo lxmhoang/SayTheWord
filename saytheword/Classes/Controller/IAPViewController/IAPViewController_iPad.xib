@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="backBtn" destination="V1t-wH-w5V" id="Kxa-Se-eqN"/>
                 <outlet property="bigView" destination="ngp-6m-ii7" id="o7Z-Y3-e1g"/>
+                <outlet property="cancelBtn" destination="mob-aM-mRW" id="VNJ-rI-tyw"/>
                 <outlet property="coinTableView" destination="6aN-JN-LRE" id="hnY-S9-XeN"/>
                 <outlet property="fbView" destination="j0W-Rw-EmB" id="qhR-Sj-JVW"/>
                 <outlet property="freeCoinTableView" destination="L0p-SD-YHj" id="bIO-xg-ray"/>
@@ -95,7 +96,7 @@
                             <rect key="frame" x="1200" y="80" width="600" height="526"/>
                             <subviews>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vfv-So-W2f" customClass="FBLoginView">
-                                    <rect key="frame" x="143" y="178" width="400" height="80"/>
+                                    <rect key="frame" x="150" y="200" width="300" height="150"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
                                         <rect key="frame" x="115" y="96" width="370" height="80"/>

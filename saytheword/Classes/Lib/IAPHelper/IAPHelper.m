@@ -103,6 +103,11 @@
         NSLog(@"transaction DATA : %@ ",transaction.transactionDate);
 //        [transaction.transactionDate ]
         NSLog(@" transasction state: %d",transaction.transactionState);
+        if (transaction.error)
+        {
+            
+            NSLog(@" transasction error: %d",transaction.error);
+        }
         switch (transaction.transactionState)
         {
             
@@ -185,7 +190,11 @@
         
     }
     //    [self finishTransaction:transaction wasSuccessful:YES];
-     [delegate dismissVC];
+    if ([delegate respondsToSelector:@selector(dismissVC)])
+    {
+        [delegate dismissVC];
+    }
+    
 }
 
 //

@@ -67,22 +67,57 @@
 
 - (void)hintBtnTapped
 {
-    NSLog(@"hint Tapped !!!!!");
-    HintsView *hintsView = [[HintsView alloc] initWithFrame:self.view.bounds];
+    HintsView *hintsView = [[[NSBundle mainBundle] loadNibNamed:@"HintsView_iPad" owner:nil options:nil] objectAtIndex:0];
     hintsView.delegate = self;
-    [hintsView setTag:kTagOfHintView];
+    [hintsView setUp];
     [self.view addSubview:hintsView];
-    [hintsView bloat];
+    [hintsView setTag:kTagOfHintView];
+    int y = hintsView.bigView.frame.origin.y;
+    CGRect frame = hintsView.bigView.frame;
+    [hintsView.bigView setFrame:CGRectMake(hintsView.bigView.frame.origin.x, -hintsView.bigView.frame.size.height, hintsView.bigView.frame.size.width, hintsView.bigView.frame.size.height)];
+    int dy = kCheckIfIphone ? 25 : 50;
+//    [UIView animateWithDuration:0.2 animations:^{
+//        [hintsView.bigView setFrame:CGRectOffset(frame, 0, -dy)];
+//    } completion:^(BOOL finished) {
+//        [UIView animateWithDuration:0.1 animations:^{
+//            
+//            [hintsView.bigView setFrame:frame];
+//        }];
+//    }];
     
-//    HintView *hintView = [[HintView alloc]initWithFrame:self.view.bounds];
-//    hintView.delegate = self;
-//    [hintView setTag:kTagOfHintView];
-//    [self.view addSubview:hintView];
-//    [hintView release];
+    [UIView animateWithDuration:0.2 animations:^{
+        
+        [hintsView.bigView setFrame:CGRectMake(frame.origin.x, y+dy, frame.size.width, frame.size.height)];
+    } completion:^(BOOL finished) {
+        if (finished)
+        {
+        
+        [UIView animateWithDuration:0.1 animations:^{
+                    [hintsView.bigView setFrame:CGRectMake(frame.origin.x, frame.origin.y-dy, frame.size.width, frame.size.height)];
+        } completion:^(BOOL finished) {
+        }];
+        }
+        
+        
+    }
+     ];
+    
+  //  [hintsView bloat];
+
+    
+//    NSLog(@"hint Tapped !!!!!");
+//    HintsView *hintsView = [[HintsView alloc] initWithFrame:self.view.bounds];
+//    hintsView.delegate = self;
+//    [hintsView setTag:kTagOfHintView];
+//    [self.view addSubview:hintsView];
+//    [hintsView bloat];
+//    
+
 }
 
 - (void)backBtnPressFromPlayView
 {
+    [playView deactiveTimer];
     [delegate backBtnPressFromPlayController];
 }
 
@@ -91,7 +126,7 @@
 {
 
 
-    
+    [playView deactiveTimer];
     [delegate showWinScreen];
     
     NSLog(@"aaa");

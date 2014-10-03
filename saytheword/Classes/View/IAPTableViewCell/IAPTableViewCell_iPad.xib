@@ -17,14 +17,14 @@
                         <rect key="frame" x="16" y="10" width="68" height="68"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zA-4M-HIe">
-                        <rect key="frame" x="110" y="0.0" width="360" height="60"/>
-                        <fontDescription key="fontDescription" type="italicSystem" pointSize="40"/>
+                        <rect key="frame" x="185" y="0.0" width="230" height="60"/>
+                        <fontDescription key="fontDescription" type="italicSystem" pointSize="35"/>
                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UlT-2q-asC">
-                        <rect key="frame" x="110" y="14" width="360" height="60"/>
-                        <fontDescription key="fontDescription" type="italicSystem" pointSize="40"/>
+                        <rect key="frame" x="186" y="14" width="229" height="60"/>
+                        <fontDescription key="fontDescription" type="italicSystem" pointSize="35"/>
                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -41,18 +41,35 @@
                         <color key="textColor" red="0.79607843140000001" green="0.47843137250000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rvc-z7-iUA">
+                        <rect key="frame" x="90" y="32" width="60" height="60"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="starnoads.png" translatesAutoresizingMaskIntoConstraints="NO" id="vNB-pe-nuv">
+                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No ads" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GF-gv-hrQ">
+                                <rect key="frame" x="9" y="6" width="42" height="45"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="noAdsView" destination="rvc-z7-iUA" id="o0S-OJ-tos"/>
                 <outlet property="priceLabel" destination="fyO-V7-J8y" id="e5a-4c-mXz"/>
                 <outlet property="saveLabel" destination="NtR-6d-utJ" id="BYg-fp-vxm"/>
                 <outlet property="titleAloneLabel" destination="UlT-2q-asC" id="7q3-5G-G8l"/>
                 <outlet property="titleLabel" destination="8zA-4M-HIe" id="8AU-Ec-t9P"/>
             </connections>
-            <point key="canvasLocation" x="56" y="0.0"/>
+            <point key="canvasLocation" x="203" y="-21"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="100coin.png" width="96" height="96"/>
+        <image name="starnoads.png" width="300" height="300"/>
     </resources>
 </document>

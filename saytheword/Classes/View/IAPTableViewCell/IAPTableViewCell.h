@@ -13,5 +13,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *saveLabel;
 @property (strong, nonatomic) IBOutlet UILabel *priceLabel;
 @property (strong, nonatomic) IBOutlet UILabel *titleAloneLabel;
+@property (strong, nonatomic) IBOutlet UIView *noAdsView;
+
 
 @end

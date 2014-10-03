@@ -512,6 +512,7 @@
     
     obj[@"level"] = [NSNumber numberWithInt:[CommonFunction getLevel]];
     obj[@"device"] = [CommonFunction machineName];
+    obj[@"FBLink"] = [CommonFunction getFBLink];
     
     [CommonFunction setLastUpdateInfo:[NSDate date]];
 //    [CommonFunction alert:[NSString stringWithFormat:@"%@",[CommonFunction getLastUpdateInfo]] delegate:nil];
@@ -621,6 +622,19 @@
 + (void)setShowAds:(BOOL)val
 {
     [[NSUserDefaults standardUserDefaults] setBool:val forKey:@"showAds"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark FBLink
+
++ (NSString *)getFBLink
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"FBLink"];
+}
+
++ (void)setFBLink:(NSString *)val
+{
+    [[NSUserDefaults standardUserDefaults] setObject:val forKey:@"FBLink"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

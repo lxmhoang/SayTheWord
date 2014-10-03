@@ -27,6 +27,7 @@
     float maxScale;
     NSMutableArray *optionsGetFreeCoin;
 }
+@property (strong, nonatomic) IBOutlet UIButton *cancelBtn;
 
 @property (strong, nonatomic) IBOutlet UIButton *backBtn;
 @property (nonatomic, unsafe_unretained) id <IAPControllerDelegate> delegate;

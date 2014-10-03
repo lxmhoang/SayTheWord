@@ -219,4 +219,7 @@
 + (BOOL)checkIfShowAds;
 + (void)setShowAds:(BOOL)val;
 
++ (NSString *)getFBLink;
++ (void)setFBLink:(NSString *)str;
+
 @end

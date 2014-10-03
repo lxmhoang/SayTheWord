@@ -9,7 +9,7 @@
 #import "HintsView.h"
 
 @implementation HintsView
-@synthesize delegate;
+@synthesize delegate,  bigView;
 
 - (void)removeLetter:(UITapGestureRecognizer *)_sender
 {
@@ -38,6 +38,31 @@
 
 - (void)createSmallViews
 {
+    // Create navigation
+    
+//    int heightOfNaviBar = kCheckIfIphone ? 14 : 32;
+    
+//    UINavigationBar *naviBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, bigView.frame.size.width, heightOfNaviBar)];
+//    
+//    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"CANCEL"
+//                                                                    style:UIBarButtonItemStyleDone target:nil action:nil];
+//    
+//    UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"HINTS"];
+//    item.rightBarButtonItem = rightButton;
+//    item.hidesBackButton = NO;
+//    [naviBar pushNavigationItem:item animated:NO];
+//    
+//    NSDictionary *settings = @{
+//                               UITextAttributeFont                 :  [UIFont systemFontOfSize:<#(CGFloat)#>],
+//                               UITextAttributeTextColor            :  [UIColor whiteColor],
+//                               UITextAttributeTextShadowColor      :  [UIColor clearColor],
+//                               UITextAttributeTextShadowOffset     :  [NSValue valueWithUIOffset:UIOffsetZero]};
+//    
+//    [[UINavigationBar appearance] setTitleTextAttributes:settings];
+//    
+//    [bigView addSubview:naviBar];
+    
+    //
     UIView *removeLetterView = [[UIView alloc]initWithFrame:CGRectMake(3, 24, 27, 30)];
     [removeLetterView setBackgroundColor:[UIColor redColor]];
     if (![CommonFunction getCanRemoveALetter]){
@@ -102,24 +127,105 @@
 - (void)createSubViews
 {
     CGRect frameHintView;
-    if( IS_IPHONE_5 )
+    if (kCheckIfIphone)
     {
-        frameHintView =  CGRectMake(115, 200, 90, 100);
-    }
-    else
+        if( IS_IPHONE_5 )
+        {
+            frameHintView =  CGRectMake(115, 200, 90, 100);
+        }
+        else
+        {
+            //        frameHintView =  CGRectMake(20, 50, 280, 400);
+            frameHintView =  CGRectMake(115, 200, 90, 100);
+        }
+    }else
     {
-//        frameHintView =  CGRectMake(20, 50, 280, 400);
-        frameHintView =  CGRectMake(115, 200, 90, 100);
+        frameHintView = CGRectMake(300, 400, 150, 165);
     }
-    bigView = [[UIView alloc]initWithFrame:frameHintView];
-    [bigView setBackgroundColor:[UIColor whiteColor]];
     
-    [self createSmallViews];
-    
-
-    [self addSubview:bigView];
+//    int k = kCheckIfIphone ? 5 : 15;
+//    
+//    
+//    bigView = [[UIView alloc]initWithFrame:frameHintView];
+//    bigView.layer.cornerRadius = k;
+//    bigView.clipsToBounds = YES;
+//    [bigView setBackgroundColor:[UIColor whiteColor]];
+//    
+//    [self createSmallViews];
+//    
+//
+//    [self addSubview:bigView];
 }
 
+- (void)setUp
+{
+    self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.45];
+    
+    
+    int k = kCheckIfIphone ? 5 : 15;
+    int t = kCheckIfIphone ? 2 : 5;
+    
+    
+    self.askFriendIcon.layer.cornerRadius = k;
+    self.freeCoinIcon.layer.cornerRadius = k;
+    self.askFriendIcon.layer.borderWidth = 1;
+    self.freeCoinIcon.layer.borderWidth = 1;
+    self.askFriendIcon.layer.borderColor = [[UIColor yellowColor] CGColor];
+    self.freeCoinIcon.layer.borderColor = [[UIColor yellowColor] CGColor];
+    
+    bigView.layer.cornerRadius = k;
+    bigView.clipsToBounds = YES;
+    
+    self.view11.layer.cornerRadius = t;
+    self.view12.layer.cornerRadius = t;
+    self.view13.layer.cornerRadius = t;
+    self.view21.layer.cornerRadius = t;
+    self.view22.layer.cornerRadius = t;
+    self.view23.layer.cornerRadius = t;
+    
+    
+    self.coinView11.layer.cornerRadius = t;
+    self.coinView12.layer.cornerRadius = t;
+    self.coinView13.layer.cornerRadius = t;
+    self.coinView21.layer.cornerRadius = t;
+    self.coinView22.layer.cornerRadius = t;
+    self.coinView23.layer.cornerRadius = t;
+    
+    
+    self.coinView11.layer.masksToBounds = YES;
+    self.coinView12.layer.masksToBounds = YES;
+    self.coinView13.layer.masksToBounds = YES;
+    self.coinView21.layer.masksToBounds = YES;
+    self.coinView22.layer.masksToBounds = YES;
+    self.coinView23.layer.masksToBounds = YES;
+    
+    
+    bigView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.7];
+    
+    if (![CommonFunction getCanRemoveALetter])
+    {
+        
+        self.view11.alpha = 0;
+    }
+    
+    
+    if (![CommonFunction getCanRevealALetter])
+    {
+        
+        self.view12.alpha = 0;
+    }
+    
+    if ([CommonFunction getShowLeftTitle])
+    {
+        
+        self.view13.alpha = 0;
+    }
+    if ([CommonFunction getShowRightTitle])
+    {
+        
+        self.view21.alpha = 0;
+    }
+}
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -131,15 +237,15 @@
         self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.6];
 
         
-        [self createSubViews];
+//        [self createSubViews];
     }
     return self;
 }
 
-- (void)closeBigView:(UITapGestureRecognizer *)_sender
-{
-    NSLog(@"Tap ....");
-    [self removeFromSuperview];
+
+
+- (IBAction)closeBigView:(id)sender {
+        [self removeFromSuperview];
 }
 
 - (void)bloat
@@ -153,13 +259,6 @@
         [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
             [bigView setTransform:CGAffineTransformMakeScale(3.0, 3.0)];
         } completion:^(BOOL finished) {
-            UIImageView *closeIcon = [[UIImageView alloc]initWithFrame:CGRectMake(bigView.frame.origin.x-12, bigView.frame.origin.y-12, 32, 32)];
-            [closeIcon setImage:[UIImage imageNamed:@"Close-icon.png"]];
-            closeIcon.userInteractionEnabled = YES;
-            
-            UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeBigView:)];
-            [closeIcon addGestureRecognizer:_tap];
-            [self addSubview:closeIcon];
         }];
         
 

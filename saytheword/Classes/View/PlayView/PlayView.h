@@ -31,6 +31,9 @@
     UILabel *coinLabel;
     UIImageView *coinImageView;
     UIView *coinView;
+    NSTimer *timer;
+    int hintInternal;
+    UIButton *hintBtn;
     
     ADBannerView *adbanner;
     BOOL _bannerIsVisible;
@@ -50,5 +53,7 @@
 - (int)checkNumOfEmptyLabelInResultView;
 - (int)getIndexOfRevealLabel:(int)numOfEmptyLB;
 - (void)revealALetterFromController:(int)r;
+
+- (void)deactiveTimer;
 
 @end

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HintsView"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HintsView">
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Js-w6-DiT">
+                    <rect key="frame" x="159" y="250" width="450" height="480"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nLc-nW-7LC">
+                            <rect key="frame" x="0.0" y="0.0" width="450" height="64"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HINTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="poR-8h-4J9">
+                                    <rect key="frame" x="125" y="12" width="200" height="40"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                    <color key="textColor" red="0.1613373719" green="0.67615458780000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4u2-zi-3FI">
+                                    <rect key="frame" x="362" y="12" width="80" height="39"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                    <state key="normal" title="Cancel">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="closeBigView:" destination="iN0-l3-epB" eventType="touchUpInside" id="ECt-Z5-Yvw"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="0.89003011430000001" blue="0.12559783299999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rjG-3o-mRG" userLabel="View11">
+                            <rect key="frame" x="30" y="90" width="120" height="170"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="yellowIAP.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="zch-i4-Eop">
+                                    <rect key="frame" x="0.0" y="0.0" width="120" height="170"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Remove letters" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdi-gm-hmK">
+                                    <rect key="frame" x="0.0" y="120" width="120" height="30"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="199 Coins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HeR-wc-sj3">
+                                    <rect key="frame" x="15" y="150" width="90" height="20"/>
+                                    <color key="backgroundColor" red="1" green="0.89003011430000001" blue="0.12559783299999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="rmv_letter.png" translatesAutoresizingMaskIntoConstraints="NO" id="LSB-70-Mr6">
+                                    <rect key="frame" x="10" y="26" width="100" height="80"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.20887012590000001" green="0.41121598110000002" blue="0.46245216839999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <gestureRecognizers/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="gVC-xT-R19" appends="YES" id="h1a-yS-aci"/>
+                            </connections>
+                        </view>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="elc-Bq-CS0" userLabel="View12">
+                            <rect key="frame" x="165" y="90" width="120" height="170"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="yellowIAP.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="31Y-Y5-D8P">
+                                    <rect key="frame" x="0.0" y="0.0" width="120" height="170"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="199 Coins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGZ-gP-Nqf">
+                                    <rect key="frame" x="15" y="150" width="90" height="20"/>
+                                    <color key="backgroundColor" red="1" green="0.89003011430000001" blue="0.12559783299999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reveal letters" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyJ-d4-Ewi">
+                                    <rect key="frame" x="0.0" y="120" width="120" height="30"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="rvl_letter.png" translatesAutoresizingMaskIntoConstraints="NO" id="qBS-62-WoR">
+                                    <rect key="frame" x="10" y="10" width="100" height="100"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.20887012590000001" green="0.41121598110000002" blue="0.46245216839999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <gestureRecognizers/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="ZEJ-e0-ZUY" appends="YES" id="phf-Hd-V0p"/>
+                            </connections>
+                        </view>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Ls-2k-qYZ" userLabel="View13">
+                            <rect key="frame" x="300" y="90" width="120" height="170"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="yellowIAP.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Fqx-gN-tNE">
+                                    <rect key="frame" x="0.0" y="0.0" width="120" height="170"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="199 Coins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WnD-9D-jtB">
+                                    <rect key="frame" x="15" y="150" width="90" height="20"/>
+                                    <color key="backgroundColor" red="1" green="0.89003011430000001" blue="0.12559783299999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reveal left pic" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwd-9b-HOu">
+                                    <rect key="frame" x="0.0" y="120" width="120" height="30"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="revel_left_img.png" translatesAutoresizingMaskIntoConstraints="NO" id="QwB-dS-PIJ">
+                                    <rect key="frame" x="10" y="10" width="100" height="100"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.20887012590000001" green="0.41121598110000002" blue="0.46245216839999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <gestureRecognizers/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="CvN-J7-cb6" appends="YES" id="WSv-El-XqS"/>
+                            </connections>
+                        </view>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YEb-rf-a71" userLabel="View21">
+                            <rect key="frame" x="30" y="280" width="120" height="170"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="yellowIAP.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="TGF-Yw-ds3">
+                                    <rect key="frame" x="0.0" y="0.0" width="120" height="170"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="199 Coins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0q-J9-k6W">
+                                    <rect key="frame" x="15" y="150" width="90" height="20"/>
+                                    <color key="backgroundColor" red="1" green="0.89003011430000001" blue="0.12559783299999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reveal right pic" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MjZ-Sj-swa">
+                                    <rect key="frame" x="0.0" y="120" width="120" height="30"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="revel_right_img.png" translatesAutoresizingMaskIntoConstraints="NO" id="5dR-FX-UCV">
+                                    <rect key="frame" x="10" y="10" width="100" height="100"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.20887012590000001" green="0.41121598110000002" blue="0.46245216839999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <gestureRecognizers/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="KNS-JA-nyq" appends="YES" id="am3-bU-KS6"/>
+                            </connections>
+                        </view>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sgI-kw-sT1" userLabel="View22">
+                            <rect key="frame" x="165" y="280" width="120" height="170"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="yellowIAP.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="nqT-MI-tje">
+                                    <rect key="frame" x="0.0" y="0.0" width="120" height="170"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="199 Coins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDL-EZ-65H">
+                                    <rect key="frame" x="15" y="150" width="90" height="20"/>
+                                    <color key="backgroundColor" red="1" green="0.89003011430000001" blue="0.12559783299999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ask your friends" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rxW-t1-iie">
+                                    <rect key="frame" x="0.0" y="120" width="120" height="30"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fb_frd_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="BJd-PZ-GBu">
+                                    <rect key="frame" x="10" y="10" width="100" height="100"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.20887012590000001" green="0.41121598110000002" blue="0.46245216839999997" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VZf-Eb-Dq8" userLabel="View23">
+                            <rect key="frame" x="300" y="280" width="120" height="170"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="yellowIAP.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="1Ib-Vt-jfk">
+                                    <rect key="frame" x="0.0" y="0.0" width="120" height="170"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="199 Coins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGg-i8-zJh">
+                                    <rect key="frame" x="15" y="150" width="90" height="20"/>
+                                    <color key="backgroundColor" red="1" green="0.89003011430000001" blue="0.12559783299999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="More coins" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDM-Mq-Pxf">
+                                    <rect key="frame" x="0.0" y="120" width="120" height="30"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FREE COINS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Qk-qu-FEK">
+                                    <rect key="frame" x="10" y="10" width="100" height="100"/>
+                                    <color key="backgroundColor" red="0.78035315689999996" green="0.062363715610000002" blue="0.097309267640000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                    <color key="textColor" red="1" green="0.89003011430000001" blue="0.12559783299999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.20887012590000001" green="0.41121598110000002" blue="0.46245216839999997" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+            <connections>
+                <outlet property="askFriendIcon" destination="BJd-PZ-GBu" id="wuU-9z-TFW"/>
+                <outlet property="bigView" destination="6Js-w6-DiT" id="xet-rc-bkP"/>
+                <outlet property="coinView11" destination="HeR-wc-sj3" id="klC-kJ-x03"/>
+                <outlet property="coinView12" destination="WGZ-gP-Nqf" id="p5O-wG-RU0"/>
+                <outlet property="coinView13" destination="WnD-9D-jtB" id="K8P-1L-xO3"/>
+                <outlet property="coinView21" destination="P0q-J9-k6W" id="aAZ-cv-1Wa"/>
+                <outlet property="coinView22" destination="DDL-EZ-65H" id="6Ad-yQ-Osp"/>
+                <outlet property="coinView23" destination="lGg-i8-zJh" id="ESz-ct-OyC"/>
+                <outlet property="freeCoinIcon" destination="1Qk-qu-FEK" id="RTA-1d-kab"/>
+                <outlet property="view11" destination="rjG-3o-mRG" id="6E1-47-msk"/>
+                <outlet property="view12" destination="elc-Bq-CS0" id="GeP-Cp-2Oh"/>
+                <outlet property="view13" destination="4Ls-2k-qYZ" id="U7z-e8-QsC"/>
+                <outlet property="view21" destination="YEb-rf-a71" id="IZh-m6-4cG"/>
+                <outlet property="view22" destination="sgI-kw-sT1" id="3Pz-cu-fUU"/>
+                <outlet property="view23" destination="VZf-Eb-Dq8" id="nfr-nj-Og8"/>
+            </connections>
+            <point key="canvasLocation" x="92" y="125"/>
+        </view>
+        <tapGestureRecognizer id="gVC-xT-R19">
+            <connections>
+                <action selector="removeLetter:" destination="iN0-l3-epB" id="VKh-jI-498"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="ZEJ-e0-ZUY">
+            <connections>
+                <action selector="revealLetter:" destination="iN0-l3-epB" id="PNJ-4U-ZLV"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="CvN-J7-cb6">
+            <connections>
+                <action selector="showLeftTitle:" destination="iN0-l3-epB" id="5ds-UO-rW9"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="KNS-JA-nyq">
+            <connections>
+                <action selector="showRightTitle:" destination="iN0-l3-epB" id="AlW-Qj-oFg"/>
+            </connections>
+        </tapGestureRecognizer>
+        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="6N6-xa-ISy">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+        </imageView>
+    </objects>
+    <resources>
+        <image name="fb_frd_icon.png" width="100" height="100"/>
+        <image name="revel_left_img.png" width="100" height="100"/>
+        <image name="revel_right_img.png" width="100" height="100"/>
+        <image name="rmv_letter.png" width="100" height="80"/>
+        <image name="rvl_letter.png" width="100" height="100"/>
+        <image name="yellowIAP.jpg" width="300" height="300"/>
+    </resources>
+</document>

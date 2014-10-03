@@ -9,15 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "RootController.h"
 #import <FacebookSDK/FacebookSDK.h>
+@class IAPHelper;
 
 
 
 
-
-@interface AppDelegate : NSObject <UIApplicationDelegate, FBLoginViewDelegate >
+@interface AppDelegate : NSObject <UIApplicationDelegate, FBLoginViewDelegate, IAPHelperDelegate >
 {
     AVAudioPlayer *player;
     SystemSoundID fireWorkSound;
+    NSArray *listOfIAPs;
+    IAPHelper *iAPHelper;
+    
     
 }
 
@@ -32,6 +35,7 @@
 
 - (void)playFireworkSoud;
 
+- (NSArray *)getIAP;
 
 
 

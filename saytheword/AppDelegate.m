@@ -40,10 +40,46 @@
     AudioServicesPlaySystemSound(fireWorkSound);
 }
 
+#pragma mark In App Purchase Delegate
+
+- (void)afterTransaction
+{
+    // no need
+}
+- (void)dismissVC
+{
+    // no need
+}
+- (void)setListProducts:(NSArray *)listProducts
+{
+    listOfIAPs = [NSArray arrayWithArray:listProducts];
+}
+- (void)IAPFailed
+{
+    
+}
+
+- (void)requestIAP
+{
+    listOfIAPs = nil;
+    iAPHelper = [[IAPHelper alloc]init];
+    iAPHelper.delegate = self;
+    [iAPHelper loadStore];
+}
+
+- (NSArray *)getIAP
+{
+    return listOfIAPs;
+}
+
+
+
+#pragma mark default functions 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
+    [self requestIAP];
     [FBLoginView class];
 //    WordInfo *info = [[WordDatabase database] wordInfoWithLevel:6];
 //    NSLog(@"%d: %@, %@, %@",info.level, info.leftWord, info.rightWord, info.finalWord);

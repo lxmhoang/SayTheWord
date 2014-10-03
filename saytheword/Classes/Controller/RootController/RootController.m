@@ -131,7 +131,7 @@
 
 #pragma mark local method
 
-- (void)presentNewVCFromTheLeft:(UIViewController *)newVC
+- (void)presentNewVCFromTheLeft: (UIViewController *)newVC
 {
     
     [self addChildViewController:newVC];
@@ -141,6 +141,7 @@
 //    [newVC.view release];
 //    [newVC.view release];
     
+    
     [UIView animateWithDuration:kTimeToPresentVC animations:^{
         [fVC.view  setFrame:CGRectMake(+kWidthOfScreen, 0, kWidthOfScreen, kHeightOfScreen)];
         [newVC.view setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
@@ -148,7 +149,11 @@
         [fVC willMoveToParentViewController:nil];
         [fVC.view removeFromSuperview];
         [fVC removeFromParentViewController];
+        fVC.view = nil;
+        fVC = nil;
+        
         fVC = newVC;
+        
     }];
     
 }

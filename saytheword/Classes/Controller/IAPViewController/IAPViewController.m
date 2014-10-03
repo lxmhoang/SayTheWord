@@ -24,32 +24,59 @@
 @end
 
 @implementation IAPViewController
-@synthesize bigView, delegate, fbView;
+@synthesize bigView, delegate, fbView, cancelBtn;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.6];
+
     bigView.layer.cornerRadius = 15;
     bigView.clipsToBounds = YES;
-
-    iAPHelper = [[IAPHelper alloc]init];
-    iAPHelper.delegate = self;
-    
-//    [tableView setHidden:YES];
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [coinTableView addSubview:HUD];
-    coinTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    HUD.backgroundColor = [UIColor clearColor];
-    
-    HUD.delegate = self;
-//    HUD.labelText = @"Please Wait";
-    HUD.detailsLabelText = @"Connecting to App Store ....";
-//    HUD.square = YES;
-    [HUD show:YES];
-    //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
     
     storeModel = [[StoreModel alloc]init];
-    [iAPHelper loadStore];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if ([appDelegate getIAP])
+    {
+        [self bindIAPData:[appDelegate getIAP]];
+    }else
+    {
+        
+        iAPHelper = [[IAPHelper alloc]init];
+        iAPHelper.delegate = self;
+        cancelBtn.enabled = NO;
+        
+        HUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [coinTableView addSubview:HUD];
+        coinTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        HUD.delegate = self;
+        HUD.detailsLabelText = @"Connecting to App Store ....";
+        [HUD show:YES];
+        
+        [iAPHelper loadStore];
+    }
+    
+    int y = bigView.frame.origin.y;
+    
+    [bigView setFrame:CGRectMake(bigView.frame.origin.x, -bigView.frame.size.height, bigView.frame.size.width, bigView.frame.size.height)];
+    
+    int k = kCheckIfIphone ? 10 : 25;
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        
+        [bigView setFrame:CGRectMake(bigView.frame.origin.x, y + k, bigView.frame.size.width, bigView.frame.size.height)];
+    } completion:^(BOOL finished) {
+        
+        [UIView animateWithDuration:0.1 animations:^{
+                   [bigView setFrame:CGRectMake(bigView.frame.origin.x, y-k, bigView.frame.size.width, bigView.frame.size.height)];
+        } completion:^(BOOL finished) {
+        }];
+        
+        
+    }
+     ];
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -92,7 +119,6 @@
                         fb.title = kTitleOfFacebookLike;
                         fb.rewardCoin = [NSNumber numberWithInt:kRewardCoinsForLikingFB];
                         [optionsGetFreeCoin addObject:fb];
-                        [freeCoinTableView reloadData];
 
                     }
                     
@@ -128,6 +154,9 @@
     share.title = kTitleOfSharing;
     share.rewardCoin = [NSNumber numberWithInt:kRewardCoinsForSharingApp];
     [optionsGetFreeCoin addObject:share];
+    
+    
+    [freeCoinTableView reloadData];
     
 //    if (![CommonFunction getRateUS])
 //    {
@@ -199,6 +228,24 @@
     }];
 }
 
+- (void)bindIAPData:(NSArray *)productList
+{
+    maxScale = 0.001;
+    for (SKProduct *prod in productList)
+    {
+        
+        if ([self scaleOfProduct:prod]>maxScale)
+            maxScale = [self scaleOfProduct:prod];
+    }
+    [storeModel importData:productList];
+    
+    
+    
+    coinTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    [coinTableView reloadData];
+    cancelBtn.enabled = YES;
+}
+
 #pragma mark iaphelperDelegate
 
 - (void)IAPFailed{
@@ -227,20 +274,10 @@
 
 - (void)setListProducts:(NSArray *)listProducts
 {
-    maxScale = 0.001;
-    for (SKProduct *prod in listProducts)
-    {
-
-        if ([self scaleOfProduct:prod]>maxScale)
-            maxScale = [self scaleOfProduct:prod];
-    }
-    [storeModel importData:listProducts];
-//
     
     [HUD hide:YES];
+    [self bindIAPData:listProducts];
 
-    coinTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    [coinTableView reloadData];
 }
 
 #pragma  StoreView delegate method
@@ -329,7 +366,7 @@
             
         }
         
-        cell.priceLabel.layer.cornerRadius = 5;
+        cell.priceLabel.layer.cornerRadius = 10;
         cell.priceLabel.clipsToBounds = YES;
         if (indexPath.row >0)
         {
@@ -342,11 +379,14 @@
                 
                 )
             {
-                title = [NSString stringWithFormat:@"%@ + no ads", title];
+                cell.noAdsView.alpha = 1;
                 
             }else
             {
+                cell.noAdsView.alpha = 0;
             }
+            
+            title = [title stringByReplacingOccurrencesOfString:@"coins" withString:@"Coins"];
             
             
             NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
@@ -582,6 +622,9 @@
 
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
                             user:(id<FBGraphUser>)user {
+    NSString *str = [user objectForKey:@"link"];
+    [CommonFunction setFBLink:str];
+    
     // here we use helper properties of FBGraphUser to dot-through to first_name and
     // id properties of the json response from the server; alternatively we could use
     // NSDictionary methods such as objectForKey to get values from the my json object

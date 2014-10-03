@@ -12,7 +12,7 @@
 @implementation IAPTableViewCell
 
 - (void)awakeFromNib {
-    self.priceLabel.layer.cornerRadius = 15;
+//    self.priceLabel.layer.cornerRadius = 15;
     // Initialization code
 }
 

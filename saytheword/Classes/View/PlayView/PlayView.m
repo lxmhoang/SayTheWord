@@ -37,7 +37,8 @@
         if ([CommonFunction getRevealIndex]>-1){
             [self revealALetterFromController:[CommonFunction getRevealIndex]];
         }
-        
+        hintInternal = 2;
+        [self performSelector:@selector(after10s) withObject:self afterDelay:2];
         
         
     }
@@ -46,6 +47,36 @@
 
     
     return self;
+}
+
+- (void)after10s
+{
+    timer = [NSTimer scheduledTimerWithTimeInterval:hintInternal target:self selector:@selector(hintJump) userInfo:nil repeats:YES];
+
+}
+
+- (void)hintJump
+{
+    int k = hintBtn.frame.size.width / 3;
+//    NSLog(@"hint Jump!!");
+    [UIView animateWithDuration:0.1 animations:^{
+        [hintBtn setFrame:CGRectOffset(hintBtn.frame, 0, -k)];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.1 animations:^{
+            [hintBtn setFrame:CGRectOffset(hintBtn.frame, 0, k)];
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.1 animations:^{
+                [hintBtn setFrame:CGRectOffset(hintBtn.frame, 0, -k)];
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.1 animations:^{
+                    [hintBtn setFrame:CGRectOffset(hintBtn.frame, 0, k)];
+                } completion:^(BOOL finished) {
+//                    NSLog(@"done");
+                }];
+            }];
+        }];
+    }];
+    
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -249,11 +280,11 @@
     int sizeOfCharInTypingView = kCheckIfIphone ? 48 : 96;
     int yOfCharInTypingView = kCheckIfIphone ? 15:30;
     
-    UIButton *hintBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    hintBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     int y = yOfTypingView;
     [hintBtn setFrame:CGRectMake(paddingInTypingView, y+yOfCharInTypingView, sizeOfCharInTypingView, sizeOfCharInTypingView)];
     [hintBtn setBackgroundImage:[UIImage imageNamed:@"hint.png"] forState:UIControlStateNormal];
-    [hintBtn addTarget:delegate action:@selector(hintBtnTapped) forControlEvents:UIControlEventTouchUpInside];
+    [hintBtn addTarget:self action:@selector(hintBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [hintBtn setTag:kTagOfHintButton];
     
     [self addSubview:hintBtn];
@@ -269,6 +300,14 @@
 }
 
 #pragma mark Handle Gestured
+
+- (void)hintBtnAction
+{
+    hintInternal = hintInternal * 2;
+    [timer invalidate];
+    [self after10s];
+    [delegate hintBtnTapped];
+}
 
 - (void)willRemoveTextOfAnswerView:(UITapGestureRecognizer *)_sender
 {
@@ -596,6 +635,11 @@
     NSLog(@"Failed to retrieve ad");
 }
 
+- (void)deactiveTimer
+{
+    [timer invalidate];
+    timer = nil;
+}
 
 
 /*
@@ -606,4 +650,7 @@
     // Drawing code
 }
 */
+
+
+
 @end

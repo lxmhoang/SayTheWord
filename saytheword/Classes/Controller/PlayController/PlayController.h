@@ -30,7 +30,7 @@
 
 @property (nonatomic, strong) IAPViewController *iapVC;
 @property (nonatomic, strong) PlayModel *playModel;
-@property (nonatomic, strong) PlayView *playView;
+@property (nonatomic, assign) PlayView *playView;
 @property (nonatomic, unsafe_unretained) id delegate;
 
 -(id)initWithPosition:(int)_pos;
