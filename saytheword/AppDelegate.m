@@ -44,7 +44,13 @@
 
 - (void)afterTransaction
 {
-    // no need
+    for (id vc in rootController.childViewControllers)
+    {
+        if ([vc respondsToSelector:@selector(updateCoininVIew)])
+        {
+            [vc updateCoininVIew];
+        }
+    }
 }
 - (void)dismissVC
 {
@@ -64,6 +70,7 @@
     listOfIAPs = nil;
     iAPHelper = [[IAPHelper alloc]init];
     iAPHelper.delegate = self;
+//    [iAPHelper performSelector:@selector(loadStore) withObject:nil afterDelay:3.0f];
     [iAPHelper loadStore];
 }
 
@@ -73,8 +80,32 @@
 }
 
 
+- (void)checkFBLike
+{
+    if (FBSession.activeSession.isOpen)
+    {
+        [FBRequestConnection startWithGraphPath:@"/me/likes/172415879600587" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+            if (error)
+            {
+                
+                
+            } else {
+                if ([[result objectForKey:@"data"] count]>0)
+                {
+                    [CommonFunction setLikeFanPage:YES];
+                }else{
+                    
+                }
+            }
+        }];
+    }else
+    {
 
-#pragma mark default functions 
+    }
+}
+
+
+#pragma mark default functions
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -169,6 +200,7 @@
         [CommonFunction setRateUs:2];
     }
     
+    
     if (FBSession.activeSession.isOpen)
     {
         [FBRequestConnection startWithGraphPath:@"/me/likes/172415879600587" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -239,14 +271,14 @@
         
     }else         if ([[NSDate date] compare:[[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]]]==NSOrderedDescending)
     {
-        NSDate *dateToUpdate = [[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]];
-        NSString *str222 = [NSString stringWithFormat:@"WILL update \n, current time : %@ , \n last update : %@, \n time until next update : %d  ,\n  time to update : %@", [NSDate date], [CommonFunction getLastUpdateInfo], [[CommonFunction gettimeBetweenUpdate] intValue], dateToUpdate];
+//        NSDate *dateToUpdate = [[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]];
+//        NSString *str222 = [NSString stringWithFormat:@"WILL update \n, current time : %@ , \n last update : %@, \n time until next update : %d  ,\n  time to update : %@", [NSDate date], [CommonFunction getLastUpdateInfo], [[CommonFunction gettimeBetweenUpdate] intValue], dateToUpdate];
 //        [CommonFunction alert:str222 delegate:nil];
 //        [CommonFunction alert:@"long enough, let's update" delegate:nil];
         PFQuery *query = [PFQuery queryWithClassName:@"Installation"];
         
         [query whereKey:@"deviceToken" equalTo:str];
-        NSLog(@"device token searching for : %@",str);
+//        NSLog(@"device token searching for : %@",str);
         query.cachePolicy = kPFCachePolicyNetworkElseCache;
         
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -269,8 +301,8 @@
     }else
     {
         
-        NSDate *dateToUpdate = [[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]];
-        NSString *str = [NSString stringWithFormat:@"no update \n, current time : %@ , \n last update : %@, \n time until next update : %d  ,\n  time to update : %@", [NSDate date], [CommonFunction getLastUpdateInfo], [[CommonFunction gettimeBetweenUpdate] intValue], dateToUpdate];
+//        NSDate *dateToUpdate = [[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]];
+//        NSString *str = [NSString stringWithFormat:@"no update \n, current time : %@ , \n last update : %@, \n time until next update : %d  ,\n  time to update : %@", [NSDate date], [CommonFunction getLastUpdateInfo], [[CommonFunction gettimeBetweenUpdate] intValue], dateToUpdate];
 //        [CommonFunction alert:str delegate:nil];
     }
     

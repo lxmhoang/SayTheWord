@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "PlayModel.h"
 #import "PlayView.h"
-#import "StoreController.h"
 //#import "HintView.h"
 #import "HintsView.h"
 #import <FacebookSDK/FacebookSDK.h>
@@ -26,11 +25,11 @@
 
 @end
 
-@interface PlayController : UIViewController <PlayViewProtocol, StoreControllerDelegate, HintsViewDelegate, UIAlertViewDelegate, FBLoginViewDelegate, IAPControllerDelegate>
+@interface PlayController : UIViewController <PlayViewProtocol, HintsViewDelegate, UIAlertViewDelegate, FBLoginViewDelegate, IAPControllerDelegate>
 
 @property (nonatomic, strong) IAPViewController *iapVC;
 @property (nonatomic, strong) PlayModel *playModel;
-@property (nonatomic, assign) PlayView *playView;
+@property (nonatomic, strong) PlayView *playView;
 @property (nonatomic, unsafe_unretained) id delegate;
 
 -(id)initWithPosition:(int)_pos;

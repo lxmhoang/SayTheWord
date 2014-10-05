@@ -13,8 +13,6 @@
 #import "WinController.h"
 #import <AVFoundation/AVFoundation.h>
 
-#import "SettingViewController.h"
-
 #import "SparklesViewController.h"  
 
 #import "HowToPlayViewController.h"
@@ -23,7 +21,7 @@
 
 
 
-@interface RootController : UIViewController<MenuControllerProtocol, PlayControllerProtocol, WinControllerProtocol, SettingControllerProtocol,UIAlertViewDelegate, HowToControllerProtocol>
+@interface RootController : UIViewController<MenuControllerProtocol, PlayControllerProtocol, WinControllerProtocol, UIAlertViewDelegate, HowToControllerProtocol>
 {
 }
 

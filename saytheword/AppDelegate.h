@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "RootController.h"
-#import <FacebookSDK/FacebookSDK.h>
+//#import <FacebookSDK
+
 @class IAPHelper;
 
 

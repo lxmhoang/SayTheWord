@@ -38,7 +38,7 @@
             [self revealALetterFromController:[CommonFunction getRevealIndex]];
         }
         hintInternal = 2;
-        [self performSelector:@selector(after10s) withObject:self afterDelay:2];
+        [self performSelector:@selector(after10s) withObject:self afterDelay:10];
         
         
     }
@@ -57,8 +57,7 @@
 
 - (void)hintJump
 {
-    int k = hintBtn.frame.size.width / 3;
-//    NSLog(@"hint Jump!!");
+    int k = hintBtn.frame.size.width / 3;\
     [UIView animateWithDuration:0.1 animations:^{
         [hintBtn setFrame:CGRectOffset(hintBtn.frame, 0, -k)];
     } completion:^(BOOL finished) {
@@ -519,7 +518,7 @@
     }
     
     int r = arc4random()%[listOfRemoveableChar count];
-    NSLog(@"num of removable char : %d %d",[listOfRemoveableChar count],r);
+//    NSLog(@"num of removable char : %lu %d",(unsigned long)[listOfRemoveableChar count],r);
     InputButtonView *willBeRemoveBtn = [listOfRemoveableChar objectAtIndex:r];
     [CommonFunction setRemoveIndex:(willBeRemoveBtn.tagg-kRandomNumber)];
 //    [playModel removeCharInDB:willBeRemoveBtn.tagg];

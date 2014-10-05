@@ -68,7 +68,7 @@
     
     RootController *rootController = (RootController *)[CommonFunction getRootController];
     
-    AnswerView *aV = (AnswerView *)[rootController.view viewWithTag:kTagOfCopyAnswerView];    
+    AnswerView *aV = (AnswerView *)[rootController.view viewWithTag:kTagOfCopyAnswerView];
     UIView *leftViewTitle = [rootController.view viewWithTag:kTagOfLeftTitle];
     UIView *rightViewTitle = [rootController.view viewWithTag:kTagOfRightTitle];
     
@@ -107,7 +107,7 @@
     int fontSize = kCheckIfIphone ? 22 : 35;
     
     UILabel *congratLB = [[UILabel alloc] initWithFrame:CGRectMake(0, yOfCongrat, kWidthOfScreen, 60)];
-    congratLB.text = [[NSString stringWithFormat:@"You got %d coins",playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter] uppercaseString];
+    congratLB.text = [[NSString stringWithFormat:@"You got %lu coins",playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter] uppercaseString];
     [congratLB setFont:[UIFont fontWithName:@"Arial-BoldMT" size:fontSize]];
     congratLB.alpha = 0;
     [congratLB setTextAlignment:NSTextAlignmentCenter];
@@ -127,11 +127,11 @@
         for (int i=0;i<playModel.wordInfo.finalWord.length;i++)
         {
             UIImageView *t = [listCoins objectAtIndex:i];
-            [UIView animateWithDuration:1 delay:0.15*(playModel.wordInfo.finalWord.length-i) options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [UIView animateWithDuration:0.6 delay:0.1*(playModel.wordInfo.finalWord.length-i) options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 int x = [aV viewWithTag:(i+kRandomNumber)].frame.origin.x;
                 [t setFrame:CGRectMake(x, yOfCoins, sizeOfCoins, sizeOfCoins)];
             } completion:^(BOOL finished) {
-                NSLog(@"i=%d",i);
+//                NSLog(@"i=%d",i);
                 if (i==0){
                     [UIView animateWithDuration:1.0 animations:^{
                         congratLB.alpha = 1;
@@ -196,10 +196,10 @@
     
     if (!tapped)
     {
-        [CommonFunction setCoin:[CommonFunction getCoin]+playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter];
+        [CommonFunction setCoin:[CommonFunction getCoin]+(int)playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter];
         tapped = YES;
         for (int i=0;i<[listCoins count];i++){
-            [UIView animateWithDuration:1.0 delay:(playModel.wordInfo.finalWord.length-i)*0.3 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            [UIView animateWithDuration:0.6 delay:(playModel.wordInfo.finalWord.length-i)*0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
                 UIView *coin = [listCoins objectAtIndex:i];
                 [coin setFrame:CGRectMake(kWidthOfScreen + coin.frame.size.width, -coin.frame.size.height, coin.frame.size.width, coin.frame.size.height)];
             } completion:^(BOOL finished) {

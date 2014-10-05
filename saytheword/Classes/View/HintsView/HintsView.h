@@ -18,17 +18,20 @@
 - (void)revealALetterFromHintsView;
 - (void)revealLeftWordFromHintsView;
 - (void)revealRightWordFromHintsView;
-- (void)revealAnswerWordFromHintsView;
 
 @end
 
-@interface HintsView : UIView  
+@interface HintsView : UIView <UICollectionViewDelegate, UICollectionViewDataSource>
 {
+    NSMutableArray *optionsGetFreeCoin;
+    int maxFreeCoin;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *bigView;
+@property (strong, nonatomic) IBOutlet UICollectionView *freeCoinCollectionView;
 
 @property (nonatomic, unsafe_unretained)  id<HintsViewDelegate> delegate;
+@property (strong, nonatomic) IBOutlet UIView *fbView;
 @property (strong, nonatomic) IBOutlet UIView *view11;
 @property (strong, nonatomic) IBOutlet UIView *view12;
 @property (strong, nonatomic) IBOutlet UIView *view13;
@@ -40,7 +43,9 @@
 @property (strong, nonatomic) IBOutlet UIImageView *askFriendIcon;
 @property (strong, nonatomic) IBOutlet UILabel *freeCoinIcon;
 
-@property (strong, nonatomic) IBOutlet UIView *coinView11,*coinView12,*coinView13,*coinView21,*coinView22,*coinView23;
+@property (strong, nonatomic) IBOutlet UILabel *coinView11,*coinView12,*coinView13,*coinView21,*coinView22,*coinView23;
+@property (strong, nonatomic) IBOutlet UIView *bodyView;
+@property (strong, nonatomic) IBOutlet UIButton *backBtn;
 
 - (IBAction)closeBigView:(id)sender;
 
@@ -48,6 +53,7 @@
 
 - (void)setUp;
 
+- (IBAction)backBtnAction:(id)sender;
 
 - (IBAction)removeLetter:(UITapGestureRecognizer *)_sender;
 
@@ -57,6 +63,10 @@
 
 - (IBAction)showRightTitle:(UITapGestureRecognizer *)_sender;
 
+- (IBAction)askFriendAction:(id)sender;
+
+
+- (IBAction)freeCoinAction:(id)sender;
 
 
 

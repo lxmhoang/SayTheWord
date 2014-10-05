@@ -58,7 +58,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"root view appear !!!!");
 
 }
 

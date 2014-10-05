@@ -57,11 +57,6 @@
     [iapVC didMoveToParentViewController:rootVC];
     [rootVC.view addSubview:iapVC.view];
     
-//    StoreController *storeController = [[StoreController alloc]init];
-//    storeController.delegate = self;
-//    [self addChildViewController:storeController];
-//    
-//    [self.view addSubview:storeController.view];
     
 }
 
@@ -167,9 +162,9 @@
         return;
     }
     
-    if ([CommonFunction getCoin]>=kPriceOfRemoveLetter){
+    if ([CommonFunction getCoin]>=[CommonFunction getPriceOfRemovingLetter]){
         [CommonFunction setCanRemoveALetter:NO];
-        [CommonFunction setCoin:([CommonFunction getCoin]-kPriceOfRemoveLetter)];
+        [CommonFunction setCoin:([CommonFunction getCoin]-[CommonFunction getPriceOfRemovingLetter])];
         [self updateCoininVIew];
         [self removeALetter];
         
@@ -204,8 +199,8 @@
 
 - (void)revealLeftWordFromHintsView
 {
-    if ([CommonFunction getCoin]>=kPriceOfLeftTitle){
-        [CommonFunction setCoin:([CommonFunction getCoin]-kPriceOfLeftTitle)];
+    if ([CommonFunction getCoin]>=[CommonFunction getPriceOfRevealingLeftPic]){
+        [CommonFunction setCoin:([CommonFunction getCoin]-[CommonFunction getPriceOfRevealingLeftPic])];
         
         [self updateCoininVIew];
         [CommonFunction setShowLeftTitle:YES];
@@ -227,8 +222,8 @@
 
 - (void)revealRightWordFromHintsView
 {
-    if ([CommonFunction getCoin]>=kPriceOfRightTitle){
-        [CommonFunction setCoin:([CommonFunction getCoin]-kPriceOfRightTitle)];
+    if ([CommonFunction getCoin]>=[CommonFunction getPriceOfRevealingRightPic]){
+        [CommonFunction setCoin:([CommonFunction getCoin]-[CommonFunction getPriceOfRevealingRightPic])];
         
         [self updateCoininVIew];
         [CommonFunction setShowRightTitle:YES];
@@ -242,29 +237,6 @@
                 
             }
         }
-    }else{
-        [self coinViewTappedFromPlayView];
-    }
-}
-
-- (void)revealAnswerWordFromHintsView
-{
-    if ([CommonFunction getCoin]>=kPriceOfAnswerTitle){
-        [CommonFunction setCoin:([CommonFunction getCoin]-kPriceOfAnswerTitle)];
-        
-        [self updateCoininVIew];
-        [CommonFunction setShowAnswer:YES];
-        [[playView viewWithTag:kTagOfAnswerTitle] setHidden:NO];
-        
-        for (UIView *tmp in self.view.subviews){
-            if ([tmp isKindOfClass:[HintsView class]])
-            {
-                [tmp removeFromSuperview];
-                break;
-                
-            }
-        }
-        
     }else{
         [self coinViewTappedFromPlayView];
     }
@@ -331,7 +303,7 @@
 {
     
     if (buttonIndex==1){
-        NSLog(@"button pressed : %d", buttonIndex);
+        NSLog(@"button pressed : %ld", (long)buttonIndex);
         [self coinViewTappedFromPlayView];
     }
 }

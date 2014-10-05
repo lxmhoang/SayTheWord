@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -10,9 +9,9 @@
                 <outlet property="backBtn" destination="V1t-wH-w5V" id="Kxa-Se-eqN"/>
                 <outlet property="bigView" destination="ngp-6m-ii7" id="o7Z-Y3-e1g"/>
                 <outlet property="cancelBtn" destination="mob-aM-mRW" id="VNJ-rI-tyw"/>
-                <outlet property="coinTableView" destination="6aN-JN-LRE" id="hnY-S9-XeN"/>
                 <outlet property="fbView" destination="j0W-Rw-EmB" id="qhR-Sj-JVW"/>
-                <outlet property="freeCoinTableView" destination="L0p-SD-YHj" id="bIO-xg-ray"/>
+                <outlet property="freecoinCollectionView" destination="TD9-QX-kaP" id="71X-2x-Xsg"/>
+                <outlet property="iapCollectionView" destination="ta8-r7-vga" id="VzM-im-j3j"/>
                 <outlet property="view" destination="Ala-nF-MD0" id="39w-cz-dqh"/>
             </connections>
         </placeholder>
@@ -22,39 +21,28 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ngp-6m-ii7">
-                    <rect key="frame" x="84" y="200" width="600" height="632"/>
+                    <rect key="frame" x="109" y="200" width="550" height="574"/>
                     <subviews>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RUM-ca-Cn1">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+                            <rect key="frame" x="0.0" y="0.0" width="550" height="80"/>
                             <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gradient_yellow.png" translatesAutoresizingMaskIntoConstraints="NO" id="mN1-IH-003">
+                                    <rect key="frame" x="0.0" y="0.0" width="550" height="80"/>
+                                </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="COINS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FyX-Xw-PO2">
-                                    <rect key="frame" x="200" y="15" width="200" height="50"/>
+                                    <rect key="frame" x="175" y="15" width="200" height="50"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
-                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="1" green="0.157790346" blue="0.19821780389999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
                                         <rect key="frame" x="204" y="16" width="196" height="48"/>
                                     </variation>
                                 </label>
-                                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1t-wH-w5V">
-                                    <rect key="frame" x="20" y="10" width="100" height="60"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                    <state key="normal" title="BACK">
-                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                        <rect key="frame" x="26" y="10" width="96" height="30"/>
-                                    </variation>
-                                    <connections>
-                                        <action selector="backBtnAction:" destination="-1" eventType="touchUpInside" id="HOa-t0-Spj"/>
-                                    </connections>
-                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mob-aM-mRW">
-                                    <rect key="frame" x="481" y="10" width="100" height="60"/>
+                                    <rect key="frame" x="421" y="10" width="100" height="60"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                     <state key="normal" title="CANCEL">
-                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" red="1" green="0.157790346" blue="0.19821780389999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
@@ -64,36 +52,57 @@
                                         <action selector="cancelBtnAction:" destination="-1" eventType="touchUpInside" id="oaA-ep-kg1"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1t-wH-w5V">
+                                    <rect key="frame" x="24" y="10" width="100" height="60"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                    <state key="normal" title="BACK">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                        <rect key="frame" x="26" y="10" width="96" height="30"/>
+                                    </variation>
+                                    <connections>
+                                        <action selector="backBtnAction:" destination="-1" eventType="touchUpInside" id="HOa-t0-Spj"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="1" green="0.89003011430000001" blue="0.12559783299999999" alpha="1" colorSpace="calibratedRGB"/>
                             <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
                             </variation>
                         </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6aN-JN-LRE">
-                            <rect key="frame" x="0.0" y="80" width="600" height="526"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                <rect key="frame" x="0.0" y="80" width="600" height="552"/>
-                            </variation>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ta8-r7-vga" userLabel="IAP Collection View">
+                            <rect key="frame" x="0.0" y="80" width="550" height="494"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <inset key="scrollIndicatorInsets" minX="69" minY="34" maxX="30" maxY="30"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="fa0-9O-ZKD">
+                                <size key="itemSize" width="150" height="212"/>
+                                <size key="headerReferenceSize" width="0.0" height="25"/>
+                                <size key="footerReferenceSize" width="0.0" height="25"/>
+                                <inset key="sectionInset" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
+                            </collectionViewFlowLayout>
                             <connections>
-                                <outlet property="dataSource" destination="-1" id="3uB-Ky-xvq"/>
-                                <outlet property="delegate" destination="-1" id="jam-XB-ZdH"/>
+                                <outlet property="dataSource" destination="-1" id="gci-Be-9Rf"/>
+                                <outlet property="delegate" destination="-1" id="p9Z-KE-1Cg"/>
                             </connections>
-                        </tableView>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="L0p-SD-YHj">
-                            <rect key="frame" x="600" y="80" width="600" height="526"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                <rect key="frame" x="600" y="80" width="600" height="552"/>
-                            </variation>
+                        </collectionView>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="TD9-QX-kaP" userLabel="FreeCoin Collection View">
+                            <rect key="frame" x="550" y="80" width="550" height="494"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <inset key="scrollIndicatorInsets" minX="69" minY="34" maxX="30" maxY="30"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="OoT-nN-2vb">
+                                <size key="itemSize" width="150" height="212"/>
+                                <size key="headerReferenceSize" width="0.0" height="25"/>
+                                <size key="footerReferenceSize" width="0.0" height="25"/>
+                                <inset key="sectionInset" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
+                            </collectionViewFlowLayout>
                             <connections>
-                                <outlet property="dataSource" destination="-1" id="yoo-n3-r06"/>
-                                <outlet property="delegate" destination="-1" id="Ey3-uF-nog"/>
+                                <outlet property="dataSource" destination="-1" id="NFL-x8-KsL"/>
+                                <outlet property="delegate" destination="-1" id="tfc-to-aW5"/>
                             </connections>
-                        </tableView>
+                        </collectionView>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j0W-Rw-EmB">
-                            <rect key="frame" x="1200" y="80" width="600" height="526"/>
+                            <rect key="frame" x="1100" y="80" width="600" height="526"/>
                             <subviews>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vfv-So-W2f" customClass="FBLoginView">
                                     <rect key="frame" x="150" y="200" width="300" height="150"/>
@@ -106,13 +115,13 @@
                                     </connections>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
                                 <rect key="frame" x="1200" y="80" width="600" height="552"/>
                             </variation>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
                         <rect key="frame" x="84" y="300" width="600" height="632"/>
                     </variation>
@@ -125,4 +134,7 @@
             <point key="canvasLocation" x="241" y="251"/>
         </view>
     </objects>
+    <resources>
+        <image name="gradient_yellow.png" width="550" height="80"/>
+    </resources>
 </document>

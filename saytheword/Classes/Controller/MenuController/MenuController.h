@@ -10,7 +10,6 @@
 
 #import "MenuView.h"
 #import "MenuModel.h"
-#import "StoreController.h"
 #import "IAPViewController.h"
 
 @protocol MenuControllerProtocol <NSObject>

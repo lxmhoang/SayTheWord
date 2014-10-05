@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "MenuModel.h"
 #import <QuartzCore/QuartzCore.h>
-#import "GradientButton.h"
 
 #import <iAd/iAd.h>
 

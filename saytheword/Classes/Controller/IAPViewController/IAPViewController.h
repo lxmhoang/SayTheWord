@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 #import <FacebookSDK/FacebookSDK.h>
-@class MBProgressHUD, IAPHelper, StoreModel;
+#import "IAPHelper.h"
+#import "MBProgressHUD.h"
+@class StoreModel;
+
 @protocol IAPControllerDelegate <NSObject>
 
 - (void)updateCoininVIew;
@@ -17,18 +20,21 @@
 
 @end
 
-@interface IAPViewController : UIViewController <IAPHelperDelegate, MBProgressHUDDelegate, UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate, FBLoginViewDelegate>
+@interface IAPViewController : UIViewController <IAPHelperDelegate, MBProgressHUDDelegate, UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate, FBLoginViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 {
     IBOutlet UITableView *coinTableView;
     IBOutlet UITableView *freeCoinTableView;
+    IBOutlet UICollectionView *iapCollectionView;
+    IBOutlet UICollectionView *freecoinCollectionView;
     StoreModel *storeModel;
     MBProgressHUD *HUD;
     IAPHelper *iAPHelper;
     float maxScale;
     NSMutableArray *optionsGetFreeCoin;
+    
+    BOOL finishAnimation, finishLoadProducts;
 }
 @property (strong, nonatomic) IBOutlet UIButton *cancelBtn;
-
 @property (strong, nonatomic) IBOutlet UIButton *backBtn;
 @property (nonatomic, unsafe_unretained) id <IAPControllerDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UIView *bigView;

@@ -262,7 +262,7 @@
         return;
     if (index>tappedLabel.tag-kRandomNumber)
     {
-        [self setNewIndex:tappedLabel.tag-kRandomNumber];
+        [self setNewIndex:(int)tappedLabel.tag-kRandomNumber];
     }
     [delegate tapToTextFromAnswerView:tappedLabel.text];
     CGRect oldFrame = tappedLabel.frame;

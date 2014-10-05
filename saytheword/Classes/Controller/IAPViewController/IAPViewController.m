@@ -10,9 +10,15 @@
 #import "MBProgressHUD.h"
 #import "IAPHelper.h"
 #import "IAPTableViewCell.h"
+#import "StoreModel.h"
+
+#import "IAPCollectionViewCell.h"
 
 #import "FreeCoinTableViewCell.h"
+#import "FreecoinCollectionViewCell.h"
 #import "FreeCoinModel.h"
+
+#import "ApActivityData.h"
 
 #define CASE(str)                       if ([__s__ isEqualToString:(str)])
 #define SWITCH(s)                       for (NSString *__s__ = (s); ; )
@@ -29,31 +35,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSString *nibName = kCheckIfIphone ? @"IAPCollectionViewCell" : @"IAPCollectionViewCell_iPad";
+    
+    UINib *cellNib = [UINib nibWithNibName:nibName bundle:nil];
+    [iapCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"IAPCell"];
+    cellNib = [UINib nibWithNibName:@"FreecoinCollectionViewCell" bundle:nil];
+    [freecoinCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"FreeCoinCell"];
+    
     self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.6];
+    bigView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.7];
 
     bigView.layer.cornerRadius = 15;
     bigView.clipsToBounds = YES;
+    bigView.layer.borderWidth = 2;
+    bigView.layer.borderColor = [[UIColor yellowColor] CGColor];
     
     storeModel = [[StoreModel alloc]init];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    if ([appDelegate getIAP])
+    NSArray *arr = [appDelegate getIAP];
+    if (arr && arr.count>0)
     {
         [self bindIAPData:[appDelegate getIAP]];
     }else
     {
+        NSLog(@"bitch");
         
         iAPHelper = [[IAPHelper alloc]init];
         iAPHelper.delegate = self;
         cancelBtn.enabled = NO;
         
         HUD = [[MBProgressHUD alloc] initWithView:self.view];
-        [coinTableView addSubview:HUD];
-        coinTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [iapCollectionView addSubview:HUD];
         
         HUD.delegate = self;
         HUD.detailsLabelText = @"Connecting to App Store ....";
-        [HUD show:YES];
+        [HUD hide:YES];
         
         [iAPHelper loadStore];
     }
@@ -64,6 +80,7 @@
     
     int k = kCheckIfIphone ? 10 : 25;
     
+//    [bigView setFrame:CGRectMake(bigView.frame.origin.x, y + k, bigView.frame.size.width, bigView.frame.size.height)];
     [UIView animateWithDuration:0.2 animations:^{
         
         [bigView setFrame:CGRectMake(bigView.frame.origin.x, y + k, bigView.frame.size.width, bigView.frame.size.height)];
@@ -84,61 +101,16 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self createOptionGetFreeCoin];
-    [freeCoinTableView reloadData];
-}
+    
+    [freecoinCollectionView reloadData];
 
+}
 
 - (void)createOptionGetFreeCoin
 {
     
-
-    
     optionsGetFreeCoin = [[NSMutableArray alloc] init];
-    if (![CommonFunction getLikeFanPage])
-    {
-        if (FBSession.activeSession.isOpen)
-        {
-            [FBRequestConnection startWithGraphPath:@"/me/likes/172415879600587" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                if (error)
-                {
-                    FreeCoinModel *fb = [[FreeCoinModel alloc] init];
-                    
-                    fb.imgName = @"fblike.png";
-                    fb.title = kTitleOfFacebookLike;
-                    fb.rewardCoin = [NSNumber numberWithInt:kRewardCoinsForLikingFB];
-                    [optionsGetFreeCoin addObject:fb];
-
-                } else {
-                    if ([[result objectForKey:@"data"] count]>0)
-                    {
-                        [CommonFunction setLikeFanPage:YES];
-                    }else{
-                        FreeCoinModel *fb = [[FreeCoinModel alloc] init];
-                        
-                        fb.imgName = @"fblike.png";
-                        fb.title = kTitleOfFacebookLike;
-                        fb.rewardCoin = [NSNumber numberWithInt:kRewardCoinsForLikingFB];
-                        [optionsGetFreeCoin addObject:fb];
-
-                    }
-                    
-                    
-                    NSLog(@"FB_LIKES: %@:", result);
-                }
-            }];
-        }else
-        {
-            FreeCoinModel *fb = [[FreeCoinModel alloc] init];
-            
-            fb.imgName = @"fblike.png";
-            fb.title = kTitleOfFacebookLike;
-            fb.rewardCoin = [NSNumber numberWithInt:kRewardCoinsForLikingFB];
-            [optionsGetFreeCoin addObject:fb];
-        }
-    }else
-    {
-        // do nothing
-    }
+    
     
     if ([CommonFunction checkIfRateForCoin] && [CommonFunction getRateUS] == 0)
     {
@@ -155,18 +127,18 @@
     share.rewardCoin = [NSNumber numberWithInt:kRewardCoinsForSharingApp];
     [optionsGetFreeCoin addObject:share];
     
+    if (![CommonFunction getLikeFanPage])
+    {
+        FreeCoinModel *fb = [[FreeCoinModel alloc] init];
+        
+        fb.imgName = @"fblike.png";
+        fb.title = kTitleOfFacebookLike;
+        fb.rewardCoin = [NSNumber numberWithInt:kRewardCoinsForLikingFB];
+        [optionsGetFreeCoin addObject:fb];
+    }
+
     
-    [freeCoinTableView reloadData];
-    
-//    if (![CommonFunction getRateUS])
-//    {
-//        FreeCoinModel *rate = [[FreeCoinModel alloc] init];
-//        rate.imgName = @"share.png";
-//        rate.title = kTitleOfRating;
-//        rate.rewardCoin = [NSNumber numberWithInt:kRewardCoinsForRatingApp];
-//        [optionsGetFreeCoin addObject:rate];
-//        [rate release];
-//    }
+
 }
 
 
@@ -210,11 +182,11 @@
 }
 
 - (IBAction)backBtnAction:(id)sender {
-    BOOL hideBackBtn = (coinTableView.frame.origin.x == -coinTableView.frame.size.width) ? YES : NO;
+    BOOL hideBackBtn = (iapCollectionView.frame.origin.x == -iapCollectionView.frame.size.width) ? YES : NO;
     [UIView animateWithDuration:0.3 animations:^{
-        [coinTableView setFrame:CGRectOffset(coinTableView.frame, +coinTableView.frame.size.width, 0)];
-        [freeCoinTableView setFrame:CGRectOffset(freeCoinTableView.frame, +coinTableView.frame.size.width, 0)];
-        [fbView setFrame:CGRectOffset(freeCoinTableView.frame, +coinTableView.frame.size.width, 0)];
+        [iapCollectionView setFrame:CGRectOffset(iapCollectionView.frame, +iapCollectionView.frame.size.width, 0)];
+        [freecoinCollectionView setFrame:CGRectOffset(freecoinCollectionView.frame, +iapCollectionView.frame.size.width, 0)];
+        [fbView setFrame:CGRectOffset(fbView.frame, +iapCollectionView.frame.size.width, 0)];
         
         if (hideBackBtn)
         {
@@ -230,6 +202,7 @@
 
 - (void)bindIAPData:(NSArray *)productList
 {
+    storeModel = [[StoreModel alloc] init];
     maxScale = 0.001;
     for (SKProduct *prod in productList)
     {
@@ -238,11 +211,10 @@
             maxScale = [self scaleOfProduct:prod];
     }
     [storeModel importData:productList];
-    
-    
-    
-    coinTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    [coinTableView reloadData];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"shit");
+        [iapCollectionView reloadData];
+//    });
     cancelBtn.enabled = YES;
 }
 
@@ -274,10 +246,14 @@
 
 - (void)setListProducts:(NSArray *)listProducts
 {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [HUD hide:YES];
+        [HUD removeFromSuperview];
+        
+        [self bindIAPData:listProducts];
+    });
     
-    [HUD hide:YES];
-    [self bindIAPData:listProducts];
-
 }
 
 #pragma  StoreView delegate method
@@ -290,7 +266,7 @@
         
         //        NSLog(@"zzz");
     }else{
-        NSLog(@"this purchase is disable");
+//        NSLog(@"this purchase is disable");
     }
 }
 
@@ -353,6 +329,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (_tableView == coinTableView)
     {
         IAPTableViewCell *cell = (IAPTableViewCell *)[_tableView dequeueReusableCellWithIdentifier:@"IAPCell"];
@@ -532,7 +509,7 @@
                 [aVC setExcludedActivityTypes:listDisableItems];
                 
                 [aVC setCompletionHandler:^(NSString *activityType, BOOL completed){
-                    NSLog(@"activity Type : %@", activityType);
+//                    NSLog(@"activity Type : %@", activityType);
                     if (completed)
                     {
                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"You have claimed %d coins",kRewardCoinsForSharingApp] delegate:delegate cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -588,6 +565,296 @@
     }
 }
 
+#pragma mark UI Collection View
+
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    if (collectionView == iapCollectionView)
+    {
+        if (storeModel.listItems)
+        {
+            return storeModel.listItems.count+1;
+        }else
+        {
+            return 0;
+        }
+    }else if (collectionView == freecoinCollectionView)
+    {
+        return optionsGetFreeCoin.count;
+    }else
+        return 0;
+}
+
+// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if (collectionView == iapCollectionView)
+    {
+        
+        IAPCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IAPCell" forIndexPath:indexPath];
+        
+        if (cell!=nil)
+        {
+            cell.bgImg.layer.cornerRadius = 10;
+            cell.bgImg.clipsToBounds = YES;
+            cell.bgImg.layer.borderWidth = 2;
+            if (indexPath.row >0)
+            {
+                cell.bgImg.layer.borderColor = [[UIColor yellowColor] CGColor];
+            }else
+            {
+                cell.bgImg.layer.borderColor = [[UIColor redColor] CGColor];
+                
+            }
+            cell.priceLabel.layer.cornerRadius = 10;
+            cell.priceLabel.clipsToBounds = YES;
+            if (indexPath.row >0)
+            {
+                SKProduct *product = [storeModel.listItems objectAtIndex:indexPath.row-1];
+                
+                long index = indexPath.row - 1;
+                index = index*2+1;
+                NSString *imgName = [NSString stringWithFormat:@"coin%ld.png",index];
+                
+                [cell.imgView setImage:[UIImage imageNamed:imgName]];
+//                NSLog(@"indexpath : %ld-%ld  img name : %@ cell : %@", (long)indexPath.section, (long)indexPath.row,imgName, cell);
+                NSString *title = product.localizedTitle;
+                if ([product.productIdentifier isEqualToString:kProductIDOf1100]
+                    || [product.productIdentifier isEqualToString:kProductIDOf2400]
+                    || [product.productIdentifier isEqualToString:kProductIDOf7800]
+                    
+                    )
+                {
+                    cell.rmvAdsView.alpha = 1;
+                    
+                }else
+                {
+                    cell.rmvAdsView.alpha = 0;
+                }
+                
+                cell.freeCoinLabel.alpha = 0;
+                
+                title = [title stringByReplacingOccurrencesOfString:@"coins" withString:@"Coins"];
+                
+                //    cell.titleLabel.text = product.productIdentifier;
+                
+                float scale = [self scaleOfProduct:product];
+                float save = 1/(scale/maxScale)-1;
+                save =save*100+1;
+                if (save > 2)
+                {
+                    cell.saveLabel.text = [NSString stringWithFormat:@"Save %.0f %%",save];
+                    
+                    
+                }else
+                {
+                    
+                    cell.saveLabel.text = @"";
+                }
+                
+                cell.coinLabel.text = title;
+                
+                NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+                [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+                [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+                [numberFormatter setLocale:product.priceLocale];
+                NSString *formattedPrice = [numberFormatter stringFromNumber:product.price];
+                
+                cell.priceLabel.text = formattedPrice;
+                return cell;
+                
+            }else if (indexPath.row == 0)
+            {
+//                NSLog(@"indexpath : %ld-%ld  img name : %@ cell : %@", (long)indexPath.section, (long)indexPath.row,@"none",cell);
+                cell.rmvAdsView.alpha = 0;
+                cell.freeCoinLabel.alpha = 1;
+                cell.freeCoinLabel.layer.cornerRadius = 10;
+                cell.freeCoinLabel.layer.borderColor = [[UIColor yellowColor] CGColor];
+                cell.freeCoinLabel.layer.borderWidth = 2;
+                cell.imgView.alpha = 0;
+                cell.coinLabel.text = @"20 coins";
+                cell.priceLabel.backgroundColor = [UIColor redColor];
+                cell.saveLabel.text = @"";
+                cell.priceLabel.textColor = [UIColor yellowColor];
+                cell.priceLabel.text = @"FREE";
+                return cell;
+            }
+            return cell;
+        }
+        
+        return cell;
+    }else if (collectionView == freecoinCollectionView)
+    {
+        
+        FreecoinCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FreeCoinCell" forIndexPath:indexPath];
+        
+        cell.bgImg.layer.cornerRadius = 10;
+        cell.bgImg.clipsToBounds = YES;
+        cell.bgImg.layer.borderWidth = 2;
+        cell.bgImg.layer.borderColor = [[UIColor yellowColor] CGColor];
+        cell.priceLabel.layer.cornerRadius = 10;
+        cell.priceLabel.clipsToBounds = YES;
+        
+        
+        FreeCoinModel *model = [optionsGetFreeCoin objectAtIndex:indexPath.row];
+        cell.imgView.image = [UIImage imageNamed:model.imgName];
+        cell.coinLabel.text = model.title;
+        cell.saveLabel.text = @"";
+        cell.priceLabel.text = [NSString stringWithFormat:@"%d COINS", [model.rewardCoin intValue]];
+        
+        return cell;
+    }
+    
+    return nil;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (collectionView == iapCollectionView)
+    {
+        if (indexPath.row == 0)
+        {
+            [UIView animateWithDuration:0.3 animations:^{
+                [iapCollectionView setFrame:CGRectOffset(iapCollectionView.frame, -iapCollectionView.frame.size.width, 0)];
+                [freecoinCollectionView setFrame:CGRectOffset(freecoinCollectionView.frame, -iapCollectionView.frame.size.width, 0)];
+                [fbView setFrame:CGRectOffset(fbView.frame, -iapCollectionView.frame.size.width, 0)];
+                self.backBtn.alpha = 1;
+            } completion:^(BOOL finished) {
+                if (finished)
+                {
+                    
+                }
+            }];
+        }else
+        {
+            SKProduct *selectedProduct = [storeModel.listItems objectAtIndex:indexPath.row-1];
+            SKPayment *payment = [SKPayment paymentWithProduct:selectedProduct];
+            [[SKPaymentQueue defaultQueue] addPayment:payment];
+        }
+    }else if (collectionView == freecoinCollectionView)
+    {
+        FreeCoinModel *model = [optionsGetFreeCoin objectAtIndex:indexPath.row];
+        if ([model.title isEqualToString:kTitleOfFacebookLike])
+        {
+            if (!FBSession.activeSession.isOpen)
+            {
+                
+                [UIView animateWithDuration:0.3 animations:^{
+                    [iapCollectionView setFrame:CGRectOffset(iapCollectionView.frame, -iapCollectionView.frame.size.width, 0)];
+                    [freecoinCollectionView setFrame:CGRectOffset(freecoinCollectionView.frame, -iapCollectionView.frame.size.width, 0)];
+                    [fbView setFrame:CGRectOffset(fbView.frame, -iapCollectionView.frame.size.width, 0)];
+                    self.backBtn.alpha = 1;
+                } completion:^(BOOL finished) {
+                    if (finished)
+                    {
+                        
+                    }
+                }];
+            }else
+            {
+                [self cancelBtnAction:nil];
+                NSURL *url = [NSURL URLWithString:@"fb://profile/172415879600587"];
+                [[UIApplication sharedApplication] openURL:url];
+            }
+        }else if ([model.title isEqualToString:kTitleOfSharing])
+        {
+            
+            
+            if( [UIActivityViewController class])
+            {
+                if ([[NSDate date] compare:[[CommonFunction getLastFBShare] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
+                {
+                    [CommonFunction alert:[CommonFunction msgSharingNotAvail] delegate:nil];
+                }else
+                {
+                    APActivityProvider *ActivityProvider = [[APActivityProvider alloc] init];
+                    UIImage *ImageAtt = [UIImage imageNamed:@"fblike.png"];
+                    NSArray *Items = @[ActivityProvider, ImageAtt];
+                    
+                    
+                    UIActivityViewController *aVC = [[UIActivityViewController alloc] initWithActivityItems:Items applicationActivities:nil];
+                    NSMutableArray *listDisableItems = [[NSMutableArray alloc] initWithObjects:UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll, UIActivityTypePostToWeibo, UIActivityTypeMessage, UIActivityTypeMail,UIActivityTypeAirDrop ,nil];
+
+                    
+                    if ([[NSDate date] compare:[[CommonFunction getLastSendEmail] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
+                    {
+                        [listDisableItems addObject:UIActivityTypeMail];
+                    }
+                    if ([[NSDate date] compare:[[CommonFunction getLastTwitterShare] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
+                    {
+                        [listDisableItems addObject:UIActivityTypePostToTwitter];
+                    }
+                    if ([[NSDate date] compare:[[CommonFunction getLastSendSMS] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
+                    {
+                        [listDisableItems addObject:UIActivityTypeMessage];
+                    }
+                    
+                    [aVC setExcludedActivityTypes:listDisableItems];
+                    
+                    [aVC setCompletionHandler:^(NSString *activityType, BOOL completed){
+                        //                    NSLog(@"activity Type : %@", activityType);
+                        if (completed)
+                        {
+                            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"You have claimed %d coins",kRewardCoinsForSharingApp] delegate:delegate cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                            [alertView show];
+                            [CommonFunction setCoin:[CommonFunction getCoin]+kRewardCoinsForSharingApp];
+                            [delegate updateCoininVIew];
+                            
+                            SWITCH (activityType) {
+                                CASE (@"com.apple.UIKit.activity.Message") {
+                                    [CommonFunction setLastSendSMS:[NSDate date]];
+                                    break;
+                                }
+                                CASE (@"com.apple.UIKit.activity.Mail") {
+                                    [CommonFunction setLastSendEmail:[NSDate date]];
+                                    break;
+                                }
+                                CASE (@"com.apple.UIKit.activity.PostToTwitter") {
+                                    [CommonFunction setLastTwitterShare:[NSDate date]];
+                                    break;
+                                }
+                                CASE (@"com.apple.UIKit.activity.PostToFacebook") {
+                                    [CommonFunction setLastFBShare:[NSDate date]];
+                                    break;
+                                }
+                                DEFAULT {
+                                    break;
+                                }
+                            }
+                        }
+                    }];
+                    if (kCheckIfIphone)
+                    {
+                        
+                    }else
+                    {
+                        FreecoinCollectionViewCell *cell = (FreecoinCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+                        aVC.popoverPresentationController.sourceView = cell;
+                    }
+                    [self presentViewController:aVC animated:YES completion:nil];
+                }
+            }else{
+                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"We are sorry. This feature can only available in IOS 6 or above, please upgrade IOS to get free coins" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alertView show];
+            }
+            
+        }
+        else if ([model.title isEqualToString:kTitleOfRating])
+        {
+            
+            [[UIApplication sharedApplication] openURL:[CommonFunction getAppURL]];
+            [CommonFunction setRateUs:1];
+        }
+    }
+}
+
 
 #pragma mark - FBLoginViewDelegate
 
@@ -596,6 +863,7 @@
     
     if (fbView.frame.origin.x == 0)
     {
+        
         [self backBtnAction:nil];
     }
     
@@ -631,7 +899,7 @@
 }
 
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
-    NSLog(@"logged out");
+//    NSLog(@"logged out");
     // test to see if we can use the share dialog built into the Facebook application
 //    FBShareDialogParams *p = [[FBShareDialogParams alloc] init];
 //    p.link = [NSURL URLWithString:@"http://developers.facebook.com/ios"];

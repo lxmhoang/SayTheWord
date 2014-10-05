@@ -32,7 +32,7 @@
 
 + (NSNumber *)gettimeBetweenUpdate
 {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"timeToNextUpdate"];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"timeBetweenUpdate"];
 }
 
 + (void)setTimeBetweenUpdate:(NSNumber*)num
@@ -306,7 +306,7 @@
 
 + (int)getRateUS
 {
-    return [[NSUserDefaults standardUserDefaults] integerForKey:@"rateUs"];
+    return (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"rateUs"];
 }
 
 #pragma mark get set rate us text
@@ -327,9 +327,30 @@
 
 + (void)createGlobalVariable
 {
-     
+    
     NSNumber *coin = [NSNumber numberWithInt:kInitialCoin];
     
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rewardCoinForAskingFriends"] == nil){
+        [self setRewardCoinForAskingFriends:kInitialRewardCoinForAskingFriends];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"priceOfRemovingLetter"] == nil){
+        [self setPriceOfRemovingLetter:kPriceOfRemoveLetter];
+    }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"priceOfRevealingLetter"] == nil){
+        [self setPriceOfRevealingLetter:kPriceOfRevealLetter];
+    }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"priceOfRevealingLeftPic"] == nil){
+        [self setPriceOfRevealingLeftPic:kPriceOfRevealLeftPic];
+    }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"priceOfRevealingRightPic"] == nil){
+        [self setPriceOfRevealingLRightPic:kPriceOfRevealRightPic];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"FBLink"] == nil){
+        [self setFBLink:@"N/A"];
+    }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rateForCoin"] == nil){
         [self setRateForCoin:NO];
@@ -543,8 +564,11 @@
                 for (id key in [obj allKeys])
                 {
                     NSString *strKey = key;
-                    [[NSUserDefaults standardUserDefaults] setObject:[obj objectForKey:strKey] forKey:strKey];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    if ([obj objectForKey:strKey])
+                    {
+                        [[NSUserDefaults standardUserDefaults] setObject:[obj objectForKey:strKey] forKey:strKey];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                    }
                 }
             }
         }
@@ -608,7 +632,7 @@
 
 + (void)setTimeToNextShare:(double)val
 {
-    [[NSUserDefaults standardUserDefaults] setDouble:val forKey:@"dirty_sharing"];
+    [[NSUserDefaults standardUserDefaults] setDouble:val forKey:@"TimeToNextShare"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -637,5 +661,67 @@
     [[NSUserDefaults standardUserDefaults] setObject:val forKey:@"FBLink"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+#pragma mark Hints Price
+
++ (void)setPriceOfRemovingLetter:(int)val
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:val] forKey:@"priceOfRemovingLetter"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int)getPriceOfRemovingLetter
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"priceOfRemovingLetter"] intValue];
+}
+
++ (void)setPriceOfRevealingLetter:(int)val
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:val] forKey:@"priceOfRevealingLetter"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int)getPriceOfRevealingLetter
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"priceOfRevealingLetter"] intValue];
+}
+
+
++ (void)setPriceOfRevealingLeftPic:(int)val
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:val] forKey:@"priceOfRevealingLeftPic"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int)getPriceOfRevealingLeftPic
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"priceOfRevealingLeftPic"] intValue];
+}
+
+
++ (void)setPriceOfRevealingLRightPic:(int)val
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:val] forKey:@"priceOfRevealingRightPic"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int)getPriceOfRevealingRightPic
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"priceOfRevealingRightPic"] intValue];
+}
+
+#pragma mark Reward Coin For Asking Friends
+
++ (void)setRewardCoinForAskingFriends:(int)val
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:val] forKey:@"rewardCoinForAskingFriends"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int)getRewardCoinForAskingFriends
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"rewardCoinForAskingFriends"] intValue];
+}
+
 
 @end

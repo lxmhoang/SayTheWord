@@ -22,7 +22,7 @@
 
 
 #define kTitleOfFacebookLike @"LIKE US"
-#define kTitleOfSharing @"SHARE THE APP"
+#define kTitleOfSharing @"SHARE IT"
 #define kTitleOfRating @"RATE IT"
 
 #define kTagOfCopyAnswerView 669
@@ -34,6 +34,8 @@
 #define kRewardCoinsForLikingFB 70
 
 #define kRewardCoinsForSharingApp 15
+
+#define kInitialRewardCoinForAskingFriends 10
 
 #define kRewardCoinsForEachLetter 3
 
@@ -91,9 +93,8 @@
 
 #define kPriceOfRemoveLetter 10
 #define kPriceOfRevealLetter 35
-#define kPriceOfLeftTitle 70
-#define kPriceOfRightTitle 70
-#define kPriceOfAnswerTitle 150
+#define kPriceOfRevealLeftPic 70
+#define kPriceOfRevealRightPic 70
 
 
 
@@ -221,5 +222,20 @@
 
 + (NSString *)getFBLink;
 + (void)setFBLink:(NSString *)str;
+
++ (int)getPriceOfRemovingLetter;
++ (void)setPriceOfRemovingLetter:(int)val;
+
++ (int)getPriceOfRevealingLetter;
++ (void)setPriceOfRevealingLetter:(int)val;
+
++ (int)getPriceOfRevealingLeftPic;
++ (void)setPriceOfRevealingLeftPic:(int)val;
+
++ (int)getPriceOfRevealingRightPic;
++ (void)setPriceOfRevealingLRightPic:(int)val;
+
++ (int)getRewardCoinForAskingFriends;
++ (void)setRewardCoinForAskingFriends:(int)val;
 
 @end

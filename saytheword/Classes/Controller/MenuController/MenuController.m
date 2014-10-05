@@ -89,13 +89,6 @@
     [iapVC didMoveToParentViewController:rootVC];
     [rootVC.view addSubview:iapVC.view];
     
-//    StoreController *storeController = [[StoreController alloc]init];
-//    storeController.delegate = self;
-//    //    [self presentViewController:storeController animated:YES completion:nil];
-//    //    [storeController release];
-//    [self addChildViewController:storeController];
-//    
-//    [self.view addSubview:storeController.view];
 }
 
 #pragma mark IAPViewController delegate method

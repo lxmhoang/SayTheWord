@@ -56,22 +56,9 @@
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_3_0)
 {
-//    NSArray *products = response.products;
     productList = [[NSArray alloc]initWithArray:response.products];
 
-    for(SKProduct* _item in productList){
-        NSLog(@"product id: %@", _item.productIdentifier);
-        
-    }
-//    IAPProduct = [productList count] == 1 ? [[productList objectAtIndex:0] retain] : nil;
-//    if (IAPProduct)
-//    {
-//
-//        NSLog(@"Product title: %@" , IAPProduct.localizedTitle);
-//        NSLog(@"Product description: %@" , IAPProduct.localizedDescription);
-//        NSLog(@"Product price: %@" , IAPProduct.price);
-//        NSLog(@"Product id: %@" , IAPProduct.productIdentifier);
-//    }
+
     
     for (NSString *invalidProductId in response.invalidProductIdentifiers)
     {
@@ -84,7 +71,9 @@
     // finally release the reqest we alloc/init’ed in requestProUpgradeProductData
     if (delegate && [delegate respondsToSelector:@selector(setListProducts:)])
     {
-        [delegate setListProducts:productList];
+//        NSLog(@"tom");
+        
+            [delegate setListProducts:productList];
     }
 //    [productsRequest release];
 //    [self purchaseItem];
@@ -102,11 +91,11 @@
 //        transaction.transactionIdentifier
         NSLog(@"transaction DATA : %@ ",transaction.transactionDate);
 //        [transaction.transactionDate ]
-        NSLog(@" transasction state: %d",transaction.transactionState);
+        NSLog(@" transasction state: %ld",transaction.transactionState);
         if (transaction.error)
         {
             
-            NSLog(@" transasction error: %d",transaction.error);
+            NSLog(@" transasction error: %@",transaction.error);
         }
         switch (transaction.transactionState)
         {
@@ -118,15 +107,18 @@
             case SKPaymentTransactionStateFailed:
                 if (transaction.error.code == SKErrorPaymentCancelled) {
                     /// user has cancelled
-                    [self finishTransaction:transaction wasSuccessful:NO];
+                    [self finishTransaction:transaction wasSuccessful:NO reason:@"Transaction cancelled"];
                 }
                 else if (transaction.error.code == SKErrorPaymentNotAllowed) {
                     // payment not allowed
-                    [self finishTransaction:transaction wasSuccessful:NO];
+                    [self finishTransaction:transaction wasSuccessful:NO reason:@"This device is not allowed to make the payment"];
+                } else if (transaction.error.code == SKErrorStoreProductNotAvailable) {
+                    // payment not allowed
+                    [self finishTransaction:transaction wasSuccessful:NO reason:@"Product is not available in the current storefront"];
                 }
                 else {
                     // real error
-                    [self finishTransaction:transaction wasSuccessful:NO];
+                    [self finishTransaction:transaction wasSuccessful:NO reason:transaction.error.localizedDescription];
                     // show error
                 }
                 break;
@@ -295,7 +287,7 @@
 //
 // removes the transaction from the queue and posts a notification with the transaction result
 //
-- (void)finishTransaction:(SKPaymentTransaction *)transaction wasSuccessful:(BOOL)wasSuccessful
+- (void)finishTransaction:(SKPaymentTransaction *)transaction wasSuccessful:(BOOL)wasSuccessful reason:(NSString *)reason
 {
 //    NSLog(@"remove transaction : %@", transaction.transactionIdentifier);
     // remove the transaction from the payment queue.
@@ -309,6 +301,7 @@
     }
     else
     {
+        [CommonFunction alert:reason delegate:nil];
         // send out a notification for the failed transaction
         [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerTransactionFailedNotification object:self userInfo:userInfo];
     }
