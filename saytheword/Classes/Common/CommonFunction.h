@@ -25,15 +25,23 @@
 #define kTitleOfSharing @"SHARE IT"
 #define kTitleOfRating @"RATE IT"
 
+#define kInitialHelpMessage @"Help me guess this word by combining first syllabel of left pic with last syllabel of right pic. E.g: BUTter+stuDY = BUDDY. Download it FREE at http://goo.gl/m2U3sV "
+
+
+#define kInitialShareMessage @"Help me guess this word by combining first syllabel of left pic with last syllabel of right pic. E.g: BUTter+stuDY = BUDDY. Download it FREE at http://goo.gl/m2U3sV "
+
+
+#define kInitialBragMessage @"Help me guess this word by combining first syllabel of left pic with last syllabel of right pic. E.g: BUTter+stuDY = BUDDY. Download it FREE at http://goo.gl/m2U3sV "
+
 #define kTagOfCopyAnswerView 669
 
 #define kMsgThankForRating @"Thank you for rating"
 
-#define kRewardCoinsForRatingApp 70
+#define kInitialRewardCoinsForRatingApp 70
 
-#define kRewardCoinsForLikingFB 70
+#define kInitialRewardCoinsForLikingFB 70
 
-#define kRewardCoinsForSharingApp 15
+#define kInitialRewardCoinsForSharingApp 15
 
 #define kInitialRewardCoinForAskingFriends 10
 
@@ -115,6 +123,8 @@
 
 
 @interface CommonFunction : NSObject
+
++ (UIImage *)getScreenShot;
 
 + (NSURL *)getAppURL;
 
@@ -235,7 +245,43 @@
 + (int)getPriceOfRevealingRightPic;
 + (void)setPriceOfRevealingLRightPic:(int)val;
 
+#pragma mark reward points
+
++ (int)getRewardCoinForRattingApp;
++ (void)setRewardCoinForRattingApp:(int)val;
+
++ (int)getRewardCoinForLikingPage;
++ (void)setRewardCoinForLikingPage:(int)val;
+
++ (int)getRewardCoinForSharingApp;
++ (void)setRewardCoinForSharingApp:(int)val;
+
 + (int)getRewardCoinForAskingFriends;
 + (void)setRewardCoinForAskingFriends:(int)val;
+
+
+#pragma mark did ask friend for current level
+
++ (BOOL)getDidAskFriendForCurrentLevel;
++ (void)setDidAskFriendForCurrentLevel:(BOOL)val;
+
+#pragma mark sharing app
+
++ (void)shareWithImage:(UIImage *)img andMessage:(NSString *)msg withArchorPoint:(UIView *)ap inViewController:(UIViewController *)vc completion:(void (^)(void))completion;
+
+#pragma mark message share app
+
++ (NSString *)getMessageShareApp;
++ (void)setMessageShareApp:(NSString *)msg;
+
+#pragma mark message help
+
++ (NSString *)getMessageHelp;
++ (void)setMessageHelp:(NSString *)msg;
+
+#pragma mark message brag
+
++ (NSString *)getMessageBrag;
++ (void)setMessageBrag:(NSString *)msg;
 
 @end

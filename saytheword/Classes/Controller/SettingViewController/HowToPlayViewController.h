@@ -17,6 +17,8 @@
 @property (strong, nonatomic) IBOutlet UIView *navigationBar;
 @property (nonatomic, unsafe_unretained) id delegate;
 
+@property (strong, nonatomic) IBOutlet UIView *pic1View;
+@property (strong, nonatomic) IBOutlet UIView *pic2View;
 
 - (id)initWithPosition:(int)_pos;
 - (IBAction)menuBtnTapped:(id)sender;

@@ -12,9 +12,7 @@
 #import "ApActivityData.h"
 
 
-#define CASE(str)                       if ([__s__ isEqualToString:(str)])
-#define SWITCH(s)                       for (NSString *__s__ = (s); ; )
-#define DEFAULT
+
 
 @implementation HintsView
 @synthesize delegate,  bigView, bodyView, backBtn, freeCoinCollectionView, fbView;
@@ -39,7 +37,38 @@
     [delegate revealRightWordFromHintsView];
 }
 
-- (IBAction)askFriendAction:(id)sender {
+- (IBAction)askFriendAction:(UITapGestureRecognizer *)sender {
+//    if ([[NSDate date] compare:[[CommonFunction getLastFBShare] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
+//    {
+//        [CommonFunction alert:[CommonFunction msgSharingNotAvail] delegate:nil];
+//        return;
+//    }else
+//    {
+        UIImage *img = [CommonFunction getScreenShot];
+        UIViewController *playVC = (UIViewController *)delegate;
+        [CommonFunction shareWithImage:img andMessage:[CommonFunction getMessageHelp] withArchorPoint:sender.view inViewController:playVC completion:^{
+            
+            if (([CommonFunction getRewardCoinForAskingFriends] > 0) && (![CommonFunction getDidAskFriendForCurrentLevel]))
+            {
+                
+                [CommonFunction setDidAskFriendForCurrentLevel:YES];
+                NSString *str =[NSString stringWithFormat:@"You have claimed %d coins",[CommonFunction getRewardCoinForAskingFriends]];
+                [CommonFunction alert:str delegate:nil];
+                [CommonFunction setCoin:[CommonFunction getCoin]+[CommonFunction getRewardCoinForAskingFriends]];
+                
+                PlayController *play = (PlayController *)delegate;
+                [play updateCoininVIew];
+                
+                
+            }else
+            {
+            }
+            
+            
+            [self closeBigView:nil];
+            
+        }];
+//    }
 }
 
 
@@ -178,6 +207,8 @@
 - (void)setUp
 {
     [self createOptionGetFreeCoin];
+    //FBLoginView *loginview = [[FBLoginView alloc] init];
+   // [fbview addSubview:loginview];
     UINib *cellNib = [UINib nibWithNibName:@"FreecoinCollectionViewCell" bundle:nil];
     [self.freeCoinCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"FreeCoinCell"];
     
@@ -238,10 +269,17 @@
     
     if ([CommonFunction getRewardCoinForAskingFriends] > 0)
     {
-        self.coinView22.text =[[NSString stringWithFormat:@"+%d coins", [CommonFunction getRewardCoinForAskingFriends]] uppercaseString];
+        if (![CommonFunction getDidAskFriendForCurrentLevel])
+        {
+            self.coinView22.text =[[NSString stringWithFormat:@"+%d coins", [CommonFunction getRewardCoinForAskingFriends]] uppercaseString];
+        }else
+        {
+            self.coinView22.text = @"FREE";
+            // asked friends already, no reward point
+        }
     }else
     {
-        self.coinView22.text = @"";
+        self.coinView22.text = @"FREE";
     }
     
     if (maxFreeCoin > 0)
@@ -347,21 +385,24 @@
     optionsGetFreeCoin = [[NSMutableArray alloc] init];
     
     
-    if ([CommonFunction checkIfRateForCoin] && [CommonFunction getRateUS] == 0)
+    if (([CommonFunction getRewardCoinForRattingApp] > 0) && [CommonFunction checkIfRateForCoin] && [CommonFunction getRateUS] == 0)
     {
         FreeCoinModel *rate = [[FreeCoinModel alloc] init];
         rate.imgName = @"star_rate.png";
         rate.title = kTitleOfRating;
-        rate.rewardCoin = [NSNumber numberWithInt:kRewardCoinsForRatingApp];
+        rate.rewardCoin = [NSNumber numberWithInt:[CommonFunction getRewardCoinForRattingApp]];
         [optionsGetFreeCoin addObject:rate];
         
         maxFreeCoin = (maxFreeCoin < [rate.rewardCoin intValue]) ? [rate.rewardCoin intValue] : maxFreeCoin;
+    }else
+    {
+        
     }
     
     FreeCoinModel *share = [[FreeCoinModel alloc] init];
     share.imgName = @"fbicon.png";
     share.title = kTitleOfSharing;
-    share.rewardCoin = [NSNumber numberWithInt:kRewardCoinsForSharingApp];
+    share.rewardCoin = [NSNumber numberWithInt:[CommonFunction getRewardCoinForSharingApp]];
 
     [optionsGetFreeCoin addObject:share];
     maxFreeCoin = (maxFreeCoin < [share.rewardCoin intValue]) ? [share.rewardCoin intValue] : maxFreeCoin;
@@ -372,7 +413,7 @@
         
         fb.imgName = @"fblike.png";
         fb.title = kTitleOfFacebookLike;
-        fb.rewardCoin = [NSNumber numberWithInt:kRewardCoinsForLikingFB];
+        fb.rewardCoin = [NSNumber numberWithInt:[CommonFunction getRewardCoinForLikingPage]];
         [optionsGetFreeCoin addObject:fb];
         
         maxFreeCoin = (maxFreeCoin < [fb.rewardCoin intValue]) ? [fb.rewardCoin intValue] : maxFreeCoin;
@@ -448,87 +489,39 @@
     }else if ([model.title isEqualToString:kTitleOfSharing])
     {
         
-        
-        if( [UIActivityViewController class])
+        if ([[NSDate date] compare:[[CommonFunction getLastFBShare] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
         {
-            if ([[NSDate date] compare:[[CommonFunction getLastFBShare] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
+            [CommonFunction alert:[CommonFunction msgSharingNotAvail] delegate:nil];
+            return;
+        }else
+        {
+            UIView *ap;
+            UIViewController *vc = (UIViewController *)delegate;
+            if (kCheckIfIphone)
             {
-                [CommonFunction alert:[CommonFunction msgSharingNotAvail] delegate:nil];
+                ap = nil;
             }else
             {
-                APActivityProvider *ActivityProvider = [[APActivityProvider alloc] init];
-                UIImage *ImageAtt = [UIImage imageNamed:@"fblike.png"];
-                NSArray *Items = @[ActivityProvider, ImageAtt];
-                
-                
-                UIActivityViewController *aVC = [[UIActivityViewController alloc] initWithActivityItems:Items applicationActivities:nil];
-                NSMutableArray *listDisableItems = [[NSMutableArray alloc] initWithObjects:UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll, UIActivityTypePostToWeibo, UIActivityTypeMessage, UIActivityTypeMail,UIActivityTypeAirDrop ,nil];
-                
-                
-                if ([[NSDate date] compare:[[CommonFunction getLastSendEmail] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
+                ap = (UIView *)[collectionView cellForItemAtIndexPath:indexPath];
+            }
+            UIImage *ImageAtt = [CommonFunction getScreenShot];
+            [CommonFunction shareWithImage:ImageAtt andMessage:[CommonFunction getMessageShareApp] withArchorPoint:ap inViewController:vc completion:^{
+                if ([CommonFunction getRewardCoinForSharingApp] > 0)
                 {
-                    [listDisableItems addObject:UIActivityTypeMail];
-                }
-                if ([[NSDate date] compare:[[CommonFunction getLastTwitterShare] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
-                {
-                    [listDisableItems addObject:UIActivityTypePostToTwitter];
-                }
-                if ([[NSDate date] compare:[[CommonFunction getLastSendSMS] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
-                {
-                    [listDisableItems addObject:UIActivityTypeMessage];
-                }
-                
-                [aVC setExcludedActivityTypes:listDisableItems];
-                
-                [aVC setCompletionHandler:^(NSString *activityType, BOOL completed){
-                    //                    NSLog(@"activity Type : %@", activityType);
-                    if (completed)
-                    {
-                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"You have claimed %d coins",kRewardCoinsForSharingApp] delegate:delegate cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                        [alertView show];
-                        [CommonFunction setCoin:[CommonFunction getCoin]+kRewardCoinsForSharingApp];
-                        
-                        PlayController *play = (PlayController *)delegate;
-                        [play updateCoininVIew];
-                        
-                        SWITCH (activityType) {
-                            CASE (@"com.apple.UIKit.activity.Message") {
-                                [CommonFunction setLastSendSMS:[NSDate date]];
-                                break;
-                            }
-                            CASE (@"com.apple.UIKit.activity.Mail") {
-                                [CommonFunction setLastSendEmail:[NSDate date]];
-                                break;
-                            }
-                            CASE (@"com.apple.UIKit.activity.PostToTwitter") {
-                                [CommonFunction setLastTwitterShare:[NSDate date]];
-                                break;
-                            }
-                            CASE (@"com.apple.UIKit.activity.PostToFacebook") {
-                                [CommonFunction setLastFBShare:[NSDate date]];
-                                break;
-                            }
-                            DEFAULT {
-                                break;
-                            }
-                        }
-                    }
-                }];
-                if (kCheckIfIphone)
-                {
+                    NSString *str =[NSString stringWithFormat:@"You have claimed %d coins",[CommonFunction getRewardCoinForSharingApp]];
+                    [CommonFunction alert:str delegate:nil];
+                    [CommonFunction setCoin:[CommonFunction getCoin]+[CommonFunction getRewardCoinForSharingApp]];
                     
+                    PlayController *play = (PlayController *)delegate;
+                    [play updateCoininVIew];
                 }else
                 {
-                    FreecoinCollectionViewCell *cell = (FreecoinCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-                    aVC.popoverPresentationController.sourceView = cell;
+                    
                 }
-                PlayController *play = (PlayController *)delegate;
-                [play presentViewController:aVC animated:YES completion:nil];
-            }
-        }else{
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"We are sorry. This feature can only available in IOS 6 or above, please upgrade IOS to get free coins" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alertView show];
+                [self closeBigView:nil];
+            }];
         }
+        
         
     }
     else if ([model.title isEqualToString:kTitleOfRating])
@@ -538,6 +531,78 @@
         [CommonFunction setRateUs:1];
     }
 }
+
+
+#pragma mark - FBLoginViewDelegate
+
+- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
+    // first get the buttons set for login mode
+    
+    if (fbView.frame.origin.x == 0)
+    {
+        
+        [self backBtnAction:nil];
+    }
+    
+    //    BOOL hideBackBtn = (coinTableView.frame.origin.x == -coinTableView.frame.size.width) ? YES : NO;
+    //    [UIView animateWithDuration:0.3 animations:^{
+    //        [coinTableView setFrame:CGRectOffset(coinTableView.frame, +coinTableView.frame.size.width, 0)];
+    //        [freeCoinTableView setFrame:CGRectOffset(freeCoinTableView.frame, +coinTableView.frame.size.width, 0)];
+    //        [fbView setFrame:CGRectOffset(freeCoinTableView.frame, +coinTableView.frame.size.width, 0)];
+    //
+    //        if (hideBackBtn)
+    //        {
+    //            self.backBtn.alpha = 0;
+    //        }
+    //
+    //    } completion:^(BOOL finished) {
+    //        if (finished)
+    //        {
+    //            NSURL *url = [NSURL URLWithString:@"fb://profile/172415879600587"];
+    //            [[UIApplication sharedApplication] openURL:url];
+    //        }
+    //    }];
+    
+}
+
+- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
+                            user:(id<FBGraphUser>)user {
+    NSString *str = [user objectForKey:@"link"];
+    [CommonFunction setFBLink:str];
+    
+    // here we use helper properties of FBGraphUser to dot-through to first_name and
+    // id properties of the json response from the server; alternatively we could use
+    // NSDictionary methods such as objectForKey to get values from the my json object
+}
+
+- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
+    //    NSLog(@"logged out");
+    // test to see if we can use the share dialog built into the Facebook application
+    //    FBShareDialogParams *p = [[FBShareDialogParams alloc] init];
+    //    p.link = [NSURL URLWithString:@"http://developers.facebook.com/ios"];
+#ifdef DEBUG
+    //    [FBSettings enableBetaFeatures:FBBetaFeaturesShareDialog];
+#endif
+    //    BOOL canShareFB = [FBDialogs canPresentShareDialogWithParams:p];
+    //    BOOL canShareiOS6 = [FBDialogs canPresentOSIntegratedShareDialogWithSession:nil];
+    //
+    
+    // "Post Status" available when logged on and potentially when logged off.  Differentiate in the label.
+}
+
+- (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error {
+    // see https://developers.facebook.com/docs/reference/api/errors/ for general guidance on error handling for Facebook API
+    // our policy here is to let the login view handle errors, but to log the results
+    NSLog(@"FBLoginView encountered an error=%@", error);
+    if ([[error.userInfo objectForKey:@"com.facebook.sdk:ErrorLoginFailedReason"] isEqualToString:@"com.facebook.sdk:SystemLoginDisallowedWithoutError"])
+    {
+        [CommonFunction alert:@"On your device, please go to Setting->Facebook->Allow this app to use your facebook account" delegate:nil];
+    }
+}
+
+
+
+
 
 
 /*

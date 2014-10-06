@@ -9,42 +9,42 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "saytheword/Classes/Controller/IAPViewController/IAPViewController.m"
-            timestampString = "434195531.041097"
+            filePath = "saytheword/Classes/View/HintsView/HintsView.m"
+            timestampString = "434301575.625848"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "276"
-            endingLineNumber = "276"
-            landmarkName = "-afterTransaction"
+            startingLineNumber = "508"
+            endingLineNumber = "508"
+            landmarkName = "-collectionView:didSelectItemAtIndexPath:"
             landmarkType = "5">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[IAPViewController afterTransaction]"
+                  symbolName = "-[HintsView collectionView:didSelectItemAtIndexPath:]"
                   moduleName = "Say it loud, the word come out"
-                  urlString = "file:///Users/hoangle/Developer/SayTheWord/saytheword/Classes/Controller/IAPViewController/IAPViewController.m"
-                  timestampString = "434223075.936092"
+                  urlString = "file:///Users/hoangle/Developer/SayTheWord/saytheword/Classes/View/HintsView/HintsView.m"
+                  timestampString = "434300518.575495"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "276"
-                  endingLineNumber = "276"
-                  offsetFromSymbolStart = "24">
+                  startingLineNumber = "490"
+                  endingLineNumber = "490"
+                  offsetFromSymbolStart = "1470">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__37-[IAPViewController afterTransaction]_block_invoke"
+                  symbolName = "__53-[HintsView collectionView:didSelectItemAtIndexPath:]_block_invoke_2"
                   moduleName = "Say it loud, the word come out"
-                  urlString = "file:///Users/hoangle/Developer/SayTheWord/saytheword/Classes/Controller/IAPViewController/IAPViewController.m"
-                  timestampString = "434223075.936713"
+                  urlString = "file:///Users/hoangle/Developer/SayTheWord/saytheword/Classes/View/HintsView/HintsView.m"
+                  timestampString = "434300518.575708"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "276"
-                  endingLineNumber = "276"
-                  offsetFromSymbolStart = "50">
+                  startingLineNumber = "491"
+                  endingLineNumber = "491"
+                  offsetFromSymbolStart = "46">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -55,13 +55,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "saytheword/Classes/Lib/IAPHelper/IAPHelper.m"
-            timestampString = "434195531.041097"
+            filePath = "saytheword/Classes/View/HintsView/HintsView.m"
+            timestampString = "434301575.625848"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "-restoreTransaction:"
+            startingLineNumber = "509"
+            endingLineNumber = "509"
+            landmarkName = "-collectionView:didSelectItemAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -71,29 +71,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "saytheword/Classes/Lib/IAPHelper/IAPHelper.m"
-            timestampString = "434195531.041097"
+            filePath = "saytheword/Classes/Common/CommonFunction.m"
+            timestampString = "434301015.031496"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "-completeTransaction:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "saytheword/Classes/Lib/IAPHelper/IAPHelper.m"
-            timestampString = "434195531.041097"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "-paymentQueue:updatedTransactions:"
+            startingLineNumber = "888"
+            endingLineNumber = "888"
+            landmarkName = "+shareWithImage:andMessage:withArchorPoint:inViewController:completion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -103,13 +87,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "saytheword/Classes/Lib/IAPHelper/IAPHelper.m"
-            timestampString = "434195531.041097"
+            filePath = "saytheword/Classes/Common/CommonFunction.m"
+            timestampString = "434301015.031496"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "-paymentQueue:updatedTransactions:"
+            startingLineNumber = "914"
+            endingLineNumber = "914"
+            landmarkName = "+shareWithImage:andMessage:withArchorPoint:inViewController:completion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -119,13 +103,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "saytheword/Classes/Lib/IAPHelper/IAPHelper.m"
-            timestampString = "434195531.041097"
+            filePath = "saytheword/Classes/View/MenuView/MenuView.m"
+            timestampString = "434299753.879296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
-            landmarkName = "-completeTransaction:"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
+            landmarkName = "-bannerView:didFailToReceiveAdWithError:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -135,13 +119,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "saytheword/AppDelegate.m"
-            timestampString = "434218299.994157"
+            filePath = "saytheword/Classes/View/HintsView/HintsView.m"
+            timestampString = "434301369.341382"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
-            landmarkName = "-applicationWillEnterForeground:"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
+            landmarkName = "-setUp"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -151,92 +135,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "saytheword/Classes/Controller/IAPViewController/IAPViewController.m"
-            timestampString = "434218293.545514"
+            filePath = "saytheword/Classes/View/HintsView/HintsView.m"
+            timestampString = "434301015.031496"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "893"
-            endingLineNumber = "893"
-            landmarkName = "-loginViewFetchedUserInfo:user:"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "-askFriendAction:"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "saytheword/AppDelegate.m"
-            timestampString = "434218411.591885"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
-            landmarkName = "-applicationWillEnterForeground:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "saytheword/AppDelegate.m"
-            timestampString = "434218498.638498"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
-            landmarkName = "-applicationWillEnterForeground:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "saytheword/AppDelegate.m"
-            timestampString = "434218529.861091"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
-            landmarkName = "-applicationWillEnterForeground:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[AppDelegate applicationWillEnterForeground:]"
-                  moduleName = "Say it loud, the word come out"
-                  urlString = "file:///Users/hoangle/Developer/SayTheWord/saytheword/AppDelegate.m"
-                  timestampString = "434223076.046286"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "206"
-                  endingLineNumber = "206"
-                  offsetFromSymbolStart = "694">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__46-[AppDelegate applicationWillEnterForeground:]_block_invoke"
-                  moduleName = "Say it loud, the word come out"
-                  urlString = "file:///Users/hoangle/Developer/SayTheWord/saytheword/AppDelegate.m"
-                  timestampString = "434223076.046451"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "206"
-                  endingLineNumber = "206"
-                  offsetFromSymbolStart = "74">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

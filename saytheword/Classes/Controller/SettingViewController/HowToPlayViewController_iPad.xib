@@ -7,6 +7,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HowToPlayViewController">
             <connections>
                 <outlet property="navigationBar" destination="kih-az-Kla" id="LKd-uu-asz"/>
+                <outlet property="pic1View" destination="0jt-R9-LeU" id="1Vm-0S-nPX"/>
+                <outlet property="pic2View" destination="o9B-LC-r9l" id="czv-Of-eYL"/>
                 <outlet property="view" destination="JRX-cq-XK9" id="RiF-0n-VkA"/>
             </connections>
         </placeholder>
@@ -41,14 +43,28 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="butter.jpg" id="Aax-xa-zcn">
-                    <rect key="frame" x="142" y="342" width="200" height="200"/>
+                <view contentMode="scaleToFill" id="0jt-R9-LeU">
+                    <rect key="frame" x="132" y="332" width="220" height="220"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="study.jpg" id="pGS-pf-Iao">
-                    <rect key="frame" x="432" y="342" width="200" height="200"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="butter.jpg" id="Aax-xa-zcn">
+                            <rect key="frame" x="10" y="10" width="200" height="200"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="o9B-LC-r9l">
+                    <rect key="frame" x="422" y="332" width="220" height="220"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="study.jpg" id="pGS-pf-Iao">
+                            <rect key="frame" x="10" y="10" width="200" height="200"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
                 <view contentMode="scaleToFill" id="97U-MR-NDG">
                     <rect key="frame" x="206" y="674" width="20" height="6"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

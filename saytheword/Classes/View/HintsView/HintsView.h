@@ -10,6 +10,7 @@
 #import "Common.h"
 #import "PlayModel.h"
 
+#import <FacebookSDK/FacebookSDK.h>
 #import <QuartzCore/QuartzCore.h>
 
 @protocol HintsViewDelegate <NSObject>
@@ -21,7 +22,7 @@
 
 @end
 
-@interface HintsView : UIView <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface HintsView : UIView <UICollectionViewDelegate, UICollectionViewDataSource, FBLoginViewDelegate>
 {
     NSMutableArray *optionsGetFreeCoin;
     int maxFreeCoin;

@@ -115,9 +115,10 @@
 - (void)nextLevelFromWinView
 {
     [CommonFunction setLevel:([CommonFunction getLevel]+1)];
-    if ([CommonFunction getLevel]==100){
-        [CommonFunction setLevel:9];
-    }
+    [CommonFunction setDidAskFriendForCurrentLevel:NO];
+//    if ([CommonFunction getLevel]==100){
+//        [CommonFunction setLevel:9];
+//    }
     
     
     
@@ -190,7 +191,7 @@
      
     if ([alertView.title isEqualToString:[NSString stringWithFormat:kMsgThankForRating]])
     {
-        [CommonFunction setCoin:([CommonFunction getCoin]+kRewardCoinsForRatingApp)];
+        [CommonFunction setCoin:([CommonFunction getCoin]+[CommonFunction getRewardCoinForRattingApp])];
         
         for (id VC in self.childViewControllers)
         {
@@ -208,7 +209,7 @@
 //        }
     }else if ([alertView.title isEqualToString:@"Thank you for liking our page"])
     {
-        [CommonFunction setCoin:([CommonFunction getCoin]+kRewardCoinsForLikingFB)];
+        [CommonFunction setCoin:([CommonFunction getCoin]+[CommonFunction getRewardCoinForLikingPage])];
         
         id lastVC = [self.childViewControllers lastObject];
         

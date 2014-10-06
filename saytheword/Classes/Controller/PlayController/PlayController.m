@@ -144,8 +144,35 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    playView.adbanner.alpha = 0;
+    UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    [bgImgView setImage:[UIImage imageNamed:bgImage]];
+    [playView insertSubview:bgImgView atIndex:0];
+    
+    
+    CGRect rect = [[UIScreen mainScreen] bounds];
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [playView.layer renderInContext:context];
+    self.screenShot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [bgImgView removeFromSuperview];
+    
+    playView.adbanner.alpha = 1;
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.screenShot = self.screenShot;
+    
+    
+}
+
 
 #pragma mark Hint Delegate methods
+
+
+
 
 - (void)shareFBFromHint
 {

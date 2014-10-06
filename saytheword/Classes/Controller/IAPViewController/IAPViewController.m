@@ -117,14 +117,14 @@
         FreeCoinModel *rate = [[FreeCoinModel alloc] init];
         rate.imgName = @"star_rate.png";
         rate.title = kTitleOfRating;
-        rate.rewardCoin = [NSNumber numberWithInt:kRewardCoinsForRatingApp];
+        rate.rewardCoin = [NSNumber numberWithInt:[CommonFunction getRewardCoinForRattingApp]];
         [optionsGetFreeCoin addObject:rate];
     }
     
     FreeCoinModel *share = [[FreeCoinModel alloc] init];
     share.imgName = @"fbicon.png";
     share.title = kTitleOfSharing;
-    share.rewardCoin = [NSNumber numberWithInt:kRewardCoinsForSharingApp];
+    share.rewardCoin = [NSNumber numberWithInt:[CommonFunction getRewardCoinForSharingApp]];
     [optionsGetFreeCoin addObject:share];
     
     if (![CommonFunction getLikeFanPage])
@@ -133,7 +133,7 @@
         
         fb.imgName = @"fblike.png";
         fb.title = kTitleOfFacebookLike;
-        fb.rewardCoin = [NSNumber numberWithInt:kRewardCoinsForLikingFB];
+        fb.rewardCoin = [NSNumber numberWithInt:[CommonFunction getRewardCoinForLikingPage]];
         [optionsGetFreeCoin addObject:fb];
     }
 
@@ -512,9 +512,9 @@
 //                    NSLog(@"activity Type : %@", activityType);
                     if (completed)
                     {
-                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"You have claimed %d coins",kRewardCoinsForSharingApp] delegate:delegate cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"You have claimed %d coins",[CommonFunction getRewardCoinForSharingApp]] delegate:delegate cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                         [alertView show];
-                        [CommonFunction setCoin:[CommonFunction getCoin]+kRewardCoinsForSharingApp];
+                        [CommonFunction setCoin:[CommonFunction getCoin]+[CommonFunction getRewardCoinForSharingApp]];
                         [delegate updateCoininVIew];
                         
                         SWITCH (activityType) {
@@ -772,73 +772,38 @@
                 if ([[NSDate date] compare:[[CommonFunction getLastFBShare] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
                 {
                     [CommonFunction alert:[CommonFunction msgSharingNotAvail] delegate:nil];
+                    return;
                 }else
                 {
-                    APActivityProvider *ActivityProvider = [[APActivityProvider alloc] init];
-                    UIImage *ImageAtt = [UIImage imageNamed:@"fblike.png"];
-                    NSArray *Items = @[ActivityProvider, ImageAtt];
-                    
-                    
-                    UIActivityViewController *aVC = [[UIActivityViewController alloc] initWithActivityItems:Items applicationActivities:nil];
-                    NSMutableArray *listDisableItems = [[NSMutableArray alloc] initWithObjects:UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll, UIActivityTypePostToWeibo, UIActivityTypeMessage, UIActivityTypeMail,UIActivityTypeAirDrop ,nil];
 
-                    
-                    if ([[NSDate date] compare:[[CommonFunction getLastSendEmail] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
-                    {
-                        [listDisableItems addObject:UIActivityTypeMail];
-                    }
-                    if ([[NSDate date] compare:[[CommonFunction getLastTwitterShare] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
-                    {
-                        [listDisableItems addObject:UIActivityTypePostToTwitter];
-                    }
-                    if ([[NSDate date] compare:[[CommonFunction getLastSendSMS] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
-                    {
-                        [listDisableItems addObject:UIActivityTypeMessage];
-                    }
-                    
-                    [aVC setExcludedActivityTypes:listDisableItems];
-                    
-                    [aVC setCompletionHandler:^(NSString *activityType, BOOL completed){
-                        //                    NSLog(@"activity Type : %@", activityType);
-                        if (completed)
-                        {
-                            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"You have claimed %d coins",kRewardCoinsForSharingApp] delegate:delegate cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                            [alertView show];
-                            [CommonFunction setCoin:[CommonFunction getCoin]+kRewardCoinsForSharingApp];
-                            [delegate updateCoininVIew];
-                            
-                            SWITCH (activityType) {
-                                CASE (@"com.apple.UIKit.activity.Message") {
-                                    [CommonFunction setLastSendSMS:[NSDate date]];
-                                    break;
-                                }
-                                CASE (@"com.apple.UIKit.activity.Mail") {
-                                    [CommonFunction setLastSendEmail:[NSDate date]];
-                                    break;
-                                }
-                                CASE (@"com.apple.UIKit.activity.PostToTwitter") {
-                                    [CommonFunction setLastTwitterShare:[NSDate date]];
-                                    break;
-                                }
-                                CASE (@"com.apple.UIKit.activity.PostToFacebook") {
-                                    [CommonFunction setLastFBShare:[NSDate date]];
-                                    break;
-                                }
-                                DEFAULT {
-                                    break;
-                                }
-                            }
-                        }
-                    }];
+                    UIView *ap;
                     if (kCheckIfIphone)
                     {
-                        
+                        ap = nil;
                     }else
                     {
-                        FreecoinCollectionViewCell *cell = (FreecoinCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-                        aVC.popoverPresentationController.sourceView = cell;
+                        ap = (UIView *)[collectionView cellForItemAtIndexPath:indexPath];
                     }
-                    [self presentViewController:aVC animated:YES completion:nil];
+                    
+                    UIImage *ImageAtt = [CommonFunction getScreenShot];
+                    [CommonFunction shareWithImage:ImageAtt andMessage:[CommonFunction getMessageShareApp] withArchorPoint:ap inViewController:self completion:^{
+                        
+                        
+                        if ([CommonFunction getRewardCoinForSharingApp] > 0)
+                        {
+                            NSString *str =[NSString stringWithFormat:@"You have claimed %d coins",[CommonFunction getRewardCoinForSharingApp]];
+                            [CommonFunction alert:str delegate:nil];
+                            [CommonFunction setCoin:[CommonFunction getCoin]+[CommonFunction getRewardCoinForSharingApp]];
+                            
+                            [delegate updateCoininVIew];
+                        }else
+                        {
+                            
+                        }
+                        
+                        
+                        [self cancelBtnAction:nil];
+                    }];
                 }
             }else{
                 UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"We are sorry. This feature can only available in IOS 6 or above, please upgrade IOS to get free coins" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];

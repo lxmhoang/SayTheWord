@@ -10,7 +10,7 @@
 
 @implementation PlayView
 
-@synthesize playModel, delegate, typingView, answerView, coinLabel, leftView, rightView;
+@synthesize playModel, delegate, typingView, answerView, coinLabel, leftView, rightView, adbanner;
 
 - (id)initWithModel:(PlayModel *)_model
 {

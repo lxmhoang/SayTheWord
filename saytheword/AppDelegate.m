@@ -109,7 +109,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+    self.screenShot = nil;
     [self requestIAP];
     [FBLoginView class];
 //    WordInfo *info = [[WordDatabase database] wordInfoWithLevel:6];
@@ -195,7 +195,7 @@
     
     if ([CommonFunction getRateUS] == 1)
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:kMsgThankForRating] message:[NSString stringWithFormat:@" You have claimed %d coins", kRewardCoinsForRatingApp] delegate:rootController cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:kMsgThankForRating] message:[NSString stringWithFormat:@" You have claimed %d coins", [CommonFunction getRewardCoinForRattingApp]] delegate:rootController cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
         [CommonFunction setRateUs:2];
     }
@@ -211,7 +211,7 @@
                 if ([[result objectForKey:@"data"] count]>0)
                 {
                     if (![CommonFunction getLikeFanPage]){
-                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Thank you for liking our page" message:[NSString stringWithFormat:@"You get %d coins", kRewardCoinsForLikingFB] delegate:rootController cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Thank you for liking our page" message:[NSString stringWithFormat:@"You get %d coins", [CommonFunction getRewardCoinForLikingPage]] delegate:rootController cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                         [alertView show];
                         
                     }
@@ -223,7 +223,7 @@
         }];
     }else
     {
-        
+//        [FBSession ope]
     }
 }
 

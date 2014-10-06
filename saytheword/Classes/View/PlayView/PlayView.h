@@ -35,10 +35,10 @@
     int hintInternal;
     UIButton *hintBtn;
     
-    ADBannerView *adbanner;
     BOOL _bannerIsVisible;
     int yOfImages, paddingLeftImg, sizeOfImg, distanceFromImgToTitle, heightOftitle, yOfAnswerView, heightOfAnswerView, distanceFromAnswerViewToAnswerLabel, yOfTypingView,heightOfTypingView;
 }
+@property (nonatomic, strong) ADBannerView *adbanner;
 
 @property (nonatomic, strong) UIView *leftView,*rightView;
 @property (nonatomic, strong) UILabel *coinLabel;

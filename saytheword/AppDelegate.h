@@ -25,6 +25,7 @@
     
 }
 
+@property (strong, nonatomic) UIImage *screenShot;
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) RootController *rootController;
 

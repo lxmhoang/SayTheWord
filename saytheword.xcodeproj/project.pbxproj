@@ -19,6 +19,7 @@
 		3719225319DF20DB0001E5D0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A97116177920A3008D4634 /* SystemConfiguration.framework */; };
 		3719225819DF71510001E5D0 /* IAPCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3719225619DF71500001E5D0 /* IAPCollectionViewCell.m */; };
 		3719225919DF71510001E5D0 /* IAPCollectionViewCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3719225719DF71500001E5D0 /* IAPCollectionViewCell_iPad.xib */; };
+		37302FCB19E2E0F0001FDEAE /* rateus_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 37302FCA19E2E0F0001FDEAE /* rateus_green.png */; };
 		3734A7CA19C71994005008B8 /* playButtongr.png in Resources */ = {isa = PBXBuildFile; fileRef = 3734A7C919C71994005008B8 /* playButtongr.png */; };
 		3734A7CC19C71BF6005008B8 /* bluebg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3734A7CB19C71BF6005008B8 /* bluebg.png */; };
 		3734A7CE19C725E0005008B8 /* bluebg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3734A7CD19C725E0005008B8 /* bluebg.jpg */; };
@@ -31,6 +32,7 @@
 		37676FB019D405DB00185A34 /* FreeCoinModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 37676FAF19D405DB00185A34 /* FreeCoinModel.m */; };
 		376999FA19E1ADCD005C1370 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 376999F819E1ADCD005C1370 /* Bolts.framework */; };
 		37699A0119E1AF82005C1370 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37699A0019E1AF82005C1370 /* FacebookSDK.framework */; };
+		37699A0319E1D07D005C1370 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37699A0219E1D07D005C1370 /* FacebookSDKResources.bundle */; };
 		37814A3817B382870079B8EC /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 37814A3117B382870079B8EC /* blue.png */; };
 		37814A3917B382870079B8EC /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = 37814A3217B382870079B8EC /* green.png */; };
 		37814A3A17B382870079B8EC /* pink.png in Resources */ = {isa = PBXBuildFile; fileRef = 37814A3317B382870079B8EC /* pink.png */; };
@@ -304,6 +306,7 @@
 		3719225519DF71500001E5D0 /* IAPCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPCollectionViewCell.h; sourceTree = "<group>"; };
 		3719225619DF71500001E5D0 /* IAPCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPCollectionViewCell.m; sourceTree = "<group>"; };
 		3719225719DF71500001E5D0 /* IAPCollectionViewCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IAPCollectionViewCell_iPad.xib; sourceTree = "<group>"; };
+		37302FCA19E2E0F0001FDEAE /* rateus_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rateus_green.png; sourceTree = "<group>"; };
 		3734A7C919C71994005008B8 /* playButtongr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButtongr.png; sourceTree = "<group>"; };
 		3734A7CB19C71BF6005008B8 /* bluebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluebg.png; sourceTree = "<group>"; };
 		3734A7CD19C725E0005008B8 /* bluebg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bluebg.jpg; sourceTree = "<group>"; };
@@ -319,6 +322,7 @@
 		37676FAF19D405DB00185A34 /* FreeCoinModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeCoinModel.m; sourceTree = "<group>"; };
 		376999F819E1ADCD005C1370 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = saytheword/Bolts.framework; sourceTree = "<group>"; };
 		37699A0019E1AF82005C1370 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		37699A0219E1D07D005C1370 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		37814A3117B382870079B8EC /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
 		37814A3217B382870079B8EC /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
 		37814A3317B382870079B8EC /* pink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pink.png; sourceTree = "<group>"; };
@@ -767,6 +771,7 @@
 		379DC469175334BE00CEDB69 = {
 			isa = PBXGroup;
 			children = (
+				37699A0219E1D07D005C1370 /* FacebookSDKResources.bundle */,
 				37A439DD179D246300F5FFC3 /* Security.framework */,
 				379DC47B175334BE00CEDB69 /* saytheword */,
 				379DC474175334BE00CEDB69 /* Frameworks */,
@@ -928,6 +933,7 @@
 		379E93151765C97000237F39 /* Accessory */ = {
 			isa = PBXGroup;
 			children = (
+				37302FCA19E2E0F0001FDEAE /* rateus_green.png */,
 				3712EF7219DFD2BA008B64BB /* gradient_yellow.png */,
 				3712EF7019DFCC68008B64BB /* bgiap.jpg */,
 				3712EF6E19DFC48D008B64BB /* green_bg_IAP.jpg */,
@@ -1475,6 +1481,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37699A0319E1D07D005C1370 /* FacebookSDKResources.bundle in Resources */,
 				37B7BD6519D878370039DC9A /* builder.jpg in Resources */,
 				37B7BD6119D819E30039DC9A /* IAPViewController_iPad.xib in Resources */,
 				379DC480175334BE00CEDB69 /* InfoPlist.strings in Resources */,
@@ -1577,6 +1584,7 @@
 				37BD679C177BD590004356AD /* feather.jpg in Resources */,
 				37BD679D177BD590004356AD /* finger.jpg in Resources */,
 				37BD679E177BD590004356AD /* furniture.jpg in Resources */,
+				37302FCB19E2E0F0001FDEAE /* rateus_green.png in Resources */,
 				37BDC1CD19D534FF00D8E4BA /* fblike.png in Resources */,
 				37BAC60019DFBCA500F830AA /* coin5.png in Resources */,
 				37A9D30519DBD39800CC8A7E /* yellowIAP.jpg in Resources */,

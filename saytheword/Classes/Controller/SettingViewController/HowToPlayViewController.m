@@ -32,6 +32,9 @@
     if (self)
     {
         [self.view setFrame:CGRectMake(_pos*kWidthOfScreen + _pos*kShortDisTanceOf2View, 0, kWidthOfScreen, kHeightOfScreen)];
+        int k = kCheckIfIphone ? 4 : 7;
+        self.pic1View.layer.cornerRadius = k;
+        self.pic2View.layer.cornerRadius = k;
         
     }
     

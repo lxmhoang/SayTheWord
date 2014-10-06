@@ -10,8 +10,15 @@
 
 #import <Parse/Parse.h>
 #import <sys/utsname.h>
+#import "ApActivityData.h"
 
 @implementation CommonFunction
+
++ (UIImage *)getScreenShot
+{
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return app.screenShot;
+}
 
 + (NSURL *)getAppURL
 {
@@ -330,6 +337,32 @@
     
     NSNumber *coin = [NSNumber numberWithInt:kInitialCoin];
     
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"messageShareApp"] == nil){
+        [self setMessageShareApp:kInitialShareMessage];
+    }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"messageHelp"] == nil){
+        [self setMessageHelp:kInitialHelpMessage];
+    }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"messageBrag"] == nil){
+        [self setMessageBrag:kInitialBragMessage];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"didAskFriendForCurrentLevel"] == nil){
+        [self setDidAskFriendForCurrentLevel:NO];
+    }    
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rewardCoinForSharingApp"] == nil){
+        [self setRewardCoinForSharingApp:kInitialRewardCoinsForSharingApp];
+    }
+    
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rewardCoinForLikingPage"] == nil){
+        [self setRewardCoinForLikingPage:kInitialRewardCoinsForLikingFB];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rewardCoinForRattingApp"] == nil){
+        [self setRewardCoinForRattingApp:kInitialRewardCoinsForRatingApp];
+    }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rewardCoinForAskingFriends"] == nil){
         [self setRewardCoinForAskingFriends:kInitialRewardCoinForAskingFriends];
@@ -710,7 +743,49 @@
     return [[[NSUserDefaults standardUserDefaults] objectForKey:@"priceOfRevealingRightPic"] intValue];
 }
 
-#pragma mark Reward Coin For Asking Friends
+#pragma mark Reward Coin For Ratting app
+
+
++ (void)setRewardCoinForRattingApp:(int)val
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:val] forKey:@"rewardCoinForRattingApp"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int)getRewardCoinForRattingApp
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"rewardCoinForRattingApp"] intValue];
+}
+
+#pragma mark Reward Coin For liking page
+
++ (void)setRewardCoinForLikingPage:(int)val
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:val] forKey:@"rewardCoinForLikingPage"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int)getRewardCoinForLikingPage
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"rewardCoinForLikingPage"] intValue];
+}
+
+
+#pragma mark Reward Coin For sharing app
+
++ (void)setRewardCoinForSharingApp:(int)val
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:val] forKey:@"rewardCoinForSharingApp"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int)getRewardCoinForSharingApp
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"rewardCoinForSharingApp"] intValue];
+}
+
+
+#pragma mark Reward Coin For asking friend
 
 + (void)setRewardCoinForAskingFriends:(int)val
 {
@@ -722,6 +797,139 @@
 {
     return [[[NSUserDefaults standardUserDefaults] objectForKey:@"rewardCoinForAskingFriends"] intValue];
 }
+
+#pragma mark Did Ask Friends For Current Level
+
++ (BOOL)getDidAskFriendForCurrentLevel
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"didAskFriendForCurrentLevel"];
+}
+
++ (void)setDidAskFriendForCurrentLevel:(BOOL)val
+{
+    [[NSUserDefaults standardUserDefaults] setBool:val forKey:@"didAskFriendForCurrentLevel"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark message
+
++ (NSString *)getMessageShareApp
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"messageShareApp"];
+}
+
++ (void)setMessageShareApp:(NSString *)msg
+{
+    [[NSUserDefaults standardUserDefaults] setObject:msg forKey:@"messageShareApp"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
++ (NSString *)getMessageHelp
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"messageHelp"];
+}
+
++ (void)setMessageHelp:(NSString *)msg
+{
+    [[NSUserDefaults standardUserDefaults] setObject:msg forKey:@"messageHelp"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
++ (NSString *)getMessageBrag
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"messageBrag"];
+}
+
++ (void)setMessageBrag:(NSString *)msg
+{
+    [[NSUserDefaults standardUserDefaults] setObject:msg forKey:@"messageBrag"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
+#pragma mark share
+
++ (void)shareWithImage:(UIImage *)img andMessage:(NSString *)msg withArchorPoint:(UIView *)ap inViewController:(UIViewController *)vc  completion:(void (^)(void))completion
+{
+    if( [UIActivityViewController class])
+    {
+        
+        APActivityProvider *ActivityProvider = [[APActivityProvider alloc] init];
+        
+        NSArray *Items;
+        if (img)
+        {
+            Items = @[ActivityProvider, img, msg];
+        }else
+        {
+            Items = @[ActivityProvider, msg];
+        }
+        
+        
+        UIActivityViewController *aVC = [[UIActivityViewController alloc] initWithActivityItems:Items applicationActivities:nil];
+        NSMutableArray *listDisableItems = [[NSMutableArray alloc] initWithObjects:UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll, UIActivityTypePostToWeibo, UIActivityTypeMessage, UIActivityTypeMail,UIActivityTypeAirDrop ,nil];
+        
+        
+        if ([[NSDate date] compare:[[CommonFunction getLastSendEmail] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
+        {
+            [listDisableItems addObject:UIActivityTypeMail];
+        }
+        if ([[NSDate date] compare:[[CommonFunction getLastTwitterShare] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
+        {
+            [listDisableItems addObject:UIActivityTypePostToTwitter];
+        }
+        if ([[NSDate date] compare:[[CommonFunction getLastSendSMS] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
+        {
+            [listDisableItems addObject:UIActivityTypeMessage];
+        }
+        
+        [aVC setExcludedActivityTypes:listDisableItems];
+        
+        [aVC setCompletionHandler:^(NSString *activityType, BOOL completed){
+            //                    NSLog(@"activity Type : %@", activityType);
+            if (completed)
+            {
+                
+                
+                SWITCH (activityType) {
+                    CASE (@"com.apple.UIKit.activity.Message") {
+                        [CommonFunction setLastSendSMS:[NSDate date]];
+                        break;
+                    }
+                    CASE (@"com.apple.UIKit.activity.Mail") {
+                        [CommonFunction setLastSendEmail:[NSDate date]];
+                        break;
+                    }
+                    CASE (@"com.apple.UIKit.activity.PostToTwitter") {
+                        [CommonFunction setLastTwitterShare:[NSDate date]];
+                        break;
+                    }
+                    CASE (@"com.apple.UIKit.activity.PostToFacebook") {
+                        [CommonFunction setLastFBShare:[NSDate date]];
+                        break;
+                    }
+                    DEFAULT {
+                        break;
+                    }
+                }
+                
+                completion();
+            }
+        }];
+        if (kCheckIfIphone)
+        {
+            
+        }else
+        {
+            
+            aVC.popoverPresentationController.sourceView = ap;
+        }
+        [vc presentViewController:aVC animated:YES completion:nil];
+        
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Sorry" message:@"We are sorry. This feature can only available in IOS 6 or above, please upgrade IOS to get free coins" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+    }
+}
+
 
 
 @end

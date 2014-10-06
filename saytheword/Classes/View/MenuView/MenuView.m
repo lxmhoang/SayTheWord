@@ -107,10 +107,11 @@
     [self addSubview:levelLabel];
 }
 
-- (void)goToFBFanPage:(id)_sender
+- (void)rateApp:(id)_sender
 {
-    NSURL *url = [NSURL URLWithString:@"fb://profile/172415879600587"];
-    [[UIApplication sharedApplication] openURL:url];
+    [[UIApplication sharedApplication] openURL:[CommonFunction getAppURL]];
+//    NSURL *url = [NSURL URLWithString:@"fb://profile/172415879600587"];
+//    [[UIApplication sharedApplication] openURL:url];
 }
 
 - (void)tapOnMusicIcon:(id)_sender
@@ -133,15 +134,19 @@
 
 - (void)createSubViews
 {
-    CGRect tmpRect = kCheckIfIphone ? CGRectMake(280, 50, 32, 32) : CGRectMake((kWidthOfScreen+480)/2, 100, 64, 64);
-    UIImageView *fbIcon = [[UIImageView alloc] initWithFrame:tmpRect];
-    [fbIcon setImage:[UIImage imageNamed:@"fb_icon.png"]];
-    fbIcon.userInteractionEnabled = YES;
-    UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToFBFanPage:)];
-    [fbIcon addGestureRecognizer:_tap];
-    [self addSubview:fbIcon];
+    CGRect tmpRect = kCheckIfIphone ? CGRectMake(280, 50, 40, 40) : CGRectMake((kWidthOfScreen+480)/2, 100, 100, 100);
+//    UILabel *labelRate = [[UILabel alloc] initWithFrame:tmpRect];
+//    labelRate.text = @"RATE";
+//    labelRate.font = [UIFont boldSystemFontOfSize:25.0f];
+//    labelRate.textColor = [UIColor yellowColor];
+    UIImageView *rateIcon = [[UIImageView alloc] initWithFrame:tmpRect];
+    [rateIcon setImage:[UIImage imageNamed:@"rateus_green.png"]];
+    rateIcon.userInteractionEnabled = YES;
+    UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rateApp:)];
+    [rateIcon addGestureRecognizer:_tap];
+    [self addSubview:rateIcon];
     
-    tmpRect = kCheckIfIphone ? CGRectMake(280, 90, 32, 32) : CGRectMake((kWidthOfScreen+480)/2, 200, 64, 64);
+    tmpRect = kCheckIfIphone ? CGRectMake(280, 200, 32, 32) : CGRectMake((kWidthOfScreen+480)/2, 300, 64, 64);
     musicIcon = [[UIImageView alloc] initWithFrame:tmpRect];
     if ([CommonFunction checkPlayMusic])
     {
