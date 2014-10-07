@@ -15,16 +15,28 @@
 
 #import "SparklesViewController.h"  
 
+#import "GADInterstitial.h"
+
+#import <iAd/iAd.h>
+
 #import "HowToPlayViewController.h"
 
 
 
 
 
-@interface RootController : UIViewController<MenuControllerProtocol, PlayControllerProtocol, WinControllerProtocol, UIAlertViewDelegate, HowToControllerProtocol>
-{
+@interface RootController : UIViewController<MenuControllerProtocol, PlayControllerProtocol, WinControllerProtocol, UIAlertViewDelegate, HowToControllerProtocol, GADInterstitialDelegate, ADInterstitialAdDelegate>
+{    
+
 }
 
 @property (nonatomic, strong) UIViewController *fVC;
+
+
+@property (strong, nonatomic) GADInterstitial  *gaInterstitial;
+@property (strong, nonatomic) ADInterstitialAd *interstitial;
+
+- (void)runInterstitial;
+- (void)requestFullScreenIAd;
 
 @end

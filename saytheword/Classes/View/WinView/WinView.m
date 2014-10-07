@@ -8,9 +8,10 @@
 
 #import "WinView.h"
 
+
 @implementation WinView
 
-@synthesize playModel, delegate;
+@synthesize playModel, delegate, fullscreenAds, brag;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -29,10 +30,14 @@
     {
         numOfFW = kCheckIfIphone ? 5 : 8;
         tapped = NO;
+        ableToGoToNextLevel = NO;
         playModel = _playModel;
         endYLimit = kCheckIfIphone ? 200 : 500;
         sizeOfFW = kCheckIfIphone ? 10 : 20;
         widthOfFireWork = round(kWidthOfScreen/numOfFW);
+        
+        fullscreenAds = NO;
+        brag = NO;
     }
     [self setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
     [self createSubViews];
@@ -41,14 +46,9 @@
 
 
 
+
 - (void)createSubViews
 {
-//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    [btn setTag:111];
-//    [btn setFrame:CGRectMake(60, 80, 200, 80)];
-//    [btn addTarget:self action:@selector(move) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [self addSubview:btn];
     
     [NSTimer scheduledTimerWithTimeInterval:kTimeToPresentVC-1 target:self selector:@selector(move) userInfo:nil repeats:NO];
     [NSTimer scheduledTimerWithTimeInterval:kTimeToPresentVC target:self selector:@selector(addTransView) userInfo:nil repeats:NO];
@@ -79,19 +79,6 @@
     [self addSubview:aV];
     [self sendSubviewToBack:aV];
     
-    
-
-
-    
-
-    
-//    CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.y"];
-//    animation.fromValue = [NSNumber numberWithFloat:0.0f];
-//    animation.toValue = [NSNumber numberWithFloat: 2*M_PI];
-//    animation.duration = 3.0f;
-//    animation.repeatCount = HUGE_VAL;
-//    [c1.layer addAnimation:animation forKey:@"MyAnimation"];
-    
     listCoins = [[NSMutableArray alloc] init];
     
     for (int i=0;i<playModel.wordInfo.finalWord.length;i++)
@@ -106,13 +93,13 @@
     int yOfCongrat = kCheckIfIphone ? 310 : 600;
     int fontSize = kCheckIfIphone ? 22 : 35;
     
-    UILabel *congratLB = [[UILabel alloc] initWithFrame:CGRectMake(0, yOfCongrat, kWidthOfScreen, 60)];
-    congratLB.text = [[NSString stringWithFormat:@"You got %lu coins",playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter] uppercaseString];
+    congratLB = [[UILabel alloc] initWithFrame:CGRectMake(0, yOfCongrat, kWidthOfScreen, 60)];
+    congratLB.text = [[NSString stringWithFormat:@"+ %u coins",playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter] uppercaseString];
     [congratLB setFont:[UIFont fontWithName:@"Arial-BoldMT" size:fontSize]];
     congratLB.alpha = 0;
     [congratLB setTextAlignment:NSTextAlignmentCenter];
     [congratLB setBackgroundColor:[UIColor clearColor]];
-    [congratLB setTextColor:[UIColor whiteColor]];
+    [congratLB setTextColor:[UIColor yellowColor]];
     [self addSubview:congratLB];
     
     int dstMoveUp = kCheckIfIphone ? 100 : 200;
@@ -127,7 +114,7 @@
         for (int i=0;i<playModel.wordInfo.finalWord.length;i++)
         {
             UIImageView *t = [listCoins objectAtIndex:i];
-            [UIView animateWithDuration:0.6 delay:0.1*(playModel.wordInfo.finalWord.length-i) options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [UIView animateWithDuration:1 delay:0.3*(playModel.wordInfo.finalWord.length-i) options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 int x = [aV viewWithTag:(i+kRandomNumber)].frame.origin.x;
                 [t setFrame:CGRectMake(x, yOfCoins, sizeOfCoins, sizeOfCoins)];
             } completion:^(BOOL finished) {
@@ -137,16 +124,19 @@
                         congratLB.alpha = 1;
                     } completion:^(BOOL finished) {
                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                        
+                        if (brag && [CommonFunction getBrag])
+                        {
+                            [self showBragLabel];
+                        }
+                        
+                        
                     }];
                 }
                 
                 
             }];
         }
-
-        
-        
-
     }];
     
 
@@ -160,7 +150,51 @@
         _bannerIsVisible = NO;
         [self addSubview:adbanner];
     }
-    }
+}
+
+- (void)showFullScreenAds
+{
+    RootController *rootVC = [CommonFunction getRootController];
+    [rootVC runInterstitial];
+    
+}
+
+- (void)doBrag:(UIGestureRecognizer *)sender
+{
+//    [];
+    UIImage *img = [CommonFunction getScreenShot];
+    [CommonFunction shareWithImage:img andMessage:[CommonFunction getMessageBrag] withArchorPoint:sender.view inViewController:[CommonFunction getRootController] completion:^{
+        
+        sender.view.userInteractionEnabled = NO;
+        congratLB.text = [[NSString stringWithFormat:@"+ %u coins",2*playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter] uppercaseString];
+        
+        [CommonFunction setCoin:([CommonFunction getCoin]+playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter)];
+    }];
+}
+
+- (void)showBragLabel
+{
+    int height = kCheckIfIphone ? 44 : 64;
+    int fontSize = kCheckIfIphone ? 20 : 32;
+    UILabel *bragLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -height, self.frame.size.width, height)];
+    bragLabel.backgroundColor = [UIColor redColor];
+    bragLabel.font = [UIFont boldSystemFontOfSize:fontSize];
+    bragLabel.textColor = [UIColor yellowColor];
+    bragLabel.textAlignment = NSTextAlignmentCenter;
+    bragLabel.text = @"Tap here to brag and DOUBLE you coin reward";
+    bragLabel.userInteractionEnabled = YES;
+    [self addSubview:bragLabel];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doBrag:)];
+    [bragLabel addGestureRecognizer:tap];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [bragLabel setFrame:CGRectOffset(bragLabel.frame, 0, height)];
+    } completion:^(BOOL finished) {
+    }];
+    
+    
+}
 
 #pragma mark Button press handle method
 
@@ -170,36 +204,30 @@
     {
         [self genNewEV:i];
     }
-
-
-    
-//    ExplodeView *stars = [[ExplodeView alloc] initWithFrame:CGRectMake(160, 70, 10, 10)];
-//    [self addSubview:stars];
-//    [stars release];
-    
-    
-//    [self sendSubviewToBack:stars];
-//    [UIView animateWithDuration:3 animations:^{
-//        stars.center = CGPointMake(320, 70);
-//    } completion:^(BOOL finished) {
-//        [stars removeFromSuperview];
-//        [stars release];
-//        [delegate animationFinished];
-//    }];
-    
 }
 
 #pragma mark moveToNextlevel
 
+
+
 - (void)moveToNextLevel:(UITapGestureRecognizer *)_tap
 {
-    
+    if (!ableToGoToNextLevel)
+    {
+        if (fullscreenAds && [CommonFunction getFullScreenAds])
+        {
+            [self showFullScreenAds];
+        }
+        ableToGoToNextLevel = YES;
+        return;
+    }
     if (!tapped)
     {
-        [CommonFunction setCoin:[CommonFunction getCoin]+(int)playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter];
+
+        
         tapped = YES;
         for (int i=0;i<[listCoins count];i++){
-            [UIView animateWithDuration:0.6 delay:(playModel.wordInfo.finalWord.length-i)*0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            [UIView animateWithDuration:1 delay:(playModel.wordInfo.finalWord.length-i)*0.2 options:UIViewAnimationOptionCurveEaseIn animations:^{
                 UIView *coin = [listCoins objectAtIndex:i];
                 [coin setFrame:CGRectMake(kWidthOfScreen + coin.frame.size.width, -coin.frame.size.height, coin.frame.size.width, coin.frame.size.height)];
             } completion:^(BOOL finished) {
@@ -273,6 +301,9 @@
 {
     NSLog(@"Failed to retrieve ad");
 }
+
+#pragma mark interstitial Delegate
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

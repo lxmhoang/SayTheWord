@@ -70,6 +70,15 @@
     [self presentNewVCFromTheLeft:menuController];
 }
 
+- (void)initGA
+{
+    
+}
+
+- (void)initFullScreenAds
+{
+    [self requestFullScreenIAd];
+}
 
 #pragma mark how to  controller delegate method
 
@@ -108,18 +117,13 @@
     PlayController *playController = [[PlayController alloc]initWithPosition:1];
     playController.delegate = self;
     [self presentNewVCFromTheRight:playController];
+    [self initFullScreenAds];
 }
 
 #pragma mark WinController delegate method
 
 - (void)nextLevelFromWinView
 {
-    [CommonFunction setLevel:([CommonFunction getLevel]+1)];
-    [CommonFunction setDidAskFriendForCurrentLevel:NO];
-//    if ([CommonFunction getLevel]==100){
-//        [CommonFunction setLevel:9];
-//    }
-    
     
     
     
@@ -234,6 +238,75 @@
     
 }
 
+#pragma mark iAd Interstitial
+
+- (void)requestFullScreenIAd
+{
+    
+    self.gaInterstitial = [self createAndLoadInterstitial];
+    
+    self.interstitial = [[ADInterstitialAd alloc] init];
+    self.interstitial.delegate = self;
+    self.interstitialPresentationPolicy = ADInterstitialPresentationPolicyManual;
+}
+
+
+-(void)interstitialAd:(ADInterstitialAd *)interstitialAd didFailWithError:(NSError *)error {
+    _interstitial = nil;
+    NSLog(@"Ad didFailWithERROR");
+    NSLog(@"%@", error);
+}
+
+-(void)interstitialAdDidLoad:(ADInterstitialAd *)interstitialAd {
+    NSLog(@"Ad DidLOAD");
+
+}
+
+-(void)interstitialAdDidUnload:(ADInterstitialAd *)interstitialAd {
+    _interstitial = nil;
+    NSLog(@"Ad DidUNLOAD");
+}
+
+-(void)interstitialAdActionDidFinish:(ADInterstitialAd *)interstitialAd {
+    _interstitial = nil;
+    NSLog(@"Ad DidFINISH");
+}
+
+#pragma mark GAD Interstitial
+
+
+- (GADInterstitial *)createAndLoadInterstitial {
+    GADInterstitial *localInterstitial = [[GADInterstitial alloc] init];
+    localInterstitial.adUnitID = @"ca-app-pub-3940256099942544/4411468910";
+    localInterstitial.delegate = self;
+    
+    GADRequest *request = [GADRequest request];
+    request.testDevices = @[ GAD_SIMULATOR_ID, @"77e210185429e6defb358e3cc5c1378c63226103" ];
+    [localInterstitial loadRequest:request];
+    
+    return localInterstitial;
+}
+
+- (void)runInterstitial
+{
+    if (![self requestInterstitialAdPresentation])
+    {
+        if ([self.gaInterstitial isReady]) {
+            [self.gaInterstitial presentFromRootViewController:self];
+        }else
+        {
+            // Neither is working
+        }
+    }
+
+}
+
+
+#pragma mark interstitial Delegate
+
+- (void)interstitialDidDismissScreen:(GADInterstitial *)interstitial {
+    self.gaInterstitial = [self createAndLoadInterstitial];
+}
 
 #pragma mark default method
 

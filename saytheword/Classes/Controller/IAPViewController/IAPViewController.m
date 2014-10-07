@@ -112,11 +112,11 @@
     optionsGetFreeCoin = [[NSMutableArray alloc] init];
     
     
-    if ([CommonFunction checkIfRateForCoin] && [CommonFunction getRateUS] == 0)
+    if (([CommonFunction getRewardCoinForRattingApp] > 0) && [CommonFunction checkIfRateForCoin] && [CommonFunction getRateUS] == 0)
     {
         FreeCoinModel *rate = [[FreeCoinModel alloc] init];
         rate.imgName = @"star_rate.png";
-        rate.title = kTitleOfRating;
+        rate.title = [CommonFunction getMessageRateIt];
         rate.rewardCoin = [NSNumber numberWithInt:[CommonFunction getRewardCoinForRattingApp]];
         [optionsGetFreeCoin addObject:rate];
     }
@@ -556,7 +556,7 @@
             }
 
         }
-        else if ([model.title isEqualToString:kTitleOfRating])
+        else if ([model.title isEqualToString:[CommonFunction getMessageRateIt]])
         {
            
             [[UIApplication sharedApplication] openURL:[CommonFunction getAppURL]];
@@ -811,9 +811,10 @@
             }
             
         }
-        else if ([model.title isEqualToString:kTitleOfRating])
+        else if ([model.title isEqualToString:[CommonFunction getMessageRateIt]])
         {
             
+            [self cancelBtnAction:nil];
             [[UIApplication sharedApplication] openURL:[CommonFunction getAppURL]];
             [CommonFunction setRateUs:1];
         }

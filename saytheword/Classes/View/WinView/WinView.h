@@ -10,6 +10,9 @@
 #import "PlayModel.h"
 #import "ExplodeView.h"
 #import <iAd/iAd.h>
+#import "GADInterstitial.h"
+
+@class GADBannerView, GADRequest;
 
 @protocol WinViewProtocol <NSObject>
 
@@ -17,8 +20,9 @@
 
 @end
 
-@interface WinView : UIView <ExplodeViewDelegate, ADBannerViewDelegate>
+@interface WinView : UIView <ExplodeViewDelegate, ADBannerViewDelegate, GADInterstitialDelegate, ADInterstitialAdDelegate>
 {
+    UILabel *congratLB;
     NSMutableArray *listCoins;
     BOOL tapped;
     ADBannerView *adbanner;
@@ -26,9 +30,17 @@
     int endYLimit;
     int widthOfFireWork;
     int numOfFW, sizeOfFW;
+    
+    BOOL ableToGoToNextLevel;
+    
+    BOOL fullscreenAds, brag;
 }
 
+@property (nonatomic, strong) ADInterstitialAd *interstitial;
 @property (nonatomic, unsafe_unretained) id delegate;
+@property (nonatomic, assign) BOOL fullscreenAds, brag;
+
+
 
 
 

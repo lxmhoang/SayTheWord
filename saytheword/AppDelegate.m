@@ -150,7 +150,7 @@
     AudioServicesCreateSystemSoundID(pathURLFW, &fireWorkSound);
 
    
-    NSString *path  = [[NSBundle mainBundle] pathForResource:@"RiverFlowsInYou" ofType:@"mp3"];
+//    NSString *path  = [[NSBundle mainBundle] pathForResource:@"Kiss_The_Rain" ofType:@"mp3"];
     NSURL *pathURL = [NSURL fileURLWithPath : path];
     
     [CommonFunction class];
@@ -193,7 +193,7 @@
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     
-    if ([CommonFunction getRateUS] == 1)
+    if ([CommonFunction checkIfRateForCoin] && ([CommonFunction getRateUS] == 1) && [CommonFunction getRewardCoinForRattingApp] > 0)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:kMsgThankForRating] message:[NSString stringWithFormat:@" You have claimed %d coins", [CommonFunction getRewardCoinForRattingApp]] delegate:rootController cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];

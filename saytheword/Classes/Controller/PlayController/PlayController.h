@@ -20,6 +20,7 @@
 
 - (void)backBtnPressFromPlayController;
 - (void)showWinScreen;
+- (void)initFullScreenAds;
 
 
 

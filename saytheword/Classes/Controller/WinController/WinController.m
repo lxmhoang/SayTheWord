@@ -42,9 +42,33 @@
     [super viewDidLoad];
 //    [CommonFunction playBGSound];
     [CommonFunction reSetGlobalData];
+    [CommonFunction setCoin:[CommonFunction getCoin]+(int)playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter];
+    
+    [CommonFunction setLevel:([CommonFunction getLevel]+1)];
+    [CommonFunction setDidAskFriendForCurrentLevel:NO];
+    
+    
     [self.view setBackgroundColor:[UIColor clearColor]];
     
     winView = [[WinView alloc]initWithModel:playModel];
+    
+    int i = arc4random() % 20;
+    
+    if (i%3==0)
+    {
+        winView.brag = YES;
+        // brag
+    }else if (i%3==1)
+    {
+        winView.fullscreenAds = YES;
+        // full screen ads
+    }else if (i%3 == 2)
+    {
+        // nothing
+    }
+    
+    winView.fullscreenAds = YES;
+    winView.brag = YES;
 
     
     winView.delegate = self;

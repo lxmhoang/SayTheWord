@@ -389,7 +389,7 @@
     {
         FreeCoinModel *rate = [[FreeCoinModel alloc] init];
         rate.imgName = @"star_rate.png";
-        rate.title = kTitleOfRating;
+        rate.title = [CommonFunction getMessageRateIt];
         rate.rewardCoin = [NSNumber numberWithInt:[CommonFunction getRewardCoinForRattingApp]];
         [optionsGetFreeCoin addObject:rate];
         
@@ -524,11 +524,12 @@
         
         
     }
-    else if ([model.title isEqualToString:kTitleOfRating])
+    else if ([model.title isEqualToString:[CommonFunction getMessageRateIt]])
     {
-        
+        [self closeBigView:nil];
         [[UIApplication sharedApplication] openURL:[CommonFunction getAppURL]];
         [CommonFunction setRateUs:1];
+        
     }
 }
 

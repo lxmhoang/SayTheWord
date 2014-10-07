@@ -62,6 +62,9 @@
 
 - (void)hintBtnTapped
 {
+    
+    [self takeScreenshot];
+
     HintsView *hintsView = [[[NSBundle mainBundle] loadNibNamed:@"HintsView_iPad" owner:nil options:nil] objectAtIndex:0];
     hintsView.delegate = self;
     [hintsView setUp];
@@ -119,7 +122,7 @@
 
 - (void)showWinScreenFromPlayView
 {
-
+    [self takeScreenshot];
 
     [playView deactiveTimer];
     [delegate showWinScreen];
@@ -140,11 +143,19 @@
     
     [self.view setFrame:playView.bounds];
     [self.view addSubview:playView];
+//    [delegate initFullScreenAds];
+    
+    
 
     // Do any additional setup after loading the view.
 }
 
 - (void)viewDidAppear:(BOOL)animated
+{
+    
+}
+
+- (void)takeScreenshot
 {
     playView.adbanner.alpha = 0;
     UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:self.view.frame];
@@ -164,8 +175,6 @@
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.screenShot = self.screenShot;
-    
-    
 }
 
 

@@ -23,15 +23,15 @@
 
 #define kTitleOfFacebookLike @"LIKE US"
 #define kTitleOfSharing @"SHARE IT"
-#define kTitleOfRating @"RATE IT"
+#define kInitialTitleOfRating @"RATE IT"
 
-#define kInitialHelpMessage @"Help me guess this word by combining first syllabel of left pic with last syllabel of right pic. E.g: BUTter+stuDY = BUDDY. Download it FREE at http://goo.gl/m2U3sV "
-
-
-#define kInitialShareMessage @"Help me guess this word by combining first syllabel of left pic with last syllabel of right pic. E.g: BUTter+stuDY = BUDDY. Download it FREE at http://goo.gl/m2U3sV "
+#define kInitialHelpMessage @"Help me guess this word by combining first syllabel of left pic with last syllabel of right pic. E.g: BUTter+stuDY = BUDDY. Download it FREE http://goo.gl/m2U3sV "
 
 
-#define kInitialBragMessage @"Help me guess this word by combining first syllabel of left pic with last syllabel of right pic. E.g: BUTter+stuDY = BUDDY. Download it FREE at http://goo.gl/m2U3sV "
+#define kInitialShareMessage @"Help me guess this word by combining first syllabel of left pic with last syllabel of right pic. E.g: BUTter+stuDY = BUDDY. Download it FREE http://goo.gl/m2U3sV "
+
+
+#define kInitialBragMessage @"I'm an expert at #SayItLoud. Try it FREE http://goo.gl/m2U3sV "
 
 #define kTagOfCopyAnswerView 669
 
@@ -60,7 +60,7 @@
 #define kHeightOfNavigationBar (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPhone) ? 44 : 64
 #define kCheckIfIphone (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPhone)
 #define kTimeToPresentVC 0.5
-#define kInitialCoin 10000
+#define kInitialCoin 100
 
 #define kRandomNumber 33
 
@@ -227,6 +227,9 @@
 + (double)timeToNextShare;
 + (void)setTimeToNextShare:(double)val;
 
++ (BOOL)getShowAdPlayView;
++ (void)setShowAdPlayView:(BOOL)val;
+
 + (BOOL)checkIfShowAds;
 + (void)setShowAds:(BOOL)val;
 
@@ -283,5 +286,18 @@
 
 + (NSString *)getMessageBrag;
 + (void)setMessageBrag:(NSString *)msg;
+
+#pragma mark set full screen ads + brag
+
++ (BOOL)getFullScreenAds;
++ (void)setFullScreenAds:(BOOL)val;
+
++ (BOOL)getBrag;
++ (void)setBrag:(BOOL)val;
+
+#pragma mark message rate it
+
++ (NSString *)getMessageRateIt;
++ (void)setMessageRateIt:(NSString *)val;
 
 @end

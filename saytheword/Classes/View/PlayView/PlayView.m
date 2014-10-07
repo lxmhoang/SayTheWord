@@ -8,6 +8,9 @@
 
 #import "PlayView.h"
 
+#import "GADBannerView.h"
+#import "GADRequest.h"
+
 @implementation PlayView
 
 @synthesize playModel, delegate, typingView, answerView, coinLabel, leftView, rightView, adbanner;
@@ -288,7 +291,7 @@
     
     [self addSubview:hintBtn];
     
-    if (![CommonFunction checkNoAds] && [CommonFunction checkIfShowAds])
+    if (![CommonFunction checkNoAds] && [CommonFunction checkIfShowAds] && [CommonFunction getShowAdPlayView])
     {
         adbanner = [[ADBannerView alloc] initWithFrame:CGRectMake(0, self.frame.size.height, kWidthOfScreen, 50)];
         adbanner.delegate = self;
@@ -432,6 +435,8 @@
         leftTitleView.alpha = 1;
         rightTitleView.alpha = 1;
     } completion:^(BOOL finished) {
+        
+        [delegate showWinScreenFromPlayView];
         RootController *rootVC = [CommonFunction getRootController];
         AnswerView *copyAnswerView = answerView;
         
@@ -441,7 +446,7 @@
         [leftTitleView setTag:kTagOfLeftTitle];
         [rightTitleView setTag:kTagOfRightTitle];
         [copyAnswerView setTag:kTagOfCopyAnswerView];
-        [delegate showWinScreenFromPlayView];
+//        [delegate showWinScreenFromPlayView];
     }];
     
     

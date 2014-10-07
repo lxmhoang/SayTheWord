@@ -337,6 +337,14 @@
     
     NSNumber *coin = [NSNumber numberWithInt:kInitialCoin];
     
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"fullScreenAds"] == nil){
+        [self setFullScreenAds:NO];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"brag"] == nil){
+        [self setBrag:NO];
+    }
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"messageShareApp"] == nil){
         [self setMessageShareApp:kInitialShareMessage];
     }
@@ -345,6 +353,9 @@
     }
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"messageBrag"] == nil){
         [self setMessageBrag:kInitialBragMessage];
+    }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"messageRateIt"] == nil){
+        [self setMessageBrag:kInitialTitleOfRating];
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"didAskFriendForCurrentLevel"] == nil){
@@ -398,6 +409,10 @@
         [self setDoubleCoinInWinView:NO];
     }
     
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"showAdPlayView"] == nil){
+        [self setShowAdPlayView:NO];
+    }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"showAds"] == nil){
         [self setShowAds:NO];
@@ -464,7 +479,7 @@
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"level"]==nil) {
-        [self setLevel:7];
+        [self setLevel:1];
     }
     
 
@@ -599,6 +614,8 @@
                     NSString *strKey = key;
                     if ([obj objectForKey:strKey])
                     {
+                        NSLog(@"object and key : %@    %@", [obj objectForKey:strKey], strKey);
+                        
                         [[NSUserDefaults standardUserDefaults] setObject:[obj objectForKey:strKey] forKey:strKey];
                         [[NSUserDefaults standardUserDefaults] synchronize];
                     }
@@ -667,6 +684,20 @@
 {
     [[NSUserDefaults standardUserDefaults] setDouble:val forKey:@"TimeToNextShare"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark show ad playview
+
++ (BOOL)getShowAdPlayView
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"showAdPlayView"];
+}
+
++ (void)setShowAdPlayView:(BOOL)val
+{
+    [[NSUserDefaults standardUserDefaults] setBool:val forKey:@"showAdPlayView"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
 }
 
 #pragma mark show ads
@@ -844,6 +875,41 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++ (NSString *)getMessageRateIt
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"messageRateIt"];
+}
+
++ (void)setMessageRateIt:(NSString *)msg
+{
+    [[NSUserDefaults standardUserDefaults] setObject:msg forKey:@"messageRateIt"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
+#pragma mark set full screen ads + brag
+
++ (BOOL)getFullScreenAds
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"fullScreenAds"];
+}
+
++ (void)setFullScreenAds:(BOOL)val
+{
+    [[NSUserDefaults standardUserDefaults] setBool:val forKey:@"fullScreenAds"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL)getBrag
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"brag"];
+}
+
++ (void)setBrag:(BOOL)val
+{
+    [[NSUserDefaults standardUserDefaults] setBool:val forKey:@"brag"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 #pragma mark share
 

@@ -8,6 +8,8 @@
 
 #import "MenuView.h"
 
+#import "GADBannerView.h"
+#import "GADRequest.h"
 @implementation MenuView
 
 
