@@ -34,6 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [CommonFunction playSweepSound];
     
     NSString *nibName = kCheckIfIphone ? @"IAPCollectionViewCell" : @"IAPCollectionViewCell_iPad";
     

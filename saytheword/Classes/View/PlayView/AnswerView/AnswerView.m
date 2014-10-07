@@ -196,6 +196,8 @@
 
 - (void)winEvent
 {
+    
+    [CommonFunction playSuccessSound];
     [[self viewWithTag:kTagOfEraseIcon] removeFromSuperview];
     for (int i=0;i<playModel.wordInfo.finalWord.length;i++){
         [self flipChar:i];
@@ -242,7 +244,7 @@
 
 - (void)removeAllText
 {
-
+    [CommonFunction playSweepSound];
     for(int i=0;i<playModel.wordInfo.finalWord.length;i++)
     {
          UILabel *indexLb = (UILabel *)[self viewWithTag:(i+kRandomNumber)];

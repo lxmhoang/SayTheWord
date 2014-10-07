@@ -45,6 +45,11 @@
 		379AA0C0178A90E70039F0D1 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 379AA0BE178A90750039F0D1 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		379AA0C4178AD01C0039F0D1 /* HintsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 379AA0C3178AD01C0039F0D1 /* HintsView.m */; };
 		379B4E291772F7B5002B978D /* clear.png in Resources */ = {isa = PBXBuildFile; fileRef = 379B4E281772F7B5002B978D /* clear.png */; };
+		379C71D019E3FD210004DC24 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 379C71CF19E3FD210004DC24 /* success.wav */; };
+		379C71D319E408760004DC24 /* many_coin_drop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 379C71D119E408760004DC24 /* many_coin_drop.wav */; };
+		379C71D419E408760004DC24 /* single_coin_drop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 379C71D219E408760004DC24 /* single_coin_drop.wav */; };
+		379C71D619E445720004DC24 /* sweep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 379C71D519E445720004DC24 /* sweep.wav */; };
+		379C71DA19E456040004DC24 /* poptounge.wav in Resources */ = {isa = PBXBuildFile; fileRef = 379C71D919E456040004DC24 /* poptounge.wav */; };
 		379D988D178E9F1A00CADFC2 /* ApActivityData.m in Sources */ = {isa = PBXBuildFile; fileRef = 379D988C178E9F1A00CADFC2 /* ApActivityData.m */; };
 		379D9891178EAFE000CADFC2 /* FacebookActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 379D9890178EAFE000CADFC2 /* FacebookActivity.m */; };
 		379DC476175334BE00CEDB69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 379DC475175334BE00CEDB69 /* UIKit.framework */; };
@@ -337,6 +342,11 @@
 		379AA0C2178AD01C0039F0D1 /* HintsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HintsView.h; sourceTree = "<group>"; };
 		379AA0C3178AD01C0039F0D1 /* HintsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HintsView.m; sourceTree = "<group>"; };
 		379B4E281772F7B5002B978D /* clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clear.png; sourceTree = "<group>"; };
+		379C71CF19E3FD210004DC24 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
+		379C71D119E408760004DC24 /* many_coin_drop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = many_coin_drop.wav; sourceTree = "<group>"; };
+		379C71D219E408760004DC24 /* single_coin_drop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = single_coin_drop.wav; sourceTree = "<group>"; };
+		379C71D519E445720004DC24 /* sweep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sweep.wav; sourceTree = "<group>"; };
+		379C71D919E456040004DC24 /* poptounge.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = poptounge.wav; sourceTree = "<group>"; };
 		379D988B178E9F1A00CADFC2 /* ApActivityData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApActivityData.h; sourceTree = "<group>"; };
 		379D988C178E9F1A00CADFC2 /* ApActivityData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApActivityData.m; sourceTree = "<group>"; };
 		379D988F178EAFE000CADFC2 /* FacebookActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookActivity.h; sourceTree = "<group>"; };
@@ -777,6 +787,11 @@
 		3797BD651755C10700F42FE4 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				379C71D919E456040004DC24 /* poptounge.wav */,
+				379C71D519E445720004DC24 /* sweep.wav */,
+				379C71D119E408760004DC24 /* many_coin_drop.wav */,
+				379C71D219E408760004DC24 /* single_coin_drop.wav */,
+				379C71CF19E3FD210004DC24 /* success.wav */,
 				37C785C119CEFDAC00010613 /* firework_explode.mp3 */,
 				37B91F4317783D4800A37CA2 /* RiverFlowsInYou.mp3 */,
 				37B91F3D17782CA600A37CA2 /* Kiss_The_Rain.mp3 */,
@@ -1589,6 +1604,7 @@
 				37BD67A5177BD590004356AD /* hoodie.jpg in Resources */,
 				37BD67A6177BD590004356AD /* hooligan.jpg in Resources */,
 				37BD67A7177BD590004356AD /* island.jpg in Resources */,
+				379C71D319E408760004DC24 /* many_coin_drop.wav in Resources */,
 				37BD67A8177BD590004356AD /* kettle.JPG in Resources */,
 				37BD67A9177BD590004356AD /* lemon.jpg in Resources */,
 				37BD67AA177BD590004356AD /* libra.jpg in Resources */,
@@ -1596,6 +1612,7 @@
 				37BD67AC177BD590004356AD /* lichee.JPG in Resources */,
 				37BD67AD177BD590004356AD /* lighter.jpg in Resources */,
 				37BD67AE177BD590004356AD /* lily.jpg in Resources */,
+				379C71DA19E456040004DC24 /* poptounge.wav in Resources */,
 				37BD67AF177BD590004356AD /* lobster.jpg in Resources */,
 				37BD67B0177BD590004356AD /* lollipop.jpg in Resources */,
 				37BD67B1177BD590004356AD /* lotus.jpg in Resources */,
@@ -1615,10 +1632,12 @@
 				37BD67BB177BD590004356AD /* mobile.jpg in Resources */,
 				37BD67BC177BD590004356AD /* money.jpg in Resources */,
 				37BD67BD177BD590004356AD /* monster.jpg in Resources */,
+				379C71D619E445720004DC24 /* sweep.wav in Resources */,
 				37BD67BE177BD590004356AD /* mountain.jpg in Resources */,
 				37B7BD6719D878E30039DC9A /* pudding.jpg in Resources */,
 				37BD67BF177BD590004356AD /* mummy.jpg in Resources */,
 				37BD67C0177BD590004356AD /* noodle.jpg in Resources */,
+				379C71D019E3FD210004DC24 /* success.wav in Resources */,
 				37BD67C1177BD590004356AD /* octopus.jpg in Resources */,
 				37BD67C2177BD590004356AD /* onion.jpg in Resources */,
 				37BD67C3177BD590004356AD /* orchid.jpg in Resources */,
@@ -1637,6 +1656,7 @@
 				37BD67CE177BD590004356AD /* president.jpg in Resources */,
 				37BD67CF177BD590004356AD /* rabbit.jpg in Resources */,
 				37302FEF19E30EC7001FDEAE /* README.txt in Resources */,
+				379C71D419E408760004DC24 /* single_coin_drop.wav in Resources */,
 				37BD67D0177BD590004356AD /* radio.jpg in Resources */,
 				37BD67D1177BD590004356AD /* raven.jpg in Resources */,
 				37BD67D2177BD590004356AD /* rubik.jpg in Resources */,

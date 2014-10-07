@@ -305,6 +305,7 @@
 
 - (void)hintBtnAction
 {
+    [CommonFunction playSweepSound];
     hintInternal = hintInternal * 2;
     [timer invalidate];
     [self after10s];
@@ -324,6 +325,7 @@
 
 - (void)tapToNormal:(UITapGestureRecognizer *)_sender
 {
+    [CommonFunction playSweepSound];
     [[self viewWithTag:kTagOfDarkView] removeFromSuperview];
     [[self viewWithTag:kTagOfNewView] removeFromSuperview];
     [_sender.view removeFromSuperview];
@@ -331,6 +333,7 @@
 
 - (void)tapLeft:(UITapGestureRecognizer *)_sender
 {
+    [CommonFunction playSweepSound];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     
     UIView *darkView = [[UIView alloc]initWithFrame:self.bounds];
@@ -374,6 +377,7 @@
 
 - (void)tapRight:(UITapGestureRecognizer *)_sender
 {
+    [CommonFunction playSweepSound];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     
     UIView *darkView = [[UIView alloc]initWithFrame:self.bounds];
@@ -419,6 +423,7 @@
 
 - (void)pickCharPress:(NSString *)_char
 {
+    [CommonFunction playBtnClickSound];
     [answerView setNewChar:_char];
 }
 
@@ -428,6 +433,7 @@
 
 - (void)winEventFromAnswerView
 {
+    
     UIView *leftTitleView = [self viewWithTag:kTagOfLeftTitle];
     UIView *rightTitleView = [self viewWithTag:kTagOfRightTitle];
     [UIView animateWithDuration:0.8 animations:^{

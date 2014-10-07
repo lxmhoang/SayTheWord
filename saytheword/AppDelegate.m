@@ -40,6 +40,31 @@
     AudioServicesPlaySystemSound(fireWorkSound);
 }
 
+- (void)playBtnClickSound
+{
+    AudioServicesPlaySystemSound(btnClickSound);
+}
+
+- (void)playSuccessSound
+{
+    AudioServicesPlaySystemSound(successSound);
+}
+
+- (void)playSingleCoinSound
+{
+    AudioServicesPlaySystemSound(singleCoin);
+}
+
+- (void)playManyCoinsSound
+{
+    AudioServicesPlaySystemSound(manyCoins);
+}
+
+- (void)playSweepSound
+{
+    AudioServicesPlaySystemSound(sweep);
+}
+
 #pragma mark In App Purchase Delegate
 
 - (void)afterTransaction
@@ -107,6 +132,46 @@
 
 #pragma mark default functions
 
+- (void)initSounds
+{
+    NSString *pathFW  = [[NSBundle mainBundle] pathForResource:@"firework_explode" ofType:@"mp3"];
+    CFURLRef pathURLFW = (__bridge CFURLRef)[NSURL fileURLWithPath : pathFW];
+    
+    AudioServicesCreateSystemSoundID(pathURLFW, &fireWorkSound);
+    
+    NSString *pathBtnClick  = [[NSBundle mainBundle] pathForResource:@"poptounge" ofType:@"wav"];
+    CFURLRef pathURLClick = (__bridge CFURLRef)[NSURL fileURLWithPath : pathBtnClick];
+    
+    AudioServicesCreateSystemSoundID(pathURLClick, &btnClickSound);
+    
+    
+    
+    NSString *pathSuccess  = [[NSBundle mainBundle] pathForResource:@"success" ofType:@"wav"];
+    CFURLRef pathURLSuccess = (__bridge CFURLRef)[NSURL fileURLWithPath : pathSuccess];
+    AudioServicesCreateSystemSoundID(pathURLSuccess, &successSound);
+    
+    
+    NSString *pathSingleCoin  = [[NSBundle mainBundle] pathForResource:@"single_coin_drop" ofType:@"wav"];
+    CFURLRef pathURLSingleCoin = (__bridge CFURLRef)[NSURL fileURLWithPath : pathSingleCoin];
+    AudioServicesCreateSystemSoundID(pathURLSingleCoin, &singleCoin);
+    
+    NSString *pathManyCoins  = [[NSBundle mainBundle] pathForResource:@"many_coin_drop" ofType:@"wav"];
+    CFURLRef pathURLManyCoins = (__bridge CFURLRef)[NSURL fileURLWithPath : pathManyCoins];
+    AudioServicesCreateSystemSoundID(pathURLManyCoins, &manyCoins);
+    
+    NSString *pathSweep  = [[NSBundle mainBundle] pathForResource:@"sweep" ofType:@"wav"];
+    CFURLRef pathURLSweep = (__bridge CFURLRef)[NSURL fileURLWithPath : pathSweep];
+    AudioServicesCreateSystemSoundID(pathURLSweep, &sweep);
+    
+    
+    
+    NSString *path  = [[NSBundle mainBundle] pathForResource:@"Kiss_The_Rain" ofType:@"mp3"];
+    NSURL *pathURL = [NSURL fileURLWithPath : path];
+    
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL:pathURL error:nil];
+    player.numberOfLoops = -1; //Infinite
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.screenShot = nil;
@@ -143,21 +208,12 @@
 //     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
 //
     
-    
-    NSString *pathFW  = [[NSBundle mainBundle] pathForResource:@"firework_explode" ofType:@"mp3"];
-    CFURLRef pathURLFW = (__bridge CFURLRef)[NSURL fileURLWithPath : pathFW];
-    
-    AudioServicesCreateSystemSoundID(pathURLFW, &fireWorkSound);
-
-   
-//    NSString *path  = [[NSBundle mainBundle] pathForResource:@"Kiss_The_Rain" ofType:@"mp3"];
-    NSURL *pathURL = [NSURL fileURLWithPath : path];
+    [self initSounds];
+ 
     
     [CommonFunction class];
     
-    
-    player = [[AVAudioPlayer alloc] initWithContentsOfURL:pathURL error:nil];
-    player.numberOfLoops = -1; //Infinite
+
 
     [CommonFunction createGlobalVariable];
     
@@ -263,7 +319,8 @@
     {
 
 //        [CommonFunction alert:@"first time" delegate:nil];
-        // first time
+        // first time or not ?
+        
         PFObject *obj = [[PFObject alloc] initWithClassName:@"Installation"];
         
         [CommonFunction updateInstallationInfoWithObject:obj andDeviceToken:str];

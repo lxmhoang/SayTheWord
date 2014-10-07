@@ -122,6 +122,29 @@
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] playFireworkSoud];
 }
 
++ (void)playBtnClickSound
+{
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] playBtnClickSound];
+}
+
++ (void)playSuccessSound
+{
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] playSuccessSound];
+}
++ (void)playSingleCoinSound
+{
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] playSingleCoinSound];
+}
++ (void)playManyCoinsSound
+{
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] playManyCoinsSound];
+}
++ (void)playSweepSound
+{
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] playSweepSound];
+}
+
+
 #pragma mark set get remove index
 
 + (int)getRemoveIndex
@@ -341,6 +364,15 @@
         [self setFullScreenAds:NO];
     }
     
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"numOfSharing"] == nil){
+        [self setNumOfSharing:0];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"coinsSpended"] == nil){
+        [self setCoinsSpended:0];
+    }
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"brag"] == nil){
         [self setBrag:NO];
     }
@@ -380,16 +412,16 @@
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"priceOfRemovingLetter"] == nil){
-        [self setPriceOfRemovingLetter:kPriceOfRemoveLetter];
+        [self setPriceOfRemovingLetter:kInitialPriceOfRemoveLetter];
     }
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"priceOfRevealingLetter"] == nil){
-        [self setPriceOfRevealingLetter:kPriceOfRevealLetter];
+        [self setPriceOfRevealingLetter:kInitialPriceOfRevealLetter];
     }
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"priceOfRevealingLeftPic"] == nil){
-        [self setPriceOfRevealingLeftPic:kPriceOfRevealLeftPic];
+        [self setPriceOfRevealingLeftPic:kInitialPriceOfRevealLeftPic];
     }
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"priceOfRevealingRightPic"] == nil){
-        [self setPriceOfRevealingLRightPic:kPriceOfRevealRightPic];
+        [self setPriceOfRevealingLRightPic:kInitialPriceOfRevealRightPic];
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"FBLink"] == nil){
@@ -582,6 +614,15 @@
     obj[@"level"] = [NSNumber numberWithInt:[CommonFunction getLevel]];
     obj[@"device"] = [CommonFunction machineName];
     obj[@"FBLink"] = [CommonFunction getFBLink];
+    
+    obj[@"numOfSharing"] =  [NSNumber numberWithInt:[CommonFunction getNumOfSharing]];
+    
+    obj[@"coinsSpended"] = [NSNumber numberWithInt:[CommonFunction getCoinsSpended]];
+    
+    obj[@"rateUS"] = [NSNumber numberWithInt:[CommonFunction getRateUS]];
+    
+    
+    obj[@"likeFB"] = [CommonFunction getLikeFanPage] ? @"Liked" : @"Not yet";
     
     [CommonFunction setLastUpdateInfo:[NSDate date]];
 //    [CommonFunction alert:[NSString stringWithFormat:@"%@",[CommonFunction getLastUpdateInfo]] delegate:nil];
@@ -911,6 +952,30 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#pragma mark user analytic
+
++ (void)setNumOfSharing:(int)val
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:val forKey:@"numOfSharing"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int)getNumOfSharing
+{
+    return (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"numOfSharing"];
+}
+
++ (void)setCoinsSpended:(int)val
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:val forKey:@"coinsSpended"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int)getCoinsSpended
+{
+    return (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"coinsSpended"];
+}
+
 #pragma mark share
 
 + (void)shareWithImage:(UIImage *)img andMessage:(NSString *)msg withArchorPoint:(UIView *)ap inViewController:(UIViewController *)vc  completion:(void (^)(void))completion
@@ -976,6 +1041,9 @@
                         break;
                     }
                 }
+                
+                int k = [CommonFunction getNumOfSharing];
+                [CommonFunction setNumOfSharing:k+1];
                 
                 completion();
             }

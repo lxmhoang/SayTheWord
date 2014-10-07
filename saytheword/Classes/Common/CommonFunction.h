@@ -99,10 +99,10 @@
 
 //prices of products
 
-#define kPriceOfRemoveLetter 10
-#define kPriceOfRevealLetter 35
-#define kPriceOfRevealLeftPic 70
-#define kPriceOfRevealRightPic 70
+#define kInitialPriceOfRemoveLetter 10
+#define kInitialPriceOfRevealLetter 35
+#define kInitialPriceOfRevealLeftPic 70
+#define kInitialPriceOfRevealRightPic 70
 
 
 
@@ -163,7 +163,13 @@
 + (void)stopBGSound;
 
 + (void)playFireworkSound;
++ (void)playBtnClickSound;
 
+
++ (void)playSuccessSound;
++ (void)playSingleCoinSound;
++ (void)playManyCoinsSound;
++ (void)playSweepSound;
 
 + (void)setCanRemoveALetter:(BOOL)_val;
 + (BOOL)getCanRemoveALetter;
@@ -299,5 +305,13 @@
 
 + (NSString *)getMessageRateIt;
 + (void)setMessageRateIt:(NSString *)val;
+
+#pragma mark user analytic
+
++ (int)getCoinsSpended;
++ (void)setCoinsSpended:(int)val;
+
++ (int)getNumOfSharing;
++ (void)setNumOfSharing:(int)val;
 
 @end

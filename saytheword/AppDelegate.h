@@ -19,6 +19,7 @@
 {
     AVAudioPlayer *player;
     SystemSoundID fireWorkSound;
+    SystemSoundID btnClickSound, successSound, singleCoin, manyCoins, sweep;
     NSArray *listOfIAPs;
     IAPHelper *iAPHelper;
     
@@ -36,6 +37,11 @@
 - (void)stopBGSound;
 
 - (void)playFireworkSoud;
+- (void)playBtnClickSound;
+- (void)playSuccessSound;
+- (void)playSingleCoinSound;
+- (void)playManyCoinsSound;
+- (void)playSweepSound;
 
 - (NSArray *)getIAP;
 

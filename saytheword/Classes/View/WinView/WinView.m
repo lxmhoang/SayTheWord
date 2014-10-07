@@ -111,6 +111,7 @@
         [aV setFrame:CGRectMake(0, aV.frame.origin.y-dstMoveUp, kWidthOfScreen, aV.frame.size.height)];
         
     } completion:^(BOOL finished) {
+        [CommonFunction playManyCoinsSound];
         for (int i=0;i<playModel.wordInfo.finalWord.length;i++)
         {
             UIImageView *t = [listCoins objectAtIndex:i];
@@ -165,10 +166,13 @@
     UIImage *img = [CommonFunction getScreenShot];
     [CommonFunction shareWithImage:img andMessage:[CommonFunction getMessageBrag] withArchorPoint:sender.view inViewController:[CommonFunction getRootController] completion:^{
         
+        
         sender.view.userInteractionEnabled = NO;
         congratLB.text = [[NSString stringWithFormat:@"+ %u coins",2*playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter] uppercaseString];
         
         [CommonFunction setCoin:([CommonFunction getCoin]+playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter)];
+        
+        [CommonFunction playSingleCoinSound];
     }];
 }
 

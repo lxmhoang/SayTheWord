@@ -193,14 +193,19 @@
     int numOfRemoveableChars = [playView checkNumOfRemoveableChars];
     if (numOfRemoveableChars == 0)
     {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:@"There is no removeable char remain in Typing View" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alertView show];
+        [CommonFunction alert:@"There is no removeable char left" delegate:nil];
+
         return;
     }
     
     if ([CommonFunction getCoin]>=[CommonFunction getPriceOfRemovingLetter]){
         [CommonFunction setCanRemoveALetter:NO];
         [CommonFunction setCoin:([CommonFunction getCoin]-[CommonFunction getPriceOfRemovingLetter])];
+        
+        // record coins spended
+        int k = [CommonFunction getCoinsSpended];
+        [CommonFunction setCoinsSpended:(k+[CommonFunction getPriceOfRemovingLetter])];
+        
         [self updateCoininVIew];
         [self removeALetter];
         
@@ -222,8 +227,14 @@
     }
     
 
-    if ([CommonFunction getCoin]>=kPriceOfRevealLetter){
-        [CommonFunction setCoin:([CommonFunction getCoin]-kPriceOfRevealLetter)];
+    if ([CommonFunction getCoin]>=[CommonFunction getPriceOfRevealingLetter]){
+        [CommonFunction setCanRevealALetter:NO];
+        [CommonFunction setCoin:([CommonFunction getCoin]-[CommonFunction getPriceOfRevealingLetter])];
+        
+        
+        // record coins spended
+        int k = [CommonFunction getCoinsSpended];
+        [CommonFunction setCoinsSpended:(k+[CommonFunction getPriceOfRevealingLetter])];
 
         [self updateCoininVIew];
         [self revealALetter:numOfEmptyLB];
@@ -237,6 +248,11 @@
 {
     if ([CommonFunction getCoin]>=[CommonFunction getPriceOfRevealingLeftPic]){
         [CommonFunction setCoin:([CommonFunction getCoin]-[CommonFunction getPriceOfRevealingLeftPic])];
+        
+        
+        // record coins spended
+        int k = [CommonFunction getCoinsSpended];
+        [CommonFunction setCoinsSpended:(k+[CommonFunction getPriceOfRevealingLeftPic])];
         
         [self updateCoininVIew];
         [CommonFunction setShowLeftTitle:YES];
@@ -260,6 +276,11 @@
 {
     if ([CommonFunction getCoin]>=[CommonFunction getPriceOfRevealingRightPic]){
         [CommonFunction setCoin:([CommonFunction getCoin]-[CommonFunction getPriceOfRevealingRightPic])];
+        
+        // record coins spended
+        int k = [CommonFunction getCoinsSpended];
+        [CommonFunction setCoinsSpended:(k+[CommonFunction getPriceOfRevealingRightPic])];
+        
         
         [self updateCoininVIew];
         [CommonFunction setShowRightTitle:YES];
@@ -318,7 +339,6 @@
     int r = [playView getIndexOfRevealLabel:numOfEmptyLB];
     
     [CommonFunction setRevealIndex:r];
-    [CommonFunction setCanRevealALetter:NO];
     
 
     
