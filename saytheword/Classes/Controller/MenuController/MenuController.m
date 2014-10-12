@@ -65,11 +65,13 @@
 
 - (void)playBtnPressFromMenuView
 {
+    [CommonFunction playBtnClickSound];
     [delegate playActionFromMenuController];
 }
 
 - (void)howtoBtnPressFromMenuView
 {
+    [CommonFunction playBtnClickSound];
     [delegate howtoActionFromMenuController];
 }
 
@@ -95,7 +97,7 @@
 
 - (void)updateCoininVIew
 {
-    
+    [CommonFunction playManyCoinsSound];
     menuView.coinLabel.text = [NSString stringWithFormat:@"%d",[[[NSUserDefaults standardUserDefaults] objectForKey:@"coins"] intValue]];
 }
 

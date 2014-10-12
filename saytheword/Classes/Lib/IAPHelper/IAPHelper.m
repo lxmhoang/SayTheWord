@@ -17,7 +17,7 @@
     self = [super init];
     if (self)
     {
-        [self loadStore];
+//        [self loadStore];
     }
     return self;
 }
@@ -25,9 +25,15 @@
 
 - (void)requestPurchaseItem
 {
-    productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObjects:kProductIDOf200, kProductIDOf420, kProductIDOf1100, kProductIDOf2400, kProductIDOf7800, nil ]];
-    productsRequest.delegate = self;
-    [productsRequest start];
+    if (!productsRequest)
+    {
+        productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObjects:kProductIDOf200, kProductIDOf420, kProductIDOf1100, kProductIDOf2400, kProductIDOf7800, nil ]];
+        productsRequest.delegate = self;
+        [productsRequest start];
+    }else
+    {
+        
+    }
 }
 
 
@@ -54,6 +60,8 @@
 
 #pragma mark skproductrequest delegate
 
+
+
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_3_0)
 {
     productList = [[NSArray alloc]initWithArray:response.products];
@@ -71,7 +79,6 @@
     // finally release the reqest we alloc/init’ed in requestProUpgradeProductData
     if (delegate && [delegate respondsToSelector:@selector(setListProducts:)])
     {
-//        NSLog(@"tom");
         
             [delegate setListProducts:productList];
     }
@@ -84,14 +91,14 @@
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
-    
+    productsRequest = nil;
     for (SKPaymentTransaction *transaction in transactions)
     {
         NSLog(@"transaction identifier : %@",transaction.transactionIdentifier);
 //        transaction.transactionIdentifier
         NSLog(@"transaction DATA : %@ ",transaction.transactionDate);
 //        [transaction.transactionDate ]
-        NSLog(@" transasction state: %ld",transaction.transactionState);
+        NSLog(@" transasction state: %d",transaction.transactionState);
         if (transaction.error)
         {
             

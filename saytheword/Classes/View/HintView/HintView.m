@@ -23,8 +23,8 @@
     UIView *bigView = [[UIView alloc]initWithFrame:CGRectMake(40, kHeightOfScreen/2-(kHeightOfTopBarPopUpIAP+4*kHeightOfRowStoreItem)/2, 240, kHeightOfTopBarPopUpIAP+4*kHeightOfRowStoreItem)];
     [bigView setBackgroundColor:[UIColor yellowColor]];
     bigView.alpha = 1;
-    bigView.layer.cornerRadius = 10;
-    bigView.layer.masksToBounds = YES;
+//    bigView.layer.cornerRadius = 10;
+//    bigView.layer.masksToBounds = YES;
     [self addSubview:bigView];
     
 //    UIView *row1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kWidthOfScreen/4*3, kHeightOfScreen/4*3/9)];

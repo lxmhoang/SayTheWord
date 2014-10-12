@@ -37,11 +37,14 @@ static WordDatabase *_database;
 
 - (WordInfo *)wordInfoWithLevel:(int)_level
 {
+    NSLog(@"aaaaaa");
     NSString *query = [NSString stringWithFormat:@"SELECT level, leftWord, leftImg, rightWord, rightImg, finalWord, initString from words WHERE level = %d",_level];
   
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(_database, [query UTF8String], -1, &statement, nil)
         == SQLITE_OK) {
+        
+        NSLog(@"bbbbbb");
         while (sqlite3_step(statement) == SQLITE_ROW) {
             int newLevel = sqlite3_column_int(statement, 0);
             char *_newLeftWord = (char *) sqlite3_column_text(statement, 1);
@@ -66,6 +69,8 @@ static WordDatabase *_database;
            
         }
     }
+    
+    NSLog(@"cccccc");
     return nil;
 }
 

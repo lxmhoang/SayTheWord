@@ -1,139 +1,193 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IAPViewController">
             <connections>
-                <outlet property="backBtn" destination="VKh-K9-VIm" id="Jof-zY-r6m"/>
-                <outlet property="bigView" destination="Hs9-b4-ZRB" id="44D-S7-Smg"/>
-                <outlet property="cancelBtn" destination="Jt8-gz-1vY" id="x22-gu-eYX"/>
-                <outlet property="coinTableView" destination="JXr-RS-iM7" id="jAs-K7-kyW"/>
-                <outlet property="fbView" destination="4eV-gJ-JXa" id="hDq-8O-alg"/>
-                <outlet property="freeCoinTableView" destination="f2N-EQ-gEe" id="QF9-FG-ebF"/>
-                <outlet property="view" destination="jP6-qJ-dAg" id="y22-Sy-cW0"/>
+                <outlet property="backBtn" destination="xlW-Sx-Kwg" id="rli-Mc-edg"/>
+                <outlet property="bigView" destination="s6b-9N-MAe" id="yhJ-Cc-TNG"/>
+                <outlet property="fbView" destination="VUz-SM-IP2" id="EXR-o5-MtJ"/>
+                <outlet property="freecoinCollectionView" destination="eaL-rl-Ntc" id="gQr-o4-9sd"/>
+                <outlet property="iapCollectionView" destination="zgv-G7-Urr" id="o2g-hx-0Kr"/>
+                <outlet property="view" destination="hp9-eu-zBb" id="ubt-fx-8hC"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="jP6-qJ-dAg">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="hp9-eu-zBb">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view clipsSubviews="YES" contentMode="scaleToFill" id="Hs9-b4-ZRB">
-                    <rect key="frame" x="10" y="50" width="300" height="316"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6b-9N-MAe">
+                    <rect key="frame" x="10" y="120" width="300" height="300"/>
                     <subviews>
-                        <view contentMode="scaleToFill" id="u4r-bX-yOz">
-                            <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aGL-AL-BAC" userLabel="Top View">
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COINS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tTH-qy-hzS">
-                                    <rect key="frame" x="100" y="7" width="100" height="25"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
-                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient_yellow.png" translatesAutoresizingMaskIntoConstraints="NO" id="pur-rW-9Fr">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COINS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f17-zS-Rcb">
+                                    <rect key="frame" x="100" y="0.0" width="100" height="44"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                    <color key="textColor" red="1" green="0.157790346" blue="0.19821780389999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
                                         <rect key="frame" x="204" y="16" width="196" height="48"/>
                                     </variation>
                                 </label>
-                                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VKh-K9-VIm">
-                                    <rect key="frame" x="10" y="5" width="50" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                    <state key="normal" title="BACK">
-                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                        <rect key="frame" x="26" y="10" width="96" height="30"/>
-                                    </variation>
-                                    <connections>
-                                        <action selector="backBtnAction:" destination="-2" eventType="touchUpInside" id="Ipj-xk-zNt"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Jt8-gz-1vY">
-                                    <rect key="frame" x="240" y="5" width="50" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hv-cZ-pc6">
+                                    <rect key="frame" x="200" y="0.0" width="100" height="44"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                     <state key="normal" title="CANCEL">
-                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" red="1" green="0.157790346" blue="0.19821780389999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
                                         <rect key="frame" x="490" y="10" width="96" height="60"/>
                                     </variation>
                                     <connections>
-                                        <action selector="cancelBtnAction:" destination="-1" eventType="touchUpInside" id="PsS-3f-fbA"/>
+                                        <action selector="cancelBtnAction:" destination="-1" eventType="touchUpInside" id="TMv-qp-rU8"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlW-Sx-Kwg">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                    <state key="normal" title="BACK">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                        <rect key="frame" x="26" y="10" width="96" height="30"/>
+                                    </variation>
+                                    <connections>
+                                        <action selector="backBtnAction:" destination="-1" eventType="touchUpInside" id="13T-zs-xXb"/>
                                     </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" red="1" green="0.89003011430000001" blue="0.12559783299999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="pur-rW-9Fr" firstAttribute="leading" secondItem="aGL-AL-BAC" secondAttribute="leading" id="09k-gm-V8Y"/>
+                                <constraint firstAttribute="centerX" secondItem="f17-zS-Rcb" secondAttribute="centerX" id="1Ik-eZ-DRa"/>
+                                <constraint firstAttribute="width" secondItem="xlW-Sx-Kwg" secondAttribute="width" multiplier="3:1" id="2EA-M8-e0V"/>
+                                <constraint firstAttribute="centerY" secondItem="f17-zS-Rcb" secondAttribute="centerY" id="6La-k6-8SQ"/>
+                                <constraint firstItem="pur-rW-9Fr" firstAttribute="height" secondItem="aGL-AL-BAC" secondAttribute="height" id="8Dn-Oo-nEw"/>
+                                <constraint firstAttribute="height" secondItem="xlW-Sx-Kwg" secondAttribute="height" id="Gpl-yG-Rl4"/>
+                                <constraint firstItem="xlW-Sx-Kwg" firstAttribute="top" secondItem="aGL-AL-BAC" secondAttribute="top" id="Jb6-Ur-oaO"/>
+                                <constraint firstItem="xlW-Sx-Kwg" firstAttribute="leading" secondItem="aGL-AL-BAC" secondAttribute="leading" id="OUy-G0-f1N"/>
+                                <constraint firstItem="3hv-cZ-pc6" firstAttribute="top" secondItem="aGL-AL-BAC" secondAttribute="top" id="Oqx-jW-KEw"/>
+                                <constraint firstItem="pur-rW-9Fr" firstAttribute="top" secondItem="aGL-AL-BAC" secondAttribute="top" id="Q6Q-dz-7Z8"/>
+                                <constraint firstItem="3hv-cZ-pc6" firstAttribute="leading" secondItem="f17-zS-Rcb" secondAttribute="trailing" id="Tl5-nZ-jLc"/>
+                                <constraint firstAttribute="width" secondItem="f17-zS-Rcb" secondAttribute="width" multiplier="3:1" id="aKG-Kx-kzd"/>
+                                <constraint firstAttribute="height" secondItem="f17-zS-Rcb" secondAttribute="height" id="bz1-9s-nKM"/>
+                                <constraint firstItem="pur-rW-9Fr" firstAttribute="width" secondItem="aGL-AL-BAC" secondAttribute="width" id="dc9-SI-Qzb"/>
+                                <constraint firstAttribute="height" secondItem="3hv-cZ-pc6" secondAttribute="height" id="eXn-uc-XD8"/>
+                                <constraint firstAttribute="width" secondItem="3hv-cZ-pc6" secondAttribute="width" multiplier="3:1" id="pPP-rg-2iE"/>
+                                <constraint firstAttribute="height" constant="44" id="u27-YB-cmd"/>
+                            </constraints>
                             <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
                             </variation>
                         </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="JXr-RS-iM7">
-                            <rect key="frame" x="0.0" y="40" width="300" height="263"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                <rect key="frame" x="0.0" y="80" width="600" height="552"/>
-                            </variation>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="zgv-G7-Urr" userLabel="IAP Collection View">
+                            <rect key="frame" x="0.0" y="44" width="300" height="256"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <inset key="scrollIndicatorInsets" minX="69" minY="34" maxX="30" maxY="30"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="5" id="qnu-SS-i0Q">
+                                <size key="itemSize" width="90" height="120"/>
+                                <size key="headerReferenceSize" width="0.0" height="5"/>
+                                <size key="footerReferenceSize" width="0.0" height="5"/>
+                                <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                            </collectionViewFlowLayout>
                             <connections>
-                                <outlet property="dataSource" destination="-1" id="ZYz-Xm-jrk"/>
-                                <outlet property="delegate" destination="-1" id="ogA-TH-jc6"/>
+                                <outlet property="dataSource" destination="-1" id="k23-vh-g9U"/>
+                                <outlet property="delegate" destination="-1" id="KGn-gd-0rA"/>
                             </connections>
-                        </tableView>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="f2N-EQ-gEe">
-                            <rect key="frame" x="300" y="40" width="300" height="263"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                <rect key="frame" x="600" y="80" width="600" height="552"/>
-                            </variation>
+                        </collectionView>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="eaL-rl-Ntc" userLabel="FreeCoin Collection View">
+                            <rect key="frame" x="300" y="44" width="300" height="256"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <inset key="scrollIndicatorInsets" minX="69" minY="34" maxX="30" maxY="30"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="5" id="898-vh-rXi">
+                                <size key="itemSize" width="90" height="120"/>
+                                <size key="headerReferenceSize" width="0.0" height="5"/>
+                                <size key="footerReferenceSize" width="0.0" height="5"/>
+                                <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                            </collectionViewFlowLayout>
                             <connections>
-                                <outlet property="dataSource" destination="-1" id="F9m-Fi-bnc"/>
-                                <outlet property="delegate" destination="-1" id="eJD-Ff-LYh"/>
+                                <outlet property="dataSource" destination="-1" id="gli-qP-NvR"/>
+                                <outlet property="delegate" destination="-1" id="Twf-I4-VCQ"/>
                             </connections>
-                        </tableView>
-                        <view contentMode="scaleToFill" id="4eV-gJ-JXa">
-                            <rect key="frame" x="600" y="40" width="300" height="263"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </collectionView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VUz-SM-IP2">
+                            <rect key="frame" x="600" y="44" width="300" height="256"/>
                             <subviews>
-                                <view contentMode="scaleToFill" id="TCq-wC-5Qh" customClass="FBLoginView">
-                                    <rect key="frame" x="75" y="100" width="150" height="75"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTw-sl-ud2" customClass="FBLoginView">
+                                    <rect key="frame" x="76" y="49" width="150" height="128"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
                                         <rect key="frame" x="115" y="96" width="370" height="80"/>
                                     </variation>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="centerX" secondItem="yTw-sl-ud2" secondAttribute="centerX" constant="-0.5" id="CYj-uI-dvn"/>
+                                <constraint firstItem="yTw-sl-ud2" firstAttribute="width" secondItem="VUz-SM-IP2" secondAttribute="width" multiplier="1:2" id="Qye-i2-cK0"/>
+                                <constraint firstItem="yTw-sl-ud2" firstAttribute="height" secondItem="VUz-SM-IP2" secondAttribute="height" multiplier="1:2" id="l3Y-oO-a39"/>
+                                <constraint firstAttribute="centerY" secondItem="yTw-sl-ud2" secondAttribute="centerY" constant="15.5" id="pJb-Ql-7Iw"/>
+                            </constraints>
                             <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
                                 <rect key="frame" x="1200" y="80" width="600" height="552"/>
                             </variation>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="eaL-rl-Ntc" firstAttribute="trailing" secondItem="VUz-SM-IP2" secondAttribute="leading" id="2mh-xW-BOI"/>
+                        <constraint firstAttribute="bottom" secondItem="zgv-G7-Urr" secondAttribute="bottom" id="5Ir-qg-cFx"/>
+                        <constraint firstItem="eaL-rl-Ntc" firstAttribute="leading" secondItem="zgv-G7-Urr" secondAttribute="trailing" id="5Ji-B8-Vzy"/>
+                        <constraint firstItem="zgv-G7-Urr" firstAttribute="leading" secondItem="s6b-9N-MAe" secondAttribute="leading" id="5wt-UX-8L8"/>
+                        <constraint firstAttribute="trailing" secondItem="aGL-AL-BAC" secondAttribute="trailing" id="A3M-JQ-jKB"/>
+                        <constraint firstAttribute="width" secondItem="s6b-9N-MAe" secondAttribute="height" multiplier="1:1" id="AyU-pd-P7Y"/>
+                        <constraint firstItem="zgv-G7-Urr" firstAttribute="width" secondItem="s6b-9N-MAe" secondAttribute="width" id="ECl-VD-s9I"/>
+                        <constraint firstItem="VUz-SM-IP2" firstAttribute="top" secondItem="s6b-9N-MAe" secondAttribute="top" constant="44" id="KB0-pj-EM3"/>
+                        <constraint firstItem="VUz-SM-IP2" firstAttribute="width" secondItem="s6b-9N-MAe" secondAttribute="width" id="bJc-gF-ZFv"/>
+                        <constraint firstItem="eaL-rl-Ntc" firstAttribute="width" secondItem="s6b-9N-MAe" secondAttribute="width" id="dG1-lM-ct8"/>
+                        <constraint firstAttribute="bottom" secondItem="VUz-SM-IP2" secondAttribute="bottom" id="fRC-eg-0La"/>
+                        <constraint firstAttribute="bottom" secondItem="eaL-rl-Ntc" secondAttribute="bottom" id="mCh-rH-emZ"/>
+                        <constraint firstItem="aGL-AL-BAC" firstAttribute="width" secondItem="s6b-9N-MAe" secondAttribute="width" id="n3B-hw-uNQ"/>
+                        <constraint firstItem="aGL-AL-BAC" firstAttribute="top" secondItem="s6b-9N-MAe" secondAttribute="top" id="n7k-WG-ew4"/>
+                        <constraint firstItem="zgv-G7-Urr" firstAttribute="top" secondItem="s6b-9N-MAe" secondAttribute="top" constant="44" id="qlc-Px-5hf"/>
+                        <constraint firstItem="eaL-rl-Ntc" firstAttribute="top" secondItem="s6b-9N-MAe" secondAttribute="top" constant="44" id="y0m-9d-jbz"/>
+                        <constraint firstItem="aGL-AL-BAC" firstAttribute="leading" secondItem="s6b-9N-MAe" secondAttribute="leading" id="yaH-x0-21g"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="yaH-x0-21g"/>
+                        </mask>
+                    </variation>
                     <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
                         <rect key="frame" x="84" y="300" width="600" height="632"/>
                     </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="s6b-9N-MAe" firstAttribute="leading" secondItem="hp9-eu-zBb" secondAttribute="leading" constant="10" id="eSn-Jy-zcY"/>
+                <constraint firstItem="s6b-9N-MAe" firstAttribute="top" secondItem="hp9-eu-zBb" secondAttribute="top" constant="120" id="vLG-2T-UWf"/>
+                <constraint firstAttribute="trailing" secondItem="s6b-9N-MAe" secondAttribute="trailing" constant="10" id="yGN-zX-Smt"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="241" y="251"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="253" y="249"/>
         </view>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
+    <resources>
+        <image name="gradient_yellow.png" width="550" height="80"/>
+    </resources>
 </document>

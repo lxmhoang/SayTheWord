@@ -163,6 +163,7 @@
 + (void)stopBGSound;
 
 + (void)playFireworkSound;
++ (void)playLetterPickSound;
 + (void)playBtnClickSound;
 
 

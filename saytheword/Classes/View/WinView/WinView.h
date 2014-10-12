@@ -22,6 +22,8 @@
 
 @interface WinView : UIView <ExplodeViewDelegate, ADBannerViewDelegate, GADInterstitialDelegate, ADInterstitialAdDelegate>
 {
+    NSTimer *timer;
+    int rewardCoins;
     UILabel *congratLB;
     NSMutableArray *listCoins;
     BOOL tapped;

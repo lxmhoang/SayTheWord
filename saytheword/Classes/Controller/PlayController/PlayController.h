@@ -27,6 +27,9 @@
 @end
 
 @interface PlayController : UIViewController <PlayViewProtocol, HintsViewDelegate, UIAlertViewDelegate, FBLoginViewDelegate, IAPControllerDelegate>
+{
+    HintsView *hintsView;
+}
 
 @property (nonatomic, strong) UIImage *screenShot;
 @property (nonatomic, strong) IAPViewController *iapVC;

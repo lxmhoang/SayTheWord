@@ -167,12 +167,15 @@
     
     // Create Level label
     fontSize = kCheckIfIphone ? 20 : 40;
+    int width = kCheckIfIphone ? 100 : 200;
+    int height = kCheckIfIphone ? 44 : 64;
     UILabel *levelLabel = [[UILabel alloc]init];
+    levelLabel.textAlignment = NSTextAlignmentCenter;
     levelLabel.text = [NSString stringWithFormat:@"%d",[[[NSUserDefaults standardUserDefaults] objectForKey:@"level"] intValue]];
     [levelLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:fontSize]];
     [levelLabel sizeToFit];
     
-    [levelLabel setFrame:CGRectMake((kWidthOfScreen - levelLabel.frame.size.width)/2, (kHeightOfNavigationBar - levelLabel.frame.size.height)/2, levelLabel.frame.size.width, levelLabel.frame.size.height)];
+    [levelLabel setFrame:CGRectMake((kWidthOfScreen - width)/2, 0, width, height)];
     [levelLabel setBackgroundColor:[UIColor clearColor]];
     [levelLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:levelLabel];
@@ -305,7 +308,6 @@
 
 - (void)hintBtnAction
 {
-    [CommonFunction playSweepSound];
     hintInternal = hintInternal * 2;
     [timer invalidate];
     [self after10s];
@@ -353,10 +355,12 @@
     [newView setTag:kTagOfNewView];
     [self addSubview:newView];
     
+    float k = kCheckIfIphone ? 1 : 0.7f;
+    
     [UIView animateWithDuration:0.2 animations:^{
-        [newView setFrame:CGRectMake(kWidthOfScreen*0.15, yOfImages+50, kWidthOfScreen*0.7, kWidthOfScreen*0.7)];
+        [newView setFrame:CGRectMake(kWidthOfScreen*(1-k)/2, yOfImages+50, kWidthOfScreen*k, kWidthOfScreen*k)];
         for (UIView *subView in newView.subviews){
-            [subView setFrame:CGRectMake(5, 5, kWidthOfScreen*0.7-10, kWidthOfScreen*0.7-10)];
+            [subView setFrame:CGRectMake(5, 5, kWidthOfScreen*k-10, kWidthOfScreen*k-10)];
         }
     } completion:^(BOOL finished) {
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
@@ -397,10 +401,13 @@
     [newView setTag:kTagOfNewView];
     [self addSubview:newView];
     
+    
+    float k = kCheckIfIphone ? 1 : 0.7;
+    
     [UIView animateWithDuration:0.2 animations:^{
-        [newView setFrame:CGRectMake(kWidthOfScreen*0.15, yOfImages+50, kWidthOfScreen*0.7, kWidthOfScreen*0.7)];
+        [newView setFrame:CGRectMake(kWidthOfScreen*(1-k)/2, yOfImages+50, kWidthOfScreen*k, kWidthOfScreen*k)];
         for (UIView *subView in newView.subviews){
-            [subView setFrame:CGRectMake(5, 5, kWidthOfScreen*0.7-10, kWidthOfScreen*0.7-10)];
+            [subView setFrame:CGRectMake(5, 5, kWidthOfScreen*k-10, kWidthOfScreen*k-10)];
         }
     } completion:^(BOOL finished) {
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
@@ -423,7 +430,7 @@
 
 - (void)pickCharPress:(NSString *)_char
 {
-    [CommonFunction playBtnClickSound];
+    [CommonFunction playLetterPickSound];
     [answerView setNewChar:_char];
 }
 
@@ -649,6 +656,7 @@
 {
     [timer invalidate];
     timer = nil;
+    
 }
 
 

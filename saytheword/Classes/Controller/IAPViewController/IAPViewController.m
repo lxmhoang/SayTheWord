@@ -34,14 +34,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [CommonFunction playSweepSound];
     
+    [CommonFunction playSweepSound];
+
     NSString *nibName = kCheckIfIphone ? @"IAPCollectionViewCell" : @"IAPCollectionViewCell_iPad";
     
     UINib *cellNib = [UINib nibWithNibName:nibName bundle:nil];
     [iapCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"IAPCell"];
-    cellNib = [UINib nibWithNibName:@"FreecoinCollectionViewCell" bundle:nil];
+    
+    nibName = kCheckIfIphone ? @"FreecoinCollectionViewCell_ip4" : @"FreecoinCollectionViewCell_iPad";
+    cellNib = [UINib nibWithNibName:nibName bundle:nil];
     [freecoinCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"FreeCoinCell"];
+    
     
     self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.6];
     bigView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.7];
@@ -51,50 +55,30 @@
     bigView.layer.borderWidth = 2;
     bigView.layer.borderColor = [[UIColor yellowColor] CGColor];
     
+    
     storeModel = [[StoreModel alloc]init];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSArray *arr = [appDelegate getIAP];
     if (arr && arr.count>0)
     {
         [self bindIAPData:[appDelegate getIAP]];
+        
     }else
     {
-        NSLog(@"bitch");
         
         iAPHelper = [[IAPHelper alloc]init];
         iAPHelper.delegate = self;
         cancelBtn.enabled = NO;
         
-        HUD = [[MBProgressHUD alloc] initWithView:self.view];
-        [iapCollectionView addSubview:HUD];
+        HUD = [MBProgressHUD showHUDAddedTo:iapCollectionView animated:YES];
         
         HUD.delegate = self;
         HUD.detailsLabelText = @"Connecting to App Store ....";
-        [HUD hide:YES];
+        [HUD show:YES];
         
         [iAPHelper loadStore];
     }
-    
-    int y = bigView.frame.origin.y;
-    
-    [bigView setFrame:CGRectMake(bigView.frame.origin.x, -bigView.frame.size.height, bigView.frame.size.width, bigView.frame.size.height)];
-    
-    int k = kCheckIfIphone ? 10 : 25;
-    
-//    [bigView setFrame:CGRectMake(bigView.frame.origin.x, y + k, bigView.frame.size.width, bigView.frame.size.height)];
-    [UIView animateWithDuration:0.2 animations:^{
-        
-        [bigView setFrame:CGRectMake(bigView.frame.origin.x, y + k, bigView.frame.size.width, bigView.frame.size.height)];
-    } completion:^(BOOL finished) {
-        
-        [UIView animateWithDuration:0.1 animations:^{
-                   [bigView setFrame:CGRectMake(bigView.frame.origin.x, y-k, bigView.frame.size.width, bigView.frame.size.height)];
-        } completion:^(BOOL finished) {
-        }];
-        
-        
-    }
-     ];
+
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -104,6 +88,28 @@
     [self createOptionGetFreeCoin];
     
     [freecoinCollectionView reloadData];
+    
+    
+    int y = bigView.frame.origin.y;
+    
+    [bigView setFrame:CGRectMake(bigView.frame.origin.x, -bigView.frame.size.height, bigView.frame.size.width, bigView.frame.size.height)];
+    
+    int k = kCheckIfIphone ? 10 : 25;
+    //    [bigView setFrame:CGRectMake(bigView.frame.origin.x, y + k, bigView.frame.size.width, bigView.frame.size.height)];
+    [UIView animateWithDuration:0.2 animations:^{
+        
+        [bigView setFrame:CGRectMake(bigView.frame.origin.x, y + k, bigView.frame.size.width, bigView.frame.size.height)];
+        
+    } completion:^(BOOL finished) {
+        
+        [UIView animateWithDuration:0.1 animations:^{
+            [bigView setFrame:CGRectMake(bigView.frame.origin.x, y-k, bigView.frame.size.width, bigView.frame.size.height)];
+        } completion:^(BOOL finished) {
+        }];
+        
+        
+    }
+     ];
 
 }
 
@@ -116,7 +122,7 @@
     if (([CommonFunction getRewardCoinForRattingApp] > 0) && [CommonFunction checkIfRateForCoin] && [CommonFunction getRateUS] == 0)
     {
         FreeCoinModel *rate = [[FreeCoinModel alloc] init];
-        rate.imgName = @"star_rate.png";
+        rate.imgName = @"5stars.png";
         rate.title = [CommonFunction getMessageRateIt];
         rate.rewardCoin = [NSNumber numberWithInt:[CommonFunction getRewardCoinForRattingApp]];
         [optionsGetFreeCoin addObject:rate];
@@ -142,12 +148,12 @@
 
 }
 
-
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-    
-    self.view.superview.backgroundColor = [UIColor clearColor];
-}
+//
+//- (void)viewWillLayoutSubviews {
+//    [super viewWillLayoutSubviews];
+//    
+//    self.view.superview.backgroundColor = [UIColor clearColor];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -213,7 +219,6 @@
     }
     [storeModel importData:productList];
 //    dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"shit");
         [iapCollectionView reloadData];
 //    });
     cancelBtn.enabled = YES;
@@ -223,7 +228,7 @@
 
 - (void)IAPFailed{
     [HUD hide:YES];
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:@"Unable to connect App Stores, please check Internet Connection" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:@"Unable to connect to App Stores, please check your Internet Connection" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alertView show];
 }
 
@@ -250,7 +255,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [HUD hide:YES];
-        [HUD removeFromSuperview];
+//        [HUD removeFromSuperview];
         
         [self bindIAPData:listProducts];
     });
@@ -603,9 +608,11 @@
         
         if (cell!=nil)
         {
-            cell.bgImg.layer.cornerRadius = 10;
+            int k = kCheckIfIphone ? 3: 10;
+            int h = kCheckIfIphone ? 1:2;
+            cell.bgImg.layer.cornerRadius = k;
             cell.bgImg.clipsToBounds = YES;
-            cell.bgImg.layer.borderWidth = 2;
+            cell.bgImg.layer.borderWidth = h;
             if (indexPath.row >0)
             {
                 cell.bgImg.layer.borderColor = [[UIColor yellowColor] CGColor];
@@ -614,7 +621,7 @@
                 cell.bgImg.layer.borderColor = [[UIColor redColor] CGColor];
                 
             }
-            cell.priceLabel.layer.cornerRadius = 10;
+            cell.priceLabel.layer.cornerRadius = kCheckIfIphone ? 3 : 10;
             cell.priceLabel.clipsToBounds = YES;
             if (indexPath.row >0)
             {
@@ -676,9 +683,9 @@
 //                NSLog(@"indexpath : %ld-%ld  img name : %@ cell : %@", (long)indexPath.section, (long)indexPath.row,@"none",cell);
                 cell.rmvAdsView.alpha = 0;
                 cell.freeCoinLabel.alpha = 1;
-                cell.freeCoinLabel.layer.cornerRadius = 10;
+                cell.freeCoinLabel.layer.cornerRadius = kCheckIfIphone ? 5 : 10;
                 cell.freeCoinLabel.layer.borderColor = [[UIColor yellowColor] CGColor];
-                cell.freeCoinLabel.layer.borderWidth = 2;
+                cell.freeCoinLabel.layer.borderWidth = kCheckIfIphone ? 1 : 2;
                 cell.imgView.alpha = 0;
                 cell.coinLabel.text = @"20 coins";
                 cell.priceLabel.backgroundColor = [UIColor redColor];
@@ -696,11 +703,15 @@
         
         FreecoinCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FreeCoinCell" forIndexPath:indexPath];
         
-        cell.bgImg.layer.cornerRadius = 10;
+        int c = kCheckIfIphone ? 3 : 10;
+        
+        cell.bgImg.layer.cornerRadius = c;
         cell.bgImg.clipsToBounds = YES;
-        cell.bgImg.layer.borderWidth = 2;
+        cell.bgImg.layer.borderWidth = kCheckIfIphone ? 1 : 2;
         cell.bgImg.layer.borderColor = [[UIColor yellowColor] CGColor];
-        cell.priceLabel.layer.cornerRadius = 10;
+        
+        
+        cell.priceLabel.layer.cornerRadius = c;
         cell.priceLabel.clipsToBounds = YES;
         
         

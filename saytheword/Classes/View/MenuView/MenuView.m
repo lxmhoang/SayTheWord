@@ -59,7 +59,7 @@
 //    [self addSubview:v1];
     
     coinView = [[UIView alloc]init];
-    [coinView setFrame:CGRectMake(kWidthOfScreen - (kCheckIfIphone ? 120 : 220), 0, (kCheckIfIphone ? 120 : 220), kHeightOfNavigationBar)];
+    [coinView setFrame:CGRectMake(kWidthOfScreen - (kCheckIfIphone ? 120 : 220)-20, 0, (kCheckIfIphone ? 120 : 220), kHeightOfNavigationBar)];
     [coinView setBackgroundColor:[UIColor clearColor]];
     
     int fontSize = kCheckIfIphone ? 16 : 28;
@@ -98,12 +98,15 @@
     
     // Create Level label
     fontSize = kCheckIfIphone ? 20 : 40;
+    int width = kCheckIfIphone ? 100 : 200;
+    int height = kCheckIfIphone ? 44 : 64;
     UILabel *levelLabel = [[UILabel alloc]init];
+    levelLabel.textAlignment = NSTextAlignmentCenter;
     levelLabel.text = [NSString stringWithFormat:@"%d",[[[NSUserDefaults standardUserDefaults] objectForKey:@"level"] intValue]];
     [levelLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:fontSize]];
     [levelLabel sizeToFit];
     
-    [levelLabel setFrame:CGRectMake((kWidthOfScreen - levelLabel.frame.size.width)/2, (kHeightOfNavigationBar - levelLabel.frame.size.height)/2, levelLabel.frame.size.width, levelLabel.frame.size.height)];
+    [levelLabel setFrame:CGRectMake((kWidthOfScreen - width)/2, 0, width, height)];
     [levelLabel setBackgroundColor:[UIColor clearColor]];
     [levelLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:levelLabel];
@@ -136,17 +139,18 @@
 
 - (void)createSubViews
 {
-    CGRect tmpRect = kCheckIfIphone ? CGRectMake(280, 50, 40, 40) : CGRectMake((kWidthOfScreen+480)/2, 100, 100, 100);
-//    UILabel *labelRate = [[UILabel alloc] initWithFrame:tmpRect];
-//    labelRate.text = @"RATE";
-//    labelRate.font = [UIFont boldSystemFontOfSize:25.0f];
-//    labelRate.textColor = [UIColor yellowColor];
-    UIImageView *rateIcon = [[UIImageView alloc] initWithFrame:tmpRect];
-    [rateIcon setImage:[UIImage imageNamed:@"rateus_green.png"]];
-    rateIcon.userInteractionEnabled = YES;
-    UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rateApp:)];
-    [rateIcon addGestureRecognizer:_tap];
-    [self addSubview:rateIcon];
+    CGRect tmpRect;
+    if (!(([CommonFunction getRewardCoinForRattingApp] > 0) && [CommonFunction checkIfRateForCoin] && [CommonFunction getRateUS] == 0))
+    {
+        tmpRect = kCheckIfIphone ? CGRectMake(280, 50, 40, 40) : CGRectMake((kWidthOfScreen+480)/2, 100, 100, 100);
+        UIImageView *rateIcon = [[UIImageView alloc] initWithFrame:tmpRect];
+        [rateIcon setImage:[UIImage imageNamed:@"rateus_green.png"]];
+        rateIcon.userInteractionEnabled = YES;
+        UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rateApp:)];
+        [rateIcon addGestureRecognizer:_tap];
+        [self addSubview:rateIcon];
+    }
+
     
     tmpRect = kCheckIfIphone ? CGRectMake(280, 200, 32, 32) : CGRectMake((kWidthOfScreen+480)/2, 300, 64, 64);
     musicIcon = [[UIImageView alloc] initWithFrame:tmpRect];

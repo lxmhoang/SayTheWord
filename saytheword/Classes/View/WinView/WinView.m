@@ -166,14 +166,29 @@
     UIImage *img = [CommonFunction getScreenShot];
     [CommonFunction shareWithImage:img andMessage:[CommonFunction getMessageBrag] withArchorPoint:sender.view inViewController:[CommonFunction getRootController] completion:^{
         
-        
+        rewardCoins = playModel.wordInfo.finalWord.length * kRewardCoinsForEachLetter;
         sender.view.userInteractionEnabled = NO;
-        congratLB.text = [[NSString stringWithFormat:@"+ %u coins",2*playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter] uppercaseString];
-        
+//        congratLB.text = [[NSString stringWithFormat:@"+ %u coins",2*playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter] uppercaseString];
+        [timer invalidate];
+        timer = [NSTimer timerWithTimeInterval:(0.5/playModel.wordInfo.finalWord.length) target:self selector:@selector(coinIncrement) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+        [timer fire];
         [CommonFunction setCoin:([CommonFunction getCoin]+playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter)];
         
         [CommonFunction playSingleCoinSound];
     }];
+}
+
+- (void)coinIncrement
+{
+    rewardCoins ++;
+    if (rewardCoins == playModel.wordInfo.finalWord.length*2*kRewardCoinsForEachLetter)
+    {
+        [timer invalidate];
+    }
+    
+    congratLB.text = [[NSString stringWithFormat:@"+ %u coins",rewardCoins] uppercaseString];
+    
 }
 
 - (void)showBragLabel
@@ -307,6 +322,18 @@
 }
 
 #pragma mark interstitial Delegate
+
+- (void)interstitialAdDidUnload:(ADInterstitialAd *)interstitialAd
+{
+    
+}
+
+
+- (void)interstitialAd:(ADInterstitialAd *)interstitialAd didFailWithError:(NSError *)error
+{
+    
+}
+
 
 
 /*

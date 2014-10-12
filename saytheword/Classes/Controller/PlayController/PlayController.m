@@ -22,7 +22,16 @@
     if (self)
     {
         playModel = [[PlayModel alloc] initWithPosition:_pos andLevel:[[[NSUserDefaults standardUserDefaults] objectForKey:@"level"] intValue]];
+        NSLog(@"dddddd");
+        
+        NSString *nibname = kCheckIfIphone ? @"HintsView_ip4" : @"HintsView_iPad";
+        hintsView = [[[NSBundle mainBundle] loadNibNamed:nibname owner:nil options:nil] objectAtIndex:0];
+        hintsView.delegate = self;
+        
         [self.view setFrame:CGRectMake(_pos*kWidthOfScreen + _pos*kShortDisTanceOf2View, 0, kWidthOfScreen, kHeightOfScreen)];
+        //
+        
+        NSLog(@"eeeeee");
         
     }
 
@@ -62,26 +71,16 @@
 
 - (void)hintBtnTapped
 {
-    
+    NSLog(@"list of subviwes : %@", self.view.subviews);
+//    [CommonFunction playSweepSound];
     [self takeScreenshot];
 
-    HintsView *hintsView = [[[NSBundle mainBundle] loadNibNamed:@"HintsView_iPad" owner:nil options:nil] objectAtIndex:0];
-    hintsView.delegate = self;
+    hintsView.alpha = 1;
     [hintsView setUp];
-    [self.view addSubview:hintsView];
-    [hintsView setTag:kTagOfHintView];
     int y = hintsView.bigView.frame.origin.y;
     CGRect frame = hintsView.bigView.frame;
     [hintsView.bigView setFrame:CGRectMake(hintsView.bigView.frame.origin.x, -hintsView.bigView.frame.size.height, hintsView.bigView.frame.size.width, hintsView.bigView.frame.size.height)];
     int dy = kCheckIfIphone ? 25 : 50;
-//    [UIView animateWithDuration:0.2 animations:^{
-//        [hintsView.bigView setFrame:CGRectOffset(frame, 0, -dy)];
-//    } completion:^(BOOL finished) {
-//        [UIView animateWithDuration:0.1 animations:^{
-//            
-//            [hintsView.bigView setFrame:frame];
-//        }];
-//    }];
     
     [UIView animateWithDuration:0.2 animations:^{
         
@@ -91,25 +90,16 @@
         {
         
         [UIView animateWithDuration:0.1 animations:^{
-                    [hintsView.bigView setFrame:CGRectMake(frame.origin.x, frame.origin.y-dy, frame.size.width, frame.size.height)];
+                    [hintsView.bigView setFrame:CGRectMake(frame.origin.x, y, frame.size.width, frame.size.height)];
         } completion:^(BOOL finished) {
+            
         }];
         }
         
         
     }
      ];
-    
-  //  [hintsView bloat];
 
-    
-//    NSLog(@"hint Tapped !!!!!");
-//    HintsView *hintsView = [[HintsView alloc] initWithFrame:self.view.bounds];
-//    hintsView.delegate = self;
-//    [hintsView setTag:kTagOfHintView];
-//    [self.view addSubview:hintsView];
-//    [hintsView bloat];
-//    
 
 }
 
@@ -143,7 +133,13 @@
     
     [self.view setFrame:playView.bounds];
     [self.view addSubview:playView];
-//    [delegate initFullScreenAds];
+    
+    // create HintsView
+
+//    [hintsView setUp];
+    [self.view addSubview:hintsView];
+    [hintsView setTag:kTagOfHintView];
+    hintsView.alpha = 0;
     
     
 
@@ -261,7 +257,7 @@
         for (UIView *tmp in self.view.subviews){
             if ([tmp isKindOfClass:[HintsView class]])
             {
-                [tmp removeFromSuperview];
+                tmp.alpha = 0;
                 break;
                 
             }
@@ -289,7 +285,7 @@
         for (UIView *tmp in self.view.subviews){
             if ([tmp isKindOfClass:[HintsView class]])
             {
-                [tmp removeFromSuperview];
+                tmp.alpha = 0;
                 break;
                 
             }
@@ -303,7 +299,7 @@
 
 - (void)updateCoininVIew
 {
-    
+    [CommonFunction playManyCoinsSound];
     playView.coinLabel.text = [NSString stringWithFormat:@"%d",[[[NSUserDefaults standardUserDefaults] objectForKey:@"coins"] intValue]];
 }
 
@@ -327,7 +323,7 @@
     for (UIView *tmp in self.view.subviews){
         if ([tmp isKindOfClass:[HintsView class]])
         {
-            [tmp removeFromSuperview];
+            tmp.alpha = 0;
             break;
             
         }
@@ -346,7 +342,7 @@
     for (UIView *tmp in self.view.subviews){
         if ([tmp isKindOfClass:[HintsView class]])
         {
-            [tmp removeFromSuperview];
+            tmp.alpha = 0;
             break;
             
         }

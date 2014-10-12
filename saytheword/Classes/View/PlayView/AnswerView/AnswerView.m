@@ -30,7 +30,7 @@
         widthOfChar = kCheckIfIphone ? 30 : 60;
         yOfLine = kCheckIfIphone ? 45 : 90;
         thickOfLine = kCheckIfIphone ? 3 : 6;
-        yOfChar = kCheckIfIphone ? 29 : 34;
+        yOfChar = kCheckIfIphone ? 17 : 34;
         self.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
         playModel = _model;
         [self createSubViews];

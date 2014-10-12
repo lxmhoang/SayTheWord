@@ -146,6 +146,7 @@
 //    [newVC.view release];
     
     
+    dispatch_async(dispatch_get_main_queue(), ^{
     [UIView animateWithDuration:kTimeToPresentVC animations:^{
         [fVC.view  setFrame:CGRectMake(+kWidthOfScreen, 0, kWidthOfScreen, kHeightOfScreen)];
         [newVC.view setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
@@ -159,6 +160,7 @@
         fVC = newVC;
         
     }];
+    });
     
 }
 
@@ -172,16 +174,25 @@
     
 //    [newVC.view release];
 
+    NSLog(@"ffffff  %@  %@", fVC.view, newVC.view);
+    
+//    [UIView animatewi]
 
-    [UIView animateWithDuration:kTimeToPresentVC animations:^{
-        [fVC.view  setFrame:CGRectMake(-kWidthOfScreen, 0, kWidthOfScreen, kHeightOfScreen)];
-        [newVC.view setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
-    } completion:^(BOOL finished) {
-        [fVC willMoveToParentViewController:nil];
-        [fVC.view removeFromSuperview];
-        [fVC removeFromParentViewController];
-        fVC = newVC;
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:kTimeToPresentVC animations:^{
+            [fVC.view  setFrame:CGRectMake(-kWidthOfScreen, 0, kWidthOfScreen, kHeightOfScreen)];
+            [newVC.view setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
+        } completion:^(BOOL finished) {
+            
+            NSLog(@"111111");
+            [fVC willMoveToParentViewController:nil];
+            [fVC.view removeFromSuperview];
+            [fVC removeFromParentViewController];
+            fVC = newVC;
+        }];
+    });
+    
+
 //    [newVC.view release];
     
     

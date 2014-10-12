@@ -20,55 +20,54 @@
 - (void)removeLetter:(UITapGestureRecognizer *)_sender
 {
     [delegate removeALetterFromHintsView];
+    [self loadViews];
 }
 
 - (void)revealLetter:(UITapGestureRecognizer *)_sender
 {
     [delegate revealALetterFromHintsView];
+    [self loadViews];
 }
 
 - (void)showLeftTitle:(UITapGestureRecognizer *)_sender
 {
     [delegate revealLeftWordFromHintsView];
+    [self loadViews];
 }
 
 - (void)showRightTitle:(UITapGestureRecognizer *)_sender
 {
     [delegate revealRightWordFromHintsView];
+    [self loadViews];
 }
 
-- (IBAction)askFriendAction:(UITapGestureRecognizer *)sender {
-//    if ([[NSDate date] compare:[[CommonFunction getLastFBShare] dateByAddingTimeInterval:[CommonFunction timeToNextShare]]]==NSOrderedAscending)
-//    {
-//        [CommonFunction alert:[CommonFunction msgSharingNotAvail] delegate:nil];
-//        return;
-//    }else
-//    {
-        UIImage *img = [CommonFunction getScreenShot];
-        UIViewController *playVC = (UIViewController *)delegate;
-        [CommonFunction shareWithImage:img andMessage:[CommonFunction getMessageHelp] withArchorPoint:sender.view inViewController:playVC completion:^{
+- (IBAction)askFriendAction:(UITapGestureRecognizer *)sender
+{
+    UIImage *img = [CommonFunction getScreenShot];
+    UIViewController *playVC = (UIViewController *)delegate;
+    [CommonFunction shareWithImage:img andMessage:[CommonFunction getMessageHelp] withArchorPoint:sender.view inViewController:playVC completion:^{
+        
+        [CommonFunction alert:@"Your message is" delegate:nil];
+        
+        if (([CommonFunction getRewardCoinForAskingFriends] > 0) && (![CommonFunction getDidAskFriendForCurrentLevel]))
+        {
             
-            if (([CommonFunction getRewardCoinForAskingFriends] > 0) && (![CommonFunction getDidAskFriendForCurrentLevel]))
-            {
-                
-                [CommonFunction setDidAskFriendForCurrentLevel:YES];
-                NSString *str =[NSString stringWithFormat:@"You have claimed %d coins",[CommonFunction getRewardCoinForAskingFriends]];
-                [CommonFunction alert:str delegate:nil];
-                [CommonFunction setCoin:[CommonFunction getCoin]+[CommonFunction getRewardCoinForAskingFriends]];
-                
-                PlayController *play = (PlayController *)delegate;
-                [play updateCoininVIew];
-                
-                
-            }else
-            {
-            }
+            [CommonFunction setDidAskFriendForCurrentLevel:YES];
+            NSString *str =[NSString stringWithFormat:@"You have claimed %d coins",[CommonFunction getRewardCoinForAskingFriends]];
+            [CommonFunction alert:str delegate:nil];
+            [CommonFunction setCoin:[CommonFunction getCoin]+[CommonFunction getRewardCoinForAskingFriends]];
+            
+            PlayController *play = (PlayController *)delegate;
+            [play updateCoininVIew];
             
             
-            [self closeBigView:nil];
-            
-        }];
-//    }
+        }else
+        {
+        }
+        
+        [self closeBigView:nil];
+        
+    }];
 }
 
 
@@ -206,14 +205,22 @@
 
 - (void)setUp
 {
-    [self createOptionGetFreeCoin];
+    
     //FBLoginView *loginview = [[FBLoginView alloc] init];
    // [fbview addSubview:loginview];
-    UINib *cellNib = [UINib nibWithNibName:@"FreecoinCollectionViewCell" bundle:nil];
+    
+    NSString *nibName = kCheckIfIphone ? @"FreecoinCollectionViewCell_ip4" : @"FreecoinCollectionViewCell_iPad";
+    UINib *cellNib = [UINib nibWithNibName:nibName bundle:nil];
     [self.freeCoinCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"FreeCoinCell"];
     
     self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.45];
     
+    [self loadViews];
+}
+
+- (void)loadViews
+{
+    [self createOptionGetFreeCoin];
     int k = kCheckIfIphone ? 5 : 15;
     int t = kCheckIfIphone ? 2 : 5;
     
@@ -317,10 +324,6 @@
         
         self.view21.alpha = 0;
     }
-    
-
-    
-
 }
 
 - (IBAction)backBtnAction:(id)sender {
@@ -358,7 +361,7 @@
 
 
 - (IBAction)closeBigView:(id)sender {
-        [self removeFromSuperview];
+    self.alpha = 0;
 }
 
 - (void)bloat
@@ -388,7 +391,7 @@
     if (([CommonFunction getRewardCoinForRattingApp] > 0) && [CommonFunction checkIfRateForCoin] && [CommonFunction getRateUS] == 0)
     {
         FreeCoinModel *rate = [[FreeCoinModel alloc] init];
-        rate.imgName = @"star_rate.png";
+        rate.imgName = @"5stars.png";
         rate.title = [CommonFunction getMessageRateIt];
         rate.rewardCoin = [NSNumber numberWithInt:[CommonFunction getRewardCoinForRattingApp]];
         [optionsGetFreeCoin addObject:rate];
@@ -443,13 +446,13 @@
 {
     FreecoinCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FreeCoinCell" forIndexPath:indexPath];
     
-    cell.bgImg.layer.cornerRadius = 10;
-    cell.bgImg.clipsToBounds = YES;
-    cell.bgImg.layer.borderWidth = 2;
-    cell.bgImg.layer.borderColor = [[UIColor yellowColor] CGColor];
-    cell.priceLabel.layer.cornerRadius = 10;
-    cell.priceLabel.clipsToBounds = YES;
-    
+//    cell.bgImg.layer.cornerRadius = 10;
+//    cell.bgImg.clipsToBounds = YES;
+//    cell.bgImg.layer.borderWidth = 2;
+//    cell.bgImg.layer.borderColor = [[UIColor yellowColor] CGColor];
+//    cell.priceLabel.layer.cornerRadius = 10;
+//    cell.priceLabel.clipsToBounds = YES;
+//    
     
     FreeCoinModel *model = [optionsGetFreeCoin objectAtIndex:indexPath.row];
     cell.imgView.image = [UIImage imageNamed:model.imgName];
@@ -577,7 +580,7 @@
 }
 
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
-    //    NSLog(@"logged out");
+       NSLog(@"logged out");
     // test to see if we can use the share dialog built into the Facebook application
     //    FBShareDialogParams *p = [[FBShareDialogParams alloc] init];
     //    p.link = [NSURL URLWithString:@"http://developers.facebook.com/ios"];

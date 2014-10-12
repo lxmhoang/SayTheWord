@@ -35,14 +35,19 @@
     [player stop];
 }
 
+- (void)playBtnClickSound
+{
+   AudioServicesPlaySystemSound(btnClickSound);
+}
+
 - (void)playFireworkSoud
 {
     AudioServicesPlaySystemSound(fireWorkSound);
 }
 
-- (void)playBtnClickSound
+- (void)playLetterPickSound
 {
-    AudioServicesPlaySystemSound(btnClickSound);
+    AudioServicesPlaySystemSound(letterPickSound);
 }
 
 - (void)playSuccessSound
@@ -139,10 +144,17 @@
     
     AudioServicesCreateSystemSoundID(pathURLFW, &fireWorkSound);
     
-    NSString *pathBtnClick  = [[NSBundle mainBundle] pathForResource:@"poptounge" ofType:@"wav"];
-    CFURLRef pathURLClick = (__bridge CFURLRef)[NSURL fileURLWithPath : pathBtnClick];
     
-    AudioServicesCreateSystemSoundID(pathURLClick, &btnClickSound);
+    
+    NSString *pathBtnClick  = [[NSBundle mainBundle] pathForResource:@"btnClick" ofType:@"wav"];
+    CFURLRef pathURLBtnClick = (__bridge CFURLRef)[NSURL fileURLWithPath : pathBtnClick];
+    
+    AudioServicesCreateSystemSoundID(pathURLBtnClick, &btnClickSound);
+    
+    NSString *pathLetterPick  = [[NSBundle mainBundle] pathForResource:@"poptounge" ofType:@"wav"];
+    CFURLRef pathURLLetterPick = (__bridge CFURLRef)[NSURL fileURLWithPath : pathLetterPick];
+    
+    AudioServicesCreateSystemSoundID(pathURLLetterPick, &letterPickSound);
     
     
     
@@ -163,9 +175,17 @@
     CFURLRef pathURLSweep = (__bridge CFURLRef)[NSURL fileURLWithPath : pathSweep];
     AudioServicesCreateSystemSoundID(pathURLSweep, &sweep);
     
+    int k = arc4random()%10;
+    NSString *song;
+    if (k%2==0)
+    {
+        song = @"RiverFlowsInYou";
+    }else
+    {
+        song = @"Kiss_The_Rain";
+    }
     
-    
-    NSString *path  = [[NSBundle mainBundle] pathForResource:@"Kiss_The_Rain" ofType:@"mp3"];
+    NSString *path  = [[NSBundle mainBundle] pathForResource:song ofType:@"mp3"];
     NSURL *pathURL = [NSURL fileURLWithPath : path];
     
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:pathURL error:nil];

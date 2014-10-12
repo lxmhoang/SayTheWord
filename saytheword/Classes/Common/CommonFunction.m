@@ -122,11 +122,15 @@
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] playFireworkSoud];
 }
 
++ (void)playLetterPickSound
+{
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] playLetterPickSound];
+}
+
 + (void)playBtnClickSound
 {
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] playBtnClickSound];
 }
-
 + (void)playSuccessSound
 {
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] playSuccessSound];
