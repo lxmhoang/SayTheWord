@@ -194,6 +194,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    if ([CommonFunction getWordInfoForLevel:1] == nil)
+    {
+        [[WordDatabase database] insertDatabaseIntoNSUserDefault];
+    }
     self.screenShot = nil;
     [self requestIAP];
     [FBLoginView class];

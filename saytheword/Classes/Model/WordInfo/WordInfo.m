@@ -20,7 +20,6 @@
         rightWord = __rightWord;
         leftImg = __leftImg;
         rightImg = __rightImg;
-        NSLog(@"right img : %@",rightImg);
         finalWord = __finalWord;
         dummyString = __initString;
     }

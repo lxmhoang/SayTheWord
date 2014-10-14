@@ -33,6 +33,9 @@ static WordDatabase *_database;
         NSLog(@"Done");
     }
     sqlite3_finalize(statement);
+    WordInfo *editedWord = [CommonFunction getWordInfoForLevel:_level];
+    editedWord.dummyString = _newInitString;
+    [CommonFunction setWordInfo:editedWord];
 }
 
 - (WordInfo *)wordInfoWithLevel:(int)_level
@@ -114,6 +117,16 @@ static WordDatabase *_database;
         }
     }
     return self;
+}
+
+- (void)insertDatabaseIntoNSUserDefault
+{
+    NSArray *datas = [self WordsInfo];
+    for (WordInfo *info in datas)
+    {
+        [CommonFunction setWordInfo:info];
+        
+    }
 }
 
 - (NSArray *)WordsInfo {

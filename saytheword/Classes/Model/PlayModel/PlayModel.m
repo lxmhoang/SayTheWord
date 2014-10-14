@@ -17,7 +17,8 @@
     self = [super init];
     if (self){
         position = _pos;
-        wordInfo = [[WordDatabase database] wordInfoWithLevel:_level];
+//        wordInfo = [[WordDatabase database] wordInfoWithLevel:_level];
+        wordInfo = [CommonFunction getWordInfoForLevel:_level];
     }
     return self;
     

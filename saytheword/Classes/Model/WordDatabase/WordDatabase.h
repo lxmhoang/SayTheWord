@@ -20,4 +20,6 @@
 - (WordInfo *)wordInfoWithLevel:(int)_level;
 - (void)updateInitString:(NSString *)_newInitString atLevel:(int)_level;
 
+- (void)insertDatabaseIntoNSUserDefault;
+
 @end

@@ -7,7 +7,7 @@
 //
 //iap
 
-@class PFObject;
+@class PFObject, WordInfo;
 
 /*
  *  System Versioning Preprocessor Macros
@@ -314,5 +314,15 @@
 
 + (int)getNumOfSharing;
 + (void)setNumOfSharing:(int)val;
+
+#pragma mark Data
+
++ (void)setWordInfo:(WordInfo *)wordInfo;
++ (WordInfo *)getWordInfoForLevel:(int)level;
+
+#pragma mark dat version
+
++ (void)setDataVersion:(NSString *)dataVersion;
++ (NSString *)getDataVersion;
 
 @end

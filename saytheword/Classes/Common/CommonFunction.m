@@ -665,6 +665,116 @@
                         [[NSUserDefaults standardUserDefaults] synchronize];
                     }
                 }
+                
+                // check data version
+                if (([CommonFunction getDataVersion] == nil) || (![[CommonFunction getDataVersion] isEqualToString:[obj objectForKey:@"data_version"]]))
+                {
+                    NSPredicate *predicateDataVersion = [NSPredicate predicateWithFormat:
+                                              @"version = %@", [obj objectForKey:@"data_version"]];
+                    PFQuery *queryData = [PFQuery queryWithClassName:@"Data" predicate:predicateDataVersion];
+                    queryData.cachePolicy = kPFCachePolicyNetworkElseCache;
+                    [queryData findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                        if (error)
+                        {
+                            // shit happen
+                        }else
+                        {
+                            
+                            
+                            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory ,    NSUserDomainMask, YES);
+                            NSString *documentsPath = [paths objectAtIndex:0];
+                            documentsPath = [documentsPath stringByAppendingString:@"/"];
+                            
+                            
+                            NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+                            queue.maxConcurrentOperationCount = 4;
+                            
+                            NSBlockOperation *totalCompletion = [NSBlockOperation blockOperationWithBlock:^{
+                                NSLog(@"finish all data migration, now update data_version");
+                                [CommonFunction setDataVersion:[obj objectForKey:@"data_version"]];
+
+                            }];
+                            
+                            for (PFObject *wordObj in objects)
+                            {
+                                NSURL *urlLeftPic = nil;
+                                NSURL *urlRightPic = nil;
+                                NSString *leftPicName = nil;
+                                NSString *rightPicName = nil;
+                                
+                                if ([wordObj objectForKey:@"leftPicURL"] != nil)
+                                {
+                                    urlLeftPic = [[NSURL alloc] initWithString:[wordObj objectForKey:@"leftPicURL"]];
+                                    leftPicName = [urlLeftPic lastPathComponent];
+                                    
+                                }
+                                
+                                if ([wordObj objectForKey:@"rightPicURL"])
+                                {
+                                    
+                                    urlRightPic = [[NSURL alloc] initWithString:[wordObj objectForKey:@"rightPicURL"]];
+                                    rightPicName = [urlRightPic lastPathComponent];
+                                }
+                                
+                                
+                                
+                                NSBlockOperation *completionOperation = [NSBlockOperation blockOperationWithBlock:^{
+                                    NSLog(@"finish downloading %@, now save data to local", [wordObj objectForKey:@"answer"]);
+                                    NSString *leftWord = [wordObj objectForKey:@"leftword"];
+                                    NSString *rightWord = [wordObj objectForKey:@"rightword"];
+                                    NSString *initialString = [wordObj objectForKey:@"initialString"];
+                                    NSString *answer = [wordObj objectForKey:@"answer"];
+                                    NSString *leftPic = leftPicName;
+                                    NSString *rightPic = rightPicName;
+                                    int level = [[wordObj objectForKey:@"level"] intValue];
+                                    
+                                    
+                                    WordInfo *info = [[WordInfo alloc] initWithUniqueLevel:level leftWord:leftWord leftImg:leftPic rightWord:rightWord rightImg:rightPic finalWord:answer initString:initialString];
+                                    [CommonFunction setWordInfo:info];
+
+                                }];
+                                
+                                NSBlockOperation *operationLeft = [NSBlockOperation blockOperationWithBlock:^{
+                                    NSData *data = [NSData dataWithContentsOfURL:urlLeftPic];
+                                    NSString *filename = [documentsPath stringByAppendingString:leftPicName];
+                                    
+                                    NSLog(@"begin download left pic %@",leftPicName);
+                                    [data writeToFile:filename atomically:YES];
+                                    NSLog(@"finish write %@ to file %@", [urlLeftPic absoluteString], filename);
+                                }];
+                                
+                                [completionOperation addDependency:operationLeft];
+                                
+
+                                
+                                NSBlockOperation *operationRight = [NSBlockOperation blockOperationWithBlock:^{
+                                    
+                                    NSData *data = [NSData dataWithContentsOfURL:urlRightPic];
+                                    NSString *filename = [documentsPath stringByAppendingString:rightPicName];
+                                    
+                                    NSLog(@"begin download right pic %@", rightPicName);
+                                    [data writeToFile:filename atomically:YES];
+                                    NSLog(@"finish write %@ to file %@", [urlRightPic absoluteString], filename);
+                                }];
+                                
+                                [completionOperation addDependency:operationRight];
+                                
+                                [totalCompletion addDependency:completionOperation];
+                                
+                                [queue addOperations:completionOperation.dependencies waitUntilFinished:NO];
+                                [queue addOperation:completionOperation];
+                                
+                            }
+                            
+                            [queue addOperation:totalCompletion];
+                            
+                            
+                        }
+                    }];
+                }else
+                {
+                    NSLog(@"no data change");
+                }
             }
         }
     }];
@@ -978,6 +1088,48 @@
 + (int)getCoinsSpended
 {
     return (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"coinsSpended"];
+}
+
+#pragma mark Datas
+
++ (void)setWordInfo:(WordInfo *)wordInfo
+{
+    NSDictionary *wordDict = [NSDictionary  dictionaryWithObjectsAndKeys:
+                              wordInfo.leftWord,@"leftWord",
+                              wordInfo.leftImg,@"leftImg",
+                              wordInfo.rightWord,@"rightWord",
+                              wordInfo.rightImg,@"rightImg",
+                              wordInfo.finalWord,@"finalWord",
+                              wordInfo.dummyString,@"dummyString"
+                              
+                              , nil];
+    NSString *str = [NSString stringWithFormat:@"level_%d", wordInfo.level];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:wordDict forKey:str];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (WordInfo *)getWordInfoForLevel:(int)level
+{
+    NSString *str = [NSString stringWithFormat:@"level_%d", level];
+    NSDictionary *wordDict = [[NSUserDefaults standardUserDefaults] objectForKey:str];
+    if (wordDict == nil)
+        return nil;
+    
+    WordInfo *info = [[WordInfo alloc] initWithUniqueLevel:level leftWord:[wordDict objectForKey:@"leftWord"] leftImg:[wordDict objectForKey:@"leftImg"] rightWord:[wordDict objectForKey:@"rightWord"] rightImg:[wordDict objectForKey:@"rightImg"] finalWord:[wordDict objectForKey:@"finalWord"] initString:[wordDict objectForKey:@"dummyString"]];
+    return info;
+}
+#pragma mark data version
+
++ (NSString *)getDataVersion
+{
+   return [[NSUserDefaults standardUserDefaults] stringForKey:@"dataVersion"];
+}
+
++ (void)setDataVersion:(NSString *)dataVersion
+{
+    [[NSUserDefaults standardUserDefaults] setObject:dataVersion forKey:@"dataVersion"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark share

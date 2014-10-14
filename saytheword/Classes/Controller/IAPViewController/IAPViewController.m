@@ -700,7 +700,6 @@
         return cell;
     }else if (collectionView == freecoinCollectionView)
     {
-        
         FreecoinCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FreeCoinCell" forIndexPath:indexPath];
         
         int c = kCheckIfIphone ? 3 : 10;
