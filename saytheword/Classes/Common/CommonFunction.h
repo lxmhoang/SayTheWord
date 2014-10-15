@@ -322,7 +322,7 @@
 
 #pragma mark dat version
 
-+ (void)setDataVersion:(NSString *)dataVersion;
-+ (NSString *)getDataVersion;
++ (void)setDataVersion:(int)dataVersion;
++ (int)getDataVersion;
 
 @end

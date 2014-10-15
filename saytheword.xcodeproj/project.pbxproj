@@ -33,9 +33,7 @@
 		37699A0119E1AF82005C1370 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37699A0019E1AF82005C1370 /* FacebookSDK.framework */; };
 		37699A0319E1D07D005C1370 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37699A0219E1D07D005C1370 /* FacebookSDKResources.bundle */; };
 		37814A3917B382870079B8EC /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = 37814A3217B382870079B8EC /* green.png */; };
-		37814A3A17B382870079B8EC /* pink.png in Resources */ = {isa = PBXBuildFile; fileRef = 37814A3317B382870079B8EC /* pink.png */; };
 		37814A3B17B382870079B8EC /* purple.png in Resources */ = {isa = PBXBuildFile; fileRef = 37814A3417B382870079B8EC /* purple.png */; };
-		37814A3C17B382870079B8EC /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 37814A3517B382870079B8EC /* red.png */; };
 		37814A3D17B382870079B8EC /* silver.png in Resources */ = {isa = PBXBuildFile; fileRef = 37814A3617B382870079B8EC /* silver.png */; };
 		37814A3E17B382870079B8EC /* yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 37814A3717B382870079B8EC /* yellow.png */; };
 		37814A4117B382BA0079B8EC /* SparklesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37814A4017B382BA0079B8EC /* SparklesViewController.m */; };
@@ -95,6 +93,8 @@
 		37A4CB5817B8A82E00E024B9 /* coinngang.png in Resources */ = {isa = PBXBuildFile; fileRef = 37A4CB5717B8A82E00E024B9 /* coinngang.png */; };
 		37A4F797176DC5CC004A61A6 /* AnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A4F796176DC5CC004A61A6 /* AnswerView.m */; };
 		37A4F79A176DCA8B004A61A6 /* TypingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A4F799176DCA8B004A61A6 /* TypingView.m */; };
+		37A70B3919EE466300B02D0E /* cake.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37A70B3719EE466300B02D0E /* cake.jpg */; };
+		37A70B3A19EE466300B02D0E /* cup.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37A70B3819EE466300B02D0E /* cup.jpg */; };
 		37A860B117A8EC35009C0F89 /* ExplodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A860AF17A8EC35009C0F89 /* ExplodeView.m */; };
 		37A860B217A8EC35009C0F89 /* particle.png in Resources */ = {isa = PBXBuildFile; fileRef = 37A860B017A8EC35009C0F89 /* particle.png */; };
 		37A8FC0719CD88A600E92850 /* HowToPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A8FC0519CD88A600E92850 /* HowToPlayViewController.m */; };
@@ -283,7 +283,6 @@
 		A4076088183DDDF40062A553 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A4076087183DDDF40062A553 /* libz.dylib */; };
 		A440E69E19950C49007567F8 /* bg_nau_new.png in Resources */ = {isa = PBXBuildFile; fileRef = A440E69D19950C49007567F8 /* bg_nau_new.png */; };
 		A440E6A2199892C1007567F8 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A440E6A1199892C1007567F8 /* logo.png */; };
-		A440E6A41998997B007567F8 /* logo2.png in Resources */ = {isa = PBXBuildFile; fileRef = A440E6A31998997B007567F8 /* logo2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -342,9 +341,7 @@
 		37699A0019E1AF82005C1370 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		37699A0219E1D07D005C1370 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		37814A3217B382870079B8EC /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
-		37814A3317B382870079B8EC /* pink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pink.png; sourceTree = "<group>"; };
 		37814A3417B382870079B8EC /* purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purple.png; sourceTree = "<group>"; };
-		37814A3517B382870079B8EC /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		37814A3617B382870079B8EC /* silver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silver.png; sourceTree = "<group>"; };
 		37814A3717B382870079B8EC /* yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow.png; sourceTree = "<group>"; };
 		37814A3F17B382BA0079B8EC /* SparklesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SparklesViewController.h; sourceTree = "<group>"; };
@@ -436,6 +433,8 @@
 		37A4F796176DC5CC004A61A6 /* AnswerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerView.m; sourceTree = "<group>"; };
 		37A4F798176DCA8B004A61A6 /* TypingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypingView.h; sourceTree = "<group>"; };
 		37A4F799176DCA8B004A61A6 /* TypingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypingView.m; sourceTree = "<group>"; };
+		37A70B3719EE466300B02D0E /* cake.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cake.jpg; sourceTree = "<group>"; };
+		37A70B3819EE466300B02D0E /* cup.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cup.jpg; sourceTree = "<group>"; };
 		37A860AE17A8EC35009C0F89 /* ExplodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplodeView.h; sourceTree = "<group>"; };
 		37A860AF17A8EC35009C0F89 /* ExplodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExplodeView.m; sourceTree = "<group>"; };
 		37A860B017A8EC35009C0F89 /* particle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = particle.png; sourceTree = "<group>"; };
@@ -632,7 +631,6 @@
 		A4076087183DDDF40062A553 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A440E69D19950C49007567F8 /* bg_nau_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_nau_new.png; sourceTree = "<group>"; };
 		A440E6A1199892C1007567F8 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
-		A440E6A31998997B007567F8 /* logo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -796,9 +794,7 @@
 			isa = PBXGroup;
 			children = (
 				37814A3217B382870079B8EC /* green.png */,
-				37814A3317B382870079B8EC /* pink.png */,
 				37814A3417B382870079B8EC /* purple.png */,
-				37814A3517B382870079B8EC /* red.png */,
 				37814A3617B382870079B8EC /* silver.png */,
 				37814A3717B382870079B8EC /* yellow.png */,
 			);
@@ -1294,6 +1290,8 @@
 		37BD66FB177BD590004356AD /* GiangImgs */ = {
 			isa = PBXGroup;
 			children = (
+				37A70B3719EE466300B02D0E /* cake.jpg */,
+				37A70B3819EE466300B02D0E /* cup.jpg */,
 				37CCA72319ED5BA700CA228C /* one.jpg */,
 				37CCA72419ED5BA800CA228C /* summer.jpg */,
 				37CCA71F19ED473A00CA228C /* fall.jpg */,
@@ -1322,7 +1320,6 @@
 				37B7BD6819D880630039DC9A /* coffee.jpg */,
 				37B7BD6619D878E20039DC9A /* pudding.jpg */,
 				37B7BD6419D878370039DC9A /* builder.jpg */,
-				A440E6A31998997B007567F8 /* logo2.png */,
 				A440E6A1199892C1007567F8 /* logo.png */,
 				37BD66FC177BD590004356AD /* amulet.jpg */,
 				37BD66FD177BD590004356AD /* angry.jpg */,
@@ -1630,6 +1627,7 @@
 				37BD6797177BD590004356AD /* dustbin.jpg in Resources */,
 				37BC6A8D19DEBC3300580E10 /* rmv_letter.png in Resources */,
 				37CCA70819ED174F00CA228C /* shirt.jpg in Resources */,
+				37A70B3919EE466300B02D0E /* cake.jpg in Resources */,
 				37BD6799177BD590004356AD /* empty.jpg in Resources */,
 				37CCA72119ED473A00CA228C /* fall.jpg in Resources */,
 				37BD679A177BD590004356AD /* entry.jpg in Resources */,
@@ -1644,6 +1642,7 @@
 				37BD67A0177BD590004356AD /* garlic.jpg in Resources */,
 				37BD67A1177BD590004356AD /* ginger.jpg in Resources */,
 				37CCA6FA19ECFF4E00CA228C /* dog.jpg in Resources */,
+				37A70B3A19EE466300B02D0E /* cup.jpg in Resources */,
 				37BD67A2177BD590004356AD /* grenade.jpg in Resources */,
 				37B7BD5F19D7FAA10039DC9A /* HowToPlayViewController_iPad.xib in Resources */,
 				37BD67A3177BD590004356AD /* hamster.jpg in Resources */,
@@ -1730,7 +1729,6 @@
 				37BD67DD177BD590004356AD /* tiger.jpg in Resources */,
 				37DAC03619E59C1800FDC52F /* FreecoinCollectionViewCell_ip4.xib in Resources */,
 				3719225919DF71510001E5D0 /* IAPCollectionViewCell_iPad.xib in Resources */,
-				A440E6A41998997B007567F8 /* logo2.png in Resources */,
 				37BD67DE177BD590004356AD /* torrent.jpg in Resources */,
 				37CCA72619ED5BA800CA228C /* summer.jpg in Resources */,
 				37BD67DF177BD590004356AD /* tunnel.jpg in Resources */,
@@ -1750,9 +1748,7 @@
 				37A860B217A8EC35009C0F89 /* particle.png in Resources */,
 				37D1CB3419D2FE63004E26EE /* IAPViewController.xib in Resources */,
 				37814A3917B382870079B8EC /* green.png in Resources */,
-				37814A3A17B382870079B8EC /* pink.png in Resources */,
 				37814A3B17B382870079B8EC /* purple.png in Resources */,
-				37814A3C17B382870079B8EC /* red.png in Resources */,
 				37BAC60119DFBCA500F830AA /* coin6.png in Resources */,
 				37814A3D17B382870079B8EC /* silver.png in Resources */,
 				37814A3E17B382870079B8EC /* yellow.png in Resources */,
