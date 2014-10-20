@@ -208,9 +208,19 @@
 //        [rateIcon addGestureRecognizer:_tap];
 //        [self addSubview:rateIcon];
 //    }
+    
+    int t = kHeightOfNavigationBar;
+    tmpRect = kCheckIfIphone ? CGRectMake(30, t+((kHeightOfScreen-210-t)-(kWidthOfScreen-60))/2, kWidthOfScreen-60, kWidthOfScreen-60) :  CGRectMake(45, 0, kWidthOfScreen-90, kWidthOfScreen-90);
+    
+    UIImageView *img = [[UIImageView alloc] initWithFrame:tmpRect];
+    [img setImage:[UIImage imageNamed:@"2pics.png"]];
+    [self addSubview:img];
+//    img.layer.borderWidth = 2;
 
     
-    tmpRect = kCheckIfIphone ? CGRectMake(280, 200, 32, 32) : CGRectMake((kWidthOfScreen+480)/2, 300, 64, 64);
+    int y = kHeightOfScreen;
+    
+    tmpRect = kCheckIfIphone ? CGRectMake(280,  y-50-80-80-70, 32, 32) : CGRectMake(kWidthOfScreen-80, 500, 64, 64);
     musicIcon = [[UIImageView alloc] initWithFrame:tmpRect];
     if ([CommonFunction checkPlayMusic])
     {
@@ -229,7 +239,6 @@
     [self createNavigationBar];
     [self setFrame:CGRectMake(0, 0, kWidthOfScreen, kHeightOfScreen)];
     
-    int y = kHeightOfScreen;
     
     tmpRect = kCheckIfIphone ? CGRectMake(40, y-50-80-80, 240, 50) :CGRectMake((kWidthOfScreen-480)/2, y-66-100-100-60-100, 480, 100);
     int fontSize = kCheckIfIphone ? 23 : 34;
@@ -272,6 +281,7 @@
         _bannerIsVisible = NO;
         [self addSubview:adbanner];
     }
+
 }
 
 - (void)coinViewTapped:(UITapGestureRecognizer *)_sender

@@ -278,6 +278,7 @@
 		37CCA72519ED5BA800CA228C /* one.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37CCA72319ED5BA700CA228C /* one.jpg */; };
 		37CCA72619ED5BA800CA228C /* summer.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37CCA72419ED5BA800CA228C /* summer.jpg */; };
 		37CD43B019D5FE0400B4FB69 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CD43AF19D5FE0400B4FB69 /* iAd.framework */; };
+		37CEB91219F53ED900ED8DE7 /* 2pics.png in Resources */ = {isa = PBXBuildFile; fileRef = 37CEB91119F53ED900ED8DE7 /* 2pics.png */; };
 		37D1CB2819D2F0F5004E26EE /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D1CB2719D2F0F5004E26EE /* View.xib */; };
 		37D1CB3319D2FE63004E26EE /* IAPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D1CB3119D2FE63004E26EE /* IAPViewController.m */; };
 		37D1CB3419D2FE63004E26EE /* IAPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D1CB3219D2FE63004E26EE /* IAPViewController.xib */; };
@@ -637,6 +638,7 @@
 		37CCA72319ED5BA700CA228C /* one.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = one.jpg; sourceTree = "<group>"; };
 		37CCA72419ED5BA800CA228C /* summer.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = summer.jpg; sourceTree = "<group>"; };
 		37CD43AF19D5FE0400B4FB69 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		37CEB91119F53ED900ED8DE7 /* 2pics.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2pics.png; sourceTree = "<group>"; };
 		37D1CB2719D2F0F5004E26EE /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		37D1CB3019D2FE63004E26EE /* IAPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPViewController.h; sourceTree = "<group>"; };
 		37D1CB3119D2FE63004E26EE /* IAPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPViewController.m; sourceTree = "<group>"; };
@@ -1051,6 +1053,7 @@
 		379E93151765C97000237F39 /* Accessory */ = {
 			isa = PBXGroup;
 			children = (
+				37CEB91119F53ED900ED8DE7 /* 2pics.png */,
 				37F3F7FA19E8635900E80344 /* menu.png */,
 				37C89E2F19E516E400D774E2 /* 5stars */,
 				37302FCA19E2E0F0001FDEAE /* rateus_green.png */,
@@ -1710,6 +1713,7 @@
 				37BD67AC177BD590004356AD /* lichee.JPG in Resources */,
 				37BD67AD177BD590004356AD /* lighter.jpg in Resources */,
 				379C71DA19E456040004DC24 /* poptounge.wav in Resources */,
+				37CEB91219F53ED900ED8DE7 /* 2pics.png in Resources */,
 				37CCA70C19ED1F3E00CA228C /* first.jpg in Resources */,
 				37BD67AF177BD590004356AD /* lobster.jpg in Resources */,
 				37C89E3219E5391600D774E2 /* btnClick.wav in Resources */,
@@ -1987,8 +1991,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LE HOANG (TMD3Y97MSH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LE HOANG (TMD3Y97MSH)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2006,8 +2010,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Say 2 pics, guess the word";
-				PROVISIONING_PROFILE = "d064eb87-91ca-4055-b1a5-0303dbd00604";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "0d631ea3-c8c4-427f-9366-9e276b95c8c6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0d631ea3-c8c4-427f-9366-9e276b95c8c6";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
