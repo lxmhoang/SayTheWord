@@ -25,13 +25,13 @@
 #define kTitleOfSharing @"SHARE IT"
 #define kInitialTitleOfRating @"RATE IT"
 
-#define kInitialHelpMessage @"Help me guess this word by combining first syllabel of left pic with last syllabel of right pic. E.g: BUTter+stuDY = BUDDY. Download it FREE http://goo.gl/m2U3sV "
+#define kInitialHelpMessage @"Help me guess this word by combining first syllabel of left pic with last syllabel of right pic. E.g: STUdio+presiDENT = STUDENT. Download it FREE at http://goo.gl/GgWVAL "
 
 
-#define kInitialShareMessage @"Help me guess this word by combining first syllabel of left pic with last syllabel of right pic. E.g: BUTter+stuDY = BUDDY. Download it FREE http://goo.gl/m2U3sV "
+#define kInitialShareMessage @"Help me guess this word by combining first syllabel of left pic with last syllabel of right pic. E.g: STUdio+presiDENT = STUDENT. Download it FREE at http://goo.gl/GgWVAL "
 
 
-#define kInitialBragMessage @"I'm an expert at #SayItLoud. Try it FREE http://goo.gl/m2U3sV "
+#define kInitialBragMessage @"I'm an expert at #Say2picsGuessTheWord. Try it FREE http://goo.gl/GgWVAL "
 
 #define kTagOfCopyAnswerView 669
 
@@ -48,11 +48,11 @@
 #define kRewardCoinsForEachLetter 3
 
 #define kNavBarImg @"nav_nau.png"
-#define kProductIDOf200  @"com.lxmhoang.sayitloud.iap.200coins"
-#define kProductIDOf420  @"com.lxmhoang.sayitloud.iap.420coins"
-#define kProductIDOf1100  @"com.lxmhoang.sayitloud.iap.1100coins"
-#define kProductIDOf2400  @"com.lxmhoang.sayitloud.iap.2400coins"
-#define kProductIDOf7800  @"com.lxmhoang.sayitloud.iap.7800coins"
+#define kProductIDOf200  @"com.lxmhoang.say2picsguesstheword.iap.200coins"
+#define kProductIDOf420  @"com.lxmhoang.say2picsguesstheword.iap.420coins"
+#define kProductIDOf1100  @"com.lxmhoang.say2picsguesstheword.iap.1100coins"
+#define kProductIDOf2400  @"com.lxmhoang.say2picsguesstheword.iap.2400coins"
+#define kProductIDOf7800  @"com.lxmhoang.say2picsguesstheword.iap.7800coins"
 //#define kProductIDOf50000  @"com.lxmhoang.saytheword.iap.50000coins"
 
 #define kHeightOfScreen [ [ UIScreen mainScreen ] bounds ].size.height
@@ -320,9 +320,23 @@
 + (void)setWordInfo:(WordInfo *)wordInfo;
 + (WordInfo *)getWordInfoForLevel:(int)level;
 
-#pragma mark dat version
+#pragma mark data version
 
 + (void)setDataVersion:(int)dataVersion;
 + (int)getDataVersion;
+
+#pragma mark Rated Version
++ (void)setRatedVersion:(NSString *)ver;
++ (NSString *)getRatedVersion;
+
+#pragma mark rule
+
++ (void)setRule:(NSString *)rule;
++ (NSString *)getRule;
+
+#pragma mark max level
+
++ (void)setMaxLevel:(int)level;
++ (int)getMaxLevel;
 
 @end

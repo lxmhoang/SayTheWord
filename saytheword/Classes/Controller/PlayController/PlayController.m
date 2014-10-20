@@ -71,8 +71,8 @@
 
 - (void)hintBtnTapped
 {
-    NSLog(@"list of subviwes : %@", self.view.subviews);
-//    [CommonFunction playSweepSound];
+//    NSLog(@"list of subviwes : %@", self.view.subviews);
+    [CommonFunction playSweepSound];
     [self takeScreenshot];
 
     hintsView.alpha = 1;

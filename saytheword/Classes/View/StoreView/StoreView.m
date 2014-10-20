@@ -17,8 +17,8 @@
     if (self) {
         [self setBackgroundColor:[UIColor yellowColor]];
         //        self.alpha = 0;
-        self.layer.cornerRadius = 10;
-        self.layer.masksToBounds = YES;
+//        self.layer.cornerRadius = 10;
+//        self.layer.masksToBounds = YES;
         storeModel = _data;
         [self createSubViews];
         HUD = [[MBProgressHUD alloc] initWithView:self];

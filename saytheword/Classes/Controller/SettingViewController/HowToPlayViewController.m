@@ -51,6 +51,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if ([CommonFunction getRule])
+    {
+        
+        self.textRule.text = [CommonFunction getRule];
+    }
     
     navigationBar.layer.shadowOffset = CGSizeMake(4, 5);
     navigationBar.layer.shadowRadius = 5;

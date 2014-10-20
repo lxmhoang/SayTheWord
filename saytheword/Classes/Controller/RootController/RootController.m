@@ -52,7 +52,7 @@
     }
     
       
-    
+    [self initFullScreenAds];
 	// Do any additional setup after loading the view.
 }
 
@@ -117,7 +117,7 @@
     PlayController *playController = [[PlayController alloc]initWithPosition:1];
     playController.delegate = self;
     [self presentNewVCFromTheRight:playController];
-    [self initFullScreenAds];
+    
 }
 
 #pragma mark WinController delegate method
@@ -288,7 +288,7 @@
 
 - (GADInterstitial *)createAndLoadInterstitial {
     GADInterstitial *localInterstitial = [[GADInterstitial alloc] init];
-    localInterstitial.adUnitID = @"ca-app-pub-3940256099942544/4411468910";
+    localInterstitial.adUnitID = @"ca-app-pub-1616883244249130/9582987201";
     localInterstitial.delegate = self;
     
     GADRequest *request = [GADRequest request];

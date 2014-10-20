@@ -446,13 +446,13 @@
 {
     FreecoinCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FreeCoinCell" forIndexPath:indexPath];
     
-//    cell.bgImg.layer.cornerRadius = 10;
-//    cell.bgImg.clipsToBounds = YES;
-//    cell.bgImg.layer.borderWidth = 2;
-//    cell.bgImg.layer.borderColor = [[UIColor yellowColor] CGColor];
-//    cell.priceLabel.layer.cornerRadius = 10;
-//    cell.priceLabel.clipsToBounds = YES;
-//    
+    cell.bgImg.layer.cornerRadius = 10;
+    cell.bgImg.clipsToBounds = YES;
+    cell.bgImg.layer.borderWidth = 2;
+    cell.bgImg.layer.borderColor = [[UIColor yellowColor] CGColor];
+    cell.priceLabel.layer.cornerRadius = 10;
+    cell.priceLabel.clipsToBounds = YES;
+//
     
     FreeCoinModel *model = [optionsGetFreeCoin objectAtIndex:indexPath.row];
     cell.imgView.image = [UIImage imageNamed:model.imgName];

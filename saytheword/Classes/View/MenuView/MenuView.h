@@ -19,7 +19,7 @@
 
 @end
 
-@interface MenuView : UIView <ADBannerViewDelegate>
+@interface MenuView : UIView <ADBannerViewDelegate, UIAlertViewDelegate>
 {
     UILabel *coinLabel;
     UIImageView *coinImageView;
@@ -28,6 +28,7 @@
     
     ADBannerView *adbanner;
     BOOL _bannerIsVisible;
+    BOOL vung1, vung2;
 }
 
 

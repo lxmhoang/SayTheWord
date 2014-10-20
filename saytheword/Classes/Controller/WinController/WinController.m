@@ -44,6 +44,8 @@
     [CommonFunction reSetGlobalData];
     [CommonFunction setCoin:[CommonFunction getCoin]+(int)playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter];
     
+
+    
     [CommonFunction setLevel:([CommonFunction getLevel]+1)];
     [CommonFunction setDidAskFriendForCurrentLevel:NO];
     

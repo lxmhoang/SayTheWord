@@ -24,11 +24,11 @@
 {
     
     if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-        return [NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=901409937"];
+        return [NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=930826001"];
     }else
     {
         
-        return [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id901409937"];
+        return [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id930826001"];
         
     }
 }
@@ -363,6 +363,10 @@
 {
     
     NSNumber *coin = [NSNumber numberWithInt:kInitialCoin];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"maxLevel"] == nil){
+        [self setMaxLevel:10];
+    }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"dataVersion"] == nil){
         [self setDataVersion:-1];
@@ -1104,6 +1108,18 @@
     return (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"coinsSpended"];
 }
 
+
++ (void)setMaxLevel:(int)level
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:level forKey:@"maxLevel"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int)getMaxLevel
+{
+    return (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"maxLevel"];
+}
+
 #pragma mark Datas
 
 + (void)setWordInfo:(WordInfo *)wordInfo
@@ -1118,6 +1134,11 @@
                               
                               , nil];
     NSString *str = [NSString stringWithFormat:@"level_%d", wordInfo.level];
+    
+    if (wordInfo.level > [CommonFunction getMaxLevel])
+    {
+        [CommonFunction setMaxLevel:wordInfo.level];
+    }
     
     [[NSUserDefaults standardUserDefaults] setObject:wordDict forKey:str];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -1144,6 +1165,32 @@
 {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:dataVersion] forKey:@"dataVersion"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark rated version
+
++ (NSString *)getRatedVersion
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ratedVersion"];
+}
+
++ (void)setRatedVersion:(NSString *)ver
+{
+    [[NSUserDefaults standardUserDefaults] setObject:ver forKey:@"ratedVersion"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark rule
+
++ (void)setRule:(NSString *)rule
+{
+    [[NSUserDefaults standardUserDefaults] setObject:rule forKey:@"Rule"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSString *)getRule
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"Rule"];
 }
 
 #pragma mark share

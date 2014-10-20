@@ -19,6 +19,7 @@
 
 @property (strong, nonatomic) IBOutlet UIView *pic1View;
 @property (strong, nonatomic) IBOutlet UIView *pic2View;
+@property (strong, nonatomic) IBOutlet UILabel *textRule;
 
 - (id)initWithPosition:(int)_pos;
 - (IBAction)menuBtnTapped:(id)sender;

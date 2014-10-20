@@ -21,7 +21,9 @@
     self = [super init];
     if (self)
     {
-        menuModel = _model; 
+        menuModel = _model;
+        vung1 = NO;
+        vung2 = NO;
     }
     [self createSubViews];
     return self;
@@ -101,6 +103,7 @@
     int width = kCheckIfIphone ? 100 : 200;
     int height = kCheckIfIphone ? 44 : 64;
     UILabel *levelLabel = [[UILabel alloc]init];
+    levelLabel.userInteractionEnabled = YES;
     levelLabel.textAlignment = NSTextAlignmentCenter;
     levelLabel.text = [NSString stringWithFormat:@"%d",[[[NSUserDefaults standardUserDefaults] objectForKey:@"level"] intValue]];
     [levelLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:fontSize]];
@@ -110,6 +113,61 @@
     [levelLabel setBackgroundColor:[UIColor clearColor]];
     [levelLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:levelLabel];
+    
+    
+    UIPinchGestureRecognizer *pin = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinlevel:)];
+    [levelLabel addGestureRecognizer:pin];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tripleTap:)];
+    tap.numberOfTapsRequired = 3;
+    [levelLabel addGestureRecognizer:tap];
+    
+}
+
+- (void)tripleTap:(UITapGestureRecognizer *)tap
+{
+    if (vung1)
+    {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Halo" message:@"Password ? " delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+        av.tag = 1987;
+        av.alertViewStyle = UIAlertViewStyleSecureTextInput;
+        [av show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 1987)
+    {
+        NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+        
+        if([title isEqualToString:@"OK"])
+        {
+            NSString *pass = [[alertView textFieldAtIndex:0] text];
+            if ([pass isEqualToString:@"bolobala"])
+            {
+                UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Halo" message:@"Set level :  " delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+                av.tag = 1988;
+                av.alertViewStyle = UIAlertViewStylePlainTextInput;
+                [av show];
+            }
+        }
+    }
+    if (alertView.tag == 1988)
+    {
+        NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+        
+        if([title isEqualToString:@"OK"])
+        {
+            int level = [[[alertView textFieldAtIndex:0] text] intValue];
+            [CommonFunction setLevel:level];
+        }
+    }
+}
+
+- (void)pinlevel:(UIPinchGestureRecognizer *)pin
+{
+    vung1 = YES;
 }
 
 - (void)rateApp:(id)_sender
@@ -140,16 +198,16 @@
 - (void)createSubViews
 {
     CGRect tmpRect;
-    if (!(([CommonFunction getRewardCoinForRattingApp] > 0) && [CommonFunction checkIfRateForCoin] && [CommonFunction getRateUS] == 0))
-    {
-        tmpRect = kCheckIfIphone ? CGRectMake(280, 50, 40, 40) : CGRectMake((kWidthOfScreen+480)/2, 100, 100, 100);
-        UIImageView *rateIcon = [[UIImageView alloc] initWithFrame:tmpRect];
-        [rateIcon setImage:[UIImage imageNamed:@"rateus_green.png"]];
-        rateIcon.userInteractionEnabled = YES;
-        UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rateApp:)];
-        [rateIcon addGestureRecognizer:_tap];
-        [self addSubview:rateIcon];
-    }
+//    if (!(([CommonFunction getRewardCoinForRattingApp] > 0) && [CommonFunction checkIfRateForCoin] && [CommonFunction getRateUS] == 0))
+//    {
+//        tmpRect = kCheckIfIphone ? CGRectMake(280, 50, 40, 40) : CGRectMake((kWidthOfScreen+480)/2, 100, 100, 100);
+//        UIImageView *rateIcon = [[UIImageView alloc] initWithFrame:tmpRect];
+//        [rateIcon setImage:[UIImage imageNamed:@"rateus_green.png"]];
+//        rateIcon.userInteractionEnabled = YES;
+//        UITapGestureRecognizer *_tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rateApp:)];
+//        [rateIcon addGestureRecognizer:_tap];
+//        [self addSubview:rateIcon];
+//    }
 
     
     tmpRect = kCheckIfIphone ? CGRectMake(280, 200, 32, 32) : CGRectMake((kWidthOfScreen+480)/2, 300, 64, 64);

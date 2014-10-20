@@ -30,7 +30,7 @@
     {
         numOfFW = kCheckIfIphone ? 5 : 8;
         tapped = NO;
-        ableToGoToNextLevel = NO;
+        ableToGoToNextLevel = ![CommonFunction checkIfShowAds];
         playModel = _playModel;
         endYLimit = kCheckIfIphone ? 200 : 500;
         sizeOfFW = kCheckIfIphone ? 10 : 20;
@@ -231,6 +231,16 @@
 
 - (void)moveToNextLevel:(UITapGestureRecognizer *)_tap
 {
+    // already increase by 1 in wincontroller
+    if ([CommonFunction getLevel] > [CommonFunction getMaxLevel])
+    {
+        [CommonFunction alert:@"Congratulation! You pass the highest level of this game. We are creating new levels, please check it later " delegate:nil];
+        return;
+    }
+    
+    
+    
+    
     if (!ableToGoToNextLevel)
     {
         if (fullscreenAds && [CommonFunction getFullScreenAds])

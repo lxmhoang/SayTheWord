@@ -10,6 +10,7 @@
 #import "WordDatabase.h"
 #import "WordInfo.h"
 #import <Parse/Parse.h>
+#import <Crashlytics/Crashlytics.h>
 
 @implementation AppDelegate
 @synthesize rootController;
@@ -213,6 +214,8 @@
     [Parse setApplicationId:@"7Rx018E0kJKkmON2WF5pSCWLxa5u0mR8boHcHCc5"
                   clientKey:@"cQijJMLIqBiUCcNkaN1m4K7NbEyBhLCC0ZxM8BPA"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    [Crashlytics startWithAPIKey:@"36b3007e0a0f53cf00825f195fc7f17a5e8db471"];
 
     
     //-- Set Notification
@@ -240,6 +243,21 @@
 
 
     [CommonFunction createGlobalVariable];
+    
+    if ([CommonFunction getRateUS] == 2)// app is rated before
+    {
+        if ([CommonFunction getRatedVersion] == nil)
+        {
+            // it's weird
+        }else
+        {
+            if (![[CommonFunction getRatedVersion] isEqualToString:
+                [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]])
+            {
+                [CommonFunction setRateUs:0];
+            }
+        }
+    }
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
@@ -278,6 +296,7 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:kMsgThankForRating] message:[NSString stringWithFormat:@" You have claimed %d coins", [CommonFunction getRewardCoinForRattingApp]] delegate:rootController cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
         [CommonFunction setRateUs:2];
+        [CommonFunction setRatedVersion:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
     }
     
     

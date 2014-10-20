@@ -22,6 +22,14 @@
         rightImg = __rightImg;
         finalWord = __finalWord;
         dummyString = __initString;
+        if (dummyString.length<11)
+        {
+            int k = 11-dummyString.length;
+            for (int i=0;i<k;i++)
+            {
+                dummyString = [dummyString stringByAppendingString:@"A"];
+            }
+        }
     }
     return self;
 }
