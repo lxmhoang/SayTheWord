@@ -152,15 +152,15 @@
 
 - (void)niceBorder:(UIView *)view
 {
-//    view.layer.borderWidth = 2;
-//    if ((view == _view22) || (view == _view23))
-//    {
-//        view.layer.borderColor = [[UIColor redColor] CGColor];
-//    }else
-//    {
-//        
-//        view.layer.borderColor = [[UIColor yellowColor] CGColor];
-//    }
+    view.layer.borderWidth = 2;
+    if ((view == _view22) || (view == _view23))
+    {
+        view.layer.borderColor = [[UIColor redColor] CGColor];
+    }else
+    {
+        
+        view.layer.borderColor = [[UIColor yellowColor] CGColor];
+    }
 }
 
 - (void)setUp
@@ -185,41 +185,41 @@
     int t = kCheckIfIphone ? 2 : 5;
     
     
-    self.askFriendIcon.layer.cornerRadius = k;
-    self.freeCoinIcon.layer.cornerRadius = k;
+//    self.askFriendIcon.layer.cornerRadius = k;
+//    self.freeCoinIcon.layer.cornerRadius = k;
     self.askFriendIcon.layer.borderWidth = 1;
     self.freeCoinIcon.layer.borderWidth = 1;
     self.askFriendIcon.layer.borderColor = [[UIColor yellowColor] CGColor];
     self.freeCoinIcon.layer.borderColor = [[UIColor yellowColor] CGColor];
-    
-    bigView.layer.cornerRadius = k;
+//
+//    bigView.layer.cornerRadius = k;
     bigView.clipsToBounds = YES;
     bigView.layer.borderColor = [[UIColor yellowColor] CGColor];
     bigView.layer.borderWidth = 1;
-    
-    self.view11.layer.cornerRadius = t;
-    self.view12.layer.cornerRadius = t;
-    self.view13.layer.cornerRadius = t;
-    self.view21.layer.cornerRadius = t;
-    self.view22.layer.cornerRadius = t;
-    self.view23.layer.cornerRadius = t;
-    
-    
-    self.coinView11.layer.cornerRadius = t;
-    self.coinView12.layer.cornerRadius = t;
-    self.coinView13.layer.cornerRadius = t;
-    self.coinView21.layer.cornerRadius = t;
-    self.coinView22.layer.cornerRadius = t;
-    self.coinView23.layer.cornerRadius = t;
-    
-    
+//
+//    self.view11.layer.cornerRadius = t;
+//    self.view12.layer.cornerRadius = t;
+//    self.view13.layer.cornerRadius = t;
+//    self.view21.layer.cornerRadius = t;
+//    self.view22.layer.cornerRadius = t;
+//    self.view23.layer.cornerRadius = t;
+//    
+//    
+//    self.coinView11.layer.cornerRadius = t;
+//    self.coinView12.layer.cornerRadius = t;
+//    self.coinView13.layer.cornerRadius = t;
+//    self.coinView21.layer.cornerRadius = t;
+//    self.coinView22.layer.cornerRadius = t;
+//    self.coinView23.layer.cornerRadius = t;
+//    
+//    
     self.coinView11.layer.masksToBounds = YES;
     self.coinView12.layer.masksToBounds = YES;
     self.coinView13.layer.masksToBounds = YES;
     self.coinView21.layer.masksToBounds = YES;
     self.coinView22.layer.masksToBounds = YES;
     self.coinView23.layer.masksToBounds = YES;
-    
+//
     [self niceBorder:self.view11];
     [self niceBorder:self.view12];
     [self niceBorder:self.view13];
@@ -406,11 +406,11 @@
 {
     FreecoinCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FreeCoinCell" forIndexPath:indexPath];
     
-    cell.bgImg.layer.cornerRadius = 10;
+//    cell.bgImg.layer.cornerRadius = 10;
     cell.bgImg.clipsToBounds = YES;
     cell.bgImg.layer.borderWidth = 2;
     cell.bgImg.layer.borderColor = [[UIColor yellowColor] CGColor];
-    cell.priceLabel.layer.cornerRadius = 10;
+//    cell.priceLabel.layer.cornerRadius = 10;
     cell.priceLabel.clipsToBounds = YES;
 //
     

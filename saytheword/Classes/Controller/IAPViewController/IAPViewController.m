@@ -50,7 +50,7 @@
     self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.6];
     bigView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.7];
 
-    bigView.layer.cornerRadius = 15;
+//    bigView.layer.cornerRadius = 15;
     bigView.clipsToBounds = YES;
     bigView.layer.borderWidth = 2;
     bigView.layer.borderColor = [[UIColor yellowColor] CGColor];
@@ -341,7 +341,7 @@
         {
             int k = kCheckIfIphone ? 3: 10;
             int h = kCheckIfIphone ? 1:2;
-            cell.bgImg.layer.cornerRadius = k;
+//            cell.bgImg.layer.cornerRadius = k;
             cell.bgImg.clipsToBounds = YES;
             cell.bgImg.layer.borderWidth = h;
             if (indexPath.row >0)
@@ -352,7 +352,7 @@
                 cell.bgImg.layer.borderColor = [[UIColor redColor] CGColor];
                 
             }
-            cell.priceLabel.layer.cornerRadius = kCheckIfIphone ? 3 : 10;
+//            cell.priceLabel.layer.cornerRadius = kCheckIfIphone ? 3 : 10;
             cell.priceLabel.clipsToBounds = YES;
             if (indexPath.row >0)
             {
@@ -414,7 +414,7 @@
 //                NSLog(@"indexpath : %ld-%ld  img name : %@ cell : %@", (long)indexPath.section, (long)indexPath.row,@"none",cell);
                 cell.rmvAdsView.alpha = 0;
                 cell.freeCoinLabel.alpha = 1;
-                cell.freeCoinLabel.layer.cornerRadius = kCheckIfIphone ? 5 : 10;
+//                cell.freeCoinLabel.layer.cornerRadius = kCheckIfIphone ? 5 : 10;
                 cell.freeCoinLabel.layer.borderColor = [[UIColor yellowColor] CGColor];
                 cell.freeCoinLabel.layer.borderWidth = kCheckIfIphone ? 1 : 2;
                 cell.imgView.alpha = 0;
@@ -435,13 +435,13 @@
         
         int c = kCheckIfIphone ? 3 : 10;
         
-        cell.bgImg.layer.cornerRadius = c;
+//        cell.bgImg.layer.cornerRadius = c;
         cell.bgImg.clipsToBounds = YES;
         cell.bgImg.layer.borderWidth = kCheckIfIphone ? 1 : 2;
         cell.bgImg.layer.borderColor = [[UIColor yellowColor] CGColor];
         
         
-        cell.priceLabel.layer.cornerRadius = c;
+//        cell.priceLabel.layer.cornerRadius = c;
         cell.priceLabel.clipsToBounds = YES;
         
         

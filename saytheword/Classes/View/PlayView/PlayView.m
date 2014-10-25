@@ -104,9 +104,9 @@
     [navBar setBackgroundColor:navColor];
     navBar.layer.masksToBounds = NO;
     //    navBar.layer.cornerRadius = 5; // if you like rounded corners
-    navBar.layer.shadowOffset = CGSizeMake(4, 5);
-    navBar.layer.shadowRadius = 5;
-    navBar.layer.shadowOpacity = 0.5;
+//    navBar.layer.shadowOffset = CGSizeMake(4, 5);
+//    navBar.layer.shadowRadius = 5;
+//    navBar.layer.shadowOpacity = 0.5;
     
     
     //    UIView *v1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];

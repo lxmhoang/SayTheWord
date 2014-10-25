@@ -33,8 +33,8 @@
     {
         [self.view setFrame:CGRectMake(_pos*kWidthOfScreen + _pos*kShortDisTanceOf2View, 0, kWidthOfScreen, kHeightOfScreen)];
         int k = kCheckIfIphone ? 4 : 7;
-        self.pic1View.layer.cornerRadius = k;
-        self.pic2View.layer.cornerRadius = k;
+//        self.pic1View.layer.cornerRadius = k;
+//        self.pic2View.layer.cornerRadius = k;
         
     }
     
@@ -57,9 +57,9 @@
         self.textRule.text = [CommonFunction getRule];
     }
     
-    navigationBar.layer.shadowOffset = CGSizeMake(4, 5);
-    navigationBar.layer.shadowRadius = 5;
-    navigationBar.layer.shadowOpacity = 0.5;
+//    navigationBar.layer.shadowOffset = CGSizeMake(4, 5);
+//    navigationBar.layer.shadowRadius = 5;
+//    navigationBar.layer.shadowOpacity = 0.5;
     // Do any additional setup after loading the view from its nib.
 }
 
