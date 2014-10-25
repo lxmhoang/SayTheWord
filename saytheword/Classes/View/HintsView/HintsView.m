@@ -11,10 +11,8 @@
 #import "FreecoinCollectionViewCell.h"
 #import "ApActivityData.h"
 
-
-
-
 @implementation HintsView
+
 @synthesize delegate,  bigView, bodyView, backBtn, freeCoinCollectionView, fbView;
 
 - (void)removeLetter:(UITapGestureRecognizer *)_sender
@@ -85,31 +83,6 @@
 
 - (void)createSmallViews
 {
-    // Create navigation
-    
-//    int heightOfNaviBar = kCheckIfIphone ? 14 : 32;
-    
-//    UINavigationBar *naviBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, bigView.frame.size.width, heightOfNaviBar)];
-//    
-//    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"CANCEL"
-//                                                                    style:UIBarButtonItemStyleDone target:nil action:nil];
-//    
-//    UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"HINTS"];
-//    item.rightBarButtonItem = rightButton;
-//    item.hidesBackButton = NO;
-//    [naviBar pushNavigationItem:item animated:NO];
-//    
-//    NSDictionary *settings = @{
-//                               UITextAttributeFont                 :  [UIFont systemFontOfSize:<#(CGFloat)#>],
-//                               UITextAttributeTextColor            :  [UIColor whiteColor],
-//                               UITextAttributeTextShadowColor      :  [UIColor clearColor],
-//                               UITextAttributeTextShadowOffset     :  [NSValue valueWithUIOffset:UIOffsetZero]};
-//    
-//    [[UINavigationBar appearance] setTitleTextAttributes:settings];
-//    
-//    [bigView addSubview:naviBar];
-    
-    //
     UIView *removeLetterView = [[UIView alloc]initWithFrame:CGRectMake(3, 24, 27, 30)];
     [removeLetterView setBackgroundColor:[UIColor redColor]];
     if (![CommonFunction getCanRemoveALetter]){
@@ -175,32 +148,19 @@
     {
         frameHintView = CGRectMake(300, 400, 150, 165);
     }
-    
-//    int k = kCheckIfIphone ? 5 : 15;
-//    
-//    
-//    bigView = [[UIView alloc]initWithFrame:frameHintView];
-//    bigView.layer.cornerRadius = k;
-//    bigView.clipsToBounds = YES;
-//    [bigView setBackgroundColor:[UIColor whiteColor]];
-//    
-//    [self createSmallViews];
-//    
-//
-//    [self addSubview:bigView];
 }
 
 - (void)niceBorder:(UIView *)view
 {
-    view.layer.borderWidth = 2;
-    if ((view == _view22) || (view == _view23))
-    {
-        view.layer.borderColor = [[UIColor redColor] CGColor];
-    }else
-    {
-        
-        view.layer.borderColor = [[UIColor yellowColor] CGColor];
-    }
+//    view.layer.borderWidth = 2;
+//    if ((view == _view22) || (view == _view23))
+//    {
+//        view.layer.borderColor = [[UIColor redColor] CGColor];
+//    }else
+//    {
+//        
+//        view.layer.borderColor = [[UIColor yellowColor] CGColor];
+//    }
 }
 
 - (void)setUp
@@ -547,33 +507,12 @@
         
         [self backBtnAction:nil];
     }
-    
-    //    BOOL hideBackBtn = (coinTableView.frame.origin.x == -coinTableView.frame.size.width) ? YES : NO;
-    //    [UIView animateWithDuration:0.3 animations:^{
-    //        [coinTableView setFrame:CGRectOffset(coinTableView.frame, +coinTableView.frame.size.width, 0)];
-    //        [freeCoinTableView setFrame:CGRectOffset(freeCoinTableView.frame, +coinTableView.frame.size.width, 0)];
-    //        [fbView setFrame:CGRectOffset(freeCoinTableView.frame, +coinTableView.frame.size.width, 0)];
-    //
-    //        if (hideBackBtn)
-    //        {
-    //            self.backBtn.alpha = 0;
-    //        }
-    //
-    //    } completion:^(BOOL finished) {
-    //        if (finished)
-    //        {
-    //            NSURL *url = [NSURL URLWithString:@"fb://profile/172415879600587"];
-    //            [[UIApplication sharedApplication] openURL:url];
-    //        }
-    //    }];
-    
 }
 
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
                             user:(id<FBGraphUser>)user {
     NSString *str = [user objectForKey:@"link"];
     [CommonFunction setFBLink:str];
-    
     // here we use helper properties of FBGraphUser to dot-through to first_name and
     // id properties of the json response from the server; alternatively we could use
     // NSDictionary methods such as objectForKey to get values from the my json object
@@ -603,22 +542,5 @@
         [CommonFunction alert:@"On your device, please go to Setting->Facebook->Allow this app to use your facebook account" delegate:nil];
     }
 }
-
-
-
-
-
-
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect
- {
- // Drawing code
- }
- */
-
-
-
 
 @end

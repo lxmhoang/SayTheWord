@@ -150,7 +150,6 @@
 		37BD66FA177BD4F4004356AD /* saytheword.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 37BD66F9177BD4F4004356AD /* saytheword.sqlite */; };
 		37BD6773177BD590004356AD /* amulet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37BD66FC177BD590004356AD /* amulet.jpg */; };
 		37BD6774177BD590004356AD /* angry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37BD66FD177BD590004356AD /* angry.jpg */; };
-		37BD6775177BD590004356AD /* archer.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37BD66FE177BD590004356AD /* archer.jpg */; };
 		37BD6776177BD590004356AD /* arrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37BD66FF177BD590004356AD /* arrow.jpg */; };
 		37BD6778177BD590004356AD /* baby.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37BD6701177BD590004356AD /* baby.jpg */; };
 		37BD6779177BD590004356AD /* ballon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37BD6702177BD590004356AD /* ballon.jpg */; };
@@ -279,6 +278,8 @@
 		37CCA72619ED5BA800CA228C /* summer.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37CCA72419ED5BA800CA228C /* summer.jpg */; };
 		37CD43B019D5FE0400B4FB69 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CD43AF19D5FE0400B4FB69 /* iAd.framework */; };
 		37CEB91219F53ED900ED8DE7 /* 2pics.png in Resources */ = {isa = PBXBuildFile; fileRef = 37CEB91119F53ED900ED8DE7 /* 2pics.png */; };
+		37CEB91519F6085E00ED8DE7 /* fare.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37CEB91319F6085E00ED8DE7 /* fare.jpg */; };
+		37CEB91619F6085E00ED8DE7 /* well.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37CEB91419F6085E00ED8DE7 /* well.jpg */; };
 		37D1CB2819D2F0F5004E26EE /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D1CB2719D2F0F5004E26EE /* View.xib */; };
 		37D1CB3319D2FE63004E26EE /* IAPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D1CB3119D2FE63004E26EE /* IAPViewController.m */; };
 		37D1CB3419D2FE63004E26EE /* IAPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D1CB3219D2FE63004E26EE /* IAPViewController.xib */; };
@@ -509,7 +510,6 @@
 		37BD66F9177BD4F4004356AD /* saytheword.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = saytheword.sqlite; sourceTree = "<group>"; };
 		37BD66FC177BD590004356AD /* amulet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = amulet.jpg; sourceTree = "<group>"; };
 		37BD66FD177BD590004356AD /* angry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = angry.jpg; sourceTree = "<group>"; };
-		37BD66FE177BD590004356AD /* archer.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = archer.jpg; sourceTree = "<group>"; };
 		37BD66FF177BD590004356AD /* arrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = arrow.jpg; sourceTree = "<group>"; };
 		37BD6701177BD590004356AD /* baby.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = baby.jpg; sourceTree = "<group>"; };
 		37BD6702177BD590004356AD /* ballon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ballon.jpg; sourceTree = "<group>"; };
@@ -639,6 +639,8 @@
 		37CCA72419ED5BA800CA228C /* summer.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = summer.jpg; sourceTree = "<group>"; };
 		37CD43AF19D5FE0400B4FB69 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		37CEB91119F53ED900ED8DE7 /* 2pics.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2pics.png; sourceTree = "<group>"; };
+		37CEB91319F6085E00ED8DE7 /* fare.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fare.jpg; sourceTree = "<group>"; };
+		37CEB91419F6085E00ED8DE7 /* well.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = well.jpg; sourceTree = "<group>"; };
 		37D1CB2719D2F0F5004E26EE /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		37D1CB3019D2FE63004E26EE /* IAPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPViewController.h; sourceTree = "<group>"; };
 		37D1CB3119D2FE63004E26EE /* IAPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPViewController.m; sourceTree = "<group>"; };
@@ -1321,6 +1323,8 @@
 		37BD66FB177BD590004356AD /* GiangImgs */ = {
 			isa = PBXGroup;
 			children = (
+				37CEB91319F6085E00ED8DE7 /* fare.jpg */,
+				37CEB91419F6085E00ED8DE7 /* well.jpg */,
 				37D3795719F4DDB600B6E074 /* nation.png */,
 				37D3795819F4DDB600B6E074 /* picture.jpg */,
 				37CB86FC19F4323D00EC76F4 /* microsoft.jpg */,
@@ -1380,7 +1384,6 @@
 				A440E6A1199892C1007567F8 /* logo.png */,
 				37BD66FC177BD590004356AD /* amulet.jpg */,
 				37BD66FD177BD590004356AD /* angry.jpg */,
-				37BD66FE177BD590004356AD /* archer.jpg */,
 				37BD66FF177BD590004356AD /* arrow.jpg */,
 				37BD6701177BD590004356AD /* baby.jpg */,
 				37BD6702177BD590004356AD /* ballon.jpg */,
@@ -1619,12 +1622,12 @@
 				37D1CB2819D2F0F5004E26EE /* View.xib in Resources */,
 				37B91F4417783D4800A37CA2 /* RiverFlowsInYou.mp3 in Resources */,
 				37B11BEE19929E4800047989 /* homeBtn.png in Resources */,
+				37CEB91619F6085E00ED8DE7 /* well.jpg in Resources */,
 				37CB86FD19F4323D00EC76F4 /* microsoft.jpg in Resources */,
 				37C785C219CEFDAC00010613 /* firework_explode.mp3 in Resources */,
 				37BD66FA177BD4F4004356AD /* saytheword.sqlite in Resources */,
 				37BD6773177BD590004356AD /* amulet.jpg in Resources */,
 				37BD6774177BD590004356AD /* angry.jpg in Resources */,
-				37BD6775177BD590004356AD /* archer.jpg in Resources */,
 				37BD6776177BD590004356AD /* arrow.jpg in Resources */,
 				37C544A119DE7CC100B27C3B /* Images.xcassets in Resources */,
 				37AE913119EFB6620044AD6C /* lay.jpg in Resources */,
@@ -1706,6 +1709,7 @@
 				37BD67A9177BD590004356AD /* lemon.jpg in Resources */,
 				37BD67AA177BD590004356AD /* libra.jpg in Resources */,
 				37BD67AB177BD590004356AD /* library.jpg in Resources */,
+				37CEB91519F6085E00ED8DE7 /* fare.jpg in Resources */,
 				37CCA70619ED13C600CA228C /* tea.jpg in Resources */,
 				37CCA71819ED370E00CA228C /* high.jpg in Resources */,
 				37CB86EF19F3F13200EC76F4 /* time.jpg in Resources */,

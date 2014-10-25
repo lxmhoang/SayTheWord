@@ -187,10 +187,7 @@
                 NSLog(@"tag View : %d", tagView);
                 [delegate winEventFromAnswerView];
             }
-
         }];
-        
-
     }];
 }
 

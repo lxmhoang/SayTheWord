@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -36,11 +34,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.00</string>
+	<string>1.06</string>
 	<key>FacebookAppID</key>
 	<string>558267074215057</string>
 	<key>FacebookDisplayName</key>
 	<string>Say The Word</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

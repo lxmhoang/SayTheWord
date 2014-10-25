@@ -459,11 +459,11 @@
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"showAds"] == nil){
-        [self setShowAds:NO];
+        [self setShowAds:YES];
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"TimeToNextShare"] == nil){
-        [self setTimeToNextShare:3600*24*30];
+        [self setTimeToNextShare:3600*24];
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"timeBetweenUpdate"] == nil){
@@ -613,7 +613,7 @@
 + (void)updateInstallationInfoWithObject:(PFObject *)obj andDeviceToken:(NSString *)token
 {
     
-    NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     
     
     NSTimeZone *timeZone = [NSTimeZone localTimeZone];
@@ -633,6 +633,7 @@
     
     obj[@"rateUS"] = [NSNumber numberWithInt:[CommonFunction getRateUS]];
     
+    obj[@"dataVersion"] = [NSNumber numberWithInt:[CommonFunction getDataVersion]];
     
     obj[@"likeFB"] = [CommonFunction getLikeFanPage] ? @"Liked" : @"Not yet";
     
@@ -646,7 +647,7 @@
 + (void)updateConfigurationInfo
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                              @"app_version = %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+                              @"app_version = %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
     PFQuery *query = [PFQuery queryWithClassName:@"ConfigurationInfo" predicate:predicate];
     
     query.cachePolicy = kPFCachePolicyNetworkElseCache;

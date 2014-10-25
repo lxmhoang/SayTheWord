@@ -252,7 +252,7 @@
         }else
         {
             if (![[CommonFunction getRatedVersion] isEqualToString:
-                [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]])
+                [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]])
             {
                 [CommonFunction setRateUs:0];
             }
@@ -296,7 +296,7 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:kMsgThankForRating] message:[NSString stringWithFormat:@" You have claimed %d coins", [CommonFunction getRewardCoinForRattingApp]] delegate:rootController cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
         [CommonFunction setRateUs:2];
-        [CommonFunction setRatedVersion:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+        [CommonFunction setRatedVersion:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
     }
     
     

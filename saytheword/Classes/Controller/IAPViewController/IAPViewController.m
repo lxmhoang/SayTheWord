@@ -228,6 +228,8 @@
 
 - (void)IAPFailed{
     [HUD hide:YES];
+    
+    cancelBtn.enabled = YES;
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:@"Unable to connect to App Stores, please check your Internet Connection" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alertView show];
 }

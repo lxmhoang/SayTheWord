@@ -479,7 +479,8 @@
             [tmpLine setBackgroundColor:[UIColor whiteColor]];
         }
         
-        [UIView animateWithDuration:1.5 animations:^{
+        [UIView animateWithDuration:1
+                         animations:^{
             for (int i=0;i<playModel.wordInfo.finalWord.length;i++)
             {
                 UIView *tmpLine = [answerView viewWithTag:i+2*kRandomNumber];
