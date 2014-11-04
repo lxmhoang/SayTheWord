@@ -38,7 +38,7 @@
 
 - (void)playBtnClickSound
 {
-   AudioServicesPlaySystemSound(btnClickSound);
+    AudioServicesPlaySystemSound(btnClickSound);
 }
 
 - (void)playFireworkSoud
@@ -101,7 +101,7 @@
     listOfIAPs = nil;
     iAPHelper = [[IAPHelper alloc]init];
     iAPHelper.delegate = self;
-//    [iAPHelper performSelector:@selector(loadStore) withObject:nil afterDelay:3.0f];
+    //    [iAPHelper performSelector:@selector(loadStore) withObject:nil afterDelay:3.0f];
     [iAPHelper loadStore];
 }
 
@@ -131,7 +131,7 @@
         }];
     }else
     {
-
+        
     }
 }
 
@@ -202,12 +202,12 @@
     self.screenShot = nil;
     [self requestIAP];
     [FBLoginView class];
-//    WordInfo *info = [[WordDatabase database] wordInfoWithLevel:6];
-//    NSLog(@"%d: %@, %@, %@",info.level, info.leftWord, info.rightWord, info.finalWord);
-//    NSArray *wordInfos = [WordDatabase database].WordsInfo;
-//    for (WordInfo *info in wordInfos) {
-//        NSLog(@"%d: %@, %@, %@",info.level, info.leftWord, info.rightWord, info.finalWord);
-//    }
+    //    WordInfo *info = [[WordDatabase database] wordInfoWithLevel:6];
+    //    NSLog(@"%d: %@, %@, %@",info.level, info.leftWord, info.rightWord, info.finalWord);
+    //    NSArray *wordInfos = [WordDatabase database].WordsInfo;
+    //    for (WordInfo *info in wordInfos) {
+    //        NSLog(@"%d: %@, %@, %@",info.level, info.leftWord, info.rightWord, info.finalWord);
+    //    }
     
     
     
@@ -216,7 +216,7 @@
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     [Crashlytics startWithAPIKey:@"36b3007e0a0f53cf00825f195fc7f17a5e8db471"];
-
+    
     
     //-- Set Notification
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
@@ -231,17 +231,18 @@
     }
     
     
-//    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
-//     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-//
+    //    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+    //     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    //
+    
     
     [self initSounds];
- 
+    
     
     [CommonFunction class];
     
-
-
+    
+    
     [CommonFunction createGlobalVariable];
     
     if ([CommonFunction getRateUS] == 2)// app is rated before
@@ -252,7 +253,7 @@
         }else
         {
             if (![[CommonFunction getRatedVersion] isEqualToString:
-                [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]])
+                  [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]])
             {
                 [CommonFunction setRateUs:0];
             }
@@ -268,7 +269,7 @@
     rootController = [[RootController alloc]init];
     [self.window setRootViewController:rootController];
     
-
+    
     // check coin reward for rateus
     
     
@@ -283,7 +284,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
@@ -291,9 +292,20 @@
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     
+    
+    
+}
+
+
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [FBAppCall handleDidBecomeActive];
+    
+    
     if ([CommonFunction checkIfRateForCoin] && ([CommonFunction getRateUS] == 1) && [CommonFunction getRewardCoinForRattingApp] > 0)
     {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:kMsgThankForRating] message:[NSString stringWithFormat:@" You have claimed %d coins", [CommonFunction getRewardCoinForRattingApp]] delegate:rootController cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:kMsgThankForRating] message:[NSString stringWithFormat:@"You have claimed %d coins", [CommonFunction getRewardCoinForRattingApp]] delegate:rootController cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
         [CommonFunction setRateUs:2];
         [CommonFunction setRatedVersion:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
@@ -304,13 +316,13 @@
     {
         [FBRequestConnection startWithGraphPath:@"/me/likes/172415879600587" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if (error) {
-
+                
                 NSLog(@"FB_UD %@", error.userInfo);
             } else {
                 if ([[result objectForKey:@"data"] count]>0)
                 {
                     if (![CommonFunction getLikeFanPage]){
-                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Thank you for liking our page" message:[NSString stringWithFormat:@"You get %d coins", [CommonFunction getRewardCoinForLikingPage]] delegate:rootController cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Thank you for liking our page" message:[NSString stringWithFormat:@"You have claimed %d coins", [CommonFunction getRewardCoinForLikingPage]] delegate:rootController cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                         [alertView show];
                         
                     }
@@ -322,13 +334,52 @@
         }];
     }else
     {
-//        [FBSession ope]
+        //        [FBSession ope]
     }
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    [FBAppCall handleDidBecomeActive];
+    
+    
+    // in the case that user doesn't allow, notification but deviceToken is not set, see PlayController.m
+    if ([[[UIApplication sharedApplication] currentUserNotificationSettings] types] == UIUserNotificationTypeNone)
+    {
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"]!=nil)
+        {
+            // if app not allow notification and already has deviceToken, it will not update Info in didregister... function, so we must update info here
+            
+            if ([[NSDate date] compare:[[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]]]==NSOrderedDescending)
+            {
+                NSString *str = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
+                PFQuery *query = [PFQuery queryWithClassName:@"Installation"];
+                
+                [query whereKey:@"deviceToken" equalTo:str];
+                //        NSLog(@"device token searching for : %@",str);
+                query.cachePolicy = kPFCachePolicyNetworkElseCache;
+                
+                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    if (!error) {
+                        PFObject *obj = [objects firstObject];
+                        if (obj)
+                        {
+                            [CommonFunction updateInstallationInfoWithObject:obj andDeviceToken:str];
+                            
+                            [CommonFunction updateConfigurationInfo];
+                        }else
+                        {
+                            // no obj with this devicetoken on parse, may be first update has not completed yet, so we do nothing, wait for first update to be completed
+                        }
+                    } else {
+                        // Log details of the failure
+                        //                NSLog(@"Error: %@ %@", error, [error userInfo]);
+                    }
+                }];
+            }
+        }else
+        {
+            
+        }
+    }else
+    {
+        
+    }
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
@@ -352,16 +403,16 @@
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    NSString *str =
-    [NSString stringWithFormat:@"%@",deviceToken];
-    str = [[str stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
-           stringByReplacingOccurrencesOfString:@" "
-           withString:@""];
+    
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"] == nil)
     {
-
-//        [CommonFunction alert:@"first time" delegate:nil];
+        NSString *str =
+        [NSString stringWithFormat:@"%@",deviceToken];
+        str = [[str stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
+               stringByReplacingOccurrencesOfString:@" "
+               withString:@""];
+        //        [CommonFunction alert:@"first time" delegate:nil];
         // first time or not ?
         
         PFObject *obj = [[PFObject alloc] initWithClassName:@"Installation"];
@@ -369,16 +420,17 @@
         [CommonFunction updateInstallationInfoWithObject:obj andDeviceToken:str];
         [CommonFunction updateConfigurationInfo];
         
+        
+        [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"deviceToken"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
     }else         if ([[NSDate date] compare:[[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]]]==NSOrderedDescending)
     {
-//        NSDate *dateToUpdate = [[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]];
-//        NSString *str222 = [NSString stringWithFormat:@"WILL update \n, current time : %@ , \n last update : %@, \n time until next update : %d  ,\n  time to update : %@", [NSDate date], [CommonFunction getLastUpdateInfo], [[CommonFunction gettimeBetweenUpdate] intValue], dateToUpdate];
-//        [CommonFunction alert:str222 delegate:nil];
-//        [CommonFunction alert:@"long enough, let's update" delegate:nil];
+        NSString *deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
         PFQuery *query = [PFQuery queryWithClassName:@"Installation"];
         
-        [query whereKey:@"deviceToken" equalTo:str];
-//        NSLog(@"device token searching for : %@",str);
+        [query whereKey:@"deviceToken" equalTo:deviceToken];
+        //        NSLog(@"device token searching for : %@",str);
         query.cachePolicy = kPFCachePolicyNetworkElseCache;
         
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -386,7 +438,7 @@
                 PFObject *obj = [objects firstObject];
                 if (obj)
                 {
-                    [CommonFunction updateInstallationInfoWithObject:obj andDeviceToken:str];
+                    [CommonFunction updateInstallationInfoWithObject:obj andDeviceToken:deviceToken];
                     
                     [CommonFunction updateConfigurationInfo];
                 }else
@@ -395,21 +447,16 @@
                 }
             } else {
                 // Log details of the failure
-//                NSLog(@"Error: %@ %@", error, [error userInfo]);
+                //                NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
         }];
     }else
     {
         
-//        NSDate *dateToUpdate = [[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]];
-//        NSString *str = [NSString stringWithFormat:@"no update \n, current time : %@ , \n last update : %@, \n time until next update : %d  ,\n  time to update : %@", [NSDate date], [CommonFunction getLastUpdateInfo], [[CommonFunction gettimeBetweenUpdate] intValue], dateToUpdate];
-//        [CommonFunction alert:str delegate:nil];
     }
     
-    [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"deviceToken"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     
-
+    
     
     
 }

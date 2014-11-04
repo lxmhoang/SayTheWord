@@ -9,6 +9,8 @@
 #import "PlayController.h"
 #import "IAPViewController.h"
 
+#import <Parse/Parse.h>
+
 @interface PlayController ()
 
 @end
@@ -34,7 +36,7 @@
         NSLog(@"eeeeee");
         
     }
-
+    
     return self;
 }
 
@@ -71,10 +73,10 @@
 
 - (void)hintBtnTapped
 {
-//    NSLog(@"list of subviwes : %@", self.view.subviews);
+    //    NSLog(@"list of subviwes : %@", self.view.subviews);
     [CommonFunction playSweepSound];
-    [self takeScreenshot];
-
+    
+    
     hintsView.alpha = 1;
     [hintsView setUp];
     int y = hintsView.bigView.frame.origin.y;
@@ -88,19 +90,19 @@
     } completion:^(BOOL finished) {
         if (finished)
         {
-        
-        [UIView animateWithDuration:0.1 animations:^{
-                    [hintsView.bigView setFrame:CGRectMake(frame.origin.x, y, frame.size.width, frame.size.height)];
-        } completion:^(BOOL finished) {
             
-        }];
+            [UIView animateWithDuration:0.1 animations:^{
+                [hintsView.bigView setFrame:CGRectMake(frame.origin.x, y, frame.size.width, frame.size.height)];
+            } completion:^(BOOL finished) {
+                
+            }];
         }
         
         
     }
      ];
-
-
+    
+    
 }
 
 - (void)backBtnPressFromPlayView
@@ -113,20 +115,76 @@
 - (void)showWinScreenFromPlayView
 {
     [self takeScreenshot];
-
+    
     [playView deactiveTimer];
     [delegate showWinScreen];
     
     NSLog(@"aaa");
 }
 
-#pragma mark 
+#pragma mark
+
+- (void)checkNotification
+{
+    
+    
+    // in the case that user doesn't allow, notification but deviceToken is created already, see AppDelegate.m, appwillEnterForeGround
+    
+    // check if user not allow notification
+    
+    if ([[[UIApplication sharedApplication] currentUserNotificationSettings] types] == UIUserNotificationTypeNone)
+    {
+        // user doesn't allow notification
+        
+        
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"] == nil)
+        {
+            // create its own devicetoken by itself
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setFormatterBehavior:NSDateFormatterBehaviorDefault];
+            
+            [formatter setDateStyle:NSDateFormatterShortStyle];
+            [formatter setTimeStyle:NSDateFormatterMediumStyle];
+            NSString *deviceToken = [formatter stringFromDate:[NSDate date]];
+            deviceToken = [[deviceToken componentsSeparatedByCharactersInSet:
+                            [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
+                           componentsJoinedByString:@""];
+            deviceToken = [NSString stringWithFormat:@"__date%@", deviceToken];
+            
+            //        [CommonFunction alert:@"first time" delegate:nil];
+            // first time or not ?
+            
+            PFObject *obj = [[PFObject alloc] initWithClassName:@"Installation"];
+            
+            [CommonFunction updateInstallationInfoWithObject:obj andDeviceToken:deviceToken];
+            [CommonFunction updateConfigurationInfo];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:deviceToken forKey:@"deviceToken"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+        }else
+        {
+            // user not allow but devicetoken is still exist, that mean either user disabled notification after installing app, or above code was ran before, anw do nothing
+        }
+        
+    }else
+    {
+        
+    }
+    
+}
 
 #pragma mark default method
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self checkNotification];
+    
+    
+    
+    
     [self.view setBackgroundColor:[UIColor clearColor]];
     playView = [[PlayView alloc]initWithModel:playModel];
     [playView setDelegate:self];
@@ -135,20 +193,20 @@
     [self.view addSubview:playView];
     
     // create HintsView
-
-//    [hintsView setUp];
+    
+    //    [hintsView setUp];
     [self.view addSubview:hintsView];
     [hintsView setTag:kTagOfHintView];
     hintsView.alpha = 0;
     
     
-
+    
     // Do any additional setup after loading the view.
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    
+    [self performSelector:@selector(takeScreenshot) withObject:nil afterDelay:2];
 }
 
 - (void)takeScreenshot
@@ -190,7 +248,7 @@
     if (numOfRemoveableChars == 0)
     {
         [CommonFunction alert:@"There is no removeable char left" delegate:nil];
-
+        
         return;
     }
     
@@ -222,7 +280,7 @@
         return;
     }
     
-
+    
     if ([CommonFunction getCoin]>=[CommonFunction getPriceOfRevealingLetter]){
         [CommonFunction setCanRevealALetter:NO];
         [CommonFunction setCoin:([CommonFunction getCoin]-[CommonFunction getPriceOfRevealingLetter])];
@@ -231,7 +289,7 @@
         // record coins spended
         int k = [CommonFunction getCoinsSpended];
         [CommonFunction setCoinsSpended:(k+[CommonFunction getPriceOfRevealingLetter])];
-
+        
         [self updateCoininVIew];
         [self revealALetter:numOfEmptyLB];
         
@@ -336,7 +394,7 @@
     
     [CommonFunction setRevealIndex:r];
     
-
+    
     
     [playView revealALetterFromController:r];
     for (UIView *tmp in self.view.subviews){

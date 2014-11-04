@@ -17,8 +17,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-
-
+        
+        
     }
     return self;
 }
@@ -57,7 +57,7 @@
 
 - (void)addTransView
 {
-
+    
     UIView *transView = [[UIView alloc] initWithFrame:self.bounds];
     [transView setBackgroundColor:[UIColor clearColor]];
     
@@ -106,7 +106,7 @@
     
     int yOfCoins = kCheckIfIphone ? 270 : 660;
     int sizeOfCoins = kCheckIfIphone ? 32 : 64;
-
+    
     [UIView animateWithDuration:1.5 animations:^{
         [aV setFrame:CGRectMake(0, aV.frame.origin.y-dstMoveUp, kWidthOfScreen, aV.frame.size.height)];
         
@@ -119,7 +119,7 @@
                 int x = [aV viewWithTag:(i+kRandomNumber)].frame.origin.x;
                 [t setFrame:CGRectMake(x, yOfCoins, sizeOfCoins, sizeOfCoins)];
             } completion:^(BOOL finished) {
-//                NSLog(@"i=%d",i);
+                //                NSLog(@"i=%d",i);
                 if (i==0){
                     [UIView animateWithDuration:1.0 animations:^{
                         congratLB.alpha = 1;
@@ -140,8 +140,8 @@
         }
     }];
     
-
-
+    
+    
     
     if (![CommonFunction checkNoAds] && [CommonFunction checkIfShowAds])
     {
@@ -162,13 +162,13 @@
 
 - (void)doBrag:(UIGestureRecognizer *)sender
 {
-//    [];
+    //    [];
     UIImage *img = [CommonFunction getScreenShot];
     [CommonFunction shareWithImage:img andMessage:[CommonFunction getMessageBrag] withArchorPoint:sender.view inViewController:[CommonFunction getRootController] completion:^{
         
         rewardCoins = playModel.wordInfo.finalWord.length * kRewardCoinsForEachLetter;
         sender.view.userInteractionEnabled = NO;
-//        congratLB.text = [[NSString stringWithFormat:@"+ %u coins",2*playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter] uppercaseString];
+        //        congratLB.text = [[NSString stringWithFormat:@"+ %u coins",2*playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter] uppercaseString];
         [timer invalidate];
         timer = [NSTimer timerWithTimeInterval:(0.5/playModel.wordInfo.finalWord.length) target:self selector:@selector(coinIncrement) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
@@ -194,13 +194,14 @@
 - (void)showBragLabel
 {
     int height = kCheckIfIphone ? 44 : 64;
-    int fontSize = kCheckIfIphone ? 20 : 32;
+    int fontSize = kCheckIfIphone ? 16 : 32;
     UILabel *bragLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -height, self.frame.size.width, height)];
+    bragLabel.numberOfLines = 0;
     bragLabel.backgroundColor = [UIColor redColor];
     bragLabel.font = [UIFont boldSystemFontOfSize:fontSize];
     bragLabel.textColor = [UIColor yellowColor];
     bragLabel.textAlignment = NSTextAlignmentCenter;
-    bragLabel.text = @"Tap here to brag and DOUBLE you coin reward";
+    bragLabel.text = @"Tap here to brag and DOUBLE your coins reward!";
     bragLabel.userInteractionEnabled = YES;
     [self addSubview:bragLabel];
     
@@ -252,7 +253,7 @@
     }
     if (!tapped)
     {
-
+        
         
         tapped = YES;
         for (int i=0;i<[listCoins count];i++){
@@ -267,14 +268,14 @@
             
         }
     }
-
+    
 }
 
 #pragma mark ExplodeView Delegate
 
 - (void)genNewEV:(int)i
 {
-//    NSLog(@"get new ev %@", self);
+    //    NSLog(@"get new ev %@", self);
     int startX =  i*widthOfFireWork+ arc4random()%widthOfFireWork;
     UIImageView *fireBall = [[UIImageView alloc] initWithFrame:CGRectMake(startX, kHeightOfScreen, sizeOfFW, sizeOfFW)];
     [fireBall setImage:[UIImage imageNamed:@"particle.png"]];
@@ -347,12 +348,12 @@
 
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
 
 @end
