@@ -29,6 +29,7 @@
 @interface PlayController : UIViewController <PlayViewProtocol, HintsViewDelegate, UIAlertViewDelegate, FBLoginViewDelegate, IAPControllerDelegate, UIAlertViewDelegate>
 {
     HintsView *hintsView;
+    NSString *msg;
     int pos;
 }
 

@@ -210,7 +210,8 @@
     BOOL expired = [[NSUserDefaults standardUserDefaults] boolForKey:@"versionExpired"];
     if (expired)
     {
-        [CommonFunction alert:@"Good new! New version is available on App Store. Please update now !" delegate:self];
+        msg = @"New version is available on App Store. Please update now !";
+        [CommonFunction alert:msg delegate:self];
     }else
     {
         
@@ -419,8 +420,9 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ([alertView.title isEqualToString:@"Good new! New version is available on App Store. Please update now !"])
+    if ([alertView.message isEqualToString:msg])
     {
+        
         [[UIApplication sharedApplication] openURL:[CommonFunction getAppURL]];
 
     }else
