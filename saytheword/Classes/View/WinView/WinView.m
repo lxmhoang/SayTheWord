@@ -81,7 +81,7 @@
     
     listCoins = [[NSMutableArray alloc] init];
     
-    for (int i=0;i<playModel.wordInfo.finalWord.length;i++)
+    for (int i=0;i<[CommonFunction getRewardCoinForEachLevel];i++)
     {
         UIImageView *c1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"coinngang.png"]];
         [c1 setFrame:CGRectMake(-50, 450, 32, 32)];
@@ -94,7 +94,7 @@
     int fontSize = kCheckIfIphone ? 22 : 35;
     
     congratLB = [[UILabel alloc] initWithFrame:CGRectMake(0, yOfCongrat, kWidthOfScreen, 60)];
-    congratLB.text = [[NSString stringWithFormat:@"+ %u coins",playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter] uppercaseString];
+    congratLB.text = [[NSString stringWithFormat:@"+ %u coins",[CommonFunction getRewardCoinForEachLevel]] uppercaseString];
     [congratLB setFont:[UIFont fontWithName:@"Arial-BoldMT" size:fontSize]];
     congratLB.alpha = 0;
     [congratLB setTextAlignment:NSTextAlignmentCenter];
@@ -107,17 +107,23 @@
     int yOfCoins = kCheckIfIphone ? 270 : 660;
     int sizeOfCoins = kCheckIfIphone ? 32 : 64;
     
+    __block int x;
+    __block int distanceBwChars;
+    distanceBwChars = kCheckIfIphone ? 5 : 10;
+    x = (kWidthOfScreen - listCoins.count*sizeOfCoins - (listCoins.count -1)*distanceBwChars)/2;
+    
     [UIView animateWithDuration:1.5 animations:^{
         [aV setFrame:CGRectMake(0, aV.frame.origin.y-dstMoveUp, kWidthOfScreen, aV.frame.size.height)];
         
     } completion:^(BOOL finished) {
         [CommonFunction playManyCoinsSound];
-        for (int i=0;i<playModel.wordInfo.finalWord.length;i++)
+        for (int i=0;i<[listCoins count];i++)
         {
             UIImageView *t = [listCoins objectAtIndex:i];
-            [UIView animateWithDuration:1 delay:0.3*(playModel.wordInfo.finalWord.length-i) options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                int x = [aV viewWithTag:(i+kRandomNumber)].frame.origin.x;
+            [UIView animateWithDuration:1 delay:0.3*(listCoins.count-i) options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//                int x = [aV viewWithTag:(i+kRandomNumber)].frame.origin.x;
                 [t setFrame:CGRectMake(x, yOfCoins, sizeOfCoins, sizeOfCoins)];
+                x+=sizeOfCoins+distanceBwChars;
             } completion:^(BOOL finished) {
                 //                NSLog(@"i=%d",i);
                 if (i==0){
@@ -166,14 +172,13 @@
     UIImage *img = [CommonFunction getScreenShot];
     [CommonFunction shareWithImage:img andMessage:[CommonFunction getMessageBrag] withArchorPoint:sender.view inViewController:[CommonFunction getRootController] completion:^{
         
-        rewardCoins = playModel.wordInfo.finalWord.length * kRewardCoinsForEachLetter;
+        rewardCoins = [CommonFunction getRewardCoinForEachLevel];
         sender.view.userInteractionEnabled = NO;
-        //        congratLB.text = [[NSString stringWithFormat:@"+ %u coins",2*playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter] uppercaseString];
         [timer invalidate];
-        timer = [NSTimer timerWithTimeInterval:(0.5/playModel.wordInfo.finalWord.length) target:self selector:@selector(coinIncrement) userInfo:nil repeats:YES];
+        timer = [NSTimer timerWithTimeInterval:(0.5/listCoins.count) target:self selector:@selector(coinIncrement) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
         [timer fire];
-        [CommonFunction setCoin:([CommonFunction getCoin]+playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter)];
+        [CommonFunction setCoin:([CommonFunction getCoin]+[CommonFunction getRewardCoinForEachLevel])];
         
         [CommonFunction playSingleCoinSound];
     }];
@@ -182,7 +187,7 @@
 - (void)coinIncrement
 {
     rewardCoins ++;
-    if (rewardCoins == playModel.wordInfo.finalWord.length*2*kRewardCoinsForEachLetter)
+    if (rewardCoins == 2*[CommonFunction getRewardCoinForEachLevel])
     {
         [timer invalidate];
     }
@@ -257,7 +262,7 @@
         
         tapped = YES;
         for (int i=0;i<[listCoins count];i++){
-            [UIView animateWithDuration:1 delay:(playModel.wordInfo.finalWord.length-i)*0.2 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            [UIView animateWithDuration:1 delay:(listCoins.count-i)*0.2 options:UIViewAnimationOptionCurveEaseIn animations:^{
                 UIView *coin = [listCoins objectAtIndex:i];
                 [coin setFrame:CGRectMake(kWidthOfScreen + coin.frame.size.width, -coin.frame.size.height, coin.frame.size.width, coin.frame.size.height)];
             } completion:^(BOOL finished) {

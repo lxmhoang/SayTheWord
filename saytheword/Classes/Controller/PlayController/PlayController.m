@@ -149,7 +149,7 @@
             deviceToken = [[deviceToken componentsSeparatedByCharactersInSet:
                             [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
                            componentsJoinedByString:@""];
-            deviceToken = [NSString stringWithFormat:@"__date%@", deviceToken];
+            deviceToken = [NSString stringWithFormat:@"__%d__date%@", arc4random()%10,deviceToken];
             
             //        [CommonFunction alert:@"first time" delegate:nil];
             // first time or not ?

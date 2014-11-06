@@ -45,7 +45,7 @@
 
 #define kInitialRewardCoinForAskingFriends 10
 
-#define kRewardCoinsForEachLetter 3
+#define kInitialRewardCoinsForEachLevel 2
 
 #define kNavBarImg @"nav_nau.png"
 #define kProductIDOf200  @"com.lxmhoang.say2picsguesstheword.iap.200coins"
@@ -319,6 +319,12 @@
 
 + (void)setWordInfo:(WordInfo *)wordInfo;
 + (WordInfo *)getWordInfoForLevel:(int)level;
+
+#pragma mark Reward Coin for each letter
+
++ (int)getRewardCoinForEachLevel;
+
++ (void)setRewardCoinForEachLevel:(int)val;
 
 #pragma mark data version
 

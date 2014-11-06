@@ -195,10 +195,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    if ([CommonFunction getWordInfoForLevel:1] == nil)
+    // open app the first time or just updated app
+    if (([[NSUserDefaults standardUserDefaults] objectForKey:@"appVersionOfSQLiteWhichNSUserDefaultPresentingData"] == nil)
+        ||
+        (![[[NSUserDefaults standardUserDefaults] objectForKey:@"appVersionOfSQLiteWhichNSUserDefaultPresentingData"] isEqualToString:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]])
+        )
     {
         [[WordDatabase database] insertDatabaseIntoNSUserDefault];
+        
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] forKey:@"appVersionOfSQLiteWhichNSUserDefaultPresentingData"];
     }
+    
+    
     self.screenShot = nil;
     [self requestIAP];
     [FBLoginView class];

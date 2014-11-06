@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "379DC471175334BE00CEDB69"
-               BuildableName = "Say 2 pics, guess the word.app"
+               BuildableName = "Say 2 pics.app"
                BlueprintName = "saytheword"
                ReferencedContainer = "container:saytheword.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "379DC471175334BE00CEDB69"
-            BuildableName = "Say 2 pics, guess the word.app"
+            BuildableName = "Say 2 pics.app"
             BlueprintName = "saytheword"
             ReferencedContainer = "container:saytheword.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "379DC471175334BE00CEDB69"
-            BuildableName = "Say 2 pics, guess the word.app"
+            BuildableName = "Say 2 pics.app"
             BlueprintName = "saytheword"
             ReferencedContainer = "container:saytheword.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "379DC471175334BE00CEDB69"
-            BuildableName = "Say 2 pics, guess the word.app"
+            BuildableName = "Say 2 pics.app"
             BlueprintName = "saytheword"
             ReferencedContainer = "container:saytheword.xcodeproj">
          </BuildableReference>

@@ -42,7 +42,7 @@
     [super viewDidLoad];
 //    [CommonFunction playBGSound];
     [CommonFunction reSetGlobalData];
-    [CommonFunction setCoin:[CommonFunction getCoin]+(int)playModel.wordInfo.finalWord.length*kRewardCoinsForEachLetter];
+    [CommonFunction setCoin:[CommonFunction getCoin]+[CommonFunction getRewardCoinForEachLevel]];
     
 
     

@@ -364,6 +364,11 @@
     
     NSNumber *coin = [NSNumber numberWithInt:kInitialCoin];
     
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rewardCoinForEachLevel"] == nil){
+        [self setRewardCoinForEachLevel:kInitialRewardCoinsForEachLevel];
+    }
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"maxLevel"] == nil){
         [self setMaxLevel:10];
     }
@@ -1154,6 +1159,19 @@
     
     WordInfo *info = [[WordInfo alloc] initWithUniqueLevel:level leftWord:[wordDict objectForKey:@"leftWord"] leftImg:[wordDict objectForKey:@"leftImg"] rightWord:[wordDict objectForKey:@"rightWord"] rightImg:[wordDict objectForKey:@"rightImg"] finalWord:[wordDict objectForKey:@"finalWord"] initString:[wordDict objectForKey:@"dummyString"]];
     return info;
+}
+
+#pragma mark Reward Coin for each letter
+
++ (int)getRewardCoinForEachLevel
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"rewardCoinForEachLevel"] intValue];
+}
+
++ (void)setRewardCoinForEachLevel:(int)val
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:val] forKey:@"rewardCoinForEachLevel"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 #pragma mark data version
 

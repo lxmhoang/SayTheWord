@@ -22,7 +22,7 @@
     if (self)
     {
         menuModel = _model;
-        vung1 = NO;
+        vung1 = YES;
         vung2 = NO;
     }
     [self createSubViews];

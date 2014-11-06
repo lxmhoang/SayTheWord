@@ -181,6 +181,26 @@
     [self addSubview:levelLabel];
 }
 
+- (UIImage *)getImageByName:(NSString *)imgName
+{
+    NSArray  *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir  = [documentPaths objectAtIndex:0];
+    NSString  *pathFile = [documentsDir stringByAppendingPathComponent:imgName];
+    UIImage *documentImage = [UIImage imageWithContentsOfFile:pathFile];
+    
+    
+    if (documentImage)
+    {
+        return documentImage;
+    }else
+    {
+        
+        UIImage *img = [UIImage imageNamed:imgName];
+
+        return img;
+    }
+}
+
 - (void)createImageViews
 {
     leftView = [[UIView alloc]initWithFrame:CGRectMake((kWidthOfScreen - 2*sizeOfImg)/4, yOfImages, sizeOfImg, sizeOfImg)];
@@ -188,10 +208,12 @@
     [leftView.layer setCornerRadius:10.0f];
     [leftView setTag:kTagOfLeftView];
     
-    UIImageView *leftImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, sizeOfImg-10, sizeOfImg-10)
-                                ];
-    [leftImgView setImage:[UIImage imageNamed:playModel.wordInfo.leftImg]];
+    UIImageView *leftImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, sizeOfImg-10, sizeOfImg-10)];
+    
+    [leftImgView setImage:[self getImageByName:playModel.wordInfo.leftImg]];
     [leftView addSubview:leftImgView];
+    
+    
     
     UITapGestureRecognizer *_tapLeft = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapLeft:)];
     [leftView addGestureRecognizer:_tapLeft];
@@ -204,13 +226,15 @@
     [rightView.layer setCornerRadius:10.0f];
     [rightView setTag:kTagOfRightView];
     
-    UITapGestureRecognizer *_tapRight = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRight:)];
-    [rightView addGestureRecognizer:_tapRight];
     
     UIImageView *rightImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, sizeOfImg-10, sizeOfImg-10)];
-    [rightImageView setImage:[UIImage imageNamed:playModel.wordInfo.rightImg]];
+    
+    [rightImageView setImage:[self getImageByName:playModel.wordInfo.rightImg]];
+    
     [rightView addSubview:rightImageView];
     
+    UITapGestureRecognizer *_tapRight = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRight:)];
+    [rightView addGestureRecognizer:_tapRight];
     [self addSubview:rightView];
     
 }
@@ -349,7 +373,7 @@
     [newView.layer setCornerRadius:10.0f];
     
     UIImageView *newImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, sizeOfImg-10, sizeOfImg-10)];
-    [newImgView setImage:[UIImage imageNamed:playModel.wordInfo.leftImg]];
+    [newImgView setImage:[self getImageByName:playModel.wordInfo.leftImg]];
     [newView addSubview:newImgView];
     
     [newView setTag:kTagOfNewView];
@@ -395,7 +419,7 @@
     [newView.layer setCornerRadius:10.0f];
     
     UIImageView *newImgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, sizeOfImg-10, sizeOfImg-10)];
-    [newImgView setImage:[UIImage imageNamed:playModel.wordInfo.rightImg]];
+    [newImgView setImage:[self getImageByName:playModel.wordInfo.rightImg]];
     [newView addSubview:newImgView];
     
     [newView setTag:kTagOfNewView];
