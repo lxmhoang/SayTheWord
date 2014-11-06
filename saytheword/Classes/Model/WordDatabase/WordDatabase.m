@@ -88,6 +88,7 @@ static WordDatabase *_database;
 	return [documentsDir stringByAppendingPathComponent:@"saytheword.sqlite"];
 }
 
+
 - (void)createEditableCopyOfDatabaseIfNeeded {
     // First, test for existence.
 	

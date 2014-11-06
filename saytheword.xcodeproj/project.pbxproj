@@ -228,7 +228,6 @@
 		37BD67DB177BD590004356AD /* tailor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37BD6764177BD590004356AD /* tailor.jpg */; };
 		37BD67DC177BD590004356AD /* tidy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37BD6765177BD590004356AD /* tidy.jpg */; };
 		37BD67DD177BD590004356AD /* tiger.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37BD6766177BD590004356AD /* tiger.jpg */; };
-		37BD67DF177BD590004356AD /* tunnel.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37BD6768177BD590004356AD /* tunnel.jpg */; };
 		37BD67E1177BD590004356AD /* vacuum.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37BD676A177BD590004356AD /* vacuum.jpg */; };
 		37BD67E2177BD590004356AD /* villa.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37BD676B177BD590004356AD /* villa.jpg */; };
 		37BD67E3177BD590004356AD /* volcano.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37BD676C177BD590004356AD /* volcano.jpg */; };
@@ -287,6 +286,8 @@
 		37D1CB3C19D32BA8004E26EE /* IAPTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D1CB3A19D32BA8004E26EE /* IAPTableViewCell.xib */; };
 		37D3795919F4DDB600B6E074 /* nation.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D3795719F4DDB600B6E074 /* nation.png */; };
 		37D3795A19F4DDB600B6E074 /* picture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37D3795819F4DDB600B6E074 /* picture.jpg */; };
+		37D3965E1A0B38B6003707EE /* beat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37D3965C1A0B38B6003707EE /* beat.jpg */; };
+		37D3965F1A0B38B6003707EE /* twin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37D3965D1A0B38B6003707EE /* twin.jpg */; };
 		37D3DB8419D9527B00149D35 /* IAPTableViewCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3DB8319D9527B00149D35 /* IAPTableViewCell_iPad.xib */; };
 		37D3DB8619D954DC00149D35 /* FreeCoinTableViewCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3DB8519D954DC00149D35 /* FreeCoinTableViewCell_iPad.xib */; };
 		37DAC03419E58F6200FDC52F /* HintsView_ip4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DAC03319E58F6200FDC52F /* HintsView_ip4.xib */; };
@@ -591,7 +592,6 @@
 		37BD6764177BD590004356AD /* tailor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tailor.jpg; sourceTree = "<group>"; };
 		37BD6765177BD590004356AD /* tidy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tidy.jpg; sourceTree = "<group>"; };
 		37BD6766177BD590004356AD /* tiger.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tiger.jpg; sourceTree = "<group>"; };
-		37BD6768177BD590004356AD /* tunnel.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tunnel.jpg; sourceTree = "<group>"; };
 		37BD676A177BD590004356AD /* vacuum.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vacuum.jpg; sourceTree = "<group>"; };
 		37BD676B177BD590004356AD /* villa.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = villa.jpg; sourceTree = "<group>"; };
 		37BD676C177BD590004356AD /* volcano.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = volcano.jpg; sourceTree = "<group>"; };
@@ -653,6 +653,8 @@
 		37D1CB3A19D32BA8004E26EE /* IAPTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IAPTableViewCell.xib; sourceTree = "<group>"; };
 		37D3795719F4DDB600B6E074 /* nation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nation.png; sourceTree = "<group>"; };
 		37D3795819F4DDB600B6E074 /* picture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = picture.jpg; sourceTree = "<group>"; };
+		37D3965C1A0B38B6003707EE /* beat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = beat.jpg; sourceTree = "<group>"; };
+		37D3965D1A0B38B6003707EE /* twin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = twin.jpg; sourceTree = "<group>"; };
 		37D3DB8319D9527B00149D35 /* IAPTableViewCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IAPTableViewCell_iPad.xib; sourceTree = "<group>"; };
 		37D3DB8519D954DC00149D35 /* FreeCoinTableViewCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeCoinTableViewCell_iPad.xib; sourceTree = "<group>"; };
 		37DAC03319E58F6200FDC52F /* HintsView_ip4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HintsView_ip4.xib; sourceTree = "<group>"; };
@@ -1329,6 +1331,8 @@
 		37BD66FB177BD590004356AD /* GiangImgs */ = {
 			isa = PBXGroup;
 			children = (
+				37D3965C1A0B38B6003707EE /* beat.jpg */,
+				37D3965D1A0B38B6003707EE /* twin.jpg */,
 				37E26D891A0A8BC300C51C16 /* fire.jpg */,
 				37E26D8A1A0A8BC300C51C16 /* fly.jpg */,
 				37E26D8B1A0A8BC300C51C16 /* sell.jpg */,
@@ -1471,7 +1475,6 @@
 				37BD6764177BD590004356AD /* tailor.jpg */,
 				37BD6765177BD590004356AD /* tidy.jpg */,
 				37BD6766177BD590004356AD /* tiger.jpg */,
-				37BD6768177BD590004356AD /* tunnel.jpg */,
 				37BD676A177BD590004356AD /* vacuum.jpg */,
 				37BD676B177BD590004356AD /* villa.jpg */,
 				37BD676C177BD590004356AD /* volcano.jpg */,
@@ -1607,6 +1610,7 @@
 				379DC488175334BE00CEDB69 /* Default.png in Resources */,
 				379DC48A175334BE00CEDB69 /* Default@2x.png in Resources */,
 				3712EF6D19DFC16D008B64BB /* coin3.png in Resources */,
+				37D3965E1A0B38B6003707EE /* beat.jpg in Resources */,
 				37E26D8E1A0A8BC300C51C16 /* sell.jpg in Resources */,
 				379DC48C175334BE00CEDB69 /* Default-568h@2x.png in Resources */,
 				37BC6A8C19DEBC3300580E10 /* revel_left_img.png in Resources */,
@@ -1698,6 +1702,7 @@
 				37BD6799177BD590004356AD /* empty.jpg in Resources */,
 				37CCA72119ED473A00CA228C /* fall.jpg in Resources */,
 				37BD679A177BD590004356AD /* entry.jpg in Resources */,
+				37D3965F1A0B38B6003707EE /* twin.jpg in Resources */,
 				37BD679D177BD590004356AD /* finger.jpg in Resources */,
 				37BD679E177BD590004356AD /* furniture.jpg in Resources */,
 				37302FCB19E2E0F0001FDEAE /* rateus_green.png in Resources */,
@@ -1800,7 +1805,6 @@
 				37DAC03619E59C1800FDC52F /* FreecoinCollectionViewCell_ip4.xib in Resources */,
 				3719225919DF71510001E5D0 /* IAPCollectionViewCell_iPad.xib in Resources */,
 				37CCA72619ED5BA800CA228C /* summer.jpg in Resources */,
-				37BD67DF177BD590004356AD /* tunnel.jpg in Resources */,
 				37BD67E1177BD590004356AD /* vacuum.jpg in Resources */,
 				37CCA70A19ED1F3500CA228C /* break.jpg in Resources */,
 				37BC6A8F19DEBDBD00580E10 /* revel_right_img.png in Resources */,
@@ -2000,10 +2004,7 @@
 		379DC491175334BE00CEDB69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7s,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;

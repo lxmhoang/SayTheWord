@@ -193,7 +193,31 @@
     player.numberOfLoops = -1; //Infinite
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (void)deleteSqliteInDocFolder
+{
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory ,    NSUserDomainMask, YES);
+    NSString *documentsDir = [paths objectAtIndex:0];
+    NSString *dbPath =  [documentsDir stringByAppendingPathComponent:@"saytheword.sqlite"];
+    
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    if ([fileManager fileExistsAtPath:dbPath])
+    {
+        BOOL success = [fileManager removeItemAtPath:dbPath error:&error];
+        if (!success)
+        {
+            [CommonFunction alert:[error localizedDescription] delegate:nil];
+        }else
+        {
+            
+        }
+    }
+
+}
+
+- (void)dataMigrationWhenUpdate
 {
     // open app the first time or just updated app
     if (([[NSUserDefaults standardUserDefaults] objectForKey:@"appVersionOfSQLiteWhichNSUserDefaultPresentingData"] == nil)
@@ -201,12 +225,18 @@
         (![[[NSUserDefaults standardUserDefaults] objectForKey:@"appVersionOfSQLiteWhichNSUserDefaultPresentingData"] isEqualToString:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]])
         )
     {
+        [self deleteSqliteInDocFolder];
         [[WordDatabase database] insertDatabaseIntoNSUserDefault];
         
         
         [[NSUserDefaults standardUserDefaults] setObject:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] forKey:@"appVersionOfSQLiteWhichNSUserDefaultPresentingData"];
     }
-    
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+
+    [self dataMigrationWhenUpdate];
     
     self.screenShot = nil;
     [self requestIAP];
