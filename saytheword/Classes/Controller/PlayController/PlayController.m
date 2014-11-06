@@ -207,6 +207,14 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [self performSelector:@selector(takeScreenshot) withObject:nil afterDelay:2];
+    BOOL expired = [[NSUserDefaults standardUserDefaults] boolForKey:@"versionExpired"];
+    if (expired)
+    {
+        [CommonFunction alert:@"Good new! New version is available on App Store. Please update now !" delegate:self];
+    }else
+    {
+        
+    }
 }
 
 - (void)takeScreenshot
@@ -411,11 +419,18 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
-    if (buttonIndex==1){
-        NSLog(@"button pressed : %ld", (long)buttonIndex);
-        [self coinViewTappedFromPlayView];
+    if ([alertView.title isEqualToString:@"Good new! New version is available on App Store. Please update now !"])
+    {
+        [[UIApplication sharedApplication] openURL:[CommonFunction getAppURL]];
+
+    }else
+    {
+        if (buttonIndex==1){
+            NSLog(@"button pressed : %ld", (long)buttonIndex);
+            [self coinViewTappedFromPlayView];
+        }
     }
+
 }
 
 - (void)didReceiveMemoryWarning

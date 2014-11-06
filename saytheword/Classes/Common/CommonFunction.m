@@ -613,8 +613,6 @@
 
 #pragma mark Parse.com
 
-
-
 + (void)updateInstallationInfoWithObject:(PFObject *)obj andDeviceToken:(NSString *)token
 {
     
@@ -683,7 +681,7 @@
                 // check data version
                 if
                     (
-                    ([CommonFunction getDataVersion] < [[obj objectForKey:@"data_version"] intValue])
+                    ([CommonFunction getDataVersion] != [[obj objectForKey:@"data_version"] intValue])
                     )
                 {
                     NSPredicate *predicateDataVersion = [NSPredicate predicateWithFormat:
@@ -714,79 +712,119 @@
                             
                             for (PFObject *wordObj in objects)
                             {
-                                if ([[wordObj objectForKey:@"level"] intValue]>=[CommonFunction getLevel])
+                                NSURL *urlLeftPic = nil;
+                                NSURL *urlRightPic = nil;
+                                NSString *leftPicName = nil;
+                                NSString *rightPicName = nil;
+                                
+                                if ([wordObj objectForKey:@"leftPicURL"] != nil)
                                 {
-                                    NSURL *urlLeftPic = nil;
-                                    NSURL *urlRightPic = nil;
-                                    NSString *leftPicName = nil;
-                                    NSString *rightPicName = nil;
+                                    urlLeftPic = [[NSURL alloc] initWithString:[wordObj objectForKey:@"leftPicURL"]];
+                                    leftPicName = [urlLeftPic lastPathComponent];
                                     
-                                    if ([wordObj objectForKey:@"leftPicURL"] != nil)
-                                    {
-                                        urlLeftPic = [[NSURL alloc] initWithString:[wordObj objectForKey:@"leftPicURL"]];
-                                        leftPicName = [urlLeftPic lastPathComponent];
-                                        
-                                    }
-                                    
-                                    if ([wordObj objectForKey:@"rightPicURL"])
-                                    {
-                                        
-                                        urlRightPic = [[NSURL alloc] initWithString:[wordObj objectForKey:@"rightPicURL"]];
-                                        rightPicName = [urlRightPic lastPathComponent];
-                                    }
-                                    
-                                    
-                                    
-                                    NSBlockOperation *completionOperation = [NSBlockOperation blockOperationWithBlock:^{
-                                        NSLog(@"finish downloading %@, now save data to local", [wordObj objectForKey:@"answer"]);
-                                        NSString *leftWord = [wordObj objectForKey:@"leftword"];
-                                        NSString *rightWord = [wordObj objectForKey:@"rightword"];
-                                        NSString *initialString = [wordObj objectForKey:@"initialString"];
-                                        NSString *answer = [wordObj objectForKey:@"answer"];
-                                        NSString *leftPic = leftPicName;
-                                        NSString *rightPic = rightPicName;
-                                        int level = [[wordObj objectForKey:@"level"] intValue];
-                                        
-                                        
-                                        WordInfo *info = [[WordInfo alloc] initWithUniqueLevel:level leftWord:leftWord leftImg:leftPic rightWord:rightWord rightImg:rightPic finalWord:answer initString:initialString];
-                                        [CommonFunction setWordInfo:info];
-                                        
-                                    }];
-                                    
-                                    NSBlockOperation *operationLeft = [NSBlockOperation blockOperationWithBlock:^{
-                                        NSData *data = [NSData dataWithContentsOfURL:urlLeftPic];
-                                        NSString *filename = [documentsPath stringByAppendingString:leftPicName];
-                                        
-                                        NSLog(@"begin download left pic %@",leftPicName);
-                                        [data writeToFile:filename atomically:YES];
-                                        NSLog(@"finish write %@ to file %@", [urlLeftPic absoluteString], filename);
-                                    }];
-                                    
-                                    [completionOperation addDependency:operationLeft];
-                                    
-                                    
-                                    
-                                    NSBlockOperation *operationRight = [NSBlockOperation blockOperationWithBlock:^{
-                                        
-                                        NSData *data = [NSData dataWithContentsOfURL:urlRightPic];
-                                        NSString *filename = [documentsPath stringByAppendingString:rightPicName];
-                                        
-                                        NSLog(@"begin download right pic %@", rightPicName);
-                                        [data writeToFile:filename atomically:YES];
-                                        NSLog(@"finish write %@ to file %@", [urlRightPic absoluteString], filename);
-                                    }];
-                                    
-                                    [completionOperation addDependency:operationRight];
-                                    
-                                    [totalCompletion addDependency:completionOperation];
-                                    
-                                    [queue addOperations:completionOperation.dependencies waitUntilFinished:NO];
-                                    [queue addOperation:completionOperation];
                                     
                                 }else
                                 {
-                                    // ignore smaller levels
+                                    // get local image which named is ...
+                                    if ([wordObj objectForKey:@"leftPicFileName"] != nil)
+                                    {
+                                        leftPicName = [wordObj objectForKey:@"leftPicFileName"];
+                                    }else
+                                    {
+                                        // wtf !!!!!
+                                    }
                                 }
+                                
+                                if ([wordObj objectForKey:@"rightPicURL"])
+                                {
+                                    
+                                    urlRightPic = [[NSURL alloc] initWithString:[wordObj objectForKey:@"rightPicURL"]];
+                                    
+                                    rightPicName = [urlRightPic lastPathComponent];
+                                }else
+                                {
+                                    // get local image which named is ...
+                                    if ([wordObj objectForKey:@"rightPicFileName"] != nil)
+                                    {
+                                        rightPicName = [wordObj objectForKey:@"rightPicFileName"];
+                                    }else
+                                    {
+                                        // wtf !!!!!
+                                    }
+                                }
+                                
+                                
+                                
+                                NSBlockOperation *completionOperation = [NSBlockOperation blockOperationWithBlock:^{
+                                    NSLog(@"finish downloading %@, now save data to local", [wordObj objectForKey:@"answer"]);
+                                    NSString *leftWord = [wordObj objectForKey:@"leftword"];
+                                    NSString *rightWord = [wordObj objectForKey:@"rightword"];
+                                    NSString *initialString = [wordObj objectForKey:@"initialString"];
+                                    NSString *answer = [wordObj objectForKey:@"answer"];
+                                    NSString *leftPic = leftPicName;
+                                    NSString *rightPic = rightPicName;
+                                    
+                                    
+                                    
+//                                    int level = [[wordObj objectForKey:@"level"] intValue];
+                                    // set level for this set
+                                    
+                                    int level = 1;
+                                    while (
+                                            (![[[CommonFunction getWordInfoForLevel:level] finalWord] isEqualToString:answer])
+                                           &&
+                                           
+                                           (level<= [CommonFunction getMaxLevel])
+                                           
+                                           
+                                           )
+                                    {
+                                        level ++;
+                                    }
+                                    
+                                    if  (![[[CommonFunction getWordInfoForLevel:level] finalWord] isEqualToString:answer])
+                                    {
+                                        // can't find a level which have the same answer with this set, so this will be new max level
+                                        level = [CommonFunction getMaxLevel]+1;
+                                    }
+                                    
+                                    
+                                    WordInfo *info = [[WordInfo alloc] initWithUniqueLevel:level leftWord:leftWord leftImg:leftPic rightWord:rightWord rightImg:rightPic finalWord:answer initString:initialString];
+                                    [CommonFunction setWordInfo:info];
+                                    
+                                }];
+                                
+                                NSBlockOperation *operationLeft = [NSBlockOperation blockOperationWithBlock:^{
+                                    NSData *data = [NSData dataWithContentsOfURL:urlLeftPic];
+                                    NSString *filename = [documentsPath stringByAppendingString:leftPicName];
+                                    
+                                    NSLog(@"begin download left pic %@",leftPicName);
+                                    [data writeToFile:filename atomically:YES];
+                                    NSLog(@"finish write %@ to file %@", [urlLeftPic absoluteString], filename);
+                                }];
+                                
+                                [completionOperation addDependency:operationLeft];
+                                
+                                
+                                
+                                NSBlockOperation *operationRight = [NSBlockOperation blockOperationWithBlock:^{
+                                    
+                                    NSData *data = [NSData dataWithContentsOfURL:urlRightPic];
+                                    NSString *filename = [documentsPath stringByAppendingString:rightPicName];
+                                    
+                                    NSLog(@"begin download right pic %@", rightPicName);
+                                    [data writeToFile:filename atomically:YES];
+                                    NSLog(@"finish write %@ to file %@", [urlRightPic absoluteString], filename);
+                                }];
+                                
+                                [completionOperation addDependency:operationRight];
+                                
+                                [totalCompletion addDependency:completionOperation];
+                                
+                                [queue addOperations:completionOperation.dependencies waitUntilFinished:NO];
+                                [queue addOperation:completionOperation];
+                                
+                                
                             }
                             
                             

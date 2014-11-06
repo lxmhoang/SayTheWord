@@ -26,7 +26,7 @@
 
 @end
 
-@interface PlayController : UIViewController <PlayViewProtocol, HintsViewDelegate, UIAlertViewDelegate, FBLoginViewDelegate, IAPControllerDelegate>
+@interface PlayController : UIViewController <PlayViewProtocol, HintsViewDelegate, UIAlertViewDelegate, FBLoginViewDelegate, IAPControllerDelegate, UIAlertViewDelegate>
 {
     HintsView *hintsView;
     int pos;
