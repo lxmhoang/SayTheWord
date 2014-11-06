@@ -120,7 +120,7 @@
         for (int i=0;i<[listCoins count];i++)
         {
             UIImageView *t = [listCoins objectAtIndex:i];
-            [UIView animateWithDuration:1 delay:0.3*(listCoins.count-i) options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [UIView animateWithDuration:0.5 delay:0.3*(listCoins.count-i) options:UIViewAnimationOptionCurveEaseInOut animations:^{
 //                int x = [aV viewWithTag:(i+kRandomNumber)].frame.origin.x;
                 [t setFrame:CGRectMake(x, yOfCoins, sizeOfCoins, sizeOfCoins)];
                 x+=sizeOfCoins+distanceBwChars;
@@ -262,12 +262,12 @@
         
         tapped = YES;
         for (int i=0;i<[listCoins count];i++){
-            [UIView animateWithDuration:1 delay:(listCoins.count-i)*0.2 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            [UIView animateWithDuration:0.5 delay:(listCoins.count-i)*0.2 options:UIViewAnimationOptionCurveEaseIn animations:^{
                 UIView *coin = [listCoins objectAtIndex:i];
                 [coin setFrame:CGRectMake(kWidthOfScreen + coin.frame.size.width, -coin.frame.size.height, coin.frame.size.width, coin.frame.size.height)];
             } completion:^(BOOL finished) {
                 if (i==0){
-                    [delegate performSelector:@selector(animationFinished) withObject:nil afterDelay:1.0];
+                    [delegate performSelector:@selector(animationFinished) withObject:nil afterDelay:0.5];
                 }
             }];
             

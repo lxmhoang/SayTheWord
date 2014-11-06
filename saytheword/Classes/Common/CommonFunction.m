@@ -480,7 +480,7 @@
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"playMusicFlag"] == nil){
-        [self setMusicFlag:YES];
+        [self setMusicFlag:NO];
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"bgSoundVolume"] == nil){
