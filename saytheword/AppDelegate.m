@@ -506,5 +506,12 @@
 }
 
 
+#pragma mark uialertview
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [[UIApplication sharedApplication] openURL:[CommonFunction getAppURL]];
+}
+
 
 @end

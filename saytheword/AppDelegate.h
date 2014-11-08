@@ -15,7 +15,7 @@
 
 
 
-@interface AppDelegate : NSObject <UIApplicationDelegate, FBLoginViewDelegate, IAPHelperDelegate >
+@interface AppDelegate : NSObject <UIApplicationDelegate, FBLoginViewDelegate, UIAlertViewDelegate , IAPHelperDelegate >
 {
     AVAudioPlayer *player;
     SystemSoundID fireWorkSound;

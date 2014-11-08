@@ -673,8 +673,22 @@
                     {
                         NSLog(@"object and key : %@    %@", [obj objectForKey:strKey], strKey);
                         
-                        [[NSUserDefaults standardUserDefaults] setObject:[obj objectForKey:strKey] forKey:strKey];
-                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        
+                        if ([strKey isEqualToString:@"versionExpired"])
+                        {
+                            BOOL versionExpired = [[obj objectForKey:strKey] boolValue];
+                            if (versionExpired)
+                            {
+                                
+                                NSString *msg = @"New version is available on App Store. Please update now !";
+                                [CommonFunction alert:msg delegate:[[UIApplication sharedApplication] delegate]];
+                            }
+                        }else
+                        {
+                            [[NSUserDefaults standardUserDefaults] setObject:[obj objectForKey:strKey] forKey:strKey];
+                            [[NSUserDefaults standardUserDefaults] synchronize];
+                            
+                        }
                     }
                 }
                 
@@ -766,26 +780,34 @@
                                     
                                     
                                     
-//                                    int level = [[wordObj objectForKey:@"level"] intValue];
                                     // set level for this set
+                                    int level = [[wordObj objectForKey:@"level"] intValue];
                                     
-                                    int level = 1;
-                                    while (
-                                            (![[[CommonFunction getWordInfoForLevel:level] finalWord] isEqualToString:answer])
-                                           &&
-                                           
-                                           (level<= [CommonFunction getMaxLevel])
-                                           
-                                           
-                                           )
+                                    if (level == -1)
                                     {
-                                        level ++;
+                                        level = 1;
+                                        while (
+                                               (![[[CommonFunction getWordInfoForLevel:level] finalWord] isEqualToString:answer])
+                                               &&
+                                               
+                                               (level<= [CommonFunction getMaxLevel])
+                                               
+                                               
+                                               )
+                                        {
+                                            level ++;
+                                        }
                                     }
+                                    
+
                                     
                                     if  (![[[CommonFunction getWordInfoForLevel:level] finalWord] isEqualToString:answer])
                                     {
                                         // can't find a level which have the same answer with this set, so this will be new max level
                                         level = [CommonFunction getMaxLevel]+1;
+                                    }else
+                                    {
+                                        // keep it, gonna replace that level
                                     }
                                     
                                     
