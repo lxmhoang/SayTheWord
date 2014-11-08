@@ -799,16 +799,17 @@
                                         }
                                     }
                                     
-
+// no need below code anymore, above code is enough
                                     
-                                    if  (![[[CommonFunction getWordInfoForLevel:level] finalWord] isEqualToString:answer])
-                                    {
-                                        // can't find a level which have the same answer with this set, so this will be new max level
-                                        level = [CommonFunction getMaxLevel]+1;
-                                    }else
-                                    {
-                                        // keep it, gonna replace that level
-                                    }
+//                                    
+//                                    if  (![[[CommonFunction getWordInfoForLevel:level] finalWord] isEqualToString:answer])
+//                                    {
+//                                        // can't find a level which have the same answer with this set, so this will be new max level
+//                                        level = [CommonFunction getMaxLevel]+1;
+//                                    }else
+//                                    {
+//                                        // keep it, gonna replace that level
+//                                    }
                                     
                                     
                                     WordInfo *info = [[WordInfo alloc] initWithUniqueLevel:level leftWord:leftWord leftImg:leftPic rightWord:rightWord rightImg:rightPic finalWord:answer initString:initialString];
