@@ -11,7 +11,6 @@
 #import "PlayView.h"
 //#import "HintView.h"
 #import "HintsView.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "IAPViewController.h"
 
 @class IAPViewController;
@@ -26,7 +25,7 @@
 
 @end
 
-@interface PlayController : UIViewController <PlayViewProtocol, HintsViewDelegate, UIAlertViewDelegate, FBLoginViewDelegate, IAPControllerDelegate, UIAlertViewDelegate>
+@interface PlayController : UIViewController <PlayViewProtocol, HintsViewDelegate, UIAlertViewDelegate, TypingViewDelegate, IAPControllerDelegate, UIAlertViewDelegate>
 {
     HintsView *hintsView;
     NSString *msg;

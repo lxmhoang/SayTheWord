@@ -9,7 +9,6 @@
 #import "PlayController.h"
 #import "IAPViewController.h"
 
-#import <Parse/Parse.h>
 
 @interface PlayController ()
 
@@ -154,10 +153,7 @@
             //        [CommonFunction alert:@"first time" delegate:nil];
             // first time or not ?
             
-            PFObject *obj = [[PFObject alloc] initWithClassName:@"Installation"];
-            
-            [CommonFunction updateInstallationInfoWithObject:obj andDeviceToken:deviceToken];
-            [CommonFunction updateConfigurationInfo];
+//            [CommonFunction updateConfigurationInfo];
             
             [[NSUserDefaults standardUserDefaults] setObject:deviceToken forKey:@"deviceToken"];
             [[NSUserDefaults standardUserDefaults] synchronize];

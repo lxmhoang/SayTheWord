@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "RootController.h"
-//#import <FacebookSDK
+
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @class IAPHelper;
 
 
-
-
-@interface AppDelegate : NSObject <UIApplicationDelegate, FBLoginViewDelegate, UIAlertViewDelegate , IAPHelperDelegate >
+@interface AppDelegate : NSObject <UIApplicationDelegate, UIAlertViewDelegate , IAPHelperDelegate >
 {
     AVAudioPlayer *player;
     SystemSoundID fireWorkSound;

@@ -10,6 +10,7 @@
 #import "FreeCoinModel.h"
 #import "FreecoinCollectionViewCell.h"
 #import "ApActivityData.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation HintsView
 
@@ -429,7 +430,7 @@
     FreeCoinModel *model = [optionsGetFreeCoin objectAtIndex:indexPath.row];
     if ([model.title isEqualToString:kTitleOfFacebookLike])
     {
-        if (!FBSession.activeSession.isOpen)
+        if (![FBSDKAccessToken currentAccessToken])
         {
             
             [UIView animateWithDuration:0.3 animations:^{
@@ -498,49 +499,49 @@
 
 
 #pragma mark - FBLoginViewDelegate
-
-- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
-    // first get the buttons set for login mode
-    
-    if (fbView.frame.origin.x == 0)
-    {
-        
-        [self backBtnAction:nil];
-    }
-}
-
-- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
-                            user:(id<FBGraphUser>)user {
-    NSString *str = [user objectForKey:@"link"];
-    [CommonFunction setFBLink:str];
-    // here we use helper properties of FBGraphUser to dot-through to first_name and
-    // id properties of the json response from the server; alternatively we could use
-    // NSDictionary methods such as objectForKey to get values from the my json object
-}
-
-- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
-       NSLog(@"logged out");
-    // test to see if we can use the share dialog built into the Facebook application
-    //    FBShareDialogParams *p = [[FBShareDialogParams alloc] init];
-    //    p.link = [NSURL URLWithString:@"http://developers.facebook.com/ios"];
-#ifdef DEBUG
-    //    [FBSettings enableBetaFeatures:FBBetaFeaturesShareDialog];
-#endif
-    //    BOOL canShareFB = [FBDialogs canPresentShareDialogWithParams:p];
-    //    BOOL canShareiOS6 = [FBDialogs canPresentOSIntegratedShareDialogWithSession:nil];
-    //
-    
-    // "Post Status" available when logged on and potentially when logged off.  Differentiate in the label.
-}
-
-- (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error {
-    // see https://developers.facebook.com/docs/reference/api/errors/ for general guidance on error handling for Facebook API
-    // our policy here is to let the login view handle errors, but to log the results
-    NSLog(@"FBLoginView encountered an error=%@", error);
-    if ([[error.userInfo objectForKey:@"com.facebook.sdk:ErrorLoginFailedReason"] isEqualToString:@"com.facebook.sdk:SystemLoginDisallowedWithoutError"])
-    {
-        [CommonFunction alert:@"On your device, please go to Setting->Facebook->Allow this app to use your facebook account" delegate:nil];
-    }
-}
-
+//
+//- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
+//    // first get the buttons set for login mode
+//    
+//    if (fbView.frame.origin.x == 0)
+//    {
+//        
+//        [self backBtnAction:nil];
+//    }
+//}
+//
+//- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
+//                            user:(id<FBGraphUser>)user {
+//    NSString *str = [user objectForKey:@"link"];
+//    [CommonFunction setFBLink:str];
+//    // here we use helper properties of FBGraphUser to dot-through to first_name and
+//    // id properties of the json response from the server; alternatively we could use
+//    // NSDictionary methods such as objectForKey to get values from the my json object
+//}
+//
+//- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
+//       NSLog(@"logged out");
+//    // test to see if we can use the share dialog built into the Facebook application
+//    //    FBShareDialogParams *p = [[FBShareDialogParams alloc] init];
+//    //    p.link = [NSURL URLWithString:@"http://developers.facebook.com/ios"];
+//#ifdef DEBUG
+//    //    [FBSettings enableBetaFeatures:FBBetaFeaturesShareDialog];
+//#endif
+//    //    BOOL canShareFB = [FBDialogs canPresentShareDialogWithParams:p];
+//    //    BOOL canShareiOS6 = [FBDialogs canPresentOSIntegratedShareDialogWithSession:nil];
+//    //
+//    
+//    // "Post Status" available when logged on and potentially when logged off.  Differentiate in the label.
+//}
+//
+//- (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error {
+//    // see https://developers.facebook.com/docs/reference/api/errors/ for general guidance on error handling for Facebook API
+//    // our policy here is to let the login view handle errors, but to log the results
+//    NSLog(@"FBLoginView encountered an error=%@", error);
+//    if ([[error.userInfo objectForKey:@"com.facebook.sdk:ErrorLoginFailedReason"] isEqualToString:@"com.facebook.sdk:SystemLoginDisallowedWithoutError"])
+//    {
+//        [CommonFunction alert:@"On your device, please go to Setting->Facebook->Allow this app to use your facebook account" delegate:nil];
+//    }
+//}
+//
 @end

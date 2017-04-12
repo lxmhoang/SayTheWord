@@ -9,8 +9,10 @@
 #import "AppDelegate.h"
 #import "WordDatabase.h"
 #import "WordInfo.h"
-#import <Parse/Parse.h>
+
 #import <Crashlytics/Crashlytics.h>
+
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation AppDelegate
 @synthesize rootController;
@@ -113,25 +115,20 @@
 
 - (void)checkFBLike
 {
-    if (FBSession.activeSession.isOpen)
+    if ([[FBSDKAccessToken currentAccessToken]  hasGranted:@"user_likes"])
     {
-        [FBRequestConnection startWithGraphPath:@"/me/likes/172415879600587" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-            if (error)
-            {
-                
-                
-            } else {
-                if ([[result objectForKey:@"data"] count]>0)
-                {
-                    [CommonFunction setLikeFanPage:YES];
-                }else{
-                    
-                }
-            }
-        }];
-    }else
-    {
-        
+        FBSDKGraphRequest *requestMe = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
+        FBSDKGraphRequest *requestLikes = [[FBSDKGraphRequest alloc]
+                                           initWithGraphPath:@"me/likes" parameters:nil];
+        FBSDKGraphRequestConnection *connection = [[FBSDKGraphRequestConnection alloc] init];
+        [connection addRequest:requestMe
+             completionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+             }];
+        [connection addRequest:requestLikes
+             completionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                 //TODO: process like information
+             }];
+        [connection start];
     }
 }
 
@@ -236,11 +233,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
+    
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
     [self dataMigrationWhenUpdate];
     
     self.screenShot = nil;
     [self requestIAP];
-    [FBLoginView class];
     //    WordInfo *info = [[WordDatabase database] wordInfoWithLevel:6];
     //    NSLog(@"%d: %@, %@, %@",info.level, info.leftWord, info.rightWord, info.finalWord);
     //    NSArray *wordInfos = [WordDatabase database].WordsInfo;
@@ -250,9 +249,6 @@
     
     
     
-    [Parse setApplicationId:@"7Rx018E0kJKkmON2WF5pSCWLxa5u0mR8boHcHCc5"
-                  clientKey:@"cQijJMLIqBiUCcNkaN1m4K7NbEyBhLCC0ZxM8BPA"];
-    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     [Crashlytics startWithAPIKey:@"36b3007e0a0f53cf00825f195fc7f17a5e8db471"];
     
@@ -339,7 +335,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [FBAppCall handleDidBecomeActive];
+    [FBSDKAppEvents activateApp];
     
     
     if ([CommonFunction checkIfRateForCoin] && ([CommonFunction getRateUS] == 1) && [CommonFunction getRewardCoinForRattingApp] > 0)
@@ -351,9 +347,16 @@
     }
     
     
-    if (FBSession.activeSession.isOpen)
+    if ([FBSDKAccessToken currentAccessToken])
     {
-        [FBRequestConnection startWithGraphPath:@"/me/likes/172415879600587" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                      initWithGraphPath:@"/172415879600587/likes"
+                                      parameters:nil
+                                      HTTPMethod:@"GET"];
+        [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                              id result,
+                                              NSError *error) {
+            // Handle the result
             if (error) {
                 
                 NSLog(@"FB_UD %@", error.userInfo);
@@ -370,7 +373,27 @@
                 }
                 NSLog(@"FB_LIKES: %@:", result);
             }
+
+            
         }];
+//        [FBRequestConnection startWithGraphPath:@"/me/likes/172415879600587" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//            if (error) {
+//                
+//                NSLog(@"FB_UD %@", error.userInfo);
+//            } else {
+//                if ([[result objectForKey:@"data"] count]>0)
+//                {
+//                    if (![CommonFunction getLikeFanPage]){
+//                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Thank you for liking our page" message:[NSString stringWithFormat:@"You have claimed %d coins", [CommonFunction getRewardCoinForLikingPage]] delegate:rootController cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                        [alertView show];
+//                        
+//                    }
+//                    
+//                    [CommonFunction setLikeFanPage:YES];
+//                }
+//                NSLog(@"FB_LIKES: %@:", result);
+//            }
+//        }];
     }else
     {
         //        [FBSession ope]
@@ -387,29 +410,29 @@
             if ([[NSDate date] compare:[[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]]]==NSOrderedDescending)
             {
                 NSString *str = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
-                PFQuery *query = [PFQuery queryWithClassName:@"Installation"];
-                
-                [query whereKey:@"deviceToken" equalTo:str];
-                //        NSLog(@"device token searching for : %@",str);
-                query.cachePolicy = kPFCachePolicyNetworkElseCache;
-                
-                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                    if (!error) {
-                        PFObject *obj = [objects firstObject];
-                        if (obj)
-                        {
-                            [CommonFunction updateInstallationInfoWithObject:obj andDeviceToken:str];
-                            
-                            [CommonFunction updateConfigurationInfo];
-                        }else
-                        {
-                            // no obj with this devicetoken on parse, may be first update has not completed yet, so we do nothing, wait for first update to be completed
-                        }
-                    } else {
-                        // Log details of the failure
-                        //                NSLog(@"Error: %@ %@", error, [error userInfo]);
-                    }
-                }];
+//                PFQuery *query = [PFQuery queryWithClassName:@"Installation"];
+//                
+//                [query whereKey:@"deviceToken" equalTo:str];
+//                //        NSLog(@"device token searching for : %@",str);
+//                query.cachePolicy = kPFCachePolicyNetworkElseCache;
+//                
+//                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//                    if (!error) {
+//                        PFObject *obj = [objects firstObject];
+//                        if (obj)
+//                        {
+//                            [CommonFunction updateInstallationInfoWithObject:obj andDeviceToken:str];
+//                            
+//                            [CommonFunction updateConfigurationInfo];
+//                        }else
+//                        {
+//                            // no obj with this devicetoken on parse, may be first update has not completed yet, so we do nothing, wait for first update to be completed
+//                        }
+//                    } else {
+//                        // Log details of the failure
+//                        //                NSLog(@"Error: %@ %@", error, [error userInfo]);
+//                    }
+//                }];
             }
         }else
         {
@@ -424,20 +447,21 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    [FBSession.activeSession close];
+//    [FBSession.activeSession close];
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
-    // attempt to extract a token from the url
-    return [FBAppCall handleOpenURL:url
-                  sourceApplication:sourceApplication
-                    fallbackHandler:^(FBAppCall *call) {
-                        NSLog(@"In fallback handler");
-                    }];
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+    
+    BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                                  openURL:url
+                                                        sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                                                               annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
+                    ];
+    // Add any custom logic here.
+    return handled;
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -453,11 +477,11 @@
                withString:@""];
         //        [CommonFunction alert:@"first time" delegate:nil];
         // first time or not ?
+//        
+//        PFObject *obj = [[PFObject alloc] initWithClassName:@"Installation"];
         
-        PFObject *obj = [[PFObject alloc] initWithClassName:@"Installation"];
-        
-        [CommonFunction updateInstallationInfoWithObject:obj andDeviceToken:str];
-        [CommonFunction updateConfigurationInfo];
+//        [CommonFunction updateInstallationInfoWithObject:obj andDeviceToken:str];
+//        [CommonFunction updateConfigurationInfo];
         
         
         [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"deviceToken"];
@@ -466,29 +490,29 @@
     }else         if ([[NSDate date] compare:[[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]]]==NSOrderedDescending)
     {
         NSString *deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
-        PFQuery *query = [PFQuery queryWithClassName:@"Installation"];
-        
-        [query whereKey:@"deviceToken" equalTo:deviceToken];
-        //        NSLog(@"device token searching for : %@",str);
-        query.cachePolicy = kPFCachePolicyNetworkElseCache;
-        
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (!error) {
-                PFObject *obj = [objects firstObject];
-                if (obj)
-                {
-                    [CommonFunction updateInstallationInfoWithObject:obj andDeviceToken:deviceToken];
-                    
-                    [CommonFunction updateConfigurationInfo];
-                }else
-                {
-                    // no obj with this devicetoken on parse, may be first update has not completed yet, so we do nothing, wait for first update to be completed
-                }
-            } else {
-                // Log details of the failure
-                //                NSLog(@"Error: %@ %@", error, [error userInfo]);
-            }
-        }];
+//        PFQuery *query = [PFQuery queryWithClassName:@"Installation"];
+//        
+//        [query whereKey:@"deviceToken" equalTo:deviceToken];
+//        //        NSLog(@"device token searching for : %@",str);
+//        query.cachePolicy = kPFCachePolicyNetworkElseCache;
+//        
+//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//            if (!error) {
+//                PFObject *obj = [objects firstObject];
+//                if (obj)
+//                {
+//                    [CommonFunction updateInstallationInfoWithObject:obj andDeviceToken:deviceToken];
+//                    
+//                    [CommonFunction updateConfigurationInfo];
+//                }else
+//                {
+//                    // no obj with this devicetoken on parse, may be first update has not completed yet, so we do nothing, wait for first update to be completed
+//                }
+//            } else {
+//                // Log details of the failure
+//                //                NSLog(@"Error: %@ %@", error, [error userInfo]);
+//            }
+//        }];
     }else
     {
         

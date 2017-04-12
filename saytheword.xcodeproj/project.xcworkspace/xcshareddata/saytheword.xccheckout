@@ -7,11 +7,11 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>BF5B4A5D-AF8E-411E-B0A4-0B19F40BD5B8</string>
 	<key>IDESourceControlProjectName</key>
-	<string>saytheword</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>36B1E6ED1DC89EAFE34812045E2FF7F935E50ED9</key>
-		<string>https://github.com/lxmhoang/SayTheWord.git</string>
+		<string>https://github.com/lxmhoang/SayTheWord</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>saytheword.xcodeproj/project.xcworkspace</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/lxmhoang/SayTheWord.git</string>
+	<string>https://github.com/lxmhoang/SayTheWord</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

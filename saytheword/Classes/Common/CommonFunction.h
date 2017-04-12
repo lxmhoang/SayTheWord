@@ -48,11 +48,11 @@
 #define kInitialRewardCoinsForEachLevel 2
 
 #define kNavBarImg @"nav_nau.png"
-#define kProductIDOf200  @"com.lxmhoang.say2picsguesstheword.iap.200coins"
-#define kProductIDOf420  @"com.lxmhoang.say2picsguesstheword.iap.420coins"
-#define kProductIDOf1100  @"com.lxmhoang.say2picsguesstheword.iap.1100coins"
-#define kProductIDOf2400  @"com.lxmhoang.say2picsguesstheword.iap.2400coins"
-#define kProductIDOf7800  @"com.lxmhoang.say2picsguesstheword.iap.7800coins"
+#define kProductIDOf200  @"new.com.lxmhoang.say2picsguesstheword.iap.200coins"
+#define kProductIDOf420  @"new.com.lxmhoang.say2picsguesstheword.iap.420coins"
+#define kProductIDOf1100  @"new.com.lxmhoang.say2picsguesstheword.iap.1100coins"
+#define kProductIDOf2400  @"new.com.lxmhoang.say2picsguesstheword.iap.2400coins"
+#define kProductIDOf7800  @"new.com.lxmhoang.say2picsguesstheword.iap.7800coins"
 //#define kProductIDOf50000  @"com.lxmhoang.saytheword.iap.50000coins"
 
 #define kHeightOfScreen [ [ UIScreen mainScreen ] bounds ].size.height
@@ -119,7 +119,6 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import "AppDelegate.h"
-#import <FacebookSDK/FacebookSDK.h>
 
 
 @interface CommonFunction : NSObject

@@ -3,34 +3,34 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "Default@2x.png",
-      "minimum-system-version" : "7.0",
+      "filename" : "bg_nau_new.png",
+      "scale" : "1x"
+    },
+    {
+      "orientation" : "portrait",
+      "idiom" : "iphone",
+      "filename" : "bg_nau_new-1.png",
       "scale" : "2x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "Default-568h@2x.png",
-      "minimum-system-version" : "7.0",
+      "filename" : "bg_nau_new-2.png",
       "subtype" : "retina4",
       "scale" : "2x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "Default.png",
-      "scale" : "1x"
-    },
-    {
-      "orientation" : "portrait",
-      "idiom" : "iphone",
-      "filename" : "Default@2x.png",
+      "filename" : "bg_nau_new-3.png",
+      "minimum-system-version" : "7.0",
       "scale" : "2x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "Default-568h@2x.png",
+      "filename" : "bg_nau_new-4.png",
+      "minimum-system-version" : "7.0",
       "subtype" : "retina4",
       "scale" : "2x"
     }

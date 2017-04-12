@@ -142,8 +142,6 @@
     [self.view addSubview:newVC.view];
     [newVC didMoveToParentViewController:self];
     
-//    [newVC.view release];
-//    [newVC.view release];
     
     
     dispatch_async(dispatch_get_main_queue(), ^{

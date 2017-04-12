@@ -8,9 +8,9 @@
 
 #import "CommonFunction.h"
 
-#import <Parse/Parse.h>
 #import <sys/utsname.h>
 #import "ApActivityData.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation CommonFunction
 
@@ -74,14 +74,8 @@
 
 + (BOOL)checkFBLogin
 {
-    return FBSession.activeSession.isOpen;
-    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
-        return YES;
-    } else {
-        // No, display the login page.
-        return NO;
-    }
-}
+    return [FBSDKAccessToken currentAccessToken];
+   }
 
 + (BOOL)getLikeFanPage
 {
@@ -611,260 +605,225 @@
     return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
 }
 
-#pragma mark Parse.com
-
-+ (void)updateInstallationInfoWithObject:(PFObject *)obj andDeviceToken:(NSString *)token
-{
-    
-    NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    
-    
-    NSTimeZone *timeZone = [NSTimeZone localTimeZone];
-    obj[@"timeZone"] = [timeZone name];
-    obj[@"deviceToken"] = token;
-    obj[@"app_version"] = version;
-    obj[@"ios_version"] = [[UIDevice currentDevice] systemVersion];
-    obj[@"coin"] = [NSNumber numberWithInt:[CommonFunction getCoin]];
-    
-    obj[@"level"] = [NSNumber numberWithInt:[CommonFunction getLevel]];
-    obj[@"device"] = [CommonFunction machineName];
-    obj[@"FBLink"] = [CommonFunction getFBLink];
-    
-    obj[@"numOfSharing"] =  [NSNumber numberWithInt:[CommonFunction getNumOfSharing]];
-    
-    obj[@"coinsSpended"] = [NSNumber numberWithInt:[CommonFunction getCoinsSpended]];
-    
-    obj[@"rateUS"] = [NSNumber numberWithInt:[CommonFunction getRateUS]];
-    
-    obj[@"dataVersion"] = [NSNumber numberWithInt:[CommonFunction getDataVersion]];
-    
-    obj[@"likeFB"] = [CommonFunction getLikeFanPage] ? @"Liked" : @"Not yet";
-    
-    [CommonFunction setLastUpdateInfo:[NSDate date]];
-//    [CommonFunction alert:[NSString stringWithFormat:@"%@",[CommonFunction getLastUpdateInfo]] delegate:nil];
-    NSLog(@"last update : %@", [NSDate date]);
-    [obj saveEventually];
-    
-}
-
-+ (void)updateConfigurationInfo
-{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                              @"app_version = %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-    PFQuery *query = [PFQuery queryWithClassName:@"ConfigurationInfo" predicate:predicate];
-    
-    query.cachePolicy = kPFCachePolicyNetworkElseCache;
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (error)
-        {
-         // shit happen
-        }else
-        {
-            if (objects.count == 0)
-            {
-                // no coressponding app version
-            }else
-            {
-                PFObject *obj = [objects firstObject];
-                for (id key in [obj allKeys])
-                {
-                    NSString *strKey = key;
-                    if ([obj objectForKey:strKey])
-                    {
-                        NSLog(@"object and key : %@    %@", [obj objectForKey:strKey], strKey);
-                        
-                        
-                        if ([strKey isEqualToString:@"versionExpired"])
-                        {
-                            BOOL versionExpired = [[obj objectForKey:strKey] boolValue];
-                            if (versionExpired)
-                            {
-                                
-                                NSString *msg = @"New version is available on App Store. Please update now !";
-                                [CommonFunction alert:msg delegate:[[UIApplication sharedApplication] delegate]];
-                            }
-                        }else
-                        {
-                            [[NSUserDefaults standardUserDefaults] setObject:[obj objectForKey:strKey] forKey:strKey];
-                            [[NSUserDefaults standardUserDefaults] synchronize];
-                            
-                        }
-                    }
-                }
-                
-                // check data version
-                if
-                    (
-                    ([CommonFunction getDataVersion] != [[obj objectForKey:@"data_version"] intValue])
-                    )
-                {
-                    NSPredicate *predicateDataVersion = [NSPredicate predicateWithFormat:
-                                                         @"version = %@", [obj objectForKey:@"data_version"]];
-                    PFQuery *queryData = [PFQuery queryWithClassName:@"Data" predicate:predicateDataVersion];
-                    queryData.cachePolicy = kPFCachePolicyNetworkElseCache;
-                    [queryData findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                        if (error)
-                        {
-                            // shit happen
-                        }else
-                        {
-                            
-                            
-                            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory ,    NSUserDomainMask, YES);
-                            NSString *documentsPath = [paths objectAtIndex:0];
-                            documentsPath = [documentsPath stringByAppendingString:@"/"];
-                            
-                            
-                            NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-                            queue.maxConcurrentOperationCount = 4;
-                            
-                            NSBlockOperation *totalCompletion = [NSBlockOperation blockOperationWithBlock:^{
-                                NSLog(@"finish all data migration, now update data_version");
-                                [CommonFunction setDataVersion:[[obj objectForKey:@"data_version"] intValue]];
-                                
-                            }];
-                            
-                            for (PFObject *wordObj in objects)
-                            {
-                                NSURL *urlLeftPic = nil;
-                                NSURL *urlRightPic = nil;
-                                NSString *leftPicName = nil;
-                                NSString *rightPicName = nil;
-                                
-                                if ([wordObj objectForKey:@"leftPicURL"] != nil)
-                                {
-                                    urlLeftPic = [[NSURL alloc] initWithString:[wordObj objectForKey:@"leftPicURL"]];
-                                    leftPicName = [urlLeftPic lastPathComponent];
-                                    
-                                    
-                                }else
-                                {
-                                    // get local image which named is ...
-                                    if ([wordObj objectForKey:@"leftPicFileName"] != nil)
-                                    {
-                                        leftPicName = [wordObj objectForKey:@"leftPicFileName"];
-                                    }else
-                                    {
-                                        // wtf !!!!!
-                                    }
-                                }
-                                
-                                if ([wordObj objectForKey:@"rightPicURL"])
-                                {
-                                    
-                                    urlRightPic = [[NSURL alloc] initWithString:[wordObj objectForKey:@"rightPicURL"]];
-                                    
-                                    rightPicName = [urlRightPic lastPathComponent];
-                                }else
-                                {
-                                    // get local image which named is ...
-                                    if ([wordObj objectForKey:@"rightPicFileName"] != nil)
-                                    {
-                                        rightPicName = [wordObj objectForKey:@"rightPicFileName"];
-                                    }else
-                                    {
-                                        // wtf !!!!!
-                                    }
-                                }
-                                
-                                
-                                
-                                NSBlockOperation *completionOperation = [NSBlockOperation blockOperationWithBlock:^{
-                                    NSLog(@"finish downloading %@, now save data to local", [wordObj objectForKey:@"answer"]);
-                                    NSString *leftWord = [wordObj objectForKey:@"leftword"];
-                                    NSString *rightWord = [wordObj objectForKey:@"rightword"];
-                                    NSString *initialString = [wordObj objectForKey:@"initialString"];
-                                    NSString *answer = [wordObj objectForKey:@"answer"];
-                                    NSString *leftPic = leftPicName;
-                                    NSString *rightPic = rightPicName;
-                                    
-                                    
-                                    
-                                    // set level for this set
-                                    int level = [[wordObj objectForKey:@"level"] intValue];
-                                    
-                                    if (level == -1)
-                                    {
-                                        level = 1;
-                                        while (
-                                               (![[[CommonFunction getWordInfoForLevel:level] finalWord] isEqualToString:answer])
-                                               &&
-                                               
-                                               (level<= [CommonFunction getMaxLevel])
-                                               
-                                               
-                                               )
-                                        {
-                                            level ++;
-                                        }
-                                    }
-                                    
-// no need below code anymore, above code is enough
-                                    
+//
+//+ (void)updateConfigurationInfo
+//{
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+//                              @"app_version = %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+//    PFQuery *query = [PFQuery queryWithClassName:@"ConfigurationInfo" predicate:predicate];
+//    
+//    query.cachePolicy = kPFCachePolicyNetworkElseCache;
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        if (error)
+//        {
+//         // shit happen
+//        }else
+//        {
+//            if (objects.count == 0)
+//            {
+//                // no coressponding app version
+//            }else
+//            {
+//                PFObject *obj = [objects firstObject];
+//                for (id key in [obj allKeys])
+//                {
+//                    NSString *strKey = key;
+//                    if ([obj objectForKey:strKey])
+//                    {
+//                        NSLog(@"object and key : %@    %@", [obj objectForKey:strKey], strKey);
+//                        
+//                        
+//                        if ([strKey isEqualToString:@"versionExpired"])
+//                        {
+//                            BOOL versionExpired = [[obj objectForKey:strKey] boolValue];
+//                            if (versionExpired)
+//                            {
+//                                
+//                                NSString *msg = @"New version is available on App Store. Please update now !";
+//                                [CommonFunction alert:msg delegate:[[UIApplication sharedApplication] delegate]];
+//                            }
+//                        }else
+//                        {
+//                            [[NSUserDefaults standardUserDefaults] setObject:[obj objectForKey:strKey] forKey:strKey];
+//                            [[NSUserDefaults standardUserDefaults] synchronize];
+//                            
+//                        }
+//                    }
+//                }
+//                
+//                // check data version
+//                if
+//                    (
+//                    ([CommonFunction getDataVersion] != [[obj objectForKey:@"data_version"] intValue])
+//                    )
+//                {
+//                    NSPredicate *predicateDataVersion = [NSPredicate predicateWithFormat:
+//                                                         @"version = %@", [obj objectForKey:@"data_version"]];
+//                    PFQuery *queryData = [PFQuery queryWithClassName:@"Data" predicate:predicateDataVersion];
+//                    queryData.cachePolicy = kPFCachePolicyNetworkElseCache;
+//                    [queryData findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//                        if (error)
+//                        {
+//                            // shit happen
+//                        }else
+//                        {
+//                            
+//                            
+//                            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory ,    NSUserDomainMask, YES);
+//                            NSString *documentsPath = [paths objectAtIndex:0];
+//                            documentsPath = [documentsPath stringByAppendingString:@"/"];
+//                            
+//                            
+//                            NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+//                            queue.maxConcurrentOperationCount = 4;
+//                            
+//                            NSBlockOperation *totalCompletion = [NSBlockOperation blockOperationWithBlock:^{
+//                                NSLog(@"finish all data migration, now update data_version");
+//                                [CommonFunction setDataVersion:[[obj objectForKey:@"data_version"] intValue]];
+//                                
+//                            }];
+//                            
+//                            for (PFObject *wordObj in objects)
+//                            {
+//                                NSURL *urlLeftPic = nil;
+//                                NSURL *urlRightPic = nil;
+//                                NSString *leftPicName = nil;
+//                                NSString *rightPicName = nil;
+//                                
+//                                if ([wordObj objectForKey:@"leftPicURL"] != nil)
+//                                {
+//                                    urlLeftPic = [[NSURL alloc] initWithString:[wordObj objectForKey:@"leftPicURL"]];
+//                                    leftPicName = [urlLeftPic lastPathComponent];
 //                                    
-//                                    if  (![[[CommonFunction getWordInfoForLevel:level] finalWord] isEqualToString:answer])
+//                                    
+//                                }else
+//                                {
+//                                    // get local image which named is ...
+//                                    if ([wordObj objectForKey:@"leftPicFileName"] != nil)
 //                                    {
-//                                        // can't find a level which have the same answer with this set, so this will be new max level
-//                                        level = [CommonFunction getMaxLevel]+1;
+//                                        leftPicName = [wordObj objectForKey:@"leftPicFileName"];
 //                                    }else
 //                                    {
-//                                        // keep it, gonna replace that level
+//                                        // wtf !!!!!
 //                                    }
-                                    
-                                    
-                                    WordInfo *info = [[WordInfo alloc] initWithUniqueLevel:level leftWord:leftWord leftImg:leftPic rightWord:rightWord rightImg:rightPic finalWord:answer initString:initialString];
-                                    [CommonFunction setWordInfo:info];
-                                    
-                                }];
-                                
-                                NSBlockOperation *operationLeft = [NSBlockOperation blockOperationWithBlock:^{
-                                    NSData *data = [NSData dataWithContentsOfURL:urlLeftPic];
-                                    NSString *filename = [documentsPath stringByAppendingString:leftPicName];
-                                    
-                                    NSLog(@"begin download left pic %@",leftPicName);
-                                    [data writeToFile:filename atomically:YES];
-                                    NSLog(@"finish write %@ to file %@", [urlLeftPic absoluteString], filename);
-                                }];
-                                
-                                [completionOperation addDependency:operationLeft];
-                                
-                                
-                                
-                                NSBlockOperation *operationRight = [NSBlockOperation blockOperationWithBlock:^{
-                                    
-                                    NSData *data = [NSData dataWithContentsOfURL:urlRightPic];
-                                    NSString *filename = [documentsPath stringByAppendingString:rightPicName];
-                                    
-                                    NSLog(@"begin download right pic %@", rightPicName);
-                                    [data writeToFile:filename atomically:YES];
-                                    NSLog(@"finish write %@ to file %@", [urlRightPic absoluteString], filename);
-                                }];
-                                
-                                [completionOperation addDependency:operationRight];
-                                
-                                [totalCompletion addDependency:completionOperation];
-                                
-                                [queue addOperations:completionOperation.dependencies waitUntilFinished:NO];
-                                [queue addOperation:completionOperation];
-                                
-                                
-                            }
-                            
-                            
-                            [queue addOperation:totalCompletion];
-                            
-                            
-                        }
-                    }];
-                }else
-                {
-                    NSLog(@"no data change");
-                }
-            }
-        }
-    }];
-    
-}
+//                                }
+//                                
+//                                if ([wordObj objectForKey:@"rightPicURL"])
+//                                {
+//                                    
+//                                    urlRightPic = [[NSURL alloc] initWithString:[wordObj objectForKey:@"rightPicURL"]];
+//                                    
+//                                    rightPicName = [urlRightPic lastPathComponent];
+//                                }else
+//                                {
+//                                    // get local image which named is ...
+//                                    if ([wordObj objectForKey:@"rightPicFileName"] != nil)
+//                                    {
+//                                        rightPicName = [wordObj objectForKey:@"rightPicFileName"];
+//                                    }else
+//                                    {
+//                                        // wtf !!!!!
+//                                    }
+//                                }
+//                                
+//                                
+//                                
+//                                NSBlockOperation *completionOperation = [NSBlockOperation blockOperationWithBlock:^{
+//                                    NSLog(@"finish downloading %@, now save data to local", [wordObj objectForKey:@"answer"]);
+//                                    NSString *leftWord = [wordObj objectForKey:@"leftword"];
+//                                    NSString *rightWord = [wordObj objectForKey:@"rightword"];
+//                                    NSString *initialString = [wordObj objectForKey:@"initialString"];
+//                                    NSString *answer = [wordObj objectForKey:@"answer"];
+//                                    NSString *leftPic = leftPicName;
+//                                    NSString *rightPic = rightPicName;
+//                                    
+//                                    
+//                                    
+//                                    // set level for this set
+//                                    int level = [[wordObj objectForKey:@"level"] intValue];
+//                                    
+//                                    if (level == -1)
+//                                    {
+//                                        level = 1;
+//                                        while (
+//                                               (![[[CommonFunction getWordInfoForLevel:level] finalWord] isEqualToString:answer])
+//                                               &&
+//                                               
+//                                               (level<= [CommonFunction getMaxLevel])
+//                                               
+//                                               
+//                                               )
+//                                        {
+//                                            level ++;
+//                                        }
+//                                    }
+//                                    
+//// no need below code anymore, above code is enough
+//                                    
+////                                    
+////                                    if  (![[[CommonFunction getWordInfoForLevel:level] finalWord] isEqualToString:answer])
+////                                    {
+////                                        // can't find a level which have the same answer with this set, so this will be new max level
+////                                        level = [CommonFunction getMaxLevel]+1;
+////                                    }else
+////                                    {
+////                                        // keep it, gonna replace that level
+////                                    }
+//                                    
+//                                    
+//                                    WordInfo *info = [[WordInfo alloc] initWithUniqueLevel:level leftWord:leftWord leftImg:leftPic rightWord:rightWord rightImg:rightPic finalWord:answer initString:initialString];
+//                                    [CommonFunction setWordInfo:info];
+//                                    
+//                                }];
+//                                
+//                                NSBlockOperation *operationLeft = [NSBlockOperation blockOperationWithBlock:^{
+//                                    NSData *data = [NSData dataWithContentsOfURL:urlLeftPic];
+//                                    NSString *filename = [documentsPath stringByAppendingString:leftPicName];
+//                                    
+//                                    NSLog(@"begin download left pic %@",leftPicName);
+//                                    [data writeToFile:filename atomically:YES];
+//                                    NSLog(@"finish write %@ to file %@", [urlLeftPic absoluteString], filename);
+//                                }];
+//                                
+//                                [completionOperation addDependency:operationLeft];
+//                                
+//                                
+//                                
+//                                NSBlockOperation *operationRight = [NSBlockOperation blockOperationWithBlock:^{
+//                                    
+//                                    NSData *data = [NSData dataWithContentsOfURL:urlRightPic];
+//                                    NSString *filename = [documentsPath stringByAppendingString:rightPicName];
+//                                    
+//                                    NSLog(@"begin download right pic %@", rightPicName);
+//                                    [data writeToFile:filename atomically:YES];
+//                                    NSLog(@"finish write %@ to file %@", [urlRightPic absoluteString], filename);
+//                                }];
+//                                
+//                                [completionOperation addDependency:operationRight];
+//                                
+//                                [totalCompletion addDependency:completionOperation];
+//                                
+//                                [queue addOperations:completionOperation.dependencies waitUntilFinished:NO];
+//                                [queue addOperation:completionOperation];
+//                                
+//                                
+//                            }
+//                            
+//                            
+//                            [queue addOperation:totalCompletion];
+//                            
+//                            
+//                        }
+//                    }];
+//                }else
+//                {
+//                    NSLog(@"no data change");
+//                }
+//            }
+//        }
+//    }];
+//    
+//}
 
 #pragma mark message sharing is not available
 
@@ -1280,7 +1239,7 @@
     if( [UIActivityViewController class])
     {
         
-        APActivityProvider *ActivityProvider = [[APActivityProvider alloc] init];
+        APActivityProvider *ActivityProvider = [[APActivityProvider alloc] initWithPlaceholderItem:@""];
         
         NSArray *Items;
         if (img)

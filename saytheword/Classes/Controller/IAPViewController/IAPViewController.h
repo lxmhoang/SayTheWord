@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import <FacebookSDK/FacebookSDK.h>
 #import "IAPHelper.h"
 #import "MBProgressHUD.h"
 @class StoreModel;
@@ -20,7 +19,7 @@
 
 @end
 
-@interface IAPViewController : UIViewController <IAPHelperDelegate, MBProgressHUDDelegate, UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate, FBLoginViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+@interface IAPViewController : UIViewController <IAPHelperDelegate, MBProgressHUDDelegate, UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 {
     IBOutlet UITableView *coinTableView;
     IBOutlet UITableView *freeCoinTableView;

@@ -11,7 +11,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AnswerView.h"
 #import "TypingView.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "ExplodeView.h"
 
 #import <iAd/iAd.h>
@@ -26,7 +25,7 @@
 
 @end
 
-@interface PlayView : UIView <TypingViewDelegate, AnswerViewDelegate, FBLoginViewDelegate, ADBannerViewDelegate>
+@interface PlayView : UIView <TypingViewDelegate, AnswerViewDelegate, ADBannerViewDelegate>
 {
     UILabel *coinLabel;
     UIImageView *coinImageView;
