@@ -442,7 +442,7 @@
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rateForCoin"] == nil){
-        [self setRateForCoin:NO];
+        [self setRateForCoin:YES];
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"msgShareNotAvail"] == nil){

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0820"
+   LastUpgradeVersion = "0830"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -70,8 +70,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "77E70AA632329F8A10A84F282D2E8EC6"
-               BuildableName = "Pods_saytheword.framework"
+               BlueprintIdentifier = "8E2484DFE7CC3ACC5506F95DCFD9EFA6"
+               BuildableName = "libPods-saytheword.a"
                BlueprintName = "Pods-saytheword"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
             </BuildableReference>

@@ -373,7 +373,8 @@
     [optionsGetFreeCoin addObject:share];
     maxFreeCoin = (maxFreeCoin < [share.rewardCoin intValue]) ? [share.rewardCoin intValue] : maxFreeCoin;
     
-    if (![CommonFunction getLikeFanPage])
+//    if (![CommonFunction getLikeFanPage])
+    if (NO)
     {
         FreeCoinModel *fb = [[FreeCoinModel alloc] init];
         

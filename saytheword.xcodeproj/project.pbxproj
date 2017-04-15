@@ -76,7 +76,6 @@
 		379F054B177417FB00C50DDB /* StoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F054A177417FB00C50DDB /* StoreCell.m */; };
 		379F054F1774182400C50DDB /* StoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F054E1774182400C50DDB /* StoreModel.m */; };
 		379F05531774186800C50DDB /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F05521774186800C50DDB /* IAPHelper.m */; };
-		379F05571774188E00C50DDB /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F05561774188E00C50DDB /* MBProgressHUD.m */; };
 		379F0561177438CE00C50DDB /* HintCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F055E177438CE00C50DDB /* HintCell.m */; };
 		379F0562177438CE00C50DDB /* HintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F0560177438CE00C50DDB /* HintView.m */; };
 		379F0567177450D900C50DDB /* WinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F0566177450D900C50DDB /* WinController.m */; };
@@ -301,12 +300,14 @@
 		37E26D8D1A0A8BC300C51C16 /* fly.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37E26D8A1A0A8BC300C51C16 /* fly.jpg */; };
 		37E26D8E1A0A8BC300C51C16 /* sell.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 37E26D8B1A0A8BC300C51C16 /* sell.jpg */; };
 		37F3F7FB19E8635900E80344 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F3F7FA19E8635900E80344 /* menu.png */; };
+		6949E8E84BE3753044F65BB3 /* libPods-saytheword.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14445D836037B4FA5D875209 /* libPods-saytheword.a */; };
 		A4076086183DDDE40062A553 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4076085183DDDE40062A553 /* CoreTelephony.framework */; };
 		A440E69E19950C49007567F8 /* bg_nau_new.png in Resources */ = {isa = PBXBuildFile; fileRef = A440E69D19950C49007567F8 /* bg_nau_new.png */; };
 		A440E6A2199892C1007567F8 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A440E6A1199892C1007567F8 /* logo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		14445D836037B4FA5D875209 /* libPods-saytheword.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-saytheword.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3704573B19DA83BA00933278 /* starnoads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starnoads.png; sourceTree = "<group>"; };
 		3712EF6C19DFC16D008B64BB /* coin3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coin3.png; sourceTree = "<group>"; };
 		3712EF7019DFCC68008B64BB /* bgiap.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bgiap.jpg; sourceTree = "<group>"; };
@@ -420,8 +421,6 @@
 		379F054E1774182400C50DDB /* StoreModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreModel.m; sourceTree = "<group>"; };
 		379F05511774186800C50DDB /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
 		379F05521774186800C50DDB /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
-		379F05551774188E00C50DDB /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		379F05561774188E00C50DDB /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		379F055D177438CE00C50DDB /* HintCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HintCell.h; sourceTree = "<group>"; };
 		379F055E177438CE00C50DDB /* HintCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HintCell.m; sourceTree = "<group>"; };
 		379F055F177438CE00C50DDB /* HintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HintView.h; sourceTree = "<group>"; };
@@ -670,6 +669,8 @@
 		37E26D8A1A0A8BC300C51C16 /* fly.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fly.jpg; sourceTree = "<group>"; };
 		37E26D8B1A0A8BC300C51C16 /* sell.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sell.jpg; sourceTree = "<group>"; };
 		37F3F7FA19E8635900E80344 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		512BF78E181394518FAEACFB /* Pods-saytheword.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-saytheword.release.xcconfig"; path = "Pods/Target Support Files/Pods-saytheword/Pods-saytheword.release.xcconfig"; sourceTree = "<group>"; };
+		904869C89B16BC7D02338B6C /* Pods-saytheword.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-saytheword.debug.xcconfig"; path = "Pods/Target Support Files/Pods-saytheword/Pods-saytheword.debug.xcconfig"; sourceTree = "<group>"; };
 		A4076085183DDDE40062A553 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		A440E69D19950C49007567F8 /* bg_nau_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_nau_new.png; sourceTree = "<group>"; };
 		A440E6A1199892C1007567F8 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -710,6 +711,7 @@
 				379DC478175334BE00CEDB69 /* Foundation.framework in Frameworks */,
 				379DC47A175334BE00CEDB69 /* CoreGraphics.framework in Frameworks */,
 				3737E97D1E9EA8020029817C /* Bolts.framework in Frameworks */,
+				6949E8E84BE3753044F65BB3 /* libPods-saytheword.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -908,6 +910,7 @@
 				379DC47B175334BE00CEDB69 /* saytheword */,
 				379DC474175334BE00CEDB69 /* Frameworks */,
 				379DC473175334BE00CEDB69 /* Products */,
+				58DBFFFD21635FA74BE95FF3 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -951,6 +954,7 @@
 				379DC475175334BE00CEDB69 /* UIKit.framework */,
 				379DC477175334BE00CEDB69 /* Foundation.framework */,
 				379DC479175334BE00CEDB69 /* CoreGraphics.framework */,
+				14445D836037B4FA5D875209 /* libPods-saytheword.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1029,7 +1033,6 @@
 				37A860AE17A8EC35009C0F89 /* ExplodeView.h */,
 				37A860AF17A8EC35009C0F89 /* ExplodeView.m */,
 				37A860B017A8EC35009C0F89 /* particle.png */,
-				379F05541774188E00C50DDB /* MBProgressHUD */,
 				379F05501774186800C50DDB /* IAPHelper */,
 			);
 			path = Lib;
@@ -1177,15 +1180,6 @@
 				379F05521774186800C50DDB /* IAPHelper.m */,
 			);
 			path = IAPHelper;
-			sourceTree = "<group>";
-		};
-		379F05541774188E00C50DDB /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				379F05551774188E00C50DDB /* MBProgressHUD.h */,
-				379F05561774188E00C50DDB /* MBProgressHUD.m */,
-			);
-			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		379F055C177438CD00C50DDB /* HintView */ = {
@@ -1518,6 +1512,15 @@
 			path = IAPTableViewCell;
 			sourceTree = "<group>";
 		};
+		58DBFFFD21635FA74BE95FF3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				904869C89B16BC7D02338B6C /* Pods-saytheword.debug.xcconfig */,
+				512BF78E181394518FAEACFB /* Pods-saytheword.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A461014318C095D100479EE3 /* SettingViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1536,10 +1539,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 379DC48F175334BE00CEDB69 /* Build configuration list for PBXNativeTarget "saytheword" */;
 			buildPhases = (
+				E6F356EE019A3D5689515E47 /* [CP] Check Pods Manifest.lock */,
 				379DC46E175334BE00CEDB69 /* Sources */,
 				379DC46F175334BE00CEDB69 /* Frameworks */,
 				379DC470175334BE00CEDB69 /* Resources */,
 				37A1811819F0EF870016F231 /* ShellScript */,
+				71987FC4C4B6F6B729C18639 /* [CP] Embed Pods Frameworks */,
+				E1D9EB88CCCD72C69E37E79D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1865,6 +1871,51 @@
 			shellPath = /bin/sh;
 			shellScript = "";
 		};
+		71987FC4C4B6F6B729C18639 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saytheword/Pods-saytheword-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1D9EB88CCCD72C69E37E79D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saytheword/Pods-saytheword-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E6F356EE019A3D5689515E47 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1893,7 +1944,6 @@
 				379F054B177417FB00C50DDB /* StoreCell.m in Sources */,
 				379F054F1774182400C50DDB /* StoreModel.m in Sources */,
 				379F05531774186800C50DDB /* IAPHelper.m in Sources */,
-				379F05571774188E00C50DDB /* MBProgressHUD.m in Sources */,
 				379F0561177438CE00C50DDB /* HintCell.m in Sources */,
 				37A8FC0719CD88A600E92850 /* HowToPlayViewController.m in Sources */,
 				379F0562177438CE00C50DDB /* HintView.m in Sources */,
@@ -2006,6 +2056,7 @@
 		};
 		379DC490175334BE00CEDB69 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 904869C89B16BC7D02338B6C /* Pods-saytheword.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2023,6 +2074,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "saytheword/saytheword-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				"HEADER_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				INFOPLIST_FILE = "saytheword/saytheword-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -2047,6 +2100,7 @@
 		};
 		379DC491175334BE00CEDB69 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 512BF78E181394518FAEACFB /* Pods-saytheword.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2064,6 +2118,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "saytheword/saytheword-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				"HEADER_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				INFOPLIST_FILE = "saytheword/saytheword-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (

@@ -135,14 +135,15 @@
     share.rewardCoin = [NSNumber numberWithInt:[CommonFunction getRewardCoinForSharingApp]];
     [optionsGetFreeCoin addObject:share];
     
-    if (![CommonFunction getLikeFanPage])
+//    if (![CommonFunction getLikeFanPage])
+    if (NO)
     {
-        FreeCoinModel *fb = [[FreeCoinModel alloc] init];
-        
-        fb.imgName = @"fblike.png";
-        fb.title = kTitleOfFacebookLike;
-        fb.rewardCoin = [NSNumber numberWithInt:[CommonFunction getRewardCoinForLikingPage]];
-        [optionsGetFreeCoin addObject:fb];
+//        FreeCoinModel *fb = [[FreeCoinModel alloc] init];
+//        
+//        fb.imgName = @"fblike.png";
+//        fb.title = kTitleOfFacebookLike;
+//        fb.rewardCoin = [NSNumber numberWithInt:[CommonFunction getRewardCoinForLikingPage]];
+//        [optionsGetFreeCoin addObject:fb];
     }
 
     
