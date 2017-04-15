@@ -14,6 +14,7 @@
 - (void)awakeFromNib {
 //    self.priceLabel.layer.cornerRadius = 15;
     // Initialization code
+    [super awakeFromNib];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

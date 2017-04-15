@@ -25,7 +25,7 @@
 
 @end
 
-@interface PlayController : UIViewController <PlayViewProtocol, HintsViewDelegate, UIAlertViewDelegate, TypingViewDelegate, IAPControllerDelegate, UIAlertViewDelegate>
+@interface PlayController : UIViewController <PlayViewProtocol, HintsViewDelegate, UIAlertViewDelegate, IAPControllerDelegate, UIAlertViewDelegate>
 {
     HintsView *hintsView;
     NSString *msg;

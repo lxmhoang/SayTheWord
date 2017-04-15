@@ -184,8 +184,8 @@
 - (void)loadViews
 {
     [self createOptionGetFreeCoin];
-    int k = kCheckIfIphone ? 5 : 15;
-    int t = kCheckIfIphone ? 2 : 5;
+//    int k = kCheckIfIphone ? 5 : 15;
+//    int t = kCheckIfIphone ? 2 : 5;
     
     
 //    self.askFriendIcon.layer.cornerRadius = k;

@@ -74,7 +74,9 @@
 
 + (BOOL)checkFBLogin
 {
-    return [FBSDKAccessToken currentAccessToken];
+    if ([FBSDKAccessToken currentAccessToken])
+        return YES;
+    return NO;
    }
 
 + (BOOL)getLikeFanPage

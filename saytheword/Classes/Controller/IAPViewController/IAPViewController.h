@@ -19,7 +19,7 @@
 
 @end
 
-@interface IAPViewController : UIViewController <IAPHelperDelegate, MBProgressHUDDelegate, UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+@interface IAPViewController : UIViewController <IAPHelperDelegate, MBProgressHUDDelegate, UIAlertViewDelegate, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 {
     IBOutlet UITableView *coinTableView;
     IBOutlet UITableView *freeCoinTableView;

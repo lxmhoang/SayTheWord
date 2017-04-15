@@ -98,7 +98,7 @@
 //        transaction.transactionIdentifier
         NSLog(@"transaction DATA : %@ ",transaction.transactionDate);
 //        [transaction.transactionDate ]
-        NSLog(@" transasction state: %d",transaction.transactionState);
+        NSLog(@" transasction state: %ld",(long)transaction.transactionState);
         if (transaction.error)
         {
             
@@ -146,19 +146,19 @@
 - (void)completeTransaction:(SKPaymentTransaction *)transaction
 {
     NSLog(@"completeTransaction");
-    NSData *oldReceipt = [[NSUserDefaults standardUserDefaults] objectForKey:@"receipt"];
-    if ([transaction.transactionReceipt isEqualToData:oldReceipt])
-    {
-        NSLog(@"TRUNG RECEIPT");
-    }
-    else{
-        NSLog(@"KHONG TRUNG");
-        [[NSUserDefaults standardUserDefaults] setObject:transaction.transactionReceipt forKey:@"receipt"];
+//    NSData *oldReceipt = [[NSUserDefaults standardUserDefaults] objectForKey:@"receipt"];
+//    if ([transaction.transactionReceipt isEqualToData:oldReceipt])
+//    {
+//        NSLog(@"TRUNG RECEIPT");
+//    }
+//    else{
+//        NSLog(@"KHONG TRUNG");
+//        [[NSUserDefaults standardUserDefaults] setObject:transaction.transactionReceipt forKey:@"receipt"];
         [self recordTransaction:transaction];
         [self provideContent:transaction.payment.productIdentifier];
         [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
        
-    }
+//    }
     
 
         [delegate afterTransaction];    

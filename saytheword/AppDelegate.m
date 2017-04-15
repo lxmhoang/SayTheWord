@@ -13,6 +13,7 @@
 #import <Crashlytics/Crashlytics.h>
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <UserNotifications/UserNotifications.h>
 
 @implementation AppDelegate
 @synthesize rootController;
@@ -261,8 +262,12 @@
     }
     else
     {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
-         (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
+//        [[UIApplication sharedApplication] registerForRemoteNotifications];
+//        [UN]
+        [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:UNAuthorizationOptionBadge | UNAuthorizationOptionSound|UNAuthorizationOptionAlert completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            
+        }];
+        
     }
     
     

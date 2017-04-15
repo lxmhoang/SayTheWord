@@ -15,6 +15,7 @@
 @protocol MenuViewProtocol <NSObject>
 
 - (void)playBtnPressFromMenuView;
+- (void)howtoBtnPressFromMenuView;
 - (void)coinViewTappedFromMenuView;
 
 @end
@@ -32,7 +33,7 @@
 }
 
 
-@property (nonatomic, unsafe_unretained) id delegate;
+@property (nonatomic, unsafe_unretained) id<MenuViewProtocol> delegate;
 @property (nonatomic, strong) MenuModel *menuModel;
 @property (nonatomic, strong) UILabel *coinLabel;
 

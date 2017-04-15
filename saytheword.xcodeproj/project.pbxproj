@@ -17,6 +17,7 @@
 		3719225319DF20DB0001E5D0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A97116177920A3008D4634 /* SystemConfiguration.framework */; };
 		3719225819DF71510001E5D0 /* IAPCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3719225619DF71500001E5D0 /* IAPCollectionViewCell.m */; };
 		3719225919DF71510001E5D0 /* IAPCollectionViewCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3719225719DF71500001E5D0 /* IAPCollectionViewCell_iPad.xib */; };
+		372F054E1EA29CE800960691 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 372F054D1EA29CE800960691 /* UserNotifications.framework */; };
 		37302FCB19E2E0F0001FDEAE /* rateus_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 37302FCA19E2E0F0001FDEAE /* rateus_green.png */; };
 		37302FEE19E30EC6001FDEAE /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37302FEC19E30EC6001FDEAE /* libGoogleAdMobAds.a */; };
 		37302FEF19E30EC7001FDEAE /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 37302FED19E30EC6001FDEAE /* README.txt */; };
@@ -316,6 +317,7 @@
 		3719225519DF71500001E5D0 /* IAPCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPCollectionViewCell.h; sourceTree = "<group>"; };
 		3719225619DF71500001E5D0 /* IAPCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPCollectionViewCell.m; sourceTree = "<group>"; };
 		3719225719DF71500001E5D0 /* IAPCollectionViewCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IAPCollectionViewCell_iPad.xib; sourceTree = "<group>"; };
+		372F054D1EA29CE800960691 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		37302FCA19E2E0F0001FDEAE /* rateus_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rateus_green.png; sourceTree = "<group>"; };
 		37302FCF19E30EC6001FDEAE /* DFPBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPBannerView.h; sourceTree = "<group>"; };
 		37302FD019E30EC6001FDEAE /* DFPExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPExtras.h; sourceTree = "<group>"; };
@@ -678,6 +680,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				372F054E1EA29CE800960691 /* UserNotifications.framework in Frameworks */,
 				3737E96E1E9E9B980029817C /* libsqlite3.0.tbd in Frameworks */,
 				3737E96C1E9E9B4B0029817C /* libsqlite3.tbd in Frameworks */,
 				3737E97E1E9EA8020029817C /* FBSDKCoreKit.framework in Frameworks */,
@@ -919,6 +922,7 @@
 		379DC474175334BE00CEDB69 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				372F054D1EA29CE800960691 /* UserNotifications.framework */,
 				3737E9771E9EA8020029817C /* FBSDKLoginKit.framework */,
 				3737E9781E9EA8020029817C /* FBSDKShareKit.framework */,
 				3737E9791E9EA8020029817C /* Bolts.framework */,
@@ -1960,6 +1964,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "Say 2 pics";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1993,6 +1998,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "Say 2 pics";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

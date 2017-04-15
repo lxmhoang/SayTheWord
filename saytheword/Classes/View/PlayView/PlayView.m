@@ -613,6 +613,7 @@
     if ([revealLB.gestureRecognizers count]==0)
         return;
     [answerView setNewIndex:r];
+    
     [answerView performSelector:@selector(tapLabel:) withObject:[revealLB.gestureRecognizers objectAtIndex:0]];
 
     for (UIView *tmp in typingView.subviews)

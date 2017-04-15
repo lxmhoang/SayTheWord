@@ -340,7 +340,7 @@
         
         if (cell!=nil)
         {
-            int k = kCheckIfIphone ? 3: 10;
+//            int k = kCheckIfIphone ? 3: 10;
             int h = kCheckIfIphone ? 1:2;
 //            cell.bgImg.layer.cornerRadius = k;
             cell.bgImg.clipsToBounds = YES;
@@ -434,7 +434,7 @@
     {
         FreecoinCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FreeCoinCell" forIndexPath:indexPath];
         
-        int c = kCheckIfIphone ? 3 : 10;
+//        int c = kCheckIfIphone ? 3 : 10;
         
 //        cell.bgImg.layer.cornerRadius = c;
         cell.bgImg.clipsToBounds = YES;

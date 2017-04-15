@@ -259,7 +259,10 @@
     [settingBtn setTitle:@"How to play" forState:UIControlStateNormal];
     [settingBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [settingBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:fontSize]];
-    [settingBtn addTarget:delegate action:@selector(howtoBtnPressFromMenuView) forControlEvents:UIControlEventTouchUpInside];
+    if ([delegate respondsToSelector:@selector(howtoBtnPressFromMenuView)])
+    {
+        [settingBtn addTarget:delegate action:@selector(howtoBtnPressFromMenuView) forControlEvents:UIControlEventTouchUpInside];
+    }
     [self addSubview:settingBtn];
 //    [playBtn release];
     
