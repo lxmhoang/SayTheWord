@@ -1267,37 +1267,30 @@
         {
             [listDisableItems addObject:UIActivityTypeMessage];
         }
-        
+
         [aVC setExcludedActivityTypes:listDisableItems];
-        
-        [aVC setCompletionHandler:^(NSString *activityType, BOOL completed){
+//        [aVC completionWithItemsHandler];
+        [aVC setCompletionWithItemsHandler:^(UIActivityType activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError){
             //                    NSLog(@"activity Type : %@", activityType);
             if (completed)
             {
-                
-                
-                SWITCH (activityType) {
-                    CASE (@"com.apple.UIKit.activity.Message") {
-                        [CommonFunction setLastSendSMS:[NSDate date]];
-                        break;
-                    }
-                    CASE (@"com.apple.UIKit.activity.Mail") {
-                        [CommonFunction setLastSendEmail:[NSDate date]];
-                        break;
-                    }
-                    CASE (@"com.apple.UIKit.activity.PostToTwitter") {
-                        [CommonFunction setLastTwitterShare:[NSDate date]];
-                        break;
-                    }
-                    CASE (@"com.apple.UIKit.activity.PostToFacebook") {
-                        [CommonFunction setLastFBShare:[NSDate date]];
-                        break;
-                    }
-                    DEFAULT {
-                        break;
-                    }
+                if (activityType == UIActivityTypeMessage)
+                {
+                    [CommonFunction setLastSendSMS:[NSDate date]];
                 }
-                
+                if (activityType == UIActivityTypeMail)
+                {
+                    [CommonFunction setLastSendEmail:[NSDate date]];
+                }
+                if (activityType == UIActivityTypePostToTwitter)
+                {
+                    [CommonFunction setLastTwitterShare:[NSDate date]];
+                }
+                if (activityType == UIActivityTypePostToFacebook)
+                {
+                    [CommonFunction setLastFBShare:[NSDate date]];
+                }
+//                
                 int k = [CommonFunction getNumOfSharing];
                 [CommonFunction setNumOfSharing:k+1];
                 

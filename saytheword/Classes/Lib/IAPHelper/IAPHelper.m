@@ -174,14 +174,14 @@
 - (void)restoreTransaction:(SKPaymentTransaction *)transaction
 {
     NSLog(@"restoreTransaction");
-    NSData *oldReceipt = [[NSUserDefaults standardUserDefaults] objectForKey:@"receipt"];
-    if ([transaction.transactionReceipt isEqualToData:oldReceipt])
+    NSString *oldReceipt = [[NSUserDefaults standardUserDefaults] stringForKey:@"receipt"];
+    if ([[[[NSBundle mainBundle] appStoreReceiptURL] absoluteString]  isEqualToString:oldReceipt])
     {
         NSLog(@"TRUNG RECEIPT");
     }
     else{
         NSLog(@"KHONG TRUNG");
-        [[NSUserDefaults standardUserDefaults] setObject:transaction.transactionReceipt forKey:@"receipt"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[[NSBundle mainBundle] appStoreReceiptURL] absoluteString] forKey:@"receipt"];
         [self recordTransaction:transaction.originalTransaction];
         [self provideContent:transaction.originalTransaction.payment.productIdentifier];
         [[SKPaymentQueue defaultQueue] finishTransaction: transaction];

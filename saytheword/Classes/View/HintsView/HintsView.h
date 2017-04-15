@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Common.h"
 #import "PlayModel.h"
-//#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <QuartzCore/QuartzCore.h>
 
 @protocol HintsViewDelegate <NSObject>
@@ -25,6 +25,7 @@
 {
     NSMutableArray *optionsGetFreeCoin;
     int maxFreeCoin;
+    __weak IBOutlet FBSDKLoginButton *loginButton;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *bigView;

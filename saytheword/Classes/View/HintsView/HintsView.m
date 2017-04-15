@@ -167,6 +167,8 @@
 - (void)setUp
 {
     
+    loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
+    
     //FBLoginView *loginview = [[FBLoginView alloc] init];
    // [fbview addSubview:loginview];
     
@@ -312,7 +314,7 @@
         //        hintString = [[NSUserDefaults standardUserDefaults] stringForKey:@"hintString"];
         // Initialization code
         self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.6];
-
+        loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
         
 //        [self createSubViews];
     }

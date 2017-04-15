@@ -88,6 +88,7 @@
     RootController *rootVC = [CommonFunction getRootController];
     
     [rootVC addChildViewController:iapVC];
+    iapVC.view.frame = rootVC.view.frame;
     [iapVC didMoveToParentViewController:rootVC];
     [rootVC.view addSubview:iapVC.view];
     

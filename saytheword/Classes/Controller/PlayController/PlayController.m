@@ -28,6 +28,7 @@
         NSString *nibname = kCheckIfIphone ? @"HintsView_ip4" : @"HintsView_iPad";
         hintsView = [[[NSBundle mainBundle] loadNibNamed:nibname owner:nil options:nil] objectAtIndex:0];
         hintsView.delegate = self;
+        [hintsView setUp];
         
         [self.view setFrame:CGRectMake(_pos*kWidthOfScreen + _pos*kShortDisTanceOf2View, 0, kWidthOfScreen, kHeightOfScreen)];
         //
@@ -77,6 +78,7 @@
     
     
     hintsView.alpha = 1;
+    hintsView.frame = CGRectMake(self.view.frame.origin.x , self.view.frame.origin.y,self.view.frame.size.width, self.view.frame.size.width);
     [hintsView setUp];
     int y = hintsView.bigView.frame.origin.y;
     CGRect frame = hintsView.bigView.frame;
