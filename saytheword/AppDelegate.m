@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "WordDatabase.h"
 #import "WordInfo.h"
-
+#import <Firebase/Firebase.h>
 #import <Crashlytics/Crashlytics.h>
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -234,7 +234,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
-    
+    [FIRApp configure];
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     [self dataMigrationWhenUpdate];
