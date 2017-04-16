@@ -231,8 +231,8 @@
     if ([transaction.payment.productIdentifier isEqualToString:kInAppPurchaseProUpgradeProductId])
     {
         // save the transaction receipt to disk
-        [[NSUserDefaults standardUserDefaults] setValue:transaction.transactionReceipt forKey:@"proUpgradeTransactionReceipt" ];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+//        [[NSUserDefaults standardUserDefaults] setValue:transaction.transactionReceipt forKey:@"proUpgradeTransactionReceipt" ];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 

@@ -400,7 +400,7 @@
         [self setMessageBrag:kInitialBragMessage];
     }
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"messageRateIt"] == nil){
-        [self setMessageBrag:kInitialTitleOfRating];
+        [self setMessageRateIt:kInitialTitleOfRating];
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"didAskFriendForCurrentLevel"] == nil){

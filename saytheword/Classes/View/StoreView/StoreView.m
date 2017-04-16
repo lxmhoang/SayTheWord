@@ -25,8 +25,8 @@
         [self addSubview:HUD];
         
         HUD.delegate = self;
-        HUD.labelText = @"Buying ...";
-        HUD.detailsLabelText = @"Please wait";
+        HUD.label.text = @"Buying ...";
+        HUD.detailsLabel.text = @"Please wait";
         HUD.square = YES;
         
     }
@@ -130,7 +130,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    [HUD show:YES];
+    [HUD showAnimated:YES];
     SKProduct *selectedProduct = [storeModel.listItems objectAtIndex:indexPath.row];
     SKPayment *payment = [SKPayment paymentWithProduct:selectedProduct];
     [[SKPaymentQueue defaultQueue] addPayment:payment];
