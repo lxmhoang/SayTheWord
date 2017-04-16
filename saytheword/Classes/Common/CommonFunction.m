@@ -442,7 +442,19 @@
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rateForCoin"] == nil){
-        [self setRateForCoin:YES];
+        NSDateComponents *comps = [[NSDateComponents alloc] init];
+        [comps setDay:22];
+        [comps setMonth:4];
+        [comps setYear:2017];
+        NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:comps];
+        if ([[NSDate date] compare:date] == NSOrderedDescending)
+        {
+            [self setRateForCoin:YES];
+            
+        }else
+        {
+            [self setRateForCoin:NO];
+        }
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"msgShareNotAvail"] == nil){
