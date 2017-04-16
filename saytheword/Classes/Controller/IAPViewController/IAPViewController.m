@@ -74,8 +74,8 @@
         HUD = [MBProgressHUD showHUDAddedTo:iapCollectionView animated:YES];
         
         HUD.delegate = self;
-        HUD.detailsLabelText = @"Connecting to App Store ....";
-        [HUD show:YES];
+        HUD.detailsLabel.text = @"Connecting to App Store ....";
+        [HUD showAnimated:YES];
         
         [iAPHelper loadStore];
     }
@@ -229,7 +229,7 @@
 #pragma mark iaphelperDelegate
 
 - (void)IAPFailed{
-    [HUD hide:YES];
+    [HUD hideAnimated:YES];
     
     cancelBtn.enabled = YES;
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"" message:@"Unable to connect to App Stores, please check your Internet Connection" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -260,7 +260,7 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        [HUD hide:YES];
+        [HUD hideAnimated:YES];
 //        [HUD removeFromSuperview];
         
         [self bindIAPData:listProducts];

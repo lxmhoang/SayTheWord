@@ -414,7 +414,7 @@
             
             if ([[NSDate date] compare:[[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]]]==NSOrderedDescending)
             {
-                NSString *str = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
+//                NSString *str = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
 //                PFQuery *query = [PFQuery queryWithClassName:@"Installation"];
 //                
 //                [query whereKey:@"deviceToken" equalTo:str];
@@ -494,7 +494,7 @@
         
     }else         if ([[NSDate date] compare:[[CommonFunction getLastUpdateInfo] dateByAddingTimeInterval:[[CommonFunction gettimeBetweenUpdate] doubleValue]]]==NSOrderedDescending)
     {
-        NSString *deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
+//        NSString *deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
 //        PFQuery *query = [PFQuery queryWithClassName:@"Installation"];
 //        
 //        [query whereKey:@"deviceToken" equalTo:deviceToken];
